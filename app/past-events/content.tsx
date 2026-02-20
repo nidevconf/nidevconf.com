@@ -112,7 +112,7 @@ export default function PastEventsContent() {
 
           {/* Timeline */}
           <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-nidc-pink via-nidc-cyan to-transparent" />
+            <div className="absolute left-[120px] sm:left-[160px] top-0 bottom-0 w-px bg-gradient-to-b from-nidc-pink via-nidc-cyan to-transparent" />
 
             <div className="space-y-8">
               {pastEvents.map((event, i) => (
@@ -122,10 +122,20 @@ export default function PastEventsContent() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="relative pl-20"
+                  className="relative pl-[145px] sm:pl-[185px]"
                 >
+                  {/* Year & venue label */}
+                  <div className="absolute left-0 top-4 w-[108px] sm:w-[148px] text-right pr-5">
+                    <h3 className="text-lg sm:text-xl font-black gradient-text leading-tight">
+                      NIDC {event.year}
+                    </h3>
+                    <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
+                      {event.venue}
+                    </p>
+                  </div>
+
                   {/* Dot */}
-                  <div className="absolute left-6 top-6 w-5 h-5 rounded-full bg-nidc-dark border-2 border-nidc-pink" />
+                  <div className="absolute left-[118px] sm:left-[158px] top-6 w-5 h-5 rounded-full bg-nidc-dark border-2 border-nidc-pink z-10" />
 
                   <div className="glass rounded-2xl overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -136,13 +146,7 @@ export default function PastEventsContent() {
                       loading="lazy"
                     />
                     <div className="p-6">
-                    <h3 className="text-2xl font-black gradient-text">
-                      NIDC {event.year}
-                    </h3>
-                    <p className="text-gray-400 text-sm mt-1">
-                      {event.venue}
-                    </p>
-                    <p className="text-gray-300 text-sm mt-3">
+                    <p className="text-gray-300 text-sm">
                       {event.description}
                     </p>
 
