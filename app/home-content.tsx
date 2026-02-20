@@ -13,6 +13,10 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
+  MapPin,
+  Clock,
+  Train,
+  Car,
 } from "lucide-react";
 import {
   CONFERENCE,
@@ -388,6 +392,113 @@ export default function HomeContent() {
                 </Link>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Venue & Location */}
+      <section className="py-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div {...fadeUp} className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black gradient-text mb-4">
+              Find Us
+            </h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+              ICC Belfast (Waterfront Hall) — right in the heart of the city
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Map */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="glass rounded-3xl overflow-hidden"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2311.9!2d-5.9240!3d54.5973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486108e4b27e0e39%3A0x7e2a2f12ae3a8f1!2sICC%20Belfast!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="ICC Belfast location map"
+                className="w-full"
+              />
+            </motion.div>
+
+            {/* Venue Details */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div className="glass rounded-2xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-nidc-pink/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-nidc-pink" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white mb-1">Venue</h3>
+                    <p className="text-gray-300">ICC Belfast (Waterfront Hall)</p>
+                    <p className="text-gray-400 text-sm">2 Lanyon Place, Belfast, BT1 3WH</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass rounded-2xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-nidc-cyan/10 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-5 h-5 text-nidc-cyan" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white mb-1">Date &amp; Time</h3>
+                    <p className="text-gray-300">Saturday, November 8th, 2025</p>
+                    <p className="text-gray-400 text-sm">Doors open at 8:30am — Talks finish at 5:45pm</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass rounded-2xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-nidc-pink/10 flex items-center justify-center flex-shrink-0">
+                    <Train className="w-5 h-5 text-nidc-pink" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white mb-1">Public Transport</h3>
+                    <p className="text-gray-300">5 min walk from Belfast Lanyon Place station</p>
+                    <p className="text-gray-400 text-sm">10 min walk from Belfast City Centre</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass rounded-2xl p-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-nidc-cyan/10 flex items-center justify-center flex-shrink-0">
+                    <Car className="w-5 h-5 text-nidc-cyan" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white mb-1">Parking</h3>
+                    <p className="text-gray-300">Waterfront car park directly underneath venue</p>
+                    <p className="text-gray-400 text-sm">Paid parking also nearby at Lanyon Quay &amp; Oxford Street</p>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                href="https://maps.google.com/?q=ICC+Belfast,+2+Lanyon+Place,+Belfast+BT1+3WH"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full font-semibold transition-all"
+              >
+                <MapPin className="w-4 h-4" aria-hidden="true" />
+                Open in Google Maps
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
           </div>
         </div>
       </section>

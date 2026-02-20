@@ -9,6 +9,10 @@ export const metadata: Metadata = {
     title: "NIDC 2025 — Hitchhiker's Guide Mode",
     description: "Don't Panic. 42 speakers. Towel recommended.",
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function TerminalPage() {
