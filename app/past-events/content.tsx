@@ -3,15 +3,80 @@
 import { motion } from "framer-motion";
 import { PageHero } from "@/components/PageHero";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, Calendar } from "lucide-react";
+import { Camera, Play } from "lucide-react";
 
 const pastEvents = [
-  { year: "2024", venue: "ICC Belfast", url: "https://2024.nidevconf.com" },
-  { year: "2023", venue: "ICC Belfast", url: "https://2023.nidevconf.com" },
-  { year: "2022", venue: "Waterfront Hall", url: "https://2022.nidevconf.com" },
-  { year: "2019", venue: "Waterfront Hall", url: "https://2019.nidevconf.com" },
-  { year: "2018", venue: "Waterfront Hall", url: "https://2018.nidevconf.com" },
-  { year: "2017", venue: "Waterfront Hall", url: "https://2017.nidevconf.com" },
+  {
+    year: "2024",
+    venue: "ICC Belfast",
+    description:
+      "Our biggest year yet with record attendance, an expanded expo hall, and an incredible lineup of local speakers.",
+    photos: "https://photos.app.goo.gl/D1y48Gw1NSKcPNjKA",
+    videos:
+      "https://www.youtube.com/watch?v=jdYNwlcRKwU&list=PL7DSy4xHOvv0woCZvBTsFkmv5ZjB-_cIM",
+  },
+  {
+    year: "2023",
+    venue: "ICC Belfast",
+    description:
+      "We aimed to connect with new audiences by launching billboard campaigns, hosting speaker workshops for beginners, and expanding our meetup fest.",
+    photos: "https://photos.app.goo.gl/RWhfEvSE9BevF2iC8",
+    videos:
+      "https://www.youtube.com/watch?v=SLSZ1f7QG7w&list=PL7DSy4xHOvv0xuwT9cKN49tA_qhFyJadK",
+  },
+  {
+    year: "2022",
+    venue: "Waterfront Hall",
+    description:
+      "NIDC returned in person after the pandemic with a bang. Great to see the community back together.",
+    photos: "https://photos.app.goo.gl/uziQsAF8Tk7WzcM2A",
+    videos:
+      "https://www.youtube.com/playlist?list=PL7DSy4xHOvv20xxyVDAqTGxFGRL-1-Bgr",
+  },
+  {
+    year: "2021",
+    venue: "Online",
+    description:
+      "A virtual meetup fest spread across multiple evenings, keeping the community connected.",
+    photos:
+      "https://drive.google.com/drive/u/2/folders/1cs9tU9fxmUtWnzmegaI2rM2HCMbd_7Hd",
+    videos:
+      "https://www.youtube.com/playlist?list=PL7DSy4xHOvv3FeWlBWl5mmCw_kpnXU4Xn",
+  },
+  {
+    year: "2020",
+    venue: "Online",
+    description:
+      "When the world went remote, so did we. Our first virtual conference keeping the NI tech community together.",
+    videos:
+      "https://www.youtube.com/playlist?list=PL7DSy4xHOvv2oyTay6NVD8VPkvCE8KFmH",
+  },
+  {
+    year: "2019",
+    venue: "Waterfront Hall",
+    description:
+      "A packed Waterfront Hall with talks across the full development spectrum.",
+    videos:
+      "https://www.youtube.com/playlist?list=PL7DSy4xHOvv2BEXa-y-fENyJejSTWZwua",
+  },
+  {
+    year: "2018",
+    venue: "Waterfront Hall",
+    description:
+      "Growing year on year with an even wider range of talks and community engagement.",
+    photos: "https://photos.app.goo.gl/iwKYadhnfRAHSqFY9",
+    videos:
+      "https://www.youtube.com/playlist?list=PL7DSy4xHOvv0Aw5aOOofFTCt94RZYDyS2",
+  },
+  {
+    year: "2017",
+    venue: "Peter Froggatt Centre, QUB",
+    description:
+      "Where it all began! Humble beginnings at Queen's University Belfast with 230 attendees, 38 speakers, and 8 sponsors.",
+    photos: "https://photos.app.goo.gl/AjrU4pF4VuR6gy4N7",
+    videos:
+      "https://www.youtube.com/playlist?list=PL7DSy4xHOvv2nBbBTUILPtLpfOC2bijy1",
+  },
 ];
 
 export default function PastEventsContent() {
@@ -52,55 +117,46 @@ export default function PastEventsContent() {
                   {/* Dot */}
                   <div className="absolute left-6 top-6 w-5 h-5 rounded-full bg-nidc-dark border-2 border-nidc-pink" />
 
-                  <Link
-                    href={event.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block glass rounded-2xl p-6 group hover:border-nidc-pink/20 transition-all hover:-translate-y-0.5"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h3 className="text-2xl font-black gradient-text">
-                          NIDC {event.year}
-                        </h3>
-                        <p className="text-gray-300 text-sm mt-1">
-                          {event.venue}
-                        </p>
-                      </div>
-                      <ExternalLink className="w-5 h-5 text-gray-500 group-hover:text-nidc-pink transition-colors" />
+                  <div className="glass rounded-2xl p-6">
+                    <h3 className="text-2xl font-black gradient-text">
+                      NIDC {event.year}
+                    </h3>
+                    <p className="text-gray-400 text-sm mt-1">
+                      {event.venue}
+                    </p>
+                    <p className="text-gray-300 text-sm mt-3">
+                      {event.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-3 mt-4">
+                      {event.photos && (
+                        <Link
+                          href={event.photos}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-white/5 border border-white/10 text-gray-200 hover:bg-nidc-pink/20 hover:border-nidc-pink/40 hover:text-nidc-pink transition-colors text-sm font-medium"
+                        >
+                          <Camera className="w-4 h-4" aria-hidden="true" />
+                          Photos
+                        </Link>
+                      )}
+                      {event.videos && (
+                        <Link
+                          href={event.videos}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-white/5 border border-white/10 text-gray-200 hover:bg-red-500/20 hover:border-red-400/40 hover:text-red-400 transition-colors text-sm font-medium"
+                        >
+                          <Play className="w-4 h-4" aria-hidden="true" />
+                          Videos
+                        </Link>
+                      )}
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
-
-          {/* Next Event CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-20 glass rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-nidc-pink/10 rounded-full blur-3xl" />
-            <div className="relative">
-              <Calendar className="w-12 h-12 text-nidc-pink mx-auto mb-4" />
-              <h2 className="text-3xl font-black text-white mb-4">
-                Join us at our next Event
-              </h2>
-              <p className="text-gray-300 text-lg mb-8">
-                NIDC 2025 is happening at the ICC Belfast this November 8th.
-                Tickets are live so grab yours today!
-              </p>
-              <Link
-                href="/tickets"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-nidc-pink hover:bg-nidc-pink/90 text-white font-bold text-lg rounded-full transition-all hover:shadow-2xl hover:shadow-nidc-pink/25"
-              >
-                Get Your Ticket
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
     </>
