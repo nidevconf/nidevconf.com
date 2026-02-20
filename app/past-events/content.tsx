@@ -111,37 +111,36 @@ export default function PastEventsContent() {
           </motion.p>
 
           {/* Timeline */}
-          <div className="relative">
-            {/* Continuous vertical line */}
-            <div className="absolute top-0 bottom-0 left-[104px] sm:left-[152px] w-px bg-gradient-to-b from-nidc-pink via-nidc-cyan to-transparent" />
+          <div>
+            {pastEvents.map((event, i) => (
+              <motion.div
+                key={event.year}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex"
+              >
+                {/* Year & venue label */}
+                <div className="flex-shrink-0 w-24 sm:w-36 pt-4 pr-4 sm:pr-6 text-right">
+                  <h3 className="text-base sm:text-xl font-black gradient-text leading-tight">
+                    NIDC {event.year}
+                  </h3>
+                  <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
+                    {event.venue}
+                  </p>
+                </div>
 
-            <div className="space-y-8">
-              {pastEvents.map((event, i) => (
-                <motion.div
-                  key={event.year}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="relative flex gap-4 sm:gap-6"
-                >
-                  {/* Year & venue label */}
-                  <div className="flex-shrink-0 w-24 sm:w-36 pt-4 text-right">
-                    <h3 className="text-base sm:text-xl font-black gradient-text leading-tight">
-                      NIDC {event.year}
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
-                      {event.venue}
-                    </p>
-                  </div>
+                {/* Dot + connecting line */}
+                <div className="flex-shrink-0 flex flex-col items-center">
+                  <div className={`w-px flex-none h-5 ${i === 0 ? "bg-transparent" : "bg-nidc-pink/40"}`} />
+                  <div className="w-4 h-4 flex-none rounded-full bg-nidc-dark border-2 border-nidc-pink z-10" />
+                  <div className={`w-px flex-1 ${i === pastEvents.length - 1 ? "bg-transparent" : "bg-nidc-pink/40"}`} />
+                </div>
 
-                  {/* Dot */}
-                  <div className="flex-shrink-0 w-4 flex items-start pt-5">
-                    <div className="w-4 h-4 rounded-full bg-nidc-dark border-2 border-nidc-pink z-10" />
-                  </div>
-
-                  {/* Card */}
-                  <div className="flex-1 min-w-0 glass rounded-2xl overflow-hidden">
+                {/* Card */}
+                <div className="flex-1 min-w-0 pl-4 sm:pl-6 pb-8 glass-none">
+                  <div className="glass rounded-2xl overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`${basePath}${event.image}`}
@@ -180,9 +179,9 @@ export default function PastEventsContent() {
                     </div>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
