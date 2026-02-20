@@ -73,7 +73,7 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "Gearset",
-        logo: "/sponsors/gearset.svg",
+        logo: "/sponsors/gearset.png",
         website: "https://gearset.com/",
         linkedin: "https://www.linkedin.com/company/gearset",
       },
@@ -137,7 +137,7 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "BCS Northern Ireland",
-        logo: "/sponsors/bcs.png",
+        logo: "/sponsors/bcs.svg",
         website: "https://www.bcs.org/membership-and-registrations/member-communities/northern-ireland-branch/",
         linkedin: "https://www.linkedin.com/company/it-bcs",
       },
@@ -161,7 +161,7 @@ export const SPONSORS: SponsorTier[] = [
       },
       {
         name: "HealthPass",
-        logo: "/sponsors/healthpass.png",
+        logo: "/sponsors/healthpass.webp",
         website: "https://healthpass.io/",
         linkedin: "https://www.linkedin.com/company/healthpass-f2fsolutions/",
       },
@@ -179,7 +179,7 @@ export const SPONSORS: SponsorTier[] = [
       },
       {
         name: "UTAW",
-        logo: "/sponsors/utaw.png",
+        logo: "/sponsors/utaw.svg",
         website: "https://utaw.tech/",
       },
     ],
