@@ -11,37 +11,8 @@ const CLR = {
   brightGreen: "#66FF66",
   amber: "#FFB000",
   white: "#FFFFFF",
+  red: "#FF4444",
 };
-
-/* ── Countdown ───────────────────────────────────────────── */
-const EVENT_DATE = new Date("2025-11-08T08:30:00Z");
-function pad(n: number) {
-  return String(n).padStart(2, "0");
-}
-function useCountdown() {
-  const [t, setT] = useState<{
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-  } | null>(null);
-  useEffect(() => {
-    function calc() {
-      const diff = EVENT_DATE.getTime() - Date.now();
-      if (diff <= 0) return setT({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      setT({
-        days: Math.floor(diff / 86400000),
-        hours: Math.floor((diff / 3600000) % 24),
-        minutes: Math.floor((diff / 60000) % 60),
-        seconds: Math.floor((diff / 1000) % 60),
-      });
-    }
-    calc();
-    const id = setInterval(calc, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return t;
-}
 
 /* ── ASCII art ───────────────────────────────────────────── */
 const SCENE = `
@@ -54,13 +25,13 @@ const SCENE = `
           | |                                                 | |
           | |  > DON'T PANIC                                  | |
           | |                                                 | |
-          | |  NIDC 2025                                      | |
-          | |  ICC BELFAST                                    | |
-          | |  NOVEMBER 8TH                                   | |
+          | |  NIDC 2026                                      | |
+          | |  LOCATION: ████████████                         | |
+          | |  DATE: ██ ████████ 2026                         | |
           | |                                                 | |
-          | |  "In the beginning the conference was created.  | |
-          | |   This has made a lot of people very happy      | |
-          | |   and has been widely regarded as a good move." | |
+          | |  "The ships hung in the sky in much the same    | |
+          | |   way that bricks don't. The conference date    | |
+          | |   hangs in the future in much the same way."    | |
           | |                                                 | |
           | |_________________________________________________| |
           |  ___ ___ ___   ___   _________________________  __ |
@@ -71,7 +42,7 @@ const SCENE = `
 const STORY: { text: string; color: string; delay: number }[] = [
   { text: "", color: CLR.green, delay: 0 },
   {
-    text: "NIDC 2025: The Hitchhiker's Guide to the Conference",
+    text: "NIDC 2026: The Hitchhiker's Guide to the Conference",
     color: CLR.amber,
     delay: 600,
   },
@@ -81,185 +52,234 @@ const STORY: { text: string; color: string; delay: number }[] = [
     delay: 1200,
   },
   {
-    text: "Release 42 / Serial No. 251108",
+    text: "Release 43 / Serial No. ??????",
     color: CLR.dimGreen,
     delay: 1800,
   },
   { text: "", color: CLR.green, delay: 2200 },
   {
-    text: "Grand Foyer, ICC Belfast",
+    text: "Location Unknown, Somewhere in Belfast",
     color: CLR.amber,
     delay: 2600,
   },
   {
-    text: "You are standing in the grand foyer of the ICC Belfast, which",
+    text: "You are standing in a void. Not the existential kind — more",
     color: CLR.green,
     delay: 3200,
   },
   {
-    text: "is about as far from the destruction of your home planet as",
+    text: "the kind where a conference hasn't been announced yet and",
     color: CLR.green,
     delay: 3800,
   },
   {
-    text: "you could reasonably hope to get on a Saturday morning.",
+    text: "all the details are classified at a level that would make",
     color: CLR.green,
     delay: 4400,
   },
-  { text: "", color: CLR.green, delay: 4800 },
   {
-    text: "Around you, 750+ developers mill about with the quiet",
+    text: "the Vogon bureaucracy proud.",
     color: CLR.green,
     delay: 5000,
   },
+  { text: "", color: CLR.green, delay: 5400 },
   {
-    text: "desperation of people who haven't yet found the coffee.",
+    text: "Rumours swirl through the developer community like",
     color: CLR.green,
     delay: 5600,
   },
   {
-    text: "Six tracks of talks stretch out before you like the",
+    text: "hyperspace bypasses through the fabric of space-time.",
     color: CLR.green,
     delay: 6200,
   },
   {
-    text: "improbability drive of knowledge — covering Software, AI,",
+    text: "Something is coming. Something big. Something with",
     color: CLR.green,
     delay: 6800,
   },
   {
-    text: "Cloud, Security, and everything in between.",
+    text: "speakers, and tracks, and almost certainly coffee.",
     color: CLR.green,
     delay: 7400,
   },
   { text: "", color: CLR.green, delay: 7800 },
   {
-    text: "Your towel is draped reassuringly over one shoulder.",
+    text: "Your towel is draped over one shoulder, just in case.",
     color: CLR.brightGreen,
     delay: 8000,
   },
   { text: "", color: CLR.green, delay: 8600 },
   {
-    text: "To the north is the Exhibition Hall. The after-party at",
+    text: "All exits lead to uncertainty. The Guide flickers with",
     color: CLR.green,
     delay: 8800,
   },
   {
-    text: "Marcus Ward beckons from the south with pizza and an open",
+    text: "a single blinking cursor, waiting for more information",
     color: CLR.green,
     delay: 9400,
   },
   {
-    text: "bar, which frankly seems like the most sensible place in",
+    text: "to be declassified.",
     color: CLR.green,
     delay: 10000,
   },
+  { text: "", color: CLR.green, delay: 10400 },
   {
-    text: "the galaxy right now.",
-    color: CLR.green,
+    text: "There is a large sign here that reads: WATCH THIS SPACE.",
+    color: CLR.amber,
     delay: 10600,
   },
   { text: "", color: CLR.green, delay: 11000 },
   {
-    text: "There is a registration desk here.",
-    color: CLR.green,
-    delay: 11200,
-  },
-  { text: "", color: CLR.green, delay: 11600 },
-  {
     text: ">",
     color: CLR.white,
-    delay: 11800,
+    delay: 11200,
   },
 ];
 
 /* ── Interactive commands ────────────────────────────────── */
+const CLASSIFIED = [
+  "ACCESS DENIED. That information is classified.",
+  "The Guide's entry for this topic simply reads: ██████████.",
+  "Nice try. The Vogon Information Bureau has redacted this.",
+  "CLEARANCE LEVEL INSUFFICIENT. Please try again after the announcement.",
+];
+
+function classifiedResponse(): string[] {
+  const pick = CLASSIFIED[Math.floor(Math.random() * CLASSIFIED.length)];
+  return [pick];
+}
+
 const COMMANDS: Record<
   string,
-  { response: string[]; color: string; link?: string }
+  { response: string[] | (() => string[]); color: string; link?: string }
 > = {
   TICKETS: {
     response: [
       "> get ticket",
       "",
-      "You approach the registration desk. A volunteer, who is",
-      "clearly one of those terrifyingly organised people, hands",
-      "you a lanyard with practiced efficiency.",
+      "You reach for a ticket but your hand passes through",
+      "empty air. Registration for NIDC 2026 has not opened yet.",
       "",
-      '"Welcome to NIDC 2025!" she says with genuine enthusiasm.',
-      "You are momentarily stunned. Nobody has been this nice to",
-      "you since that time the Dentrassi smuggled you aboard the",
-      "Vogon ship.",
+      "The Guide notes: 'Patience is a virtue. So is checking",
+      "nidevconf.com obsessively until tickets go live.'",
       "",
-      "Your ticket glows faintly. Your adventure begins.",
+      "Your status: WAITING (along with everyone else).",
     ],
     color: CLR.green,
-    link: "/tickets",
+  },
+  REGISTER: {
+    response: () => [
+      "> register",
+      "",
+      ...classifiedResponse(),
+      "",
+      "Registration will open when the time is right.",
+      "The Guide recommends following NIDC on social media",
+      "so you don't miss it.",
+    ],
+    color: CLR.red,
   },
   AGENDA: {
-    response: [
+    response: () => [
       "> consult guide about schedule",
       "",
       "You flip open the Guide. In large, friendly letters on",
-      "the cover it says DON'T PANIC. Underneath, in smaller,",
-      "slightly less friendly letters, it says:",
+      "the cover it says DON'T PANIC. You turn to the NIDC 2026",
+      "schedule page. It reads:",
       "",
-      "  09:30  Opening & First Sessions",
-      "  10:30  Morning Sessions (bring towel)",
-      "  12:00  Lunch & Expo Hall",
-      "         (food almost, but not quite, entirely",
-      "          unlike what the Dentrassi serve)",
-      "  13:00  Afternoon Sessions",
-      "  15:30  Final Sessions",
-      "  17:30  Closing & Prize Draw",
-      "  18:00  After-party @ Marcus Ward",
-      "         (Pan Galactic Gargle Blasters not",
-      "          available, but the bar is open)",
+      "  ██:██  ████████████████████████",
+      "  ██:██  ████████████████████████",
+      "  ██:██  ████████████████████████",
+      "  ██:██  ████████████████████████",
+      "  ██:██  ████████████████████████",
+      "  ██:██  ████████████████████████",
       "",
-      "The Guide rates this schedule as 'Mostly Harmless'.",
+      ...classifiedResponse(),
+      "",
+      "The Guide rates the upcoming schedule as '[REDACTED]'.",
     ],
     color: CLR.green,
-    link: "/agenda",
   },
   SPEAKERS: {
-    response: [
+    response: () => [
       "> look up speakers in guide",
       "",
-      "The Guide has this to say about the speakers at NIDC:",
+      "The Guide has this to say about the speakers at NIDC 2026:",
       "",
-      '"40+ speakers. Local industry professionals. No sales',
-      "pitches. No corporate doublespeak. Just hard-won wisdom",
-      "shared freely among peers, which is frankly the sort of",
-      "thing that restores your faith in carbon-based life forms.",
+      ...classifiedResponse(),
       "",
-      "Many regard this as the most improbable gathering of",
-      'useful knowledge since the Great Collapsing Hrung Disaster."',
+      "What we can tell you: they will be brilliant. They will",
+      "be local. They will share hard-won wisdom freely among",
+      "peers, which is frankly the sort of thing that restores",
+      "your faith in carbon-based life forms.",
       "",
-      "The entry is followed by the words SEE ALSO: people who",
-      "actually know what they're talking about (rare).",
+      "Speaker submissions? Watch this space.",
     ],
     color: CLR.green,
-    link: "/speakers",
+  },
+  DATE: {
+    response: () => [
+      "> ask about date",
+      "",
+      "You consult the Guide's calendar for NIDC 2026.",
+      "",
+      "  Date: ██ ████████ 2026",
+      "",
+      ...classifiedResponse(),
+      "",
+      "The Guide notes: 'Time is an illusion. Conference time",
+      "doubly so. But it WILL happen in 2026.'",
+    ],
+    color: CLR.amber,
+  },
+  LOCATION: {
+    response: () => [
+      "> examine surroundings",
+      "",
+      "You try to determine where NIDC 2026 will take place.",
+      "",
+      "  Location: ████████████, Belfast",
+      "",
+      ...classifiedResponse(),
+      "",
+      "All we can say: it's in Belfast. It always has been.",
+      "It always will be. Some things are constants in an",
+      "uncertain universe.",
+    ],
+    color: CLR.green,
+  },
+  VENUE: {
+    response: () => [
+      "> look for venue",
+      "",
+      ...classifiedResponse(),
+      "",
+      "Belfast. Beyond that, the organisers are keeping this",
+      "one close to their chest, much like a Dentrassi guards",
+      "its favourite cooking pot.",
+    ],
+    color: CLR.green,
   },
   LOOK: {
     response: [
       "> look",
       "",
-      "Grand Foyer, ICC Belfast",
+      "The Void Between Conferences",
       "",
-      "A large, well-lit space that manages to be both imposing",
-      "and welcoming, much like a Magrathean showroom but with",
-      "better signage.",
+      "You are floating in the space between NIDC 2025 and",
+      "NIDC 2026. It is dark, quiet, and filled with the",
+      "faint hum of anticipation.",
       "",
-      "  Level 0: Registration, Cloakroom",
-      "  Level 1: Exhibition Hall, Talks",
-      "  Level 2: Quiet Room, Childcare",
-      "  Level 3: More Talks, Kids' Village",
+      "  To the NORTH: fog",
+      "  To the SOUTH: more fog",
+      "  To the EAST: dense, impenetrable fog",
+      "  To the WEST: a faint glow that might be Belfast",
       "",
-      "Volunteers in pink t-shirts patrol helpfully. They appear",
-      "to know the answer to Life, the Universe, and Everything,",
-      "or at least where the toilets are, which is arguably more",
-      "useful.",
+      "A sign floats past reading: 'NIDC 2026 — COMING SOON.'",
+      "It is followed by a smaller sign reading: 'NO SPOILERS.'",
     ],
     color: CLR.green,
   },
@@ -267,12 +287,13 @@ const COMMANDS: Record<
     response: [
       "The Guide suggests the following interactions:",
       "",
-      "  TICKETS   - Acquire your passage",
-      "  AGENDA    - Consult the day's programme",
-      "  SPEAKERS  - Look up the speakers",
+      "  TICKETS   - Check registration status",
+      "  DATE      - Ask about the date",
+      "  LOCATION  - Investigate the venue",
+      "  SPEAKERS  - Enquire about speakers",
       "  LOOK      - Examine your surroundings",
       "  INVENTORY - Check your belongings",
-      "  NORTH     - Enter the Exhibition Hall",
+      "  RUMOURS   - Listen to the grapevine",
       "  TOWEL     - Check towel status",
       "  42        - The answer",
       "  EXIT      - Return to normal space-time",
@@ -287,34 +308,81 @@ const COMMANDS: Record<
       "",
       "  A towel (slightly damp)",
       "  A copy of The Hitchhiker's Guide (NIDC Edition)",
-      "  A Sub-Etha Sens-O-Matic (no signal)",
-      "  An empty coffee cup",
-      "  A lingering sense of improbability",
+      "  A Sub-Etha Sens-O-Matic (scanning for announcements)",
+      "  An empty coffee cup (as is tradition)",
+      "  Memories of NIDC 2025",
+      "  A lingering sense of anticipation",
       "",
-      "Your ticket status: NOT YET ACQUIRED",
-      "(The Guide suggests this is a problem you should",
-      "address sooner rather than later.)",
+      "Your NIDC 2026 ticket status: NOT YET AVAILABLE",
+      "(Nobody's is. Don't panic.)",
     ],
+    color: CLR.green,
+  },
+  RUMOURS: {
+    response: () => {
+      const rumours = [
+        "A passing Betelgeusean whispers: 'I heard there will be even more tracks this year.'",
+        "A developer at the bar mutters: 'Apparently the after-party is going to be legendary. Again.'",
+        "Someone scrawled on a napkin: 'The CFP will open before you expect it.'",
+        "A note stuck to the wall reads: 'The organisers have been suspiciously quiet. That means they're planning something big.'",
+        "An anonymous source reports: 'They're already arguing about which talks to accept.'",
+        "The grapevine suggests: 'The coffee will be just as good. Maybe better.'",
+      ];
+      const pick = rumours[Math.floor(Math.random() * rumours.length)];
+      return [
+        "> listen to rumours",
+        "",
+        "You press your ear to the fabric of space-time and",
+        "listen carefully...",
+        "",
+        pick,
+        "",
+        "(Rumours are unverified. The Guide accepts no liability",
+        "for disappointment, excitement, or spontaneous hype.)",
+      ];
+    },
     color: CLR.green,
   },
   NORTH: {
     response: [
       "> go north",
       "",
-      "Exhibition Hall",
+      "You walk north into the fog. After several steps you",
+      "bump into a wall that wasn't there before. A sign on",
+      "it reads:",
       "",
-      "You enter a vast hall lined with sponsor stalls. Gearset,",
-      "Enso, Payroc, DailyPay, Magnite, and many more display",
-      "their wares with the enthusiasm of Sirius Cybernetics",
-      "Corporation salespeople, except these ones actually have",
-      "useful products.",
+      "  NIDC 2026 — THIS AREA IS UNDER CONSTRUCTION",
+      "  HARD HATS AND TOWELS REQUIRED BEYOND THIS POINT",
       "",
-      "The smell of fresh coffee and traybakes fills the air.",
-      "For a brief, wonderful moment, you forget that your",
-      "planet was demolished to make way for a hyperspace bypass.",
+      "You can't go that way. Yet.",
     ],
     color: CLR.green,
-    link: "/sponsors",
+  },
+  SOUTH: {
+    response: [
+      "> go south",
+      "",
+      "You head south, hoping to find the after-party. Instead",
+      "you find only a closed door with a note pinned to it:",
+      "",
+      "  'After-party details TBA. But trust us, it'll be worth",
+      "   the wait. — The Organisers'",
+      "",
+      "You can't go that way. Yet.",
+    ],
+    color: CLR.green,
+  },
+  PARTY: {
+    response: () => [
+      "> find party",
+      "",
+      ...classifiedResponse(),
+      "",
+      "The after-party will happen. Where, when, and how much",
+      "pizza — these remain mysteries wrapped in enigmas wrapped",
+      "in a towel.",
+    ],
+    color: CLR.green,
   },
   TOWEL: {
     response: [
@@ -327,9 +395,11 @@ const COMMANDS: Record<
       "",
       '"A towel is about the most massively useful thing',
       'an interstellar hitchhiker can have." It goes on to',
-      "note that any developer who can keep track of their",
-      "towel AND their conference lanyard is clearly a person",
-      "to be reckoned with.",
+      "note that any developer who attends two consecutive NIDC",
+      "conferences with towel in hand is clearly a person to",
+      "be reckoned with.",
+      "",
+      "Keep it close. You'll need it for 2026.",
     ],
     color: CLR.brightGreen,
   },
@@ -340,12 +410,11 @@ const COMMANDS: Record<
       '"Forty-two," said Deep Thought, with infinite majesty',
       "and calm.",
       "",
-      "In the case of NIDC 2025, the question was almost",
-      "certainly: 'How many speakers does it take to fill a",
-      "Saturday with actual useful knowledge?'",
+      "In the case of NIDC 2026, the question was almost",
+      "certainly: 'How many times will I refresh nidevconf.com",
+      "waiting for the date announcement?'",
       "",
-      "The answer, as it turns out, is 40+.",
-      "Close enough.",
+      "The answer, it turns out, is significantly more than 42.",
     ],
     color: CLR.amber,
   },
@@ -354,13 +423,17 @@ const COMMANDS: Record<
       "You take a deep breath.",
       "",
       "The large, friendly letters on the cover of the Guide",
-      "glow reassuringly. You are at a developer conference",
-      "in Belfast. There is coffee. There are talks. There is",
-      "a quiet room if it all gets too much.",
+      "glow reassuringly. Yes, the date hasn't been announced.",
+      "Yes, you don't know the venue. Yes, the agenda is blank.",
+      "",
+      "But NIDC 2026 IS happening. In Belfast. With speakers,",
+      "and tracks, and coffee, and community.",
       "",
       "Everything is going to be fine.",
       "",
       "Probably.",
+      "",
+      "(Almost certainly.)",
     ],
     color: CLR.brightGreen,
   },
@@ -372,9 +445,9 @@ const COMMANDS: Record<
       "Blaster. Its effect is like having your brain smashed",
       "out by a slice of lemon wrapped round a large gold brick.",
       "",
-      "The after-party at Marcus Ward doesn't serve those, but",
-      "they do have an open bar and pizza, which the Guide rates",
-      "as 'nearly as good and significantly less fatal'.",
+      "The NIDC 2026 after-party drinks menu is, naturally,",
+      "classified. But the Guide notes that previous editions",
+      "have been 'nearly as good and significantly less fatal'.",
     ],
     color: CLR.green,
   },
@@ -383,6 +456,8 @@ const COMMANDS: Record<
       "> leave",
       "",
       "So long, and thanks for all the talks.",
+      "",
+      "(See you at NIDC 2026. Whenever that turns out to be.)",
     ],
     color: CLR.amber,
     link: "/",
@@ -391,7 +466,6 @@ const COMMANDS: Record<
 
 /* ── Component ───────────────────────────────────────────── */
 export default function TerminalContent() {
-  const countdown = useCountdown();
   const [visibleStory, setVisibleStory] = useState(0);
   const [showPrompt, setShowPrompt] = useState(false);
   const [input, setInput] = useState("");
@@ -451,7 +525,11 @@ export default function TerminalContent() {
     const entry = COMMANDS[cmd];
 
     if (entry) {
-      const lines = entry.response.map((t) => ({
+      const responseLines =
+        typeof entry.response === "function"
+          ? entry.response()
+          : entry.response;
+      const lines = responseLines.map((t) => ({
         text: t,
         color: entry.color,
       }));
@@ -524,7 +602,7 @@ export default function TerminalContent() {
             color: CLR.black,
           }}
         >
-          THE HITCHHIKER&apos;S GUIDE TO NIDC 2025 &mdash; A Text Adventure
+          THE HITCHHIKER&apos;S GUIDE TO NIDC 2026 &mdash; [CLASSIFIED]
           <Link
             href="/"
             className="absolute right-3 top-1.5 hover:opacity-70 transition-opacity"
@@ -555,24 +633,17 @@ export default function TerminalContent() {
             {SCENE}
           </pre>
 
-          {/* Countdown bar */}
-          {countdown && (
-            <div
-              className="flex items-center justify-center gap-1 py-2 mb-3 text-xs tracking-wider"
-              role="timer"
-              aria-label={`${countdown.days} days until NIDC 2025`}
-            >
-              <span style={{ color: CLR.dimGreen }}>[ </span>
-              <span style={{ color: CLR.amber }}>
-                {pad(countdown.days)}D {pad(countdown.hours)}H{" "}
-                {pad(countdown.minutes)}M {pad(countdown.seconds)}S
-              </span>
-              <span style={{ color: CLR.dimGreen }}>
-                {" "}
-                UNTIL CONFERENCE ]
-              </span>
-            </div>
-          )}
+          {/* Teaser bar */}
+          <div
+            className="flex items-center justify-center gap-1 py-2 mb-3 text-xs tracking-wider"
+            aria-label="NIDC 2026 coming soon"
+          >
+            <span style={{ color: CLR.dimGreen }}>[ </span>
+            <span style={{ color: CLR.amber }}>
+              NIDC 2026 — DATE TBA — WATCH THIS SPACE
+            </span>
+            <span style={{ color: CLR.dimGreen }}> ]</span>
+          </div>
 
           {/* Divider */}
           <div style={{ color: CLR.dimGreen }}>
