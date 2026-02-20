@@ -417,14 +417,12 @@ export default function HomeContent() {
               className="glass rounded-3xl overflow-hidden"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2311.9!2d-5.9240!3d54.5973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486108e4b27e0e39%3A0x7e2a2f12ae3a8f1!2sICC%20Belfast!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-5.9295%2C54.5925%2C-5.9175%2C54.5970&amp;layer=mapnik&amp;marker=54.5947%2C-5.9241"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
-                allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="ICC Belfast location map"
+                title="ICC Belfast (Waterfront Hall) location map"
                 className="w-full"
               />
             </motion.div>
