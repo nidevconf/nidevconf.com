@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Calendar,
-  MapPin,
   Users,
   Mic2,
   Coffee,
@@ -309,20 +308,6 @@ export default function HomeContent() {
                 </span>
               </h3>
 
-              {tierGroup.tier === "Gold" && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  {tierGroup.sponsors.map((s) => (
-                    <div key={s.name} className="text-center">
-                      {GOLD_LABELS[s.name] && (
-                        <span className="inline-block px-3 py-1 text-xs font-semibold bg-nidc-pink/10 text-nidc-pink rounded-full mb-3">
-                          {GOLD_LABELS[s.name]}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-
               <div
                 className={`grid gap-8 justify-items-center ${
                   tierGroup.tier === "Headline"
@@ -343,36 +328,22 @@ export default function HomeContent() {
                         ? "md"
                         : "sm"
                     }
+                    label={GOLD_LABELS[sponsor.name]}
                   />
                 ))}
               </div>
             </motion.div>
           ))}
 
-          <div className="text-center">
-            <Link
-              href="/sponsors"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-nidc-pink/30 text-nidc-pink hover:bg-nidc-pink/10 rounded-full font-semibold transition-all"
-            >
-              View All Sponsors
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* Info Cards */}
       <section className="py-24 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-nidc-cyan/5 to-transparent" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-6">
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
-              {
-                title: "Attendee Info",
-                description: "All the info you need on the day",
-                href: "/attendee",
-                icon: MapPin,
-              },
               {
                 title: "View Agenda",
                 description:

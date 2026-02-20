@@ -241,7 +241,6 @@ export const NAV_ITEMS = [
     children: [
       { label: "Agenda", href: "/agenda" },
       { label: "Speakers", href: "/speakers" },
-      { label: "Attendee Info", href: "/attendee" },
     ],
   },
   {
