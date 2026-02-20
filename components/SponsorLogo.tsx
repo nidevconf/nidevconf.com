@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Globe, Linkedin } from "lucide-react";
 import type { Sponsor } from "@/lib/data";
 
@@ -17,12 +18,24 @@ export function SponsorLogo({
     sm: "min-h-[40px] text-lg sm:text-xl",
   };
 
+  const imgSizes = {
+    lg: { width: 200, height: 80 },
+    md: { width: 160, height: 56 },
+    sm: { width: 120, height: 40 },
+  };
+
   return (
     <div className="flex flex-col items-center gap-2 group p-2">
       <div
         className={`${sizeClasses[size]} flex items-center justify-center font-bold text-white group-hover:text-nidc-pink transition-all text-center`}
       >
-        <span className="tracking-tight">{sponsor.name}</span>
+        <Image
+          src={sponsor.logo}
+          alt={sponsor.name}
+          width={imgSizes[size].width}
+          height={imgSizes[size].height}
+          className="object-contain max-h-full"
+        />
       </div>
       <div className="flex gap-2" role="list" aria-label={`${sponsor.name} links`}>
         <Link

@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NIDC - Northern Ireland Developers Conference
+
+The official website for [NIDC 2025](https://nidevconf.github.io/nidevconf.com/) — Northern Ireland's premier developer conference. November 8th, 2025 at ICC Belfast.
+
+Built with [Next.js 16](https://nextjs.org) and deployed to GitHub Pages.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  page.tsx              # Homepage
+  agenda/               # Agenda (Sessionize embed)
+  speakers/             # Speaker grid (Sessionize API)
+  tickets/              # Tickets (ti.to embed)
+  sponsors/             # Sponsor logos and links
+  sponsor-info/         # Become a sponsor
+  attendee/             # Attendee information
+  past-events/          # Previous NIDC events
+  faq/                  # Frequently asked questions
+  code-of-conduct/      # Code of Conduct
+  privacy/              # Privacy Policy
+  terminal/             # Hitchhiker's Guide easter egg
+components/             # Shared UI components
+lib/data.ts             # Conference data, sponsors, navigation
+public/sponsors/        # Sponsor logo images
+```
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+The site is deployed to **GitHub Pages** automatically on every merge to `main`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The GitHub Actions workflow (`.github/workflows/deploy.yml`) runs `next build` with static export and deploys the output to GitHub Pages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Live site:** https://nidevconf.github.io/nidevconf.com/
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The `main` branch is protected. To make changes:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Create a new branch from `main`
+2. Make your changes
+3. Open a Pull Request
+4. Once approved and merged, the site deploys automatically
+
+## Adding or Updating Sponsor Logos
+
+Place logo images in `public/sponsors/` and reference them in `lib/data.ts`. Supported formats: PNG, SVG, WebP. Logos should be at least 200px wide with a transparent background.
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router, static export)
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Integrations:** Sessionize (agenda/speakers), ti.to (tickets)
+- **Hosting:** GitHub Pages via GitHub Actions
