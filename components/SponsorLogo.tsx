@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Globe, Linkedin } from "lucide-react";
 import type { Sponsor } from "@/lib/data";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export function SponsorLogo({
   sponsor,
@@ -13,28 +14,21 @@ export function SponsorLogo({
   size?: "lg" | "md" | "sm";
 }) {
   const sizeClasses = {
-    lg: "min-h-[80px] text-3xl sm:text-4xl",
-    md: "min-h-[56px] text-xl sm:text-2xl",
-    sm: "min-h-[40px] text-lg sm:text-xl",
-  };
-
-  const imgSizes = {
-    lg: { width: 200, height: 80 },
-    md: { width: 160, height: 56 },
-    sm: { width: 120, height: 40 },
+    lg: "h-[80px]",
+    md: "h-[56px]",
+    sm: "h-[40px]",
   };
 
   return (
     <div className="flex flex-col items-center gap-2 group p-2">
       <div
-        className={`${sizeClasses[size]} flex items-center justify-center font-bold text-white group-hover:text-nidc-pink transition-all text-center`}
+        className={`${sizeClasses[size]} flex items-center justify-center`}
       >
-        <Image
-          src={sponsor.logo}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${basePath}${sponsor.logo}`}
           alt={sponsor.name}
-          width={imgSizes[size].width}
-          height={imgSizes[size].height}
-          className="object-contain max-h-full"
+          className="object-contain max-h-full max-w-full"
         />
       </div>
       <div className="flex gap-2" role="list" aria-label={`${sponsor.name} links`}>
