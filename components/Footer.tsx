@@ -108,6 +108,7 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <Link href="/code-of-conduct" className="hover:text-white transition-colors">Code of Conduct</Link>
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="https://github.com/nidevconf/nidevconf.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</Link>
             <Link href="/terminal" className="font-mono text-xs text-[#33FF33] hover:text-[#66FF66] transition-colors" title="Don't Panic">DON&apos;T PANIC</Link>
           </div>
         </div>
