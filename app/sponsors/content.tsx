@@ -3,9 +3,7 @@
 import { motion } from "framer-motion";
 import { PageHero } from "@/components/PageHero";
 import { SponsorLogo } from "@/components/SponsorLogo";
-import { SPONSORS, GOLD_LABELS, CONFERENCE } from "@/lib/data";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { SPONSORS, GOLD_LABELS } from "@/lib/data";
 
 export default function SponsorsContent() {
   return (
@@ -37,11 +35,11 @@ export default function SponsorsContent() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="mb-20"
+              className="mb-24"
             >
-              <h2 className="text-center mb-10">
+              <h2 className="text-center mb-12">
                 <span
-                  className={`inline-block px-8 py-3 rounded-full text-lg font-bold uppercase tracking-wider ${
+                  className={`inline-block px-10 py-4 rounded-full text-xl sm:text-2xl font-black uppercase tracking-widest ${
                     tierGroup.tier === "Headline"
                       ? "bg-nidc-pink/20 text-nidc-pink glow-pink"
                       : tierGroup.tier === "Gold"
@@ -56,29 +54,15 @@ export default function SponsorsContent() {
                 </span>
               </h2>
 
-              {tierGroup.tier === "Gold" && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                  {tierGroup.sponsors.map((s) => (
-                    <div key={s.name} className="text-center">
-                      {GOLD_LABELS[s.name] && (
-                        <span className="inline-block px-3 py-1 text-xs font-semibold bg-nidc-pink/10 text-nidc-pink rounded-full">
-                          {GOLD_LABELS[s.name]}
-                        </span>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-
               <div
-                className={`grid gap-10 justify-items-center ${
+                className={`grid gap-8 sm:gap-10 justify-items-center ${
                   tierGroup.tier === "Headline"
-                    ? "grid-cols-1"
+                    ? "grid-cols-1 max-w-lg mx-auto"
                     : tierGroup.tier === "Gold"
-                    ? "grid-cols-2 md:grid-cols-4"
+                    ? "grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto"
                     : tierGroup.tier === "Silver"
-                    ? "grid-cols-2 md:grid-cols-3"
-                    : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+                    ? "grid-cols-1 sm:grid-cols-3 max-w-5xl mx-auto"
+                    : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 max-w-6xl mx-auto"
                 }`}
               >
                 {tierGroup.sponsors.map((sponsor) => (
@@ -93,6 +77,7 @@ export default function SponsorsContent() {
                         ? "md"
                         : "sm"
                     }
+                    label={GOLD_LABELS[sponsor.name]}
                   />
                 ))}
               </div>
