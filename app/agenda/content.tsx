@@ -9,7 +9,6 @@ import {
   Smartphone,
   ExternalLink,
   ArrowRight,
-  Clock,
 } from "lucide-react";
 
 export default function AgendaContent() {
@@ -59,60 +58,6 @@ export default function AgendaContent() {
             id="schedule"
           >
             <SessionizeEmbed />
-          </motion.div>
-
-          {/* Quick Schedule */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="glass rounded-3xl p-6 sm:p-12 mb-16 max-w-4xl mx-auto"
-          >
-            <h3 className="text-2xl font-bold text-white mb-8 text-center">
-              Day at a Glance
-            </h3>
-            <div className="space-y-3 sm:space-y-4">
-              {[
-                { time: "08:30 - 09:30", event: "Registration & Coffee", type: "break" },
-                { time: "09:30 - 10:15", event: "Opening & First Sessions", type: "talk" },
-                { time: "10:15 - 10:30", event: "Break", type: "break" },
-                { time: "10:30 - 12:00", event: "Morning Sessions", type: "talk" },
-                { time: "12:00 - 13:00", event: "Lunch & Expo Hall", type: "break" },
-                { time: "13:00 - 15:00", event: "Afternoon Sessions", type: "talk" },
-                { time: "15:00 - 15:30", event: "Tea, Coffee & Traybakes", type: "break" },
-                { time: "15:30 - 17:30", event: "Final Sessions", type: "talk" },
-                { time: "17:30 - 17:45", event: "Closing & Prize Draw", type: "talk" },
-                { time: "18:00 - 22:00", event: "After Party @ Marcus Ward", type: "party" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl transition-colors ${
-                    item.type === "talk"
-                      ? "bg-nidc-pink/5 hover:bg-nidc-pink/10"
-                      : item.type === "party"
-                      ? "bg-nidc-cyan/5 hover:bg-nidc-cyan/10"
-                      : "bg-white/[0.02] hover:bg-white/[0.04]"
-                  }`}
-                >
-                  <div className="flex items-center gap-2 sm:gap-4">
-                    <Clock
-                      className={`w-5 h-5 flex-shrink-0 ${
-                        item.type === "talk"
-                          ? "text-nidc-pink"
-                          : item.type === "party"
-                          ? "text-nidc-cyan"
-                          : "text-gray-500"
-                      }`}
-                      aria-hidden="true"
-                    />
-                    <span className="text-sm font-mono text-gray-300 w-28 sm:w-32 flex-shrink-0">
-                      {item.time}
-                    </span>
-                  </div>
-                  <span className="text-white font-medium ml-7 sm:ml-0">{item.event}</span>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Mobile App CTA */}

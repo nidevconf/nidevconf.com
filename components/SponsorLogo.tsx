@@ -14,9 +14,9 @@ export function SponsorLogo({
   size?: "lg" | "md" | "sm";
 }) {
   const sizeClasses = {
-    lg: "h-[80px]",
-    md: "h-[56px]",
-    sm: "h-[40px]",
+    lg: "h-[120px] sm:h-[160px]",
+    md: "h-[80px] sm:h-[100px]",
+    sm: "h-[60px] sm:h-[80px]",
   };
 
   return (

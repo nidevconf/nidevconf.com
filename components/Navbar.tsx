@@ -142,12 +142,6 @@ export function Navbar() {
           {/* Right side */}
           <div className="flex items-center gap-3">
             <Link
-              href="/tickets"
-              className="hidden sm:inline-flex items-center px-5 py-2 min-h-[44px] bg-nidc-pink hover:bg-nidc-pink/90 text-white text-sm font-bold rounded-full transition-all hover:shadow-lg hover:shadow-nidc-pink/25"
-            >
-              GET TICKETS
-            </Link>
-            <Link
               href="/agenda"
               className="hidden sm:inline-flex items-center px-4 py-2 min-h-[44px] border-2 border-nidc-cyan/60 text-nidc-cyan text-sm font-bold rounded-full hover:bg-nidc-cyan/10 transition-all"
             >
@@ -206,12 +200,6 @@ export function Navbar() {
               </div>
             ))}
             <div className="pt-3 flex flex-col gap-2">
-              <Link
-                href="/tickets"
-                className="block text-center px-5 py-3 min-h-[44px] bg-nidc-pink text-white font-bold rounded-full"
-              >
-                GET TICKETS
-              </Link>
               <Link
                 href="/agenda"
                 className="block text-center px-4 py-3 min-h-[44px] border-2 border-nidc-cyan/60 text-nidc-cyan font-bold rounded-full"

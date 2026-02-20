@@ -116,13 +116,6 @@ export default function HomeContent() {
               className="flex flex-wrap gap-4"
             >
               <Link
-                href="/tickets"
-                className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-nidc-pink hover:bg-nidc-pink/90 text-white font-bold text-base sm:text-lg rounded-full transition-all hover:shadow-2xl hover:shadow-nidc-pink/25 hover:-translate-y-0.5 min-h-[44px]"
-              >
-                Get Your Ticket
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-              </Link>
-              <Link
                 href="/agenda"
                 className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/20 hover:border-nidc-cyan/50 text-white font-bold text-base sm:text-lg rounded-full transition-all hover:bg-white/5 min-h-[44px]"
               >
