@@ -73,7 +73,7 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "Gearset",
-        logo: "/sponsors/gearset.png",
+        logo: "/sponsors/gearset.svg",
         website: "https://gearset.com/",
         linkedin: "https://www.linkedin.com/company/gearset",
       },
@@ -102,7 +102,7 @@ export const SPONSORS: SponsorTier[] = [
       },
       {
         name: "Magnite",
-        logo: "/sponsors/magnite.png",
+        logo: "/sponsors/magnite.svg",
         website: "https://www.magnite.com/",
         linkedin: "https://www.linkedin.com/company/magnite/",
       },
@@ -119,7 +119,7 @@ export const SPONSORS: SponsorTier[] = [
       },
       {
         name: "Instil",
-        logo: "/sponsors/instil.png",
+        logo: "/sponsors/instil.svg",
         website: "http://instil.co/",
         linkedin: "https://www.linkedin.com/company/instilhq/",
       },
