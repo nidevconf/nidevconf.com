@@ -16,20 +16,20 @@ export function SponsorLogo({
   label?: string;
 }) {
   const containerClasses = {
-    lg: "w-[280px] sm:w-[300px] p-8 sm:p-10",
-    md: "w-[240px] sm:w-[260px] p-6 sm:p-8",
-    sm: "w-[200px] sm:w-[220px] p-5 sm:p-6",
+    lg: "w-full max-w-2xl p-10 sm:p-14",
+    md: "w-full p-6 sm:p-8",
+    sm: "w-full p-5 sm:p-6",
   };
 
   const imgClasses = {
-    lg: "h-[180px] sm:h-[200px] w-[180px] sm:w-[200px]",
-    md: "h-[140px] sm:h-[160px] w-[140px] sm:w-[160px]",
-    sm: "h-[100px] sm:h-[120px] w-[100px] sm:w-[120px]",
+    lg: "h-[220px] sm:h-[280px] w-full",
+    md: "h-[180px] sm:h-[220px] w-full",
+    sm: "h-[100px] sm:h-[120px] w-full",
   };
 
   const nameClasses = {
-    lg: "text-xl sm:text-2xl",
-    md: "text-lg",
+    lg: "text-2xl sm:text-3xl",
+    md: "text-lg sm:text-xl",
     sm: "text-base",
   };
 
@@ -44,10 +44,10 @@ export function SponsorLogo({
         href={sponsor.website}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${containerClasses[size]} bg-white rounded-2xl flex flex-col items-center justify-center gap-4 hover:shadow-lg hover:shadow-nidc-pink/10 transition-all hover:-translate-y-1 mx-auto`}
+        className={`${containerClasses[size]} bg-white rounded-2xl flex flex-col items-center justify-center gap-4 hover:shadow-lg hover:shadow-nidc-pink/10 transition-all hover:-translate-y-1 w-full`}
         aria-label={`Visit ${sponsor.name} website`}
       >
-        <div className={`${imgClasses[size]} flex items-center justify-center w-full`}>
+        <div className={`${imgClasses[size]} flex items-center justify-center`}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`${basePath}${sponsor.logo}`}
@@ -59,27 +59,29 @@ export function SponsorLogo({
           {sponsor.name}
         </span>
       </Link>
-      <div className="flex gap-2" role="list" aria-label={`${sponsor.name} links`}>
+      <div className="flex gap-3 mt-1" role="list" aria-label={`${sponsor.name} links`}>
         <Link
           href={sponsor.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-9 h-9 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-nidc-pink/20 flex items-center justify-center text-gray-300 hover:text-nidc-pink transition-colors"
+          className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-white/10 border border-white/20 text-gray-200 hover:bg-nidc-pink/20 hover:border-nidc-pink/40 hover:text-nidc-pink transition-colors text-sm font-medium"
           aria-label={`Visit ${sponsor.name} website`}
           role="listitem"
         >
           <Globe className="w-4 h-4" aria-hidden="true" />
+          Website
         </Link>
         {sponsor.linkedin && (
           <Link
             href={sponsor.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-9 h-9 min-w-[44px] min-h-[44px] rounded-full bg-white/5 hover:bg-blue-500/20 flex items-center justify-center text-gray-300 hover:text-blue-400 transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-2 min-h-[44px] rounded-full bg-white/10 border border-white/20 text-gray-200 hover:bg-blue-500/20 hover:border-blue-400/40 hover:text-blue-400 transition-colors text-sm font-medium"
             aria-label={`${sponsor.name} on LinkedIn`}
             role="listitem"
           >
             <Linkedin className="w-4 h-4" aria-hidden="true" />
+            LinkedIn
           </Link>
         )}
       </div>

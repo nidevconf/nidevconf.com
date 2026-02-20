@@ -57,9 +57,9 @@ export default function SponsorsContent() {
               <div
                 className={`grid gap-8 sm:gap-10 justify-items-center ${
                   tierGroup.tier === "Headline"
-                    ? "grid-cols-1 max-w-lg mx-auto"
+                    ? "grid-cols-1 max-w-3xl mx-auto"
                     : tierGroup.tier === "Gold"
-                    ? "grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto"
+                    ? "grid-cols-1 sm:grid-cols-2 max-w-5xl mx-auto"
                     : tierGroup.tier === "Silver"
                     ? "grid-cols-1 sm:grid-cols-3 max-w-5xl mx-auto"
                     : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 max-w-6xl mx-auto"
