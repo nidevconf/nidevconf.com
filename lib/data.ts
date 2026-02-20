@@ -73,7 +73,7 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "Gearset",
-        logo: "/sponsors/gearset.svg",
+        logo: "/sponsors/gearset.png",
         website: "https://gearset.com/",
         linkedin: "https://www.linkedin.com/company/gearset",
       },
@@ -84,25 +84,25 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "Enso Recruitment",
-        logo: "/sponsors/enso.svg",
+        logo: "/sponsors/enso.png",
         website: "https://www.ensorecruitment.com/",
         linkedin: "https://www.linkedin.com/company/enso-recruitment",
       },
       {
         name: "Payroc",
-        logo: "/sponsors/payroc.svg",
+        logo: "/sponsors/payroc.png",
         website: "https://payroc.com/",
         linkedin: "https://www.linkedin.com/company/payroc",
       },
       {
         name: "DailyPay",
-        logo: "/sponsors/dailypay.svg",
+        logo: "/sponsors/dailypay.png",
         website: "https://www.dailypay.com/",
         linkedin: "https://www.linkedin.com/company/dailypay",
       },
       {
         name: "Magnite",
-        logo: "/sponsors/magnite.svg",
+        logo: "/sponsors/magnite.png",
         website: "https://www.magnite.com/",
         linkedin: "https://www.linkedin.com/company/magnite/",
       },
@@ -113,19 +113,19 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "SciLeads",
-        logo: "/sponsors/scileads.svg",
+        logo: "/sponsors/scileads.png",
         website: "https://scileads.com/",
         linkedin: "https://www.linkedin.com/company/scileads/",
       },
       {
         name: "Instil",
-        logo: "/sponsors/instil.svg",
+        logo: "/sponsors/instil.png",
         website: "http://instil.co/",
         linkedin: "https://www.linkedin.com/company/instilhq/",
       },
       {
         name: "Allstate NI",
-        logo: "/sponsors/allstate.svg",
+        logo: "/sponsors/allstate.png",
         website: "https://www.allstateni.com/",
         linkedin:
           "https://www.linkedin.com/company/allstate-northern-ireland",
@@ -137,49 +137,49 @@ export const SPONSORS: SponsorTier[] = [
     sponsors: [
       {
         name: "BCS Northern Ireland",
-        logo: "/sponsors/bcs.svg",
+        logo: "/sponsors/bcs.png",
         website: "https://www.bcs.org/membership-and-registrations/member-communities/northern-ireland-branch/",
         linkedin: "https://www.linkedin.com/company/it-bcs",
       },
       {
         name: "Curiosity",
-        logo: "/sponsors/curiosity.svg",
+        logo: "/sponsors/curiosity.png",
         website: "#",
         linkedin: "https://www.linkedin.com/company/curiosity-corporation/",
       },
       {
         name: "Uptime Labs",
-        logo: "/sponsors/uptimelabs.svg",
+        logo: "/sponsors/uptimelabs.png",
         website: "https://uptimelabs.io/",
         linkedin: "https://uk.linkedin.com/company/uptime-labs",
       },
       {
         name: "Cloudsmith",
-        logo: "/sponsors/cloudsmith.svg",
+        logo: "/sponsors/cloudsmith.png",
         website: "https://cloudsmith.com/",
         linkedin: "https://www.linkedin.com/company/cloudsmith",
       },
       {
         name: "HealthPass",
-        logo: "/sponsors/healthpass.svg",
+        logo: "/sponsors/healthpass.png",
         website: "https://healthpass.io/",
         linkedin: "https://www.linkedin.com/company/healthpass-f2fsolutions/",
       },
       {
         name: "Coding Fury",
-        logo: "/sponsors/codingfury.svg",
+        logo: "/sponsors/codingfury.png",
         website: "https://www.codingfury.com/",
         linkedin: "https://www.linkedin.com/company/codingfury",
       },
       {
         name: "Software NI",
-        logo: "/sponsors/softwareni.svg",
+        logo: "/sponsors/softwareni.png",
         website: "https://softwareni.co.uk/",
         linkedin: "https://www.linkedin.com/company/software-ni",
       },
       {
         name: "UTAW",
-        logo: "/sponsors/utaw.svg",
+        logo: "/sponsors/utaw.png",
         website: "https://utaw.tech/",
       },
     ],
