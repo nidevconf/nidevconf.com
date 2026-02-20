@@ -5,10 +5,13 @@ import { PageHero } from "@/components/PageHero";
 import Link from "next/link";
 import { Camera, Play } from "lucide-react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const pastEvents = [
   {
     year: "2024",
     venue: "ICC Belfast",
+    image: "/events/2024.jpg",
     description:
       "Our biggest year yet with record attendance, an expanded expo hall, and an incredible lineup of local speakers.",
     photos: "https://photos.app.goo.gl/D1y48Gw1NSKcPNjKA",
@@ -18,6 +21,7 @@ const pastEvents = [
   {
     year: "2023",
     venue: "ICC Belfast",
+    image: "/events/2023.jpg",
     description:
       "We aimed to connect with new audiences by launching billboard campaigns, hosting speaker workshops for beginners, and expanding our meetup fest.",
     photos: "https://photos.app.goo.gl/RWhfEvSE9BevF2iC8",
@@ -27,6 +31,7 @@ const pastEvents = [
   {
     year: "2022",
     venue: "Waterfront Hall",
+    image: "/events/2022.jpg",
     description:
       "NIDC returned in person after the pandemic with a bang. Great to see the community back together.",
     photos: "https://photos.app.goo.gl/uziQsAF8Tk7WzcM2A",
@@ -36,6 +41,7 @@ const pastEvents = [
   {
     year: "2021",
     venue: "Online",
+    image: "/events/2021.jpg",
     description:
       "A virtual meetup fest spread across multiple evenings, keeping the community connected.",
     photos:
@@ -46,6 +52,7 @@ const pastEvents = [
   {
     year: "2020",
     venue: "Online",
+    image: "/events/2020.jpg",
     description:
       "When the world went remote, so did we. Our first virtual conference keeping the NI tech community together.",
     videos:
@@ -54,6 +61,7 @@ const pastEvents = [
   {
     year: "2019",
     venue: "Waterfront Hall",
+    image: "/events/2019.jpg",
     description:
       "A packed Waterfront Hall with talks across the full development spectrum.",
     videos:
@@ -62,6 +70,7 @@ const pastEvents = [
   {
     year: "2018",
     venue: "Waterfront Hall",
+    image: "/events/2018.jpg",
     description:
       "Growing year on year with an even wider range of talks and community engagement.",
     photos: "https://photos.app.goo.gl/iwKYadhnfRAHSqFY9",
@@ -71,6 +80,7 @@ const pastEvents = [
   {
     year: "2017",
     venue: "Peter Froggatt Centre, QUB",
+    image: "/events/2017.jpg",
     description:
       "Where it all began! Humble beginnings at Queen's University Belfast with 230 attendees, 38 speakers, and 8 sponsors.",
     photos: "https://photos.app.goo.gl/AjrU4pF4VuR6gy4N7",
@@ -117,7 +127,15 @@ export default function PastEventsContent() {
                   {/* Dot */}
                   <div className="absolute left-6 top-6 w-5 h-5 rounded-full bg-nidc-dark border-2 border-nidc-pink" />
 
-                  <div className="glass rounded-2xl p-6">
+                  <div className="glass rounded-2xl overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`${basePath}${event.image}`}
+                      alt={`NIDC ${event.year} at ${event.venue}`}
+                      className="w-full h-48 sm:h-56 object-cover"
+                      loading="lazy"
+                    />
+                    <div className="p-6">
                     <h3 className="text-2xl font-black gradient-text">
                       NIDC {event.year}
                     </h3>
@@ -151,6 +169,7 @@ export default function PastEventsContent() {
                           Videos
                         </Link>
                       )}
+                    </div>
                     </div>
                   </div>
                 </motion.div>
