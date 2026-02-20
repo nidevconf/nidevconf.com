@@ -111,33 +111,34 @@ export default function PastEventsContent() {
           </motion.p>
 
           {/* Timeline */}
-          <div className="relative">
-            <div className="absolute left-[120px] sm:left-[160px] top-0 bottom-0 w-px bg-gradient-to-b from-nidc-pink via-nidc-cyan to-transparent" />
+          <div className="space-y-8">
+            {pastEvents.map((event, i) => (
+              <motion.div
+                key={event.year}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="flex gap-4 sm:gap-6"
+              >
+                {/* Year & venue label */}
+                <div className="flex-shrink-0 w-24 sm:w-36 pt-4 text-right">
+                  <h3 className="text-base sm:text-xl font-black gradient-text leading-tight">
+                    NIDC {event.year}
+                  </h3>
+                  <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
+                    {event.venue}
+                  </p>
+                </div>
 
-            <div className="space-y-8">
-              {pastEvents.map((event, i) => (
-                <motion.div
-                  key={event.year}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="relative pl-[145px] sm:pl-[185px]"
-                >
-                  {/* Year & venue label */}
-                  <div className="absolute left-0 top-4 w-[108px] sm:w-[148px] text-right pr-5">
-                    <h3 className="text-lg sm:text-xl font-black gradient-text leading-tight">
-                      NIDC {event.year}
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm mt-0.5">
-                      {event.venue}
-                    </p>
-                  </div>
+                {/* Dot + line */}
+                <div className="flex flex-col items-center flex-shrink-0">
+                  <div className="w-4 h-4 mt-6 rounded-full bg-nidc-dark border-2 border-nidc-pink z-10" />
+                  <div className="w-px flex-1 bg-gradient-to-b from-nidc-pink/50 to-transparent" />
+                </div>
 
-                  {/* Dot */}
-                  <div className="absolute left-[118px] sm:left-[158px] top-6 w-5 h-5 rounded-full bg-nidc-dark border-2 border-nidc-pink z-10" />
-
-                  <div className="glass rounded-2xl overflow-hidden">
+                {/* Card */}
+                <div className="flex-1 min-w-0 glass rounded-2xl overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`${basePath}${event.image}`}
@@ -178,7 +179,6 @@ export default function PastEventsContent() {
                   </div>
                 </motion.div>
               ))}
-            </div>
           </div>
         </div>
       </section>
