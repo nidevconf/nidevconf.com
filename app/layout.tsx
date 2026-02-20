@@ -82,8 +82,8 @@ export const metadata: Metadata = {
   other: {
     "geo.region": "GB-NIR",
     "geo.placename": "Belfast",
-    "geo.position": "54.5973;-5.9218",
-    ICBM: "54.5973, -5.9218",
+    "geo.position": "54.597805;-5.920240",
+    ICBM: "54.597805, -5.920240",
   },
 };
 
@@ -110,8 +110,8 @@ const jsonLd = {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 54.5973,
-      longitude: -5.9218,
+      latitude: 54.597805,
+      longitude: -5.92024,
     },
   },
   organizer: {

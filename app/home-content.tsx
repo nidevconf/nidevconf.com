@@ -417,7 +417,7 @@ export default function HomeContent() {
               className="glass rounded-3xl overflow-hidden"
             >
               <iframe
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-5.9295%2C54.5925%2C-5.9175%2C54.5970&amp;layer=mapnik&amp;marker=54.5947%2C-5.9241"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-5.9256%2C54.5958%2C-5.9149%2C54.5998&amp;layer=mapnik&amp;marker=54.597805%2C-5.920240"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
