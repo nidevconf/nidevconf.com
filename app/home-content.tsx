@@ -137,7 +137,7 @@ export default function HomeContent() {
       </section>
 
       {/* What to Expect */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-16 sm:py-24 relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-nidc-pink/50 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -210,7 +210,7 @@ export default function HomeContent() {
       </section>
 
       {/* See the Photos */}
-      <section className="py-24">
+      <section className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
             <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
@@ -244,7 +244,7 @@ export default function HomeContent() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-24 relative">
+      <section className="py-16 sm:py-24 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-nidc-pink/5 via-transparent to-transparent" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
@@ -277,12 +277,16 @@ export default function HomeContent() {
                       onClick={() => setTestimonialIdx(i)}
                       aria-label={`Go to testimonial ${i + 1} of ${TESTIMONIALS.length}`}
                       aria-current={i === testimonialIdx ? "true" : undefined}
-                      className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                        i === testimonialIdx
-                          ? "bg-nidc-pink"
-                          : "bg-white/20 hover:bg-white/30"
-                      }`}
-                    />
+                      className="p-4 -m-2"
+                    >
+                      <span
+                        className={`block w-2.5 h-2.5 rounded-full transition-colors ${
+                          i === testimonialIdx
+                            ? "bg-nidc-pink"
+                            : "bg-white/20 hover:bg-white/30"
+                        }`}
+                      />
+                    </button>
                   ))}
                 </div>
                 <button
@@ -303,7 +307,7 @@ export default function HomeContent() {
       </section>
 
       {/* Sponsors */}
-      <section className="py-24 relative">
+      <section className="py-16 sm:py-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {SPONSORS.map((tierGroup, idx) => (
             <motion.div
@@ -316,7 +320,7 @@ export default function HomeContent() {
             >
               <h3 className="text-center mb-12">
                 <span
-                  className={`inline-block px-10 py-4 rounded-full text-xl sm:text-2xl font-black uppercase tracking-widest ${
+                  className={`inline-block px-6 sm:px-10 py-3 sm:py-4 rounded-full text-lg sm:text-2xl font-black uppercase tracking-wider sm:tracking-widest ${
                     tierGroup.tier === "Headline"
                       ? "bg-nidc-pink/20 text-nidc-pink glow-pink"
                       : tierGroup.tier === "Gold"
@@ -361,7 +365,7 @@ export default function HomeContent() {
       </section>
 
       {/* Get in Touch */}
-      <section className="py-24 relative">
+      <section className="py-16 sm:py-24 relative">
         <div className="absolute inset-0 bg-gradient-to-t from-nidc-pink/10 via-transparent to-transparent" />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div {...fadeUp}>
