@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
-// Change to "" when switching to a custom domain
-const basePath = "/nidevconf.com";
+const basePath = "";
 
 const nextConfig: NextConfig = {
   output: "export",
