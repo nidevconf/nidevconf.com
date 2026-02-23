@@ -6,9 +6,9 @@ export function Footer() {
   return (
     <footer className="border-t border-white/5 bg-nidc-darker" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 lg:col-span-1">
             <div className="text-2xl font-black tracking-tight mb-3" aria-hidden="true">
               <span className="text-nidc-pink">NI</span>
               <span className="text-white">DC</span>
@@ -82,12 +82,12 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href={`mailto:${CONFERENCE.email}`} className="text-gray-300 hover:text-nidc-pink transition-colors py-1 inline-block break-all">
+                <Link href={`mailto:${CONFERENCE.email}`} className="text-gray-300 hover:text-nidc-pink transition-colors py-1 inline-block break-words">
                   {CONFERENCE.email}
                 </Link>
               </li>
               <li>
-                <Link href={`mailto:${CONFERENCE.sponsorEmail}`} className="text-gray-300 hover:text-nidc-pink transition-colors py-1 inline-block break-all">
+                <Link href={`mailto:${CONFERENCE.sponsorEmail}`} className="text-gray-300 hover:text-nidc-pink transition-colors py-1 inline-block break-words">
                   {CONFERENCE.sponsorEmail}
                 </Link>
               </li>
@@ -102,7 +102,7 @@ export function Footer() {
 
         <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-300">
           <span>&copy; {new Date().getFullYear()} NIDC. Northern Ireland Developers Conference.</span>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 justify-center sm:justify-end">
             <Link href="/code-of-conduct" className="hover:text-white transition-colors">Code of Conduct</Link>
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="https://github.com/nidevconf/nidevconf.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</Link>

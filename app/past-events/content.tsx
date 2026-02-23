@@ -146,7 +146,7 @@ export default function PastEventsContent() {
         gradient="pink"
       />
 
-      <section className="pb-24">
+      <section className="pb-16 sm:pb-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.p
             initial={{ opacity: 0 }}
@@ -162,7 +162,7 @@ export default function PastEventsContent() {
           <div className="relative">
             {/* Continuous center line — desktop only */}
             <div
-              className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-nidc-pink/30 hidden md:block"
+              className="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 bg-nidc-pink/30 hidden lg:block"
               aria-hidden="true"
             />
 
@@ -180,7 +180,7 @@ export default function PastEventsContent() {
                 >
                   {/* Desktop: 3-column grid */}
                   <div
-                    className="hidden md:grid"
+                    className="hidden lg:grid"
                     style={{
                       gridTemplateColumns: "1fr 40px 1fr",
                     }}
@@ -201,8 +201,8 @@ export default function PastEventsContent() {
                     </div>
                   </div>
 
-                  {/* Mobile: simple stacked card */}
-                  <div className="md:hidden">
+                  {/* Mobile/tablet: simple stacked card */}
+                  <div className="lg:hidden">
                     <EventCard event={event} />
                   </div>
                 </motion.div>
