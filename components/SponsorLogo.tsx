@@ -36,7 +36,7 @@ export function SponsorLogo({
   return (
     <div className="flex flex-col items-center gap-3 group w-full h-full">
       {label && (
-        <span className="inline-block px-4 py-1.5 text-sm font-bold bg-nidc-pink/15 text-nidc-pink rounded-full tracking-wide">
+        <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-bold bg-nidc-pink/15 text-nidc-pink rounded-full tracking-wide whitespace-nowrap">
           {label}
         </span>
       )}
