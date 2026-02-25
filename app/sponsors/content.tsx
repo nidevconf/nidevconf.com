@@ -55,7 +55,7 @@ export default function SponsorsContent() {
               </h2>
 
               <div
-                className={`grid gap-8 sm:gap-10 justify-items-center ${
+                className={`grid gap-8 sm:gap-10 ${
                   tierGroup.tier === "Headline"
                     ? "grid-cols-1 max-w-3xl mx-auto"
                     : tierGroup.tier === "Gold"

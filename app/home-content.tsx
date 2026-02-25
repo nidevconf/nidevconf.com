@@ -57,7 +57,7 @@ export default function HomeContent() {
         />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16 sm:pb-20">
-          <div className="max-w-4xl">
+          <div className="max-w-4xl mx-auto sm:mx-0 text-center sm:text-left">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ export default function HomeContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 justify-center sm:justify-start"
             >
               <Link
                 href="/agenda"
@@ -335,7 +335,7 @@ export default function HomeContent() {
               </h3>
 
               <div
-                className={`grid gap-8 justify-items-center ${
+                className={`grid gap-8 ${
                   tierGroup.tier === "Headline"
                     ? "grid-cols-1"
                     : tierGroup.tier === "Gold"
