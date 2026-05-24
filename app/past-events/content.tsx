@@ -9,6 +9,16 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const pastEvents = [
   {
+    year: "2025",
+    venue: "ICC Belfast",
+    image: "/events/2025.jpg",
+    description:
+      "Back at ICC Belfast for another packed day of talks, workshops, and connections across the NI tech community.",
+    photos: "https://photos.app.goo.gl/ZDasurwvV8CbdjUR7",
+    videos:
+      "https://youtube.com/playlist?list=PL7DSy4xHOvv0avjz6QcFMO-Z58NxZ1Myt",
+  },
+  {
     year: "2024",
     venue: "ICC Belfast",
     image: "/events/2024.jpg",
