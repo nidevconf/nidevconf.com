@@ -11,7 +11,7 @@
   "dependencies": {
     "framer-motion": "^12.34.2",
     "lucide-react": "^0.574.0",
-    "next": "16.2.6",
+    "next": "^16.2.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
@@ -24,5 +24,8 @@
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
   }
 }
