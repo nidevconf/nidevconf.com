@@ -62,7 +62,7 @@ export function Navbar() {
             </span>
             <div className="hidden sm:block text-xs text-nidc-muted leading-tight">
               <div>WATERFRONT ICC BELFAST</div>
-              <div>8TH NOVEMBER 2025</div>
+              <div>RETURNING IN 2026</div>
             </div>
           </Link>
 
@@ -141,13 +141,6 @@ export function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/agenda"
-              className="hidden sm:inline-flex items-center px-4 py-2 min-h-[44px] border-2 border-nidc-cyan/60 text-nidc-cyan text-sm font-bold rounded-full hover:bg-nidc-cyan/10 transition-all"
-            >
-              VIEW AGENDA
-            </Link>
-
             {/* Mobile menu button */}
             <button
               className="lg:hidden p-3 min-w-[44px] min-h-[44px] text-gray-200 hover:text-white rounded-lg"
@@ -199,14 +192,6 @@ export function Navbar() {
                 )}
               </div>
             ))}
-            <div className="pt-3 flex flex-col gap-2">
-              <Link
-                href="/agenda"
-                className="block text-center px-4 py-3 min-h-[44px] border-2 border-nidc-cyan/60 text-nidc-cyan font-bold rounded-full"
-              >
-                VIEW AGENDA
-              </Link>
-            </div>
           </div>
         </div>
       )}

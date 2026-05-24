@@ -21,7 +21,10 @@ export const CONFERENCE = {
   sessionizeApp: "https://nidc-2025.sessionize.com/",
   photosUrl:
     "https://drive.google.com/drive/u/0/folders/1WDjXOR1Cu6xHmrIKx6SDL6bl18bKjVwT",
+  photos2025Url: "https://photos.app.goo.gl/ZDasurwvV8CbdjUR7",
   youtubeChannel: "https://www.youtube.com/channel/UCPJftRZO3wYmXLpvfRJtPhQ",
+  youtube2025Playlist:
+    "https://youtube.com/playlist?list=PL7DSy4xHOvv0avjz6QcFMO-Z58NxZ1Myt",
   email: "organisers@nidevconf.com",
   sponsorEmail: "sponsors@nidevconf.com",
 };
@@ -31,11 +34,6 @@ export const SOCIALS = [
     name: "Bluesky",
     url: "https://bsky.app/profile/nidc.bsky.social",
     icon: "bluesky",
-  },
-  {
-    name: "Discord",
-    url: "https://discord.gg/xU8zUt7md3",
-    icon: "discord",
   },
   {
     name: "LinkedIn",
@@ -234,21 +232,21 @@ export const PREVIOUS_TALKS = [
 
 export const NAV_ITEMS = [
   { label: "Home", href: "/" },
-  { label: "Sponsors", href: "/sponsors" },
   {
-    label: "Conference",
+    label: "2025 Recap",
     href: "/agenda",
     children: [
       { label: "Agenda", href: "/agenda" },
       { label: "Speakers", href: "/speakers" },
+      { label: "Past Events", href: "/past-events" },
     ],
   },
   {
-    label: "Events",
-    href: "#",
+    label: "Sponsors",
+    href: "/sponsors",
     children: [
-      { label: "NIDC 2025", href: "/agenda" },
-      { label: "Past Events", href: "/past-events" },
+      { label: "Our Sponsors", href: "/sponsors" },
+      { label: "Become a Sponsor", href: "/sponsor-info" },
     ],
   },
   {
@@ -256,7 +254,6 @@ export const NAV_ITEMS = [
     href: "#",
     children: [
       { label: "FAQ", href: "/faq" },
-      { label: "Sponsor Info", href: "/sponsor-info" },
       { label: "Code of Conduct", href: "/code-of-conduct" },
     ],
   },

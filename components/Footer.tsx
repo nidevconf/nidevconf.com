@@ -34,10 +34,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* 2025 Recap */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
-              Conference
+              2025 Recap
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -47,30 +47,22 @@ export function Footer() {
                 <Link href="/speakers" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">Speakers</Link>
               </li>
               <li>
-                <Link href="/sponsors" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">Sponsors</Link>
+                <Link href="/past-events" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">Past Events</Link>
               </li>
             </ul>
           </div>
 
-          {/* More */}
+          {/* Sponsors */}
           <div>
             <h3 className="text-sm font-semibold text-white mb-3 uppercase tracking-wider">
-              More
+              Sponsors
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/faq" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">FAQ</Link>
-              </li>
-              <li>
-                <Link href="/past-events" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">Past Events</Link>
+                <Link href="/sponsors" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">Our Sponsors</Link>
               </li>
               <li>
                 <Link href="/sponsor-info" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">Become a Sponsor</Link>
-              </li>
-              <li>
-                <Link href={CONFERENCE.youtubeChannel} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition-colors py-1 inline-block">
-                  YouTube Talks
-                </Link>
               </li>
             </ul>
           </div>
@@ -91,11 +83,6 @@ export function Footer() {
                   {CONFERENCE.sponsorEmail}
                 </Link>
               </li>
-              <li>
-                <Link href="https://discord.gg/xU8zUt7md3" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-nidc-cyan transition-colors py-1 inline-block">
-                  Join our Discord
-                </Link>
-              </li>
             </ul>
           </div>
         </div>
@@ -103,6 +90,7 @@ export function Footer() {
         <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-300">
           <span>&copy; {new Date().getFullYear()} NIDC. Northern Ireland Developers Conference.</span>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 justify-center sm:justify-end">
+            <Link href="/faq" className="hover:text-white transition-colors">FAQ</Link>
             <Link href="/code-of-conduct" className="hover:text-white transition-colors">Code of Conduct</Link>
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="https://github.com/nidevconf/nidevconf.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</Link>

@@ -112,9 +112,6 @@ export default function PrivacyContent() {
                   <li>
                     <strong className="text-white">Sessionize</strong> &mdash; session schedule and speaker data
                   </li>
-                  <li>
-                    <strong className="text-white">Discord</strong> &mdash; community messaging
-                  </li>
                 </ul>
                 <p>
                   Each of these services has its own privacy policy governing how they
