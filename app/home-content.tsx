@@ -68,7 +68,7 @@ export default function HomeContent() {
             >
               <CalendarCheck className="w-5 h-5 text-nidc-pink" aria-hidden="true" />
               <span>
-                Great Scott! NIDC returns in{" "}
+                Don&apos;t Panic! NIDC returns in{" "}
                 <span className="gradient-text">2026</span>
               </span>
             </motion.div>
