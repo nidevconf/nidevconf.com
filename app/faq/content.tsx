@@ -307,17 +307,6 @@ const faqs: { category: string; items: FAQItem[] }[] = [
             <ul className="list-disc list-inside space-y-1">
               <li>Visit the Help Desk on Level 1 (top of the escalators)</li>
               <li>Speak to any volunteer in a pink NIDC t-shirt</li>
-              <li>
-                Message us on{" "}
-                <Link
-                  href="https://discord.gg/xU8zUt7md3"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-nidc-cyan hover:underline"
-                >
-                  Discord
-                </Link>
-              </li>
             </ul>
           </div>
         ),
@@ -449,21 +438,12 @@ export default function FAQContent() {
               Still have questions?
             </h2>
             <p className="text-gray-300 mb-6">
-              Reach out on Discord or send us an email.
+              Send us an email and we&apos;ll get back to you.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                href="https://discord.gg/xU8zUt7md3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-nidc-cyan hover:bg-nidc-cyan/90 text-black font-bold rounded-full transition-all"
-              >
-                Join Discord
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
                 href={`mailto:${CONFERENCE.email}`}
-                className="inline-flex items-center gap-2 px-6 py-3 border border-nidc-pink/30 text-nidc-pink hover:bg-nidc-pink/10 rounded-full font-semibold transition-all"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-nidc-pink hover:bg-nidc-pink/90 text-white font-bold rounded-full transition-all"
               >
                 Email Us
                 <ArrowRight className="w-4 h-4" />

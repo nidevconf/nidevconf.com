@@ -9,9 +9,10 @@ import {
   PartyPopper,
   ArrowRight,
   Play,
-  Sparkles,
   ChevronLeft,
   ChevronRight,
+  Camera,
+  CalendarCheck,
 } from "lucide-react";
 import {
   CONFERENCE,
@@ -63,10 +64,13 @@ export default function HomeContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm text-nidc-cyan mb-6 sm:mb-8"
+              className="flex w-fit mx-auto items-center gap-3 px-6 py-3 rounded-full bg-nidc-pink/15 border border-nidc-pink/40 text-base sm:text-lg font-bold text-white glow-pink mb-6 sm:mb-8"
             >
-              <Sparkles className="w-4 h-4" aria-hidden="true" />
-              <span>November 8th, 2025 &mdash; ICC Belfast</span>
+              <CalendarCheck className="w-5 h-5 text-nidc-pink" aria-hidden="true" />
+              <span>
+                Great Scott! NIDC returns in{" "}
+                <span className="gradient-text">2026</span>
+              </span>
             </motion.div>
 
             {/* Title */}
@@ -95,18 +99,51 @@ export default function HomeContent() {
               Come on down, and bring along your friends, family, and colleagues!
             </motion.p>
 
-            {/* CTAs */}
+            {/* 2025 Recap CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-wrap gap-4 justify-center sm:justify-start"
+              className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto sm:mx-0"
             >
               <Link
-                href="/agenda"
-                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 border-2 border-white/20 hover:border-nidc-cyan/50 text-white font-bold text-base sm:text-lg rounded-full transition-all hover:bg-white/5 min-h-[44px]"
+                href={CONFERENCE.photos2025Url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group glass rounded-2xl p-5 hover:border-nidc-cyan/30 transition-all hover:-translate-y-1"
               >
-                View Agenda
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-nidc-cyan/10 flex items-center justify-center shrink-0">
+                    <Camera className="w-6 h-6 text-nidc-cyan" aria-hidden="true" />
+                  </div>
+                  <div className="text-left flex-1">
+                    <div className="text-white font-bold flex items-center gap-2">
+                      2025 Photo Gallery
+                      <ArrowRight className="w-4 h-4 text-nidc-cyan opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <div className="text-sm text-gray-400">Highlights from the day</div>
+                  </div>
+                </div>
+              </Link>
+
+              <Link
+                href={CONFERENCE.youtube2025Playlist}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group glass rounded-2xl p-5 hover:border-nidc-pink/30 transition-all hover:-translate-y-1"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-nidc-pink/10 flex items-center justify-center shrink-0">
+                    <Play className="w-6 h-6 text-nidc-pink" aria-hidden="true" />
+                  </div>
+                  <div className="text-left flex-1">
+                    <div className="text-white font-bold flex items-center gap-2">
+                      Watch 2025 Talks
+                      <ArrowRight className="w-4 h-4 text-nidc-pink opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    </div>
+                    <div className="text-sm text-gray-400">Full YouTube playlist</div>
+                  </div>
+                </div>
               </Link>
             </motion.div>
           </div>
@@ -206,40 +243,6 @@ export default function HomeContent() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* See the Photos */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div {...fadeUp}>
-            <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">
-              Relive the Magic
-            </h2>
-            <p className="text-gray-300 text-lg mb-8">
-              Check out photos and recordings from previous years
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href={CONFERENCE.photosUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full font-semibold transition-all"
-              >
-                See the 2024 Pics
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href={CONFERENCE.youtubeChannel}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-full font-semibold transition-all"
-              >
-                <Play className="w-4 h-4" />
-                Watch on YouTube
-              </Link>
-            </div>
-          </motion.div>
         </div>
       </section>
 
@@ -381,15 +384,6 @@ export default function HomeContent() {
                 className="inline-flex items-center gap-2 px-8 py-4 bg-nidc-pink hover:bg-nidc-pink/90 text-white font-bold rounded-full transition-all hover:shadow-lg hover:shadow-nidc-pink/25"
               >
                 Email Us
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                href="https://discord.gg/xU8zUt7md3"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-4 border border-nidc-cyan/50 text-nidc-cyan font-bold rounded-full hover:bg-nidc-cyan/10 transition-all"
-              >
-                Visit our Discord
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </div>

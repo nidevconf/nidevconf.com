@@ -171,13 +171,6 @@ export default function AttendeeContent() {
             <ul className="list-disc list-inside space-y-2">
               <li>Dedicated Help Desk on Level 1, right at the top of the escalators.</li>
               <li>Volunteers in pink t-shirts are floating about - feel free to ask us anything!</li>
-              <li>
-                Join our{" "}
-                <Link href="https://discord.gg/P5tHqv4M" target="_blank" rel="noopener noreferrer" className="text-nidc-cyan hover:underline">
-                  Discord
-                </Link>{" "}
-                for real-time help.
-              </li>
             </ul>
           </Section>
 
@@ -251,16 +244,14 @@ export default function AttendeeContent() {
           >
             <h3 className="text-2xl font-bold text-white mb-4">Got questions?</h3>
             <p className="text-gray-300 mb-6">
-              Connect with us on Discord or reach out anytime!
+              Drop us an email and we&apos;ll get back to you.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
-                href="https://discord.gg/P5tHqv4M"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-nidc-cyan hover:bg-nidc-cyan/90 text-black font-bold rounded-full transition-all"
+                href={`mailto:${CONFERENCE.email}`}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-nidc-pink hover:bg-nidc-pink/90 text-white font-bold rounded-full transition-all"
               >
-                Join Discord
+                Email Us
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

@@ -123,7 +123,6 @@ const jsonLd = {
       "https://uk.linkedin.com/company/northern-ireland-developer-conference",
       "https://www.instagram.com/nidevconf/",
       "https://www.youtube.com/channel/UCPJftRZO3wYmXLpvfRJtPhQ",
-      "https://discord.gg/xU8zUt7md3",
     ],
   },
   offers: {
