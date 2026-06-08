@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const dynamic = "force-static";
 
 export const alt =
-  "NIDC 2025 - Northern Ireland Developers Conference - November 8th, ICC Belfast";
+  "NIDC 2026 - Northern Ireland Developer Conference - November 21st, ICC Belfast";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -98,7 +98,7 @@ export default function OGImage() {
             textAlign: "center",
           }}
         >
-          Northern Ireland Developers Conference
+          Northern Ireland Developer Conference
         </div>
 
         {/* Details */}
@@ -112,7 +112,7 @@ export default function OGImage() {
             fontWeight: 600,
           }}
         >
-          <span>November 8th, 2025</span>
+          <span>November 21st, 2026</span>
           <span style={{ color: "#64748b" }}>|</span>
           <span>ICC Belfast</span>
         </div>

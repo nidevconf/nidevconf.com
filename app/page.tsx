@@ -1,20 +1,350 @@
-import type { Metadata } from "next";
-import HomeContent from "./home-content";
-
-export const metadata: Metadata = {
-  title: "NIDC 2025 - Northern Ireland Developers Conference | Belfast Tech Event",
-  description:
-    "NIDC 2025 — Northern Ireland's biggest tech conference. 750+ attendees, 40+ speakers, 6+ tracks at ICC Belfast on November 8th, 2025. Talks, workshops, expo, and after-party. Free lunch included.",
-  openGraph: {
-    title: "NIDC 2025 - Northern Ireland Developers Conference",
-    description:
-      "Northern Ireland's biggest tech conference. 750+ attendees, 40+ speakers, 6+ tracks at ICC Belfast, November 8th 2025.",
-  },
-  alternates: {
-    canonical: "https://www.nidevconf.com",
-  },
-};
+/* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
+import type { CSSProperties } from "react";
+import Countdown from "./_components/Countdown";
 
 export default function HomePage() {
-  return <HomeContent />;
+  return (
+    <>
+      {/* ================= HEADER ================= */}
+      <header className="site-header">
+        <div className="wrap">
+          <Link
+            href="/"
+            className="logo"
+            style={{ "--logo-h": "22px" } as CSSProperties}
+            aria-label="NIDC home"
+          >
+            <img className="logo-mark" src="/images/nidc-mark.png" alt="" aria-hidden />
+            <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
+          </Link>
+          <nav className="nav-links" aria-label="Primary">
+            <a href="#about">About</a>
+            <a href="#speak">Speak</a>
+            <a href="#village">Village</a>
+            <a href="#sponsor">Sponsor</a>
+            <a className="btn btn-primary" href="https://ti.to/nidc/nidc-2026-10th-anniversary">
+              Get yer&apos; tickets
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* ================= HERO ================= */}
+      <section className="hero" id="hero">
+        <div className="hero-decor" aria-hidden>
+          {/* left gutter */}
+          <figure className="polaroid hd-1 tape-pink">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/poly-2017.jpg" alt="" />
+            </div>
+            <figcaption className="cap">
+              <span className="yr">2017</span> · 1st talk
+            </figcaption>
+          </figure>
+          <figure className="polaroid hd-3 tape-white">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/about-crowd.jpg" alt="" />
+            </div>
+            <figcaption className="cap">The craic</figcaption>
+          </figure>
+          <figure className="polaroid hd-5">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/volunteers.jpg" alt="" />
+            </div>
+            <figcaption className="cap">Volunteers</figcaption>
+          </figure>
+          {/* right gutter */}
+          <figure className="polaroid hd-2">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/speaker-1.jpg" alt="" />
+            </div>
+            <figcaption className="cap">
+              <span className="yr">2025</span> · Talks
+            </figcaption>
+          </figure>
+          <figure className="polaroid hd-6 tape-pink">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/poly-tweets.jpg" alt="" />
+            </div>
+            <figcaption className="cap">
+              <span className="yr">2019</span> · Recursive!
+            </figcaption>
+          </figure>
+          <figure className="polaroid hd-7 tape-white">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/poly-afterparty.jpg" alt="" />
+            </div>
+            <figcaption className="cap">
+              <span className="yr">2021</span> after lockdown
+            </figcaption>
+          </figure>
+          <figure className="polaroid hd-4 tape-pink">
+            <span className="tape"></span>
+            <div className="pic">
+              <img src="/images/speaker-2.jpg" alt="" />
+            </div>
+            <figcaption className="cap">On stage</figcaption>
+          </figure>
+        </div>
+
+        <div className="wrap">
+          <span className="anni-badge">10th Anniversary</span>
+
+          <h1>
+            Event of the year for the{" "}
+            <span className="nobr">
+              <span className="hl tilt-flat">tech community</span>.
+            </span>
+          </h1>
+
+          <p className="for-nerds">
+            This one is for the{" "}
+            <span className="nobr">
+              <span className="hl tilt-r">nerds</span>.
+            </span>
+          </p>
+
+          <p className="when">
+            Saturday, 21st November 2026
+            <span className="dot"></span> International Convention Centre, Belfast
+          </p>
+
+          {/* countdown */}
+          <Countdown />
+
+          <div className="cta-row btn-row">
+            <a className="btn btn-primary" href="https://ti.to/nidc/nidc-2026-10th-anniversary">
+              Get yer&apos; tickets <span className="arrow">→</span>
+            </a>
+            <a className="btn btn-secondary" href="https://sessionize.com/nidc-2026/">
+              Submit a talk
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= MAIN ================= */}
+      <main id="main-content">
+        {/* ----- ABOUT ----- */}
+        <section className="section" id="about">
+          <div className="wrap section-centered">
+            <div className="section-video">
+              <video controls playsInline preload="metadata" poster="/media/trailer-poster.jpg">
+                <source src="/media/trailer.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <h2 className="sec-title">
+              Celebrating <span className="hl hl-y">10 years</span> of tech community in Northern
+              Ireland.
+            </h2>
+            <p className="sec-body">
+              The place to be for enthusiasts, practitioners and those with a passing interest
+              across software, product, cloud, data, UX, games, infrastructure, open source,
+              security, AI, and everything in between. Come on down, and bring along your friends,
+              family, and colleagues!
+            </p>
+          </div>
+        </section>
+
+        {/* ----- CALL FOR SPEAKERS ----- */}
+        <section className="section" id="speak">
+          <div className="wrap section-split">
+            <div>
+              <span className="kicker">Call for speakers</span>
+              <h2 className="sec-title">
+                Get on <span className="hl">stage</span>
+              </h2>
+              <p className="sec-body">
+                Talks can be on any subject related to the technology industry. This is the place to
+                share anything that broadens our collective knowledge.
+              </p>
+              <div className="btn-row">
+                <a className="btn btn-primary" href="https://sessionize.com/nidc-2026/">
+                  Submit a talk <span className="arrow">→</span>
+                </a>
+              </div>
+            </div>
+            <div className="section-media pair">
+              <a
+                className="media-video"
+                href="https://www.youtube.com/watch?v=Y4z_owrVaQk"
+                target="_blank"
+                rel="noopener"
+                aria-label="Watch Megan D'Arcy's NIDC talk on YouTube"
+              >
+                <img
+                  src="/images/speaker-1.jpg"
+                  width="1600"
+                  height="1066"
+                  loading="lazy"
+                  alt="Megan D'Arcy presenting from the podium at NIDC, ICC Belfast"
+                />
+                <span className="name">Megan D&apos;Arcy</span>
+                <span className="play" aria-hidden></span>
+              </a>
+              <a
+                className="media-video"
+                href="https://www.youtube.com/watch?v=lx7TEtc0fs0"
+                target="_blank"
+                rel="noopener"
+                aria-label="Watch Andrew Paul's NIDC talk on YouTube"
+              >
+                <img
+                  src="/images/speaker-2.jpg"
+                  width="1066"
+                  height="1600"
+                  loading="lazy"
+                  alt="Andrew Paul on stage at NIDC"
+                />
+                <span className="name">Andrew Paul</span>
+                <span className="play" aria-hidden></span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ----- CALL FOR VILLAGES ----- */}
+        <section className="section" id="village">
+          <div className="wrap section-split">
+            <div>
+              <span className="kicker">Call for villages</span>
+              <h2 className="sec-title">
+                Run a <span className="hl">village</span>
+              </h2>
+              <p className="sec-body">
+                Villages are themed, hands-on spaces run by the community — making, kids&apos;
+                coding, cyber, games and more. Got an idea for one? We&apos;d love to host it.
+              </p>
+              <div className="btn-row">
+                <a className="btn btn-primary" href="https://forms.gle/2zWFfxfsPCfqbrCa7">
+                  Propose a village <span className="arrow">→</span>
+                </a>
+              </div>
+            </div>
+            <div className="section-media single">
+              <img
+                src="/images/village.jpg"
+                width="1600"
+                height="1066"
+                loading="lazy"
+                alt="An attendee works at a laptop beside a desktop 3D printer and reels of filament at an NIDC village stand"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ----- CALL FOR SPONSORS ----- */}
+        <section className="section" id="sponsor">
+          <div className="wrap section-split media-left">
+            <div>
+              <span className="kicker">Become a sponsor</span>
+              <h2 className="sec-title">
+                Put your brand in the <span className="hl">room</span>.
+              </h2>
+              <p className="sec-body">
+                Get in touch at <a href="mailto:sponsors@nidevconf.com">sponsors@nidevconf.com</a>
+              </p>
+            </div>
+            <div className="section-media single">
+              <img
+                src="/images/sponsors.jpg"
+                width="1600"
+                height="1066"
+                loading="lazy"
+                alt="Attendees chatting at a village stand at NIDC 2025"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ================= STATEMENT BAND ================= */}
+      <section className="statement" aria-label="Organised by practitioners, run by volunteers">
+        <div className="wrap">
+          <h2>
+            Organised by{" "}
+            <span className="nobr">
+              <span className="hl">Practitioners</span>,
+            </span>{" "}
+            run by{" "}
+            <span className="nobr">
+              <span className="hl hl-y">Volunteers</span>.
+            </span>
+          </h2>
+          <figure className="statement-photo">
+            <img
+              src="/images/volunteers.jpg"
+              width="2000"
+              height="1333"
+              loading="lazy"
+              alt="The NIDC volunteer team in pink shirts cheering in the ICC Belfast foyer"
+            />
+          </figure>
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+      <footer className="site">
+        <div className="wrap">
+          <div className="foot-grid">
+            <div className="foot-brand">
+              <span
+                className="logo"
+                style={{ "--logo-h": "26px" } as CSSProperties}
+                role="img"
+                aria-label="NIDC"
+              >
+                <img className="logo-mark" src="/images/nidc-mark.png" alt="" aria-hidden />
+                <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
+              </span>
+              <p className="foot-blurb">
+                Northern Ireland Developer Conference — the event of the year for the tech community.
+                Come on down, and bring your friends, family, and colleagues.
+              </p>
+              <p className="foot-term">
+                <span className="prompt">{">"}</span> Sat 21 Nov 2026 · 08:00–17:00 · ICC Belfast
+                <span className="cursor" aria-hidden></span>
+              </p>
+            </div>
+
+            <div className="foot-cols">
+              <div>
+                <h4>Get involved</h4>
+                <a href="https://ti.to/nidc/nidc-2026-10th-anniversary">Get yer&apos; tickets</a>
+                <a href="https://sessionize.com/nidc-2026/">Call for speakers</a>
+                <a href="https://forms.gle/2zWFfxfsPCfqbrCa7">Call for villages</a>
+                <a href="mailto:sponsors@nidevconf.com">Call for sponsors</a>
+              </div>
+
+              <div>
+                <h4>Follow us</h4>
+                <a href="https://www.youtube.com/nidevconf">YouTube</a>
+                <a href="https://www.tiktok.com/@nidevconf">TikTok</a>
+                <a href="https://www.linkedin.com/company/nidevconf">LinkedIn</a>
+                <a href="https://www.instagram.com/nidevconf/">Instagram</a>
+                <a href="https://github.com/nidevconf/nidevconf.com">GitHub</a>
+              </div>
+
+              <div>
+                <h4>Contact</h4>
+                <a href="mailto:organisers@nidevconf.com">organisers@nidevconf.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="foot-bottom">
+            <span>© 2026 NIDC · Northern Ireland Developer Conference</span>
+            <Link href="/terminal">DON&apos;T PANIC</Link>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
 }

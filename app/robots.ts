@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://www.nidevconf.com/sitemap.xml",
+    sitemap: "https://nidevconf.com/sitemap.xml",
   };
 }

@@ -4,14 +4,14 @@ export const dynamic = "force-static";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NIDC - Northern Ireland Developers Conference",
-    short_name: "NIDC",
+    name: "NIDC 2026 — Northern Ireland Developer Conference",
+    short_name: "NIDC 2026",
     description:
-      "Event of the Year for the Tech Community. November 8th, 2025 at ICC Belfast.",
+      "Event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026 at ICC Belfast.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0d0d1a",
-    theme_color: "#ff0066",
+    background_color: "#121212",
+    theme_color: "#EC008C",
     icons: [
       {
         src: "/icon-192.png",
