@@ -1,8 +1,8 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
+import "./site.css";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -17,16 +17,18 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.nidevconf.com"),
+  metadataBase: new URL("https://nidevconf.com"),
   title: {
-    default: "NIDC 2025 - Northern Ireland Developers Conference | Belfast Tech Event",
-    template: "%s | NIDC 2025 - Northern Ireland Developers Conference",
+    default:
+      "NIDC 2026 — Northern Ireland Developer Conference · 21 Nov, ICC Belfast",
+    template: "%s | NIDC 2026 — Northern Ireland Developer Conference",
   },
   description:
-    "NIDC 2025 — Northern Ireland's biggest tech conference. 750+ attendees, 40+ speakers, 6+ tracks at ICC Belfast on November 8th, 2025. Talks, workshops, expo, and after-party. Free lunch included.",
+    "NIDC gathers enthusiasts, practitioners and those with a passing interest across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between. Saturday 21 November 2026, ICC Belfast.",
   keywords: [
     "NIDC",
-    "NIDC 2025",
+    "NIDC 2026",
+    "Northern Ireland Developer Conference",
     "Northern Ireland Developers Conference",
     "Belfast tech conference",
     "tech conference Belfast",
@@ -47,23 +49,22 @@ export const metadata: Metadata = {
     "data science conference",
     "open source conference",
     "tech talks Belfast",
-    "developer workshops",
     "tech networking Belfast",
   ],
   openGraph: {
-    title: "NIDC 2025 - Northern Ireland Developers Conference",
+    title: "NIDC 2026 — Northern Ireland Developer Conference",
     description:
-      "Northern Ireland's biggest tech conference. 750+ attendees, 40+ speakers, 6+ tracks at ICC Belfast on November 8th, 2025.",
-    url: "https://www.nidevconf.com",
-    siteName: "NIDC - Northern Ireland Developers Conference",
+      "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, ICC Belfast.",
+    url: "https://nidevconf.com",
+    siteName: "NIDC — Northern Ireland Developer Conference",
     type: "website",
     locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NIDC 2025 - Northern Ireland Developers Conference",
+    title: "NIDC 2026 — Northern Ireland Developer Conference",
     description:
-      "Northern Ireland's biggest tech conference. 750+ attendees, 40+ speakers, 6+ tracks at ICC Belfast, November 8th 2025.",
+      "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, ICC Belfast.",
   },
   robots: {
     index: true,
@@ -77,7 +78,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.nidevconf.com",
+    canonical: "https://nidevconf.com",
   },
   other: {
     "geo.region": "GB-NIR",
@@ -90,11 +91,11 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Event",
-  name: "NIDC 2025 - Northern Ireland Developers Conference",
+  name: "NIDC 2026 — Northern Ireland Developer Conference",
   description:
-    "Northern Ireland's biggest tech conference. NIDC gathers enthusiasts, practitioners and those with a passing interest across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between. 750+ attendees, 40+ speakers, 6+ tracks.",
-  startDate: "2025-11-08T08:30:00+00:00",
-  endDate: "2025-11-08T17:45:00+00:00",
+    "The event of the year for the tech community, celebrating 10 years. NIDC gathers enthusiasts, practitioners and those with a passing interest across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between.",
+  startDate: "2026-11-21T08:00:00+00:00",
+  endDate: "2026-11-21T17:00:00+00:00",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   location: {
@@ -116,23 +117,24 @@ const jsonLd = {
   },
   organizer: {
     "@type": "Organization",
-    name: "Northern Ireland Developers Conference",
-    url: "https://www.nidevconf.com",
+    name: "Northern Ireland Developer Conference",
+    url: "https://nidevconf.com",
     sameAs: [
-      "https://bsky.app/profile/nidc.bsky.social",
-      "https://uk.linkedin.com/company/northern-ireland-developer-conference",
+      "https://www.youtube.com/nidevconf",
+      "https://www.tiktok.com/@nidevconf",
+      "https://www.linkedin.com/company/nidevconf",
       "https://www.instagram.com/nidevconf/",
-      "https://www.youtube.com/channel/UCPJftRZO3wYmXLpvfRJtPhQ",
+      "https://github.com/nidevconf",
     ],
   },
   offers: {
     "@type": "Offer",
-    url: "https://ti.to/nidc/nidc2025",
+    url: "https://ti.to/nidc/nidc-2026-10th-anniversary",
     availability: "https://schema.org/InStock",
     priceCurrency: "GBP",
   },
-  image: "https://www.nidevconf.com/opengraph-image.png",
-  url: "https://www.nidevconf.com",
+  image: "https://nidevconf.com/opengraph-image.png",
+  url: "https://nidevconf.com",
   inLanguage: "en-GB",
   typicalAgeRange: "16+",
   isAccessibleForFree: false,
@@ -144,10 +146,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-gb" className="dark">
-      <body
-        className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
-      >
+    <html lang="en-GB">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Permanent+Marker&family=Poppins:wght@400;500&family=Inter:wght@400;500&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -155,11 +167,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <Navbar />
-        <main id="main-content">
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
