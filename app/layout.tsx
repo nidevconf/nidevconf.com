@@ -59,12 +59,24 @@ export const metadata: Metadata = {
     siteName: "NIDC — Northern Ireland Developer Conference",
     type: "website",
     locale: "en_GB",
+    // Static image lives in /public (not a Next metadata route): GitHub Pages
+    // serves the extensionless route output as application/octet-stream, which
+    // LinkedIn/Slack/etc. reject. A real .jpg is served as image/jpeg.
+    images: [
+      {
+        url: "/opengraph-image.jpg",
+        width: 1200,
+        height: 628,
+        alt: "An attendee runs in with arms raised to a cheering crowd at NIDC closing ceremony",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "NIDC 2026 — Northern Ireland Developer Conference",
     description:
       "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, ICC Belfast.",
+    images: ["/opengraph-image.jpg"],
   },
   robots: {
     index: true,
@@ -133,7 +145,7 @@ const jsonLd = {
     availability: "https://schema.org/InStock",
     priceCurrency: "GBP",
   },
-  image: "https://nidevconf.com/opengraph-image.png",
+  image: "https://nidevconf.com/opengraph-image.jpg",
   url: "https://nidevconf.com",
   inLanguage: "en-GB",
   typicalAgeRange: "16+",
