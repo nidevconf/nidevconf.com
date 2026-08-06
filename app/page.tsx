@@ -2,6 +2,7 @@
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import Countdown from "./_components/Countdown";
+import TiltBadge from "./_components/TiltBadge";
 
 export default function HomePage() {
   return (
@@ -95,7 +96,7 @@ export default function HomePage() {
         </div>
 
         <div className="wrap">
-          <span className="anni-badge">10th Anniversary</span>
+          <TiltBadge>10 Year Anniversary</TiltBadge>
 
           <h1>
             Event of the year for the{" "}
