@@ -144,17 +144,61 @@ ul{margin:0;}
    HERO
    ============================================================ */
 .hero{position:relative;overflow:hidden;}
-/* flat diagonal hatch texture corner (repeating lines, NOT a gradient) */
-.hero::before{
-  content:"";position:absolute;top:0;right:0;width:46%;height:100%;z-index:0;opacity:.5;
-  pointer-events:none;
-  background-image:repeating-linear-gradient(-45deg,var(--line) 0 1px,transparent 1px 16px);
-}
 .hero .wrap{position:relative;z-index:1;padding-top:var(--s7);padding-bottom:var(--s7);text-align:center;}
 .anni-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);
-  font-weight:500;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#000;
-  background:var(--yellow);border-radius:var(--r-pill);padding:8px 16px;margin-bottom:30px;}
+  font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#000;
+  background:var(--yellow);border-radius:var(--r-pill);padding:8px 16px;
+  border:0;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .09s ease-out;}
+/* sheen: a broad band, the reflection of a fixed overhead light on the tilting face.
+   Oversized background so the band can travel right across as --sweep-x moves. */
+.anni-badge::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  opacity:var(--sweep,0);transition:opacity .18s ease-out;
+  background-image:linear-gradient(var(--sweep-angle,100deg),
+    transparent 30%,rgba(190,154,46,.5) 50%,transparent 70%);
+  background-size:300% 100%;background-position:var(--sweep-x,50%) 0;background-repeat:no-repeat;}
+/* the label rides above the sheen, or the highlight greys out the black type */
+.anni-badge-label{position:relative;z-index:1;}
+/* positioning context for the confetti, and the one box that never transforms — the tilt
+   maths measures it to find where the pill really is */
+.anni-badge-hit{display:inline-block;position:relative;margin-bottom:30px;}
+/* tilt lives here, press/pop on the button inside — one transform each, so they can't clash */
+/* position:relative keeps it painting above the confetti whether or not it is mid-tilt */
+/* this spring is the release; while tracking, the component sets a faster inline transition */
+.anni-badge-tilt{display:inline-block;position:relative;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);}
+/* confetti: thrown off the pill's outline, decelerating outward, then falling under gravity.
+   Two animations so the fade keeps its own timing instead of chopping the fall's easing. */
+.anni-confetti{position:absolute;left:50%;top:50%;width:7px;height:11px;border-radius:1px;
+  background:var(--yellow);pointer-events:none;
+  animation:anni-confetti-fly var(--dur) forwards, anni-confetti-fade var(--dur) forwards;}
+@keyframes anni-confetti-fly{
+  0%{transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy)))
+      scale(var(--s)) rotateX(0) rotate(0);
+    animation-timing-function:cubic-bezier(.06,.78,.28,1);} /* thrown out, air-braking */
+  42%{transform:translate(calc(-50% + var(--ax)),calc(-50% + var(--ay)))
+      scale(var(--s)) rotateX(calc(var(--flip) * .42)) rotate(calc(var(--spin) * .42));
+    animation-timing-function:cubic-bezier(.45,0,.85,.5);} /* apex, then gravity takes over */
+  100%{transform:translate(calc(-50% + var(--ex)),calc(-50% + var(--ey)))
+      scale(var(--s)) rotateX(var(--flip)) rotate(var(--spin));}
+}
+@keyframes anni-confetti-fade{0%,62%{opacity:1;} 100%{opacity:0;}}
+.anni-badge:active{transform:scale(.94);}
+.anni-badge:hover,
+.anni-badge:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
+.anni-badge.pop{animation:badge-pop .42s ease-out;}
+/* release: two decaying pulses — a big overshoot, then a small one */
+@keyframes badge-pop{
+  0%{transform:scale(.94);}  35%{transform:scale(1.07);} 60%{transform:scale(.985);}
+  82%{transform:scale(1.025);} 100%{transform:scale(1);}
+}
 .anni-badge .n{font-size:16px;}
+/* the global pink selection clashes on yellow — use the page canvas instead */
+.anni-badge::selection{background:var(--bg);color:#fff;}
+@media (prefers-reduced-motion:reduce){
+  .anni-badge,.anni-badge-tilt{transform:none!important;}
+  .anni-badge.pop{animation:none;}
+}
 .hero h1{font-size:clamp(40px,7.4vw,82px);line-height:1;color:#fff;max-width:18ch;
   margin-left:auto;margin-right:auto;}
 .hero .slogan{margin-top:32px;font-size:clamp(18px,2.4vw,23px);color:var(--muted);max-width:52ch;
@@ -279,11 +323,6 @@ ul{margin:0;}
    ============================================================ */
 .statement{position:relative;overflow:hidden;background:var(--bg);
   padding:var(--s7) 0;}
-/* flat diagonal hatch texture across the whole band (repeating lines, NOT a gradient) */
-.statement::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55;
-  background-image:repeating-linear-gradient(-45deg,var(--line) 0 1px,transparent 1px 16px);
-}
 .statement .wrap{position:relative;z-index:1;}
 /* keep trailing punctuation glued to its highlight-marker (no orphan "," or ".") */
 .nobr{white-space:nowrap;}
