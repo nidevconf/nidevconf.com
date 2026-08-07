@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | NIDC 2026 — Northern Ireland Developer Conference",
   },
   description:
-    "NIDC gathers enthusiasts, practitioners and those with a passing interest across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between. Saturday 21 November 2026, ICC Belfast.",
+    "NIDC gathers enthusiasts, students, and professionals across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between. Saturday 21 November 2026, ICC Belfast.",
   keywords: [
     "NIDC",
     "NIDC 2026",
@@ -105,7 +105,7 @@ const jsonLd = {
   "@type": "Event",
   name: "NIDC 2026 — Northern Ireland Developer Conference",
   description:
-    "The event of the year for the tech community, celebrating 10 years. NIDC gathers enthusiasts, practitioners and those with a passing interest across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between.",
+    "The event of the year for the tech community, celebrating 10 years. NIDC gathers enthusiasts, students, and professionals across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between.",
   startDate: "2026-11-21T08:00:00+00:00",
   endDate: "2026-11-21T17:00:00+00:00",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
