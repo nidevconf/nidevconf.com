@@ -10,7 +10,7 @@ export default function manifest(): MetadataRoute.Manifest {
       "Event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026 at ICC Belfast.",
     start_url: "/",
     display: "standalone",
-    background_color: "#121212",
+    background_color: "#FBFBFB",
     theme_color: "#EC008C",
     icons: [
       {

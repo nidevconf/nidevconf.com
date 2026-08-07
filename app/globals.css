@@ -1,17 +1,51 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* our theme lives on <html data-theme>, set by the boot script in layout.tsx */
+@custom-variant dark (&:is([data-theme="dark"] *));
 
 @theme inline {
-  --color-background: #0a0a0a;
-  --color-foreground: #f0f0f0;
-  /* Original NIDC colors - matched from site */
-  --color-nidc-pink: #ff0066;
-  --color-nidc-cyan: #00c8c8;
-  --color-nidc-dark: #1b1b2f;
-  --color-nidc-darker: #0d0d1a;
-  --color-nidc-card: #1a1a2e;
-  --color-nidc-muted: #9ca3af;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 html {
@@ -32,19 +66,14 @@ html {
 }
 
 body {
-  background: var(--color-nidc-darker);
-  color: var(--color-foreground);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Focus styles for keyboard navigation - WCAG 2.4.7 */
-*:focus-visible {
-  outline: 3px solid var(--color-nidc-cyan);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
+/* focus ring lives in site.css — same specificity, and it loads after this file */
 
 /* Skip link - visible on focus only */
 .skip-link {
@@ -54,8 +83,8 @@ body {
   transform: translateX(-50%);
   z-index: 100;
   padding: 0.75rem 1.5rem;
-  background: var(--color-nidc-pink);
-  color: white;
+  background: var(--pink);
+  color: var(--white);
   font-weight: 700;
   border-radius: 0 0 0.5rem 0.5rem;
   transition: top 0.2s;
@@ -69,70 +98,11 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #111;
+  background: var(--bg-3);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-nidc-pink);
+  background: var(--pink);
   border-radius: 4px;
-}
-
-/* Gradient text utility */
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-nidc-pink), var(--color-nidc-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glow effects */
-.glow-pink {
-  box-shadow: 0 0 20px rgba(255, 0, 102, 0.3), 0 0 60px rgba(255, 0, 102, 0.1);
-}
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(0, 200, 200, 0.3), 0 0 60px rgba(0, 200, 200, 0.1);
-}
-
-/* Glass morphism */
-.glass {
-  background: rgba(26, 26, 46, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Animated gradient border */
-.gradient-border {
-  position: relative;
-}
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--color-nidc-pink), var(--color-nidc-cyan));
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  pointer-events: none;
-}
-
-/* Hero mesh gradient */
-.mesh-gradient {
-  background:
-    radial-gradient(ellipse at 20% 50%, rgba(255, 0, 102, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(0, 200, 200, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(255, 0, 102, 0.08) 0%, transparent 50%);
-}
-
-/* Noise texture overlay */
-.noise::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  pointer-events: none;
 }
 
 /* Ensure minimum touch target size for mobile - WCAG 2.5.5 */
@@ -143,14 +113,40 @@ body {
   }
 }
 
-/* High contrast mode support */
-@media (forced-colors: active) {
-  .glass {
-    border: 2px solid ButtonText;
+:root {
+  /* shadcn's tokens are aliases onto the NIDC palette in site.css, which already
+     flips on [data-theme="dark"] — so the components inherit the theme and there
+     is no second palette to keep in sync. Only the tokens in use are mapped. */
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --card: var(--bg-2);
+  --card-foreground: var(--ink);
+  --popover: var(--bg-2);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--on-ink);
+  --secondary: var(--bg-3);
+  --secondary-foreground: var(--ink);
+  /* NOT --muted: that name is already the site's secondary TEXT colour, and
+     site.css loads second, so aliasing it here would only collide. */
+  --muted-foreground: var(--muted);
+  --accent: var(--bg-3);
+  --accent-foreground: var(--ink);
+  --destructive: #C62828;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--pink);
+  --radius: 4px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-  .gradient-text {
-    -webkit-text-fill-color: unset;
-    background: none;
-    color: LinkText;
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
