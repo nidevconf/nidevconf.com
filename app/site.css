@@ -38,7 +38,7 @@
   --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px;
 
   /* --- radii --- */
-  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-pill:999px;
+  --r:4px; --r-pill:999px;
 }
 
 *{box-sizing:border-box;}
@@ -60,7 +60,7 @@ a:hover{text-decoration:underline;}
 img{max-width:100%;}
 ul{margin:0;}
 ::selection{background:var(--pink);color:#fff;}
-:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px;}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:var(--r);}
 
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
 
@@ -207,25 +207,8 @@ ul{margin:0;}
   font-size:clamp(22px,2.8vw,30px);color:#fff;line-height:1.25;}
 .hero .when{margin-top:34px;font-family:var(--display);font-weight:500;font-size:16px;color:#fff;
   display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
-.hero .when .dot{width:6px;height:6px;border-radius:50%;background:var(--pink);}
+.hero .when .dot{width:6px;height:6px;border-radius:50%;background:var(--white);}
 .hero .cta-row{margin-top:38px;justify-content:center;}
-
-/* countdown */
-.countdown{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap;justify-content:center;}
-.cd-cell{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r-md);
-  padding:14px 10px;min-width:74px;text-align:center;}
-.cd-cell .num{font-family:var(--display);font-weight:500;font-size:34px;color:#fff;line-height:1;
-  font-variant-numeric:tabular-nums;}
-.cd-cell .lbl{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--pink);margin-top:7px;}
-
-/* countdown — pink top-rule style (Variant 4) */
-.cd-line{display:flex;gap:24px;margin-top:40px;flex-wrap:wrap;justify-content:center;}
-.cd-line .seg{padding-top:12px;border-top:3px solid var(--pink);min-width:68px;}
-.cd-line .seg .n{font-family:var(--display);font-weight:500;font-size:40px;color:#fff;
-  line-height:1;font-variant-numeric:tabular-nums;}
-.cd-line .seg .u{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-top:7px;}
 
 /* decorative polaroids scattered around the hero (white card + masking tape) */
 .hero-decor{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
@@ -274,49 +257,119 @@ ul{margin:0;}
 .sec-body + .sec-body{margin-top:1em;}
 .section .btn-row{margin-top:28px;}
 
+/* every photo/video corner, one place — new media goes on this list */
+.section-media img,.section-embed,.section-video,.section-banner,.statement-photo{border-radius:var(--r);}
+
 /* text + photo(s) side by side */
 .section-split{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s6);align-items:center;}
 .section-media{display:grid;gap:14px;}
-.section-media img{width:100%;height:100%;object-fit:cover;display:block;
-  border:1px solid var(--line);border-radius:var(--r-lg);}
+.section-media img{width:100%;height:100%;object-fit:cover;display:block;}
 .section-media.pair{grid-template-columns:1fr 1fr;}
 .section-media.pair img{height:340px;}
 .section-media.single img{aspect-ratio:3/2;}
 
-/* photo that links to a video — play-button overlay + hover affordance */
-.media-video{position:relative;display:block;overflow:hidden;
-  border:1px solid var(--line);border-radius:var(--r-lg);}
-.media-video img{border:none;border-radius:0;transition:transform .35s ease,filter .35s ease;}
-.media-video::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.15);
-  transition:background .25s ease;pointer-events:none;}
-.media-video:hover img,.media-video:focus-visible img{transform:scale(1.05);filter:brightness(.8);}
-.media-video:hover::after,.media-video:focus-visible::after{background:rgba(0,0,0,.32);}
-.media-video .play{position:absolute;left:12px;bottom:12px;z-index:2;pointer-events:none;
-  width:26px;height:26px;border-radius:6px;background:#1a1a1a;
-  border:1px solid rgba(255,255,255,.15);
-  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.4);
-  transition:transform .25s ease,background .25s ease;}
-.media-video .play::before{content:"";width:0;height:0;border-style:solid;
-  border-width:5px 0 5px 8px;border-color:transparent transparent transparent #fff;margin-left:2px;}
-.media-video:hover .play,.media-video:focus-visible .play{transform:scale(1.1);background:#000;}
-.media-video .name{position:absolute;top:10px;left:10px;z-index:2;pointer-events:none;
-  font-family:var(--display);font-weight:500;font-size:11px;color:#fff;
-  background:#1a1a1a;border:1px solid rgba(255,255,255,.15);
-  padding:3px 8px;border-radius:6px;}
+/* third-party video embed (YouTube iframe) */
+.section-embed{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;}
+.section-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 /* swap photo to the left on desktop (DOM stays text-first for mobile) */
 .section-split.media-left .section-media{order:-1;}
 
 /* centred section: kicker / title / body stacked & centred, media below */
 .section-centered{text-align:center;}
 .section-centered .sec-body{margin-left:auto;margin-right:auto;}
-.section-video{margin:0 auto;max-width:920px;border:1px solid var(--line);
-  border-radius:var(--r-lg);overflow:hidden;background:#000;}
+.section-video{position:relative;margin:0 auto;max-width:920px;overflow:hidden;background:#000;}
 .section-video video{display:block;width:100%;height:auto;}
+/* controls hide until you're on the video (or tab into them) */
+.video-controls,.video-progress{opacity:0;transition:opacity .2s ease;}
+.section-video:hover .video-controls,.section-video:hover .video-progress,
+.section-video:focus-within .video-controls,.section-video:focus-within .video-progress{opacity:1;}
+
+/* our own controls — play/pause + sound */
+.video-controls{position:absolute;left:12px;bottom:12px;z-index:2;display:flex;gap:8px;}
+/* bare icon buttons — no chrome, just the glyph */
+.video-btn{width:44px;height:44px;border:0;background:transparent;color:#fff;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  opacity:.85;transition:opacity .12s ease;}
+.video-btn:hover{opacity:1;}
+/* scrub bar — native range input, so drag / click / arrow keys all come free */
+.video-progress{position:absolute;left:12px;right:12px;bottom:64px;z-index:2;height:5px;margin:0;
+  -webkit-appearance:none;appearance:none;cursor:pointer;border-radius:var(--r-pill);
+  background:linear-gradient(var(--white),var(--white)) 0/var(--p,0%) 100% no-repeat,
+    rgba(255,255,255,.28);}
+.video-progress::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;
+  border:0;border-radius:50%;background:#fff;}
+.video-progress::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:#fff;}
+.video-progress::-moz-range-track{background:transparent;}
 .section-video + .sec-title{margin-top:var(--s5);}
 
 /* full-width banner photo (e.g. the crowd panorama in About) */
-.section-banner{margin:var(--s5) 0 0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;}
+.section-banner{margin:var(--s5) 0 0;overflow:hidden;}
 .section-banner img{display:block;width:100%;height:auto;}
+
+/* ============================================================
+   TI.TO EMBED — we keep their layout/reset and only re-skin colours.
+   Every rule is scoped to .tickets-embed so it outranks their own
+   .tito-widget .tito-widget-form ... chains whatever the link order.
+   ============================================================ */
+/* card so the widget reads as its own element rather than loose page content */
+.tickets-embed{margin:var(--s5) auto 0;max-width:880px;
+  text-align:left; /* undo .section-centered */
+  background:var(--bg-2);border:1px solid #fff;border-radius:var(--r);
+  padding:var(--s3) var(--s4);}
+.tickets-embed .tito-widget{color:#fff;font-family:var(--body);justify-content:center;}
+.tickets-embed .tito-widget .tito-widget-form .tito-release{border-bottom-color:var(--line);}
+.tickets-embed .tito-widget .tito-widget-form .tito-release .tito-release--title{
+  color:#fff;font-family:var(--display);font-weight:500;font-size:18px;}
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release .tito-price{
+  font-family:var(--display);font-weight:500;font-size:20px;color:#fff;}
+/* descriptions read as .sec-body. The text sits in a <p> their own 6-class
+   chain already sizes at 14px, so we have to match that chain to win. */
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-release-description .tito-release-description--description p{
+  color:var(--muted);font-size:18px;line-height:1.6;max-width:66ch;}
+/* their tax line is rgba(0,0,0,.75) — invisible on near-black */
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release .tito-release--tax{
+  color:var(--muted);}
+.tickets-embed.classic-theme .tito-widget input[type="text"],
+.tickets-embed.classic-theme .tito-widget input[type="number"]{
+  background-color:var(--bg-3);border:1px solid var(--line);color:#fff;box-shadow:none;}
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release .tito-quantity{gap:10px;}
+/* stepper: their icon is a circular glyph, so we hide it and draw square chips */
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-quantity .tito-release--increment-quantity--link,
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-quantity .tito-release--decrement-quantity--link{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:24px;height:24px;border-radius:var(--r);background:#fff;color:var(--bg);
+  font-family:var(--display);font-weight:500;font-size:17px;line-height:1;}
+.tickets-embed.classic-theme .tito-widget .tito-quantity a svg{display:none;}
+.tickets-embed.classic-theme .tito-widget .tito-quantity
+  .tito-release--increment-quantity--link::after{content:"+";}
+.tickets-embed.classic-theme .tito-widget .tito-quantity
+  .tito-release--decrement-quantity--link::after{content:"−";}
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-quantity a.tito-release--decrement-quantity--link--disabled{
+  background:var(--bg-3);color:var(--muted);}
+/* checkbox — their own chain is 6 classes deep, so match it before adding ours */
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-quantity .tito-release--quantity-input{
+  -webkit-appearance:none;appearance:none;width:24px;height:24px;flex:none;
+  border:2px solid var(--line);border-radius:var(--r);background:var(--bg-3);cursor:pointer;
+  transition:background .12s ease,border-color .12s ease;}
+.tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-quantity .tito-release--quantity-input:checked{
+  border-color:#fff;
+  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23121212' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/15px no-repeat;}
+/* buy button — same look as .btn-primary */
+.tickets-embed .tito-widget .tito-form-actions .tito-submit{
+  background:var(--pink);border:0;border-radius:var(--r-pill);color:#fff;
+  font-family:var(--display);font-weight:500;font-size:16px;padding:12px 26px;}
+.tickets-embed .tito-widget .tito-form-actions .tito-submit:hover,
+.tickets-embed .tito-widget .tito-form-actions .tito-submit:focus,
+.tickets-embed .tito-widget .tito-form-actions .tito-submit:active{
+  background:var(--pink-dk);border:0;}
+.tickets-embed .tito-widget .tito-form-actions .tito-submit[disabled]{
+  background:var(--bg-3);color:var(--muted);}
 
 /* ============================================================
    STATEMENT BAND — "organised by practitioners, run by volunteers"
@@ -328,7 +381,7 @@ ul{margin:0;}
 .nobr{white-space:nowrap;}
 .statement h2{font-family:var(--display);font-weight:500;color:#fff;
   font-size:clamp(22px,4vw,42px);line-height:1.34;letter-spacing:-.01em;}
-.statement-photo{margin:var(--s5) 0 0;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;}
+.statement-photo{margin:var(--s5) 0 0;overflow:hidden;}
 .statement-photo img{display:block;width:100%;height:clamp(260px,40vw,460px);
   object-fit:cover;object-position:center 28%;}
 
@@ -364,8 +417,6 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
   .hero .wrap{padding-top:var(--s6);padding-bottom:var(--s6);}
   .site-header .nav-links a:not(.btn){display:none;}
   .foot-cols{grid-template-columns:1fr 1fr;}
-  .cd-cell{min-width:64px;padding:12px 8px;}
-  .cd-cell .num{font-size:28px;}
 }
 
 /* honour reduced motion */

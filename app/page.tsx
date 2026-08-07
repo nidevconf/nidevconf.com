@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import Countdown from "./_components/Countdown";
+import Tickets from "./_components/Tickets";
 import TiltBadge from "./_components/TiltBadge";
+import Trailer from "./_components/Trailer";
 
 export default function HomePage() {
   return (
@@ -20,9 +21,9 @@ export default function HomePage() {
             <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
           </Link>
           <nav className="nav-links" aria-label="Primary">
-            <a href="#about">About</a>
+            <a href="#tickets">Tickets</a>
             <a href="#speak">Speak</a>
-            <a href="#village">Village</a>
+            <a href="#village">Villages</a>
             <a href="#sponsor">Sponsor</a>
             <a className="btn btn-primary" href="https://ti.to/nidc/nidc-2026-10th-anniversary">
               Get yer&apos; tickets
@@ -117,9 +118,6 @@ export default function HomePage() {
             <span className="dot"></span> International Convention Centre, Belfast
           </p>
 
-          {/* countdown */}
-          <Countdown />
-
           <div className="cta-row btn-row">
             <a className="btn btn-primary" href="https://ti.to/nidc/nidc-2026-10th-anniversary">
               Get yer&apos; tickets <span className="arrow">→</span>
@@ -136,23 +134,21 @@ export default function HomePage() {
         {/* ----- ABOUT ----- */}
         <section className="section" id="about">
           <div className="wrap section-centered">
-            <div className="section-video">
-              <video controls playsInline preload="metadata" poster="/media/trailer-poster.jpg">
-                <source src="/media/trailer.mp4" type="video/mp4" />
-              </video>
-            </div>
+            <Trailer />
             <h2 className="sec-title">
               Celebrating <span className="hl hl-y">10 years</span> of tech community in Northern
               Ireland.
             </h2>
             <p className="sec-body">
-              The place to be for enthusiasts, practitioners and those with a passing interest
-              across software, product, cloud, data, UX, games, infrastructure, open source,
-              security, AI, and everything in between. Come on down, and bring along your friends,
-              family, and colleagues!
+              The place to be for enthusiasts, students, and professionals across software,
+              product, cloud, data, UX, games, infrastructure, open source, security, AI, and
+              everything in between. Come on down, and bring along your team.
             </p>
           </div>
         </section>
+
+        {/* ----- TICKETS ----- */}
+        <Tickets id="tickets" />
 
         {/* ----- CALL FOR SPEAKERS ----- */}
         <section className="section" id="speak">
@@ -172,41 +168,16 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
-            <div className="section-media pair">
-              <a
-                className="media-video"
-                href="https://www.youtube.com/watch?v=Y4z_owrVaQk"
-                target="_blank"
-                rel="noopener"
-                aria-label="Watch Megan D'Arcy's NIDC talk on YouTube"
-              >
-                <img
-                  src="/images/speaker-1.jpg"
-                  width="1600"
-                  height="1066"
-                  loading="lazy"
-                  alt="Megan D'Arcy presenting from the podium at NIDC, ICC Belfast"
-                />
-                <span className="name">Megan D&apos;Arcy</span>
-                <span className="play" aria-hidden></span>
-              </a>
-              <a
-                className="media-video"
-                href="https://www.youtube.com/watch?v=lx7TEtc0fs0"
-                target="_blank"
-                rel="noopener"
-                aria-label="Watch Andrew Paul's NIDC talk on YouTube"
-              >
-                <img
-                  src="/images/speaker-2.jpg"
-                  width="1066"
-                  height="1600"
-                  loading="lazy"
-                  alt="Andrew Paul on stage at NIDC"
-                />
-                <span className="name">Andrew Paul</span>
-                <span className="play" aria-hidden></span>
-              </a>
+            <div className="section-embed">
+              {/* muted is what makes autoplay allowed; "autoplay" in allow= is required too */}
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/T3otIvWC98s?autoplay=1&mute=1&start=223&playsinline=1&rel=0"
+                title="Neil McCallion's NIDC talk on YouTube"
+                loading="lazy"
+                allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
           </div>
         </section>
