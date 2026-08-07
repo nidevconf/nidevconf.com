@@ -65,7 +65,7 @@ export default function HomePage() {
               Get yer&apos; tickets <span className="arrow">→</span>
             </a>
             <a className="btn btn-secondary" href="https://sessionize.com/nidc-2026/">
-              Submit a talk
+              Submit a talk or workshop
             </a>
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function HomePage() {
               </p>
               <div className="btn-row">
                 <a className="btn btn-primary" href="https://sessionize.com/nidc-2026/">
-                  Submit a talk <span className="arrow">→</span>
+                  Submit a talk or workshop <span className="arrow">→</span>
                 </a>
               </div>
             </div>
