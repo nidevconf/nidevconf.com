@@ -1,28 +1,39 @@
 /* ============================================================
    NIDC 2026 — site styles
    Baseline: brand direction "Headline".
-   Black canvas · hot magenta-pink #EC008C · white type · generous space.
+   Canvas + type invert per theme · hot magenta-pink #EC008C · generous space.
    Signature devices: pink HIGHLIGHT-MARKER on headline keywords;
    the <>N/IDC wordmark. HARD RULE: flat colour only — NO gradients.
    Flat repeating scanline/dot/hatch patterns are allowed. WCAG AA on text.
+
+   THEMING: the boot script in layout.tsx always resolves the stored
+   system/light/dark preference to a concrete data-theme="light"|"dark" on
+   <html> before first paint — so there are exactly two token blocks below,
+   and no rule anywhere needs a prefers-color-scheme copy.
    ============================================================ */
 
 :root{
-  /* --- core surfaces (near-black, not pure #000) --- */
-  /* Pure #000 + saturated pink makes edges vibrate (halation); a near-black
-     canvas keeps the dark NIDC look while calming the pink right down. */
-  --bg:    #121212;   /* near-black canvas */
-  --bg-2:  #1A1A1A;   /* raised panel      */
-  --bg-3:  #222222;   /* raised card       */
-  --line:  #303030;   /* hairline dividers */
+  color-scheme:light;
+  /* --- core surfaces (off-white, not pure #FFF) --- */
+  /* Pure #FFF + saturated pink makes edges vibrate (halation); an off-white
+     canvas keeps the light NIDC look while calming the pink right down. */
+  --bg:    #FBFBFB;   /* off-white canvas  */
+  --bg-2:  #F1F1F1;   /* raised panel      */
+  --bg-3:  #E6E6E6;   /* raised card       */
+  --line:  #DDDDDD;   /* hairline dividers */
+  --field: #FFFFFF;   /* input / checkbox surface */
 
   /* --- THE signature: hot magenta-pink --- */
-  --pink:    #EC008C; /* PRIMARY brand accent — logo, marker, CTAs */
-  --pink-dk: #B80070; /* pressed / shaded pink for hover depth     */
+  --pink:    #EC008C; /* brand accent — logo, highlight-marker, selection */
+  /* pink-as-TEXT: #EC008C is only 4.3:1 on this canvas, the shade is 6.4:1 */
+  --pink-dk: #B80070;
 
-  /* --- text --- */
-  --white: #FFFFFF;   /* primary text (21:1 on black)        */
-  --muted: #B5B5B5;   /* secondary text (10.4:1 on black) AA */
+  /* --- text, and the fill behind every pill (CTAs) --- */
+  --ink:    #121212;  /* primary text (16.5:1 on canvas)     */
+  --ink-2:  #333333;  /* lifted ink for pill hover depth     */
+  --on-ink: #FFFFFF;  /* type sitting ON an ink-filled pill  */
+  --white:  #FFFFFF;  /* always white: on pink, on video, photo card */
+  --muted:  #5A5A5A;  /* secondary text (6.9:1 on canvas) AA */
 
   /* --- accents --- */
   --yellow: #F2C94C;  /* outline boxes for callouts / badges */
@@ -32,13 +43,34 @@
   --display:'Poppins', system-ui, -apple-system, sans-serif;
   --body:'Inter', system-ui, -apple-system, sans-serif;
   --mono:'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-  --marker:'Permanent Marker', 'Comic Sans MS', cursive; /* handwritten polaroid captions */
 
   /* --- spacing rhythm (8px) --- */
   --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px;
 
   /* --- radii --- */
   --r:4px; --r-pill:999px;
+
+  /* Measured height of the sticky header: 16px padding + a 41px nav button + 16px.
+     Three places need to agree on it — the hero's viewport maths, and the
+     scroll-margin that keeps anchored sections from landing underneath it. */
+  --header-h:73px;
+}
+
+/* The original NIDC canvas. --white stays white here: it means "on pink, on
+   video, a photo print" — surfaces that never invert. --ink is the pair that
+   does, so an ink-filled pill turns white with dark type. */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:    #121212;
+  --bg-2:  #1A1A1A;
+  --bg-3:  #222222;
+  --line:  #303030;
+  --field: #222222;
+  --pink-dk: #FF4DA6; /* pink-as-text again: 6.1:1 on this canvas */
+  --ink:    #FFFFFF;
+  --ink-2:  #E0E0E0;
+  --on-ink: #121212;
+  --muted:  #B5B5B5;
 }
 
 *{box-sizing:border-box;}
@@ -46,7 +78,7 @@ html{scroll-behavior:smooth;}
 body{
   margin:0;
   background:var(--bg);
-  color:var(--white);
+  color:var(--ink);
   font-family:var(--body);
   font-size:16px;
   line-height:1.6;
@@ -55,12 +87,17 @@ body{
 }
 h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.02;margin:0;letter-spacing:-.02em;}
 p{margin:0;}
-a{color:var(--pink);text-decoration:none;}
+a{color:var(--pink-dk);text-decoration:none;}
 a:hover{text-decoration:underline;}
 img{max-width:100%;}
 ul{margin:0;}
-::selection{background:var(--pink);color:#fff;}
-:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:var(--r);}
+::selection{background:var(--pink);color:var(--white);}
+/* yellow is invisible on an off-white canvas — pink clears the 3:1 non-text threshold */
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:var(--r);}
+/* Radix focuses the popover container itself, and the highlighted item is the real
+   focus affordance — otherwise the ring boxes the whole menu. The component already
+   asks for outline-none, but that's a layered utility and this rule is not. */
+[data-slot="dropdown-menu-content"]:focus-visible{outline:none;}
 
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
 
@@ -71,7 +108,7 @@ ul{margin:0;}
 /* Pink HIGHLIGHT-MARKER: a swiped, slightly rotated rectangle
    behind keywords, white text on top (just like the brochure). */
 .hl{
-  position:relative;display:inline-block;color:#fff;
+  position:relative;display:inline-block;color:var(--white);
   padding:0 .14em;margin:0 .02em;white-space:nowrap;z-index:0;
 }
 .hl::before{
@@ -91,7 +128,7 @@ ul{margin:0;}
 /* NIDC wordmark: bold central strokes in pink ("N/IDC")
    plus the developer <> double-chevron mark. */
 .wordmark{font-family:var(--display);font-weight:500;letter-spacing:-.04em;
-  line-height:1;display:inline-flex;align-items:center;gap:.12em;color:#fff;}
+  line-height:1;display:inline-flex;align-items:center;gap:.12em;color:var(--ink);}
 .wordmark .slash{color:var(--pink);}
 .wordmark .chev{color:var(--pink);font-weight:500;letter-spacing:-.08em;
   display:inline-block;margin-right:.18em;font-size:.82em;}
@@ -99,10 +136,14 @@ ul{margin:0;}
 /* real brand lockup: <> mark + NIDC wordmark (set height via --logo-h) */
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;line-height:0;}
 .logo img{display:block;width:auto;height:var(--logo-h,22px);}
+/* the lockup's letterforms are baked into the PNG — ink on the light canvas,
+   white on the dark one — so the file itself has to swap. */
+:root[data-theme="dark"] .logo-mark{content:url("/images/nidc-mark-dark.png");}
+:root[data-theme="dark"] .logo-word{content:url("/images/nidc-wordmark-dark.png");}
 
 /* terminal flavour — monospace, pink prompt + blinking cursor (footer date line) */
 .mono{font-family:var(--mono);}
-.prompt{color:var(--pink);font-weight:500;}
+.prompt{color:var(--pink-dk);font-weight:500;}
 .cursor{display:inline-block;width:.55em;height:1.05em;background:var(--pink);
   margin-left:.2em;transform:translateY(.13em);animation:blink 1.05s steps(1) infinite;}
 @keyframes blink{50%{opacity:0;}}
@@ -110,17 +151,19 @@ ul{margin:0;}
 /* ============================================================
    BUTTONS
    ============================================================ */
-.btn{font-family:var(--display);font-weight:500;font-size:16px;border-radius:var(--r-pill);
+/* every pill on the page — .btn and .tito-submit — carries the anniversary
+   badge's type: the display face at 600. */
+.btn{font-family:var(--display);font-weight:600;font-size:16px;border-radius:var(--r-pill);
   padding:14px 26px;border:2px solid transparent;cursor:pointer;display:inline-flex;
   align-items:center;gap:9px;line-height:1;text-decoration:none;
   transition:transform .12s ease,background .12s ease,color .12s ease,border-color .12s ease;}
-.btn-primary{background:var(--pink);color:#fff;}
-.btn-primary:hover{background:var(--pink-dk);transform:translateY(-2px);text-decoration:none;}
+.btn-primary{background:var(--ink);color:var(--on-ink);}
+.btn-primary:hover{background:var(--ink-2);transform:translateY(-2px);text-decoration:none;}
 .btn-primary:active{transform:translateY(0);}
-.btn-secondary{background:transparent;color:#fff;border-color:#fff;}
-.btn-secondary:hover{background:#fff;color:#000;transform:translateY(-2px);text-decoration:none;}
-.btn-ghost{background:transparent;color:var(--pink);border-color:var(--pink);}
-.btn-ghost:hover{background:var(--pink);color:#fff;text-decoration:none;}
+.btn-secondary{background:transparent;color:var(--ink);border-color:var(--ink);}
+.btn-secondary:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px);text-decoration:none;}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink);}
+.btn-ghost:hover{background:var(--ink);color:var(--on-ink);text-decoration:none;}
 .btn .arrow{font-size:1.1em;line-height:1;}
 /* floating tilted emoji sticker beside a CTA */
 .cta-sticker{position:relative;display:inline-flex;}
@@ -131,20 +174,30 @@ ul{margin:0;}
 /* ============================================================
    SITE HEADER (sticky)
    ============================================================ */
-.site-header{position:sticky;top:0;z-index:50;background:var(--bg);
-  border-bottom:1px solid var(--line);}
+.site-header{position:sticky;top:0;z-index:50;background:var(--bg);}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;
   gap:16px;padding-top:16px;padding-bottom:16px;}
 .site-header .nav-links{display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
-.site-header .nav-links a{color:#fff;font-family:var(--display);font-weight:500;font-size:15px;}
-.site-header .nav-links a:hover{color:var(--pink);text-decoration:none;}
+/* :not(.btn) or this outranks .btn-primary and repaints the CTA's white type */
+.site-header .nav-links a:not(.btn){color:var(--ink);font-family:var(--display);font-weight:500;font-size:15px;}
+.site-header .nav-links a:not(.btn):hover{color:var(--pink-dk);text-decoration:none;}
 .site-header .nav-links .btn{padding:11px 20px;font-size:15px;}
 
 /* ============================================================
    HERO
    ============================================================ */
-.hero{position:relative;overflow:hidden;}
-.hero .wrap{position:relative;z-index:1;padding-top:var(--s7);padding-bottom:var(--s7);text-align:center;}
+/* Fills the screen below the header on a laptop, stops growing on a 27" display.
+   min-height, not max-height: if the content ever outgrows the cap — long
+   headline, 200% zoom — the hero opens up instead of clipping.
+   svh, not vh: vh is the address-bar-hidden viewport, which on a phone would
+   push the CTAs below the fold; dvh would reflow the hero as the bar collapses. */
+.hero{position:relative;overflow:hidden;
+  min-height:min(100svh - var(--header-h), 820px);
+  display:grid;align-content:center;}
+/* align-content, NOT place-items: justify-items:center would shrink .wrap to its
+   content width and break its own max-width/auto-margin centring. */
+.hero .wrap{position:relative;z-index:1;
+  padding-top:var(--s6);padding-bottom:var(--s6);text-align:center;}
 .anni-badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);
   font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#000;
   background:var(--yellow);border-radius:var(--r-pill);padding:8px 16px;
@@ -193,72 +246,60 @@ ul{margin:0;}
   82%{transform:scale(1.025);} 100%{transform:scale(1);}
 }
 .anni-badge .n{font-size:16px;}
-/* the global pink selection clashes on yellow — use the page canvas instead */
-.anni-badge::selection{background:var(--bg);color:#fff;}
+/* the global pink selection clashes on yellow — invert to ink instead */
+.anni-badge::selection{background:var(--ink);color:var(--on-ink);}
 @media (prefers-reduced-motion:reduce){
   .anni-badge,.anni-badge-tilt{transform:none!important;}
   .anni-badge.pop{animation:none;}
 }
-.hero h1{font-size:clamp(40px,7.4vw,82px);line-height:1;color:#fff;max-width:18ch;
+.hero h1{font-size:clamp(40px,7.4vw,82px);line-height:1;color:var(--ink);max-width:18ch;
   margin-left:auto;margin-right:auto;}
 .hero .slogan{margin-top:32px;font-size:clamp(18px,2.4vw,23px);color:var(--muted);max-width:52ch;
   font-family:var(--display);font-weight:500;line-height:1.5;}
 .hero .for-nerds{margin-top:22px;font-family:var(--display);font-weight:500;
-  font-size:clamp(22px,2.8vw,30px);color:#fff;line-height:1.25;}
-.hero .when{margin-top:34px;font-family:var(--display);font-weight:500;font-size:16px;color:#fff;
+  font-size:clamp(22px,2.8vw,30px);color:var(--ink);line-height:1.25;}
+.hero .when{margin-top:34px;font-family:var(--display);font-weight:500;font-size:16px;color:var(--ink);
   display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
 .hero .when .dot{width:6px;height:6px;border-radius:50%;background:var(--white);}
 .hero .cta-row{margin-top:38px;justify-content:center;}
 
-/* decorative polaroids scattered around the hero (white card + masking tape) */
-.hero-decor{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.hero-decor .polaroid{position:absolute;width:140px;margin:0;}
-.polaroid{background:#fff;padding:8px 8px 0;border-radius:3px;
-  box-shadow:0 14px 30px rgba(0,0,0,.5);transform:rotate(var(--rot,-3deg));}
-.polaroid .pic{position:relative;height:106px;overflow:hidden;background:#111;border-radius:2px;}
-.polaroid .pic img{display:block;width:100%;height:100%;object-fit:cover;}
-.polaroid .tape{position:absolute;z-index:2;top:-9px;left:50%;width:62px;height:20px;
-  transform:translateX(-50%) rotate(var(--tape-rot,-5deg));
-  background:rgba(242,201,76,.82);box-shadow:0 1px 3px rgba(0,0,0,.3);
-  border-left:2px dashed rgba(0,0,0,.15);border-right:2px dashed rgba(0,0,0,.15);}
-.polaroid.tape-pink .tape{background:rgba(236,0,140,.78);}
-.polaroid.tape-white .tape{background:rgba(255,255,255,.6);}
-.polaroid .cap{font-family:var(--marker);font-size:13px;line-height:1.05;letter-spacing:.01em;
-  color:#111;text-align:center;padding:4px 4px 7px;transform:rotate(-1.5deg);}
-.polaroid .cap .yr{color:var(--pink);}
-/* left gutter */
-.hd-1{top:28px;left:3%;--rot:-8deg;--tape-rot:7deg;}
-.hd-3{top:43%;left:1%;--rot:5deg;--tape-rot:-7deg;}
-.hd-5{bottom:34px;left:7%;--rot:4deg;--tape-rot:-8deg;}
-/* right gutter */
-.hd-2{top:32px;right:4%;--rot:6deg;--tape-rot:-6deg;}
-.hd-6{top:25%;right:1%;--rot:-6deg;--tape-rot:6deg;}
-.hd-7{top:57%;right:3%;--rot:5deg;--tape-rot:-7deg;}
-.hd-4{bottom:36px;right:8%;--rot:-7deg;--tape-rot:6deg;}
-/* no room for the decor once the hero narrows */
-@media (max-width:1080px){.hero-decor{display:none;}}
+/* ---- hero background video ----
+   A rounded panel inset from the hero's edges, with the footage cropped to fill
+   it and a flat scrim on top. 0.6: sampled 40 frames of trailer.mp4 and the
+   brightest one runs to p95 luminance 0.74 — far lighter than the poster frame
+   suggests — which at this opacity still leaves white type at 8:1. */
+/* left+right are both set, so auto inline margins centre the panel once
+   max-width stops it — otherwise an ultrawide gets a 3400px-wide video */
+.hero-video{position:absolute;inset:16px;z-index:0;
+  max-width:1600px;margin-inline:auto;
+  border-radius:16px;overflow:hidden;background:#000;pointer-events:none;}
+.hero-video video{display:block;width:100%;height:100%;object-fit:cover;}
+.hero-video::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.6);}
+
+/* Over footage the canvas tokens are meaningless — the hero's type is white in
+   both themes, and the CTAs invert to match. */
+.hero h1,.hero .for-nerds,.hero .when{color:var(--white);}
+.hero .btn-primary{background:var(--white);color:#121212;}
+.hero .btn-primary:hover{background:#E0E0E0;}
+.hero .btn-secondary{color:var(--white);border-color:var(--white);}
+.hero .btn-secondary:hover{background:var(--white);color:#121212;}
 
 /* ============================================================
    CONTENT SECTIONS
    ============================================================ */
 .section{padding:var(--s7) 0;}
-.kicker{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.2em;
-  text-transform:uppercase;color:#000;background:var(--pink);
-  padding:7px 14px;border-radius:var(--r-pill);
-}
-.kicker.alt{background:transparent;color:var(--pink);border:2px solid var(--pink);}
-.sec-title{font-size:clamp(28px,4.4vw,46px);margin:18px 0 22px;color:#fff;}
-.sec-lead{font-family:var(--display);font-weight:500;color:#fff;
+/* the header is sticky, so anything jumped to has to clear it */
+section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
+.sec-title{font-size:clamp(28px,4.4vw,46px);margin:18px 0 22px;color:var(--ink);}
+.sec-lead{font-family:var(--display);font-weight:500;color:var(--ink);
   font-size:clamp(20px,2.6vw,28px);line-height:1.3;max-width:32ch;margin:0 0 18px;}
 .sec-body{color:var(--muted);max-width:66ch;font-size:18px;line-height:1.6;}
-.sec-body b{color:#fff;font-weight:500;}
+.sec-body b{color:var(--ink);font-weight:500;}
 .sec-body + .sec-body{margin-top:1em;}
 .section .btn-row{margin-top:28px;}
 
 /* every photo/video corner, one place — new media goes on this list */
-.section-media img,.section-embed,.section-video,.section-banner,.statement-photo{border-radius:var(--r);}
+.section-media img,.section-embed,.section-banner,.statement-photo{border-radius:var(--r);}
 
 /* text + photo(s) side by side */
 .section-split{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s6);align-items:center;}
@@ -274,34 +315,9 @@ ul{margin:0;}
 /* swap photo to the left on desktop (DOM stays text-first for mobile) */
 .section-split.media-left .section-media{order:-1;}
 
-/* centred section: kicker / title / body stacked & centred, media below */
+/* centred section: title / body stacked & centred, media below */
 .section-centered{text-align:center;}
 .section-centered .sec-body{margin-left:auto;margin-right:auto;}
-.section-video{position:relative;margin:0 auto;max-width:920px;overflow:hidden;background:#000;}
-.section-video video{display:block;width:100%;height:auto;}
-/* controls hide until you're on the video (or tab into them) */
-.video-controls,.video-progress{opacity:0;transition:opacity .2s ease;}
-.section-video:hover .video-controls,.section-video:hover .video-progress,
-.section-video:focus-within .video-controls,.section-video:focus-within .video-progress{opacity:1;}
-
-/* our own controls — play/pause + sound */
-.video-controls{position:absolute;left:12px;bottom:12px;z-index:2;display:flex;gap:8px;}
-/* bare icon buttons — no chrome, just the glyph */
-.video-btn{width:44px;height:44px;border:0;background:transparent;color:#fff;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  opacity:.85;transition:opacity .12s ease;}
-.video-btn:hover{opacity:1;}
-/* scrub bar — native range input, so drag / click / arrow keys all come free */
-.video-progress{position:absolute;left:12px;right:12px;bottom:64px;z-index:2;height:5px;margin:0;
-  -webkit-appearance:none;appearance:none;cursor:pointer;border-radius:var(--r-pill);
-  background:linear-gradient(var(--white),var(--white)) 0/var(--p,0%) 100% no-repeat,
-    rgba(255,255,255,.28);}
-.video-progress::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;
-  border:0;border-radius:50%;background:#fff;}
-.video-progress::-moz-range-thumb{width:13px;height:13px;border:0;border-radius:50%;background:#fff;}
-.video-progress::-moz-range-track{background:transparent;}
-.section-video + .sec-title{margin-top:var(--s5);}
-
 /* full-width banner photo (e.g. the crowd panorama in About) */
 .section-banner{margin:var(--s5) 0 0;overflow:hidden;}
 .section-banner img{display:block;width:100%;height:auto;}
@@ -314,25 +330,25 @@ ul{margin:0;}
 /* card so the widget reads as its own element rather than loose page content */
 .tickets-embed{margin:var(--s5) auto 0;max-width:880px;
   text-align:left; /* undo .section-centered */
-  background:var(--bg-2);border:1px solid #fff;border-radius:var(--r);
+  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
   padding:var(--s3) var(--s4);}
-.tickets-embed .tito-widget{color:#fff;font-family:var(--body);justify-content:center;}
+.tickets-embed .tito-widget{color:var(--ink);font-family:var(--body);justify-content:center;}
 .tickets-embed .tito-widget .tito-widget-form .tito-release{border-bottom-color:var(--line);}
 .tickets-embed .tito-widget .tito-widget-form .tito-release .tito-release--title{
-  color:#fff;font-family:var(--display);font-weight:500;font-size:18px;}
+  color:var(--ink);font-family:var(--display);font-weight:500;font-size:18px;}
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release .tito-price{
-  font-family:var(--display);font-weight:500;font-size:20px;color:#fff;}
+  font-family:var(--display);font-weight:500;font-size:20px;color:var(--ink);}
 /* descriptions read as .sec-body. The text sits in a <p> their own 6-class
    chain already sizes at 14px, so we have to match that chain to win. */
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
   .tito-release-description .tito-release-description--description p{
   color:var(--muted);font-size:18px;line-height:1.6;max-width:66ch;}
-/* their tax line is rgba(0,0,0,.75) — invisible on near-black */
+/* their tax line is rgba(0,0,0,.75) — level it with the rest of the secondary text */
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release .tito-release--tax{
   color:var(--muted);}
 .tickets-embed.classic-theme .tito-widget input[type="text"],
 .tickets-embed.classic-theme .tito-widget input[type="number"]{
-  background-color:var(--bg-3);border:1px solid var(--line);color:#fff;box-shadow:none;}
+  background-color:var(--field);border:1px solid var(--line);color:var(--ink);box-shadow:none;}
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release .tito-quantity{gap:10px;}
 /* stepper: their icon is a circular glyph, so we hide it and draw square chips */
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
@@ -340,7 +356,7 @@ ul{margin:0;}
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
   .tito-quantity .tito-release--decrement-quantity--link{
   display:inline-flex;align-items:center;justify-content:center;
-  width:24px;height:24px;border-radius:var(--r);background:#fff;color:var(--bg);
+  width:24px;height:24px;border-radius:var(--r);background:var(--ink);color:var(--on-ink);
   font-family:var(--display);font-weight:500;font-size:17px;line-height:1;}
 .tickets-embed.classic-theme .tito-widget .tito-quantity a svg{display:none;}
 .tickets-embed.classic-theme .tito-widget .tito-quantity
@@ -354,20 +370,26 @@ ul{margin:0;}
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
   .tito-quantity .tito-release--quantity-input{
   -webkit-appearance:none;appearance:none;width:24px;height:24px;flex:none;
-  border:2px solid var(--line);border-radius:var(--r);background:var(--bg-3);cursor:pointer;
+  border:2px solid var(--line);border-radius:var(--r);background:var(--field);cursor:pointer;
   transition:background .12s ease,border-color .12s ease;}
 .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
   .tito-quantity .tito-release--quantity-input:checked{
-  border-color:#fff;
-  background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23121212' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/15px no-repeat;}
+  border-color:#121212;
+  background:#121212 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23FFFFFF' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/15px no-repeat;}
+/* a data-URI stroke can't read a custom property, so the checked box is the one
+   rule that genuinely has to be written twice */
+:root[data-theme="dark"] .tickets-embed.classic-theme .tito-widget .tito-widget-form .tito-release
+  .tito-quantity .tito-release--quantity-input:checked{
+  border-color:#FFFFFF;
+  background:#FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23121212' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round' d='M5 13l4 4L19 7'/%3E%3C/svg%3E") center/15px no-repeat;}
 /* buy button — same look as .btn-primary */
 .tickets-embed .tito-widget .tito-form-actions .tito-submit{
-  background:var(--pink);border:0;border-radius:var(--r-pill);color:#fff;
-  font-family:var(--display);font-weight:500;font-size:16px;padding:12px 26px;}
+  background:var(--ink);border:0;border-radius:var(--r-pill);color:var(--on-ink);
+  font-family:var(--display);font-weight:600;font-size:16px;padding:12px 26px;}
 .tickets-embed .tito-widget .tito-form-actions .tito-submit:hover,
 .tickets-embed .tito-widget .tito-form-actions .tito-submit:focus,
 .tickets-embed .tito-widget .tito-form-actions .tito-submit:active{
-  background:var(--pink-dk);border:0;}
+  background:var(--ink-2);border:0;}
 .tickets-embed .tito-widget .tito-form-actions .tito-submit[disabled]{
   background:var(--bg-3);color:var(--muted);}
 
@@ -379,7 +401,7 @@ ul{margin:0;}
 .statement .wrap{position:relative;z-index:1;}
 /* keep trailing punctuation glued to its highlight-marker (no orphan "," or ".") */
 .nobr{white-space:nowrap;}
-.statement h2{font-family:var(--display);font-weight:500;color:#fff;
+.statement h2{font-family:var(--display);font-weight:500;color:var(--ink);
   font-size:clamp(22px,4vw,42px);line-height:1.34;letter-spacing:-.01em;}
 .statement-photo{margin:var(--s5) 0 0;overflow:hidden;}
 .statement-photo img{display:block;width:100%;height:clamp(260px,40vw,460px);
@@ -392,16 +414,38 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 /* Assembly-style split: brand block (left) + three link columns (right) */
 .foot-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:flex-start;}
 .foot-blurb{color:var(--muted);font-size:15px;max-width:44ch;margin-top:16px;}
-.foot-term{font-family:var(--mono);font-size:13px;color:var(--pink);margin-top:18px;
+.foot-term{font-family:var(--mono);font-size:13px;color:var(--pink-dk);margin-top:18px;
   letter-spacing:.02em;line-height:1.5;}
 .foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
 .foot-cols h4{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
-.foot-cols a{display:block;color:#fff;font-size:14px;margin-bottom:9px;}
-.foot-cols a:hover{color:var(--pink);text-decoration:none;}
+.foot-cols a{display:block;color:var(--ink);font-size:14px;margin-bottom:9px;}
+.foot-cols a:hover{color:var(--pink-dk);text-decoration:none;}
+/* social links carry the platform's own brandmark to the right of the word */
+.foot-cols a.social{display:flex;align-items:center;gap:7px;width:fit-content;}
+.social svg{flex:none;color:var(--brand);}
+.social-youtube{--brand:#FF0000;}
+.social-tiktok{--brand:#000000;}
+.social-linkedin{--brand:#0A66C2;}
+.social-instagram{--brand:#FF0069;}
+.social-github{--brand:#181717;}
+/* the two near-black marks would vanish on the dark canvas */
+:root[data-theme="dark"] .social-tiktok,
+:root[data-theme="dark"] .social-github{--brand:#FFFFFF;}
 .foot-bottom{border-top:1px solid var(--line);margin-top:var(--s5);padding-top:24px;
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
   font-family:var(--mono);color:var(--muted);font-size:12.5px;}
+.foot-bottom-end{display:flex;align-items:center;gap:16px;}
+/* trigger for the shadcn theme dropdown — the menu itself is themed by the
+   token aliases in globals.css, so only the trigger needs dressing */
+/* min-width, not width: the label cycles System/Light/Dark and the button must
+   not jump — but it must not clip either if the mono face loads wider */
+.theme-toggle{display:inline-flex;align-items:center;
+  min-width:96px;gap:7px;font:inherit;
+  color:var(--muted);background:var(--field);border:1px solid var(--line);
+  border-radius:var(--r);padding:4px 9px;cursor:pointer;
+  transition:color .12s ease,border-color .12s ease;}
+.theme-toggle:hover{color:var(--ink);border-color:var(--muted);}
 
 /* ============================================================
    RESPONSIVE
@@ -414,7 +458,6 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 }
 @media (max-width:560px){
   .section{padding:var(--s6) 0;}
-  .hero .wrap{padding-top:var(--s6);padding-bottom:var(--s6);}
   .site-header .nav-links a:not(.btn){display:none;}
   .foot-cols{grid-template-columns:1fr 1fr;}
 }

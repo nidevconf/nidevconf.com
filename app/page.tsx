@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import SocialLinks from "./_components/SocialLinks";
+import ThemeToggle from "./_components/ThemeToggle";
 import Tickets from "./_components/Tickets";
 import TiltBadge from "./_components/TiltBadge";
-import Trailer from "./_components/Trailer";
+import HeroVideo from "./_components/HeroVideo";
 
 export default function HomePage() {
   return (
@@ -25,7 +27,7 @@ export default function HomePage() {
             <a href="#speak">Speak</a>
             <a href="#village">Villages</a>
             <a href="#sponsor">Sponsor</a>
-            <a className="btn btn-primary" href="https://ti.to/nidc/nidc-2026-10th-anniversary">
+            <a className="btn btn-primary" href="#tickets">
               Get yer&apos; tickets
             </a>
           </nav>
@@ -34,73 +36,13 @@ export default function HomePage() {
 
       {/* ================= HERO ================= */}
       <section className="hero" id="hero">
-        <div className="hero-decor" aria-hidden>
-          {/* left gutter */}
-          <figure className="polaroid hd-1 tape-pink">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/poly-2017.jpg" alt="" />
-            </div>
-            <figcaption className="cap">
-              <span className="yr">2017</span> · 1st talk
-            </figcaption>
-          </figure>
-          <figure className="polaroid hd-3 tape-white">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/about-crowd.jpg" alt="" />
-            </div>
-            <figcaption className="cap">The craic</figcaption>
-          </figure>
-          <figure className="polaroid hd-5">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/volunteers.jpg" alt="" />
-            </div>
-            <figcaption className="cap">Volunteers</figcaption>
-          </figure>
-          {/* right gutter */}
-          <figure className="polaroid hd-2">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/speaker-1.jpg" alt="" />
-            </div>
-            <figcaption className="cap">
-              <span className="yr">2025</span> · Talks
-            </figcaption>
-          </figure>
-          <figure className="polaroid hd-6 tape-pink">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/poly-tweets.jpg" alt="" />
-            </div>
-            <figcaption className="cap">
-              <span className="yr">2019</span> · Recursive!
-            </figcaption>
-          </figure>
-          <figure className="polaroid hd-7 tape-white">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/poly-afterparty.jpg" alt="" />
-            </div>
-            <figcaption className="cap">
-              <span className="yr">2021</span> after lockdown
-            </figcaption>
-          </figure>
-          <figure className="polaroid hd-4 tape-pink">
-            <span className="tape"></span>
-            <div className="pic">
-              <img src="/images/speaker-2.jpg" alt="" />
-            </div>
-            <figcaption className="cap">On stage</figcaption>
-          </figure>
-        </div>
+        <HeroVideo />
 
         <div className="wrap">
           <TiltBadge>10 Year Anniversary</TiltBadge>
 
           <h1>
-            Event of the year for the{" "}
+            Technical talks, great craic,{" "}
             <span className="nobr">
               <span className="hl tilt-flat">tech community</span>.
             </span>
@@ -119,7 +61,7 @@ export default function HomePage() {
           </p>
 
           <div className="cta-row btn-row">
-            <a className="btn btn-primary" href="https://ti.to/nidc/nidc-2026-10th-anniversary">
+            <a className="btn btn-primary" href="#tickets">
               Get yer&apos; tickets <span className="arrow">→</span>
             </a>
             <a className="btn btn-secondary" href="https://sessionize.com/nidc-2026/">
@@ -134,7 +76,6 @@ export default function HomePage() {
         {/* ----- ABOUT ----- */}
         <section className="section" id="about">
           <div className="wrap section-centered">
-            <Trailer />
             <h2 className="sec-title">
               Celebrating <span className="hl hl-y">10 years</span> of tech community in Northern
               Ireland.
@@ -154,7 +95,6 @@ export default function HomePage() {
         <section className="section" id="speak">
           <div className="wrap section-split">
             <div>
-              <span className="kicker">Call for speakers</span>
               <h2 className="sec-title">
                 Get on <span className="hl">stage</span>
               </h2>
@@ -186,7 +126,6 @@ export default function HomePage() {
         <section className="section" id="village">
           <div className="wrap section-split">
             <div>
-              <span className="kicker">Call for villages</span>
               <h2 className="sec-title">
                 Run a <span className="hl">village</span>
               </h2>
@@ -216,7 +155,6 @@ export default function HomePage() {
         <section className="section" id="sponsor">
           <div className="wrap section-split media-left">
             <div>
-              <span className="kicker">Become a sponsor</span>
               <h2 className="sec-title">
                 Put your brand in the <span className="hl">room</span>.
               </h2>
@@ -297,11 +235,7 @@ export default function HomePage() {
 
               <div>
                 <h4>Follow us</h4>
-                <a href="https://www.youtube.com/nidevconf">YouTube</a>
-                <a href="https://www.tiktok.com/@nidevconf">TikTok</a>
-                <a href="https://www.linkedin.com/company/nidevconf">LinkedIn</a>
-                <a href="https://www.instagram.com/nidevconf/">Instagram</a>
-                <a href="https://github.com/nidevconf/nidevconf.com">GitHub</a>
+                <SocialLinks />
               </div>
 
               <div>
@@ -313,7 +247,10 @@ export default function HomePage() {
 
           <div className="foot-bottom">
             <span>© 2026 NIDC · Northern Ireland Developer Conference</span>
-            <Link href="/terminal">DON&apos;T PANIC</Link>
+            <div className="foot-bottom-end">
+              <Link href="/terminal">DON&apos;T PANIC</Link>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </footer>
