@@ -4,10 +4,11 @@ import TerminalContent from "./content";
 export const metadata: Metadata = {
   title: "Hitchhiker's Guide Mode",
   description:
-    "NIDC 2026 — Don't Panic. The Hitchhiker's Guide to the Northern Ireland Developers Conference. Details classified.",
+    "NIDC 2026. Don't Panic. The Hitchhiker's Guide to the Northern Ireland Developers Conference. Saturday 21 November 2026, ICC Belfast.",
   openGraph: {
-    title: "NIDC 2026 — Hitchhiker's Guide Mode",
-    description: "Don't Panic. Details classified. Towel recommended.",
+    title: "NIDC 2026 Hitchhiker's Guide Mode",
+    description:
+      "Don't Panic. Saturday 21 November 2026, ICC Belfast. Towel recommended.",
   },
   robots: {
     index: false,

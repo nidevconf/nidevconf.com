@@ -1,6 +1,6 @@
-# NIDC - Northern Ireland Developers Conference
+# NIDC - Northern Ireland Developer Conference
 
-The official website for [NIDC 2025](https://nidevconf.github.io/nidevconf.com/) — Northern Ireland's premier developer conference. November 8th, 2025 at ICC Belfast.
+The official website for [NIDC 2026](https://nidevconf.com), Northern Ireland's premier developer conference, celebrating 10 years. Saturday 21st November 2026 at ICC Belfast.
 
 Built with [Next.js 16](https://nextjs.org) and deployed to GitHub Pages.
 
@@ -15,23 +15,22 @@ Open [http://localhost:3000](http://localhost:3000) to view the site locally.
 
 ## Project Structure
 
+The site is a single landing page with anchor-linked sections, plus one easter egg route.
+
 ```
 app/
-  page.tsx              # Homepage
-  agenda/               # Agenda (Sessionize embed)
-  speakers/             # Speaker grid (Sessionize API)
-  tickets/              # Tickets (ti.to embed)
-  sponsors/             # Sponsor logos and links
-  sponsor-info/         # Become a sponsor
-  attendee/             # Attendee information
-  past-events/          # Previous NIDC events
-  faq/                  # Frequently asked questions
-  code-of-conduct/      # Code of Conduct
-  privacy/              # Privacy Policy
+  page.tsx              # The landing page: hero, agenda, speak, villages,
+                        # sponsors, tickets, footer
+  layout.tsx            # Metadata, JSON-LD event schema, theme boot script
+  site.css              # Site styles (brand direction "Headline")
+  globals.css           # Tailwind v4 + shadcn tokens
+  _components/          # Section components (Schedule, Tickets, HeroVideo,
+                        # ThemeToggle, TiltBadge, TopicChips, SocialLinks)
   terminal/             # Hitchhiker's Guide easter egg
-components/             # Shared UI components
-lib/data.ts             # Conference data, sponsors, navigation
-public/sponsors/        # Sponsor logo images
+components/ui/          # shadcn-generated components
+lib/utils.ts            # cn() class helper
+public/images/          # Brand marks, photography
+public/media/           # Hero trailer video + poster
 ```
 
 ## Deployment
@@ -40,7 +39,7 @@ The site is deployed to **GitHub Pages** automatically on every merge to `main`.
 
 The GitHub Actions workflow (`.github/workflows/deploy.yml`) runs `next build` with static export and deploys the output to GitHub Pages.
 
-**Live site:** https://nidevconf.github.io/nidevconf.com/
+**Live site:** https://nidevconf.com
 
 ## Contributing
 
@@ -51,14 +50,16 @@ The `main` branch is protected. To make changes:
 3. Open a Pull Request
 4. Once approved and merged, the site deploys automatically
 
-## Adding or Updating Sponsor Logos
+## Brand notes
 
-Place logo images in `public/sponsors/` and reference them in `lib/data.ts`. Supported formats: PNG, SVG, WebP. Logos should be at least 200px wide with a transparent background.
+- Pink `#EC008C` and yellow `#F2C94C` accents; light and dark themes invert the canvas
+- Flat colour only, no gradients (scanline/dot/hatch patterns are fine)
+- Theme tokens and the full style guide live at the top of `app/site.css`
 
 ## Tech Stack
 
 - **Framework:** Next.js 16 (App Router, static export)
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS v4 + handwritten `site.css`, shadcn configured
 - **Icons:** Lucide React
-- **Integrations:** Sessionize (agenda/speakers), ti.to (tickets)
+- **Integrations:** ti.to (ticket widget), Sessionize (call for speakers link)
 - **Hosting:** GitHub Pages via GitHub Actions
