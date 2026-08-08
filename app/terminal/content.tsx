@@ -58,7 +58,7 @@ const STORY: { text: string; color: string; delay: number }[] = [
   },
   { text: "", color: CLR.green, delay: 2200 },
   {
-    text: "Lanyon Place, Belfast",
+    text: "ICC Belfast",
     color: CLR.amber,
     delay: 2600,
   },
@@ -331,6 +331,7 @@ const COMMANDS: Record<
       "  LOOK      - Examine your surroundings",
       "  INVENTORY - Check your belongings",
       "  RUMOURS   - Listen to the grapevine",
+      "  POETRY    - Endure Vogon poetry (not advised)",
       "  TOWEL     - Check towel status",
       "  42        - The answer",
       "  EXIT      - Return to normal space-time",
@@ -422,6 +423,31 @@ const COMMANDS: Record<
     ],
     color: CLR.green,
   },
+  POETRY: {
+    response: [
+      "> listen to vogon poetry",
+      "",
+      "A Vogon guard straps you into a small chair. Prostetnic",
+      "Vogon Jeltz clears all three of his throats and recites",
+      "his latest composition, 'Ode to a Developer Conference':",
+      "",
+      "  Oh splenetic gribblesnort of keynote dawn,",
+      "  thy lanyard flaps upon my quivering jowls",
+      "  like a badly deployed microservice.",
+      "  See how the early bird plurdles its ticket,",
+      "  gurgling greatly upon the sponsored coffee urn!",
+      "  Groop, I implore thee, my frupious agenda,",
+      "  and hurl me gronkingly to the fourth breakout room,",
+      "  for I shall raise a pull request against thy spleen,",
+      "  else I shall rend thee in the merge conflicts,",
+      "  see if I don't!",
+      "",
+      "You survive. Barely. The Guide notes that attending",
+      "NIDC 2026 is statistically far more pleasant, and that",
+      "the speakers there are considerably better at it.",
+    ],
+    color: CLR.green,
+  },
   TOWEL: {
     response: [
       "> check towel",
@@ -508,6 +534,8 @@ COMMANDS.CFP = COMMANDS.SPEAK;
 COMMANDS.SUBMIT = COMMANDS.SPEAK;
 COMMANDS.SPONSORS = COMMANDS.SPONSOR;
 COMMANDS.TICKET = COMMANDS.TICKETS;
+COMMANDS.POEM = COMMANDS.POETRY;
+COMMANDS.VOGON = COMMANDS.POETRY;
 
 /* ── Component ───────────────────────────────────────────── */
 export default function TerminalContent() {
