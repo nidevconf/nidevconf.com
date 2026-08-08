@@ -5,6 +5,7 @@ import Schedule from "./_components/Schedule";
 import SocialLinks from "./_components/SocialLinks";
 import ThemeToggle from "./_components/ThemeToggle";
 import Tickets from "./_components/Tickets";
+import TopicChips from "./_components/TopicChips";
 import TiltBadge from "./_components/TiltBadge";
 import HeroVideo from "./_components/HeroVideo";
 
@@ -29,7 +30,7 @@ export default function HomePage() {
             <a href="#village">Villages</a>
             <a href="#sponsor">Sponsor</a>
             <a className="btn btn-primary" href="#tickets">
-              Get yer&apos; tickets
+              Get an early bird ticket
             </a>
           </nav>
         </div>
@@ -63,7 +64,7 @@ export default function HomePage() {
 
           <div className="cta-row btn-row">
             <a className="btn btn-primary" href="#tickets">
-              Get yer&apos; tickets <span className="arrow">→</span>
+              Get an early bird ticket <span className="arrow">→</span>
             </a>
             <a className="btn btn-secondary" href="https://sessionize.com/nidc-2026/">
               Submit a talk or workshop
@@ -84,22 +85,13 @@ export default function HomePage() {
                 <span className="hl hl-y">September</span>.
               </span>
             </p>
+            <TopicChips />
             <p className="sec-body">
               The place to be for enthusiasts, students, and professionals across software,
               product, cloud, data, UX, games, infrastructure, open source, security, AI, and
               everything in between. Come on down, and bring along your team.
             </p>
             <Schedule />
-          </div>
-        </section>
-
-        {/* ----- ABOUT ----- */}
-        <section className="section" id="about">
-          <div className="wrap section-centered">
-            <h2 className="sec-title">
-              Celebrating <span className="hl hl-y">10 years</span> of tech community in Northern
-              Ireland.
-            </h2>
           </div>
         </section>
 
@@ -183,6 +175,16 @@ export default function HomePage() {
                 alt="Attendees chatting at a village stand at NIDC 2025"
               />
             </div>
+          </div>
+        </section>
+
+        {/* ----- ABOUT ----- */}
+        <section className="section" id="about">
+          <div className="wrap section-centered">
+            <h2 className="sec-title">
+              Celebrating <span className="hl hl-y">10 years</span> of tech community in Northern
+              Ireland.
+            </h2>
           </div>
         </section>
 
