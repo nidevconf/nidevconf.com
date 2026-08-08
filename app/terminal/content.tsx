@@ -25,13 +25,13 @@ const SCENE = `
           | |                                                 | |
           | |  > DON'T PANIC                                  | |
           | |                                                 | |
-          | |  NIDC 2026                                      | |
-          | |  LOCATION: ████████████                         | |
-          | |  DATE: ██ ████████ 2026                         | |
+          | |  NIDC 2026 - 10 YEAR ANNIVERSARY                | |
+          | |  LOCATION: ICC BELFAST                          | |
+          | |  DATE: SAT 21 NOVEMBER 2026                     | |
           | |                                                 | |
           | |  "The ships hung in the sky in much the same    | |
-          | |   way that bricks don't. The conference date    | |
-          | |   hangs in the future in much the same way."    | |
+          | |   way that bricks don't. The conference date,   | |
+          | |   however, is now firmly nailed down."          | |
           | |                                                 | |
           | |_________________________________________________| |
           |  ___ ___ ___   ___   _________________________  __ |
@@ -52,54 +52,54 @@ const STORY: { text: string; color: string; delay: number }[] = [
     delay: 1200,
   },
   {
-    text: "Release 43 / Serial No. ??????",
+    text: "Release 44 / Serial No. 20261121",
     color: CLR.dimGreen,
     delay: 1800,
   },
   { text: "", color: CLR.green, delay: 2200 },
   {
-    text: "Location Unknown, Somewhere in Belfast",
+    text: "ICC Belfast",
     color: CLR.amber,
     delay: 2600,
   },
   {
-    text: "You are standing in a void. Not the existential kind — more",
+    text: "You are standing outside ICC Belfast. The fog that once",
     color: CLR.green,
     delay: 3200,
   },
   {
-    text: "the kind where a conference hasn't been announced yet and",
+    text: "shrouded this place has lifted, and a noticeboard",
     color: CLR.green,
     delay: 3800,
   },
   {
-    text: "all the details are classified at a level that would make",
+    text: "announces in large, friendly letters:",
     color: CLR.green,
     delay: 4400,
   },
   {
-    text: "the Vogon bureaucracy proud.",
-    color: CLR.green,
+    text: "SATURDAY 21 NOVEMBER 2026.",
+    color: CLR.brightGreen,
     delay: 5000,
   },
   { text: "", color: CLR.green, delay: 5400 },
   {
-    text: "Rumours swirl through the developer community like",
+    text: "The Vogon Information Bureau has, grudgingly, stamped",
     color: CLR.green,
     delay: 5600,
   },
   {
-    text: "hyperspace bypasses through the fabric of space-time.",
+    text: "almost every file DECLASSIFIED. Ten years of conference,",
     color: CLR.green,
     delay: 6200,
   },
   {
-    text: "Something is coming. Something big. Something with",
+    text: "and it is all happening again: speakers, and tracks,",
     color: CLR.green,
     delay: 6800,
   },
   {
-    text: "speakers, and tracks, and almost certainly coffee.",
+    text: "and almost certainly coffee.",
     color: CLR.green,
     delay: 7400,
   },
@@ -111,31 +111,30 @@ const STORY: { text: string; color: string; delay: number }[] = [
   },
   { text: "", color: CLR.green, delay: 8600 },
   {
-    text: "All exits lead to uncertainty. The Guide flickers with",
+    text: "There are three large signs here. They read:",
     color: CLR.green,
     delay: 8800,
   },
   {
-    text: "a single blinking cursor, waiting for more information",
-    color: CLR.green,
+    text: "  EARLY BIRD TICKETS: ON SALE NOW",
+    color: CLR.amber,
     delay: 9400,
   },
   {
-    text: "to be declassified.",
-    color: CLR.green,
-    delay: 10000,
-  },
-  { text: "", color: CLR.green, delay: 10400 },
-  {
-    text: "There is a large sign here that reads: WATCH THIS SPACE.",
+    text: "  CALL FOR SPEAKERS: OPEN",
     color: CLR.amber,
-    delay: 10600,
+    delay: 9800,
   },
-  { text: "", color: CLR.green, delay: 11000 },
+  {
+    text: "  CALL FOR SPONSORS: OPEN",
+    color: CLR.amber,
+    delay: 10200,
+  },
+  { text: "", color: CLR.green, delay: 10600 },
   {
     text: ">",
     color: CLR.white,
-    delay: 11200,
+    delay: 10800,
   },
 ];
 
@@ -160,27 +159,31 @@ const COMMANDS: Record<
     response: [
       "> get ticket",
       "",
-      "You reach for a ticket but your hand passes through",
-      "empty air. Registration for NIDC 2026 has not opened yet.",
+      "You reach for a ticket and, remarkably, your hand does",
+      "not pass through empty air. Early bird tickets for",
+      "NIDC 2026 are ON SALE NOW.",
       "",
-      "The Guide notes: 'Patience is a virtue. So is checking",
-      "nidevconf.com obsessively until tickets go live.'",
+      "The Guide notes: 'Early bird pricing, much like the",
+      "Restaurant at the End of the Universe, will not be",
+      "there forever.'",
       "",
-      "Your status: WAITING (along with everyone else).",
+      "Transporting you to the ticket desk...",
     ],
-    color: CLR.green,
+    color: CLR.brightGreen,
+    link: "https://ti.to/nidc/nidc-2026-10th-anniversary",
   },
   REGISTER: {
-    response: () => [
+    response: [
       "> register",
       "",
-      ...classifiedResponse(),
+      "Registration is OPEN. The Guide recommends acting with",
+      "the urgency of a man who knows exactly when the Vogon",
+      "demolition fleet is due.",
       "",
-      "Registration will open when the time is right.",
-      "The Guide recommends following NIDC on social media",
-      "so you don't miss it.",
+      "Transporting you to the ticket desk...",
     ],
-    color: CLR.red,
+    color: CLR.brightGreen,
+    link: "https://ti.to/nidc/nidc-2026-10th-anniversary",
   },
   AGENDA: {
     response: () => [
@@ -199,67 +202,97 @@ const COMMANDS: Record<
       "",
       ...classifiedResponse(),
       "",
-      "The Guide rates the upcoming schedule as '[REDACTED]'.",
+      "The Guide adds: 'Declassification of the agenda is",
+      "scheduled for September. Probably worth the wait.'",
     ],
     color: CLR.green,
   },
   SPEAKERS: {
-    response: () => [
+    response: [
       "> look up speakers in guide",
       "",
       "The Guide has this to say about the speakers at NIDC 2026:",
       "",
-      ...classifiedResponse(),
+      "THE CALL FOR SPEAKERS IS OPEN. Talks can be on any",
+      "subject related to the technology industry. They will",
+      "be brilliant. They will share hard-won wisdom freely",
+      "among peers, which is frankly the sort of thing that",
+      "restores your faith in carbon-based life forms.",
       "",
-      "What we can tell you: they will be brilliant. They will",
-      "be local. They will share hard-won wisdom freely among",
-      "peers, which is frankly the sort of thing that restores",
-      "your faith in carbon-based life forms.",
-      "",
-      "Speaker submissions? Watch this space.",
+      "One of them could be you. Type SPEAK to submit a talk",
+      "or workshop.",
     ],
     color: CLR.green,
   },
+  SPEAK: {
+    response: [
+      "> submit talk",
+      "",
+      "A wise choice. Sharing what you know at NIDC is about",
+      "the most massively useful thing a local developer can",
+      "do, towels notwithstanding.",
+      "",
+      "Transporting you to the submission form at",
+      "sessionize.com/nidc-2026...",
+    ],
+    color: CLR.brightGreen,
+    link: "https://sessionize.com/nidc-2026/",
+  },
+  SPONSOR: {
+    response: [
+      "> sponsor conference",
+      "",
+      "An excellent instinct. The Guide's market research",
+      "notes that the room will contain the finest collection",
+      "of carbon-based developers in Northern Ireland, and",
+      "the call for sponsors is OPEN.",
+      "",
+      "Put your brand in the room: email",
+      "sponsors@nidevconf.com and the organisers will take",
+      "it from there.",
+    ],
+    color: CLR.amber,
+  },
   DATE: {
-    response: () => [
+    response: [
       "> ask about date",
       "",
       "You consult the Guide's calendar for NIDC 2026.",
       "",
-      "  Date: ██ ████████ 2026",
+      "  Date: Saturday 21 November 2026",
+      "  Time: 08:00 to 17:00",
       "",
-      ...classifiedResponse(),
-      "",
-      "The Guide notes: 'Time is an illusion. Conference time",
-      "doubly so. But it WILL happen in 2026.'",
+      "The Guide notes: 'Time is an illusion. Lunchtime",
+      "doubly so. This date, however, is entirely real.",
+      "Put it in whichever calendar you trust most.'",
     ],
     color: CLR.amber,
   },
   LOCATION: {
-    response: () => [
+    response: [
       "> examine surroundings",
       "",
-      "You try to determine where NIDC 2026 will take place.",
+      "You determine exactly where NIDC 2026 will take place.",
       "",
-      "  Location: ████████████, Belfast",
+      "  Location: ICC Belfast, 2 Lanyon Place, BT1 3WH",
       "",
-      ...classifiedResponse(),
-      "",
-      "All we can say: it's in Belfast. It always has been.",
-      "It always will be. Some things are constants in an",
-      "uncertain universe.",
+      "It's in Belfast. It always has been. It always will",
+      "be. Some things are constants in an uncertain",
+      "universe; this year the constant has a postcode.",
     ],
     color: CLR.green,
   },
   VENUE: {
-    response: () => [
+    response: [
       "> look for venue",
       "",
-      ...classifiedResponse(),
+      "The Guide's entry reads: ICC Belfast (Waterfront",
+      "Hall), 2 Lanyon Place. Mostly harmless. Excellent",
+      "acoustics.",
       "",
-      "Belfast. Beyond that, the organisers are keeping this",
-      "one close to their chest, much like a Dentrassi guards",
-      "its favourite cooking pot.",
+      "The organisers are no longer keeping this one close",
+      "to their chest. The Dentrassi cooking pot has been",
+      "handed round for all to see.",
     ],
     color: CLR.green,
   },
@@ -267,19 +300,20 @@ const COMMANDS: Record<
     response: [
       "> look",
       "",
-      "The Void Between Conferences",
+      "Lanyon Place, Belfast",
       "",
-      "You are floating in the space between NIDC 2025 and",
-      "NIDC 2026. It is dark, quiet, and filled with the",
-      "faint hum of anticipation.",
+      "You are standing outside ICC Belfast. The fog has",
+      "lifted, and the air hums with anticipation of the",
+      "10 year anniversary conference.",
       "",
-      "  To the NORTH: fog",
-      "  To the SOUTH: more fog",
-      "  To the EAST: dense, impenetrable fog",
-      "  To the WEST: a faint glow that might be Belfast",
+      "  To the NORTH: the River Lagan",
+      "  To the SOUTH: the after-party (details TBA)",
+      "  To the EAST: a queue forming for early bird tickets",
+      "  To the WEST: the rest of Belfast",
       "",
-      "A sign floats past reading: 'NIDC 2026 — COMING SOON.'",
-      "It is followed by a smaller sign reading: 'NO SPOILERS.'",
+      "A sign floats past reading: 'NIDC 2026, SAT 21 NOV,",
+      "ICC BELFAST.' It is followed by a smaller sign",
+      "reading: 'TELL YOUR TEAM.'",
     ],
     color: CLR.green,
   },
@@ -287,13 +321,17 @@ const COMMANDS: Record<
     response: [
       "The Guide suggests the following interactions:",
       "",
-      "  TICKETS   - Check registration status",
+      "  TICKETS   - Get an early bird ticket",
+      "  SPEAK     - Submit a talk or workshop",
+      "  SPONSOR   - Put your brand in the room",
       "  DATE      - Ask about the date",
       "  LOCATION  - Investigate the venue",
+      "  AGENDA    - Consult the schedule",
       "  SPEAKERS  - Enquire about speakers",
       "  LOOK      - Examine your surroundings",
       "  INVENTORY - Check your belongings",
       "  RUMOURS   - Listen to the grapevine",
+      "  POETRY    - Endure Vogon poetry (not advised)",
       "  TOWEL     - Check towel status",
       "  42        - The answer",
       "  EXIT      - Return to normal space-time",
@@ -313,19 +351,20 @@ const COMMANDS: Record<
       "  Memories of NIDC 2025",
       "  A lingering sense of anticipation",
       "",
-      "Your NIDC 2026 ticket status: NOT YET AVAILABLE",
-      "(Nobody's is. Don't panic.)",
+      "Your NIDC 2026 ticket status: NOT PURCHASED YET",
+      "(Early bird tickets are on sale. Type TICKETS.",
+      "Don't panic.)",
     ],
     color: CLR.green,
   },
   RUMOURS: {
     response: () => {
       const rumours = [
-        "A passing Betelgeusean whispers: 'I heard there will be even more tracks this year.'",
+        "A passing Betelgeusean whispers: 'I heard it's their biggest one yet. Ten years, you know.'",
         "A developer at the bar mutters: 'Apparently the after-party is going to be legendary. Again.'",
-        "Someone scrawled on a napkin: 'The CFP will open before you expect it.'",
-        "A note stuck to the wall reads: 'The organisers have been suspiciously quiet. That means they're planning something big.'",
-        "An anonymous source reports: 'They're already arguing about which talks to accept.'",
+        "Someone scrawled on a napkin: 'Submit a talk. First-time speakers are very welcome.'",
+        "A note stuck to the wall reads: 'Early bird tickets never last as long as you think they will.'",
+        "An anonymous source reports: 'The organisers are already arguing about which talks to accept.'",
         "The grapevine suggests: 'The coffee will be just as good. Maybe better.'",
       ];
       const pick = rumours[Math.floor(Math.random() * rumours.length)];
@@ -347,14 +386,14 @@ const COMMANDS: Record<
     response: [
       "> go north",
       "",
-      "You walk north into the fog. After several steps you",
-      "bump into a wall that wasn't there before. A sign on",
-      "it reads:",
+      "You walk north and arrive at the River Lagan. It is",
+      "wet, as rivers famously are. A sign on the railing",
+      "reads:",
       "",
-      "  NIDC 2026 — THIS AREA IS UNDER CONSTRUCTION",
-      "  HARD HATS AND TOWELS REQUIRED BEYOND THIS POINT",
+      "  NIDC 2026 - SAT 21 NOV - ICC BELFAST",
+      "  TOWELS OPTIONAL BUT ENCOURAGED",
       "",
-      "You can't go that way. Yet.",
+      "The conference is the other way.",
     ],
     color: CLR.green,
   },
@@ -366,7 +405,7 @@ const COMMANDS: Record<
       "you find only a closed door with a note pinned to it:",
       "",
       "  'After-party details TBA. But trust us, it'll be worth",
-      "   the wait. — The Organisers'",
+      "   the wait. Signed, The Organisers'",
       "",
       "You can't go that way. Yet.",
     ],
@@ -379,8 +418,33 @@ const COMMANDS: Record<
       ...classifiedResponse(),
       "",
       "The after-party will happen. Where, when, and how much",
-      "pizza — these remain mysteries wrapped in enigmas wrapped",
+      "pizza: these remain mysteries wrapped in enigmas wrapped",
       "in a towel.",
+    ],
+    color: CLR.green,
+  },
+  POETRY: {
+    response: [
+      "> listen to vogon poetry",
+      "",
+      "A Vogon guard straps you into a small chair. Prostetnic",
+      "Vogon Jeltz clears all three of his throats and recites",
+      "his latest composition, 'Ode to a Developer Conference':",
+      "",
+      "  Oh splenetic gribblesnort of keynote dawn,",
+      "  thy lanyard flaps upon my quivering jowls",
+      "  like a badly deployed microservice.",
+      "  See how the early bird plurdles its ticket,",
+      "  gurgling greatly upon the sponsored coffee urn!",
+      "  Groop, I implore thee, my frupious agenda,",
+      "  and hurl me gronkingly to the fourth breakout room,",
+      "  for I shall raise a pull request against thy spleen,",
+      "  else I shall rend thee in the merge conflicts,",
+      "  see if I don't!",
+      "",
+      "You survive. Barely. The Guide notes that attending",
+      "NIDC 2026 is statistically far more pleasant, and that",
+      "the speakers there are considerably better at it.",
     ],
     color: CLR.green,
   },
@@ -411,10 +475,10 @@ const COMMANDS: Record<
       "and calm.",
       "",
       "In the case of NIDC 2026, the question was almost",
-      "certainly: 'How many times will I refresh nidevconf.com",
-      "waiting for the date announcement?'",
+      "certainly: 'How many sleeps until Saturday 21 November?'",
       "",
-      "The answer, it turns out, is significantly more than 42.",
+      "Deep Thought is still working on that one. Your",
+      "calendar app will be faster.",
     ],
     color: CLR.amber,
   },
@@ -423,11 +487,12 @@ const COMMANDS: Record<
       "You take a deep breath.",
       "",
       "The large, friendly letters on the cover of the Guide",
-      "glow reassuringly. Yes, the date hasn't been announced.",
-      "Yes, you don't know the venue. Yes, the agenda is blank.",
+      "glow reassuringly. The date is set. The venue is",
+      "booked. The calls for speakers and sponsors are open.",
       "",
-      "But NIDC 2026 IS happening. In Belfast. With speakers,",
-      "and tracks, and coffee, and community.",
+      "NIDC 2026 IS happening. Saturday 21 November, ICC",
+      "Belfast. With speakers, and tracks, and coffee, and",
+      "community.",
       "",
       "Everything is going to be fine.",
       "",
@@ -457,12 +522,20 @@ const COMMANDS: Record<
       "",
       "So long, and thanks for all the talks.",
       "",
-      "(See you at NIDC 2026. Whenever that turns out to be.)",
+      "(See you on Saturday 21 November. Bring your towel.)",
     ],
     color: CLR.amber,
     link: "/",
   },
 };
+
+// the words people will actually type
+COMMANDS.CFP = COMMANDS.SPEAK;
+COMMANDS.SUBMIT = COMMANDS.SPEAK;
+COMMANDS.SPONSORS = COMMANDS.SPONSOR;
+COMMANDS.TICKET = COMMANDS.TICKETS;
+COMMANDS.POEM = COMMANDS.POETRY;
+COMMANDS.VOGON = COMMANDS.POETRY;
 
 /* ── Component ───────────────────────────────────────────── */
 export default function TerminalContent() {
@@ -602,7 +675,7 @@ export default function TerminalContent() {
             color: CLR.black,
           }}
         >
-          THE HITCHHIKER&apos;S GUIDE TO NIDC 2026 &mdash; [CLASSIFIED]
+          THE HITCHHIKER&apos;S GUIDE TO NIDC 2026 &middot; [DECLASSIFIED]
           <Link
             href="/"
             className="absolute right-3 top-1.5 hover:opacity-70 transition-opacity"
@@ -636,11 +709,11 @@ export default function TerminalContent() {
           {/* Teaser bar */}
           <div
             className="flex items-center justify-center gap-1 py-2 mb-3 text-xs tracking-wider"
-            aria-label="NIDC 2026 coming soon"
+            aria-label="NIDC 2026, Saturday 21 November, ICC Belfast, early bird tickets on sale"
           >
             <span style={{ color: CLR.dimGreen }}>[ </span>
             <span style={{ color: CLR.amber }}>
-              NIDC 2026 — DATE TBA — WATCH THIS SPACE
+              NIDC 2026 · SAT 21 NOV · ICC BELFAST · EARLY BIRD ON SALE
             </span>
             <span style={{ color: CLR.dimGreen }}> ]</span>
           </div>
