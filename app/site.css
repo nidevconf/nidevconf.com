@@ -284,6 +284,35 @@ ul{margin:0;}
 .hero .btn-secondary{color:var(--white);border-color:var(--white);}
 .hero .btn-secondary:hover{background:var(--white);color:#121212;}
 
+/* Topic chips — toggles, for filtering the schedule later. */
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin:24px 0 0;padding:0;list-style:none;}
+.chips button{font-family:var(--display);font-weight:600;font-size:13px;line-height:1;
+  color:var(--muted);background:none;border:1px solid var(--line);
+  border-radius:var(--r-pill);padding:6px 14px;cursor:pointer;
+  transition:transform .16s ease-out,color .16s ease-out,
+    border-color .16s ease-out,background .16s ease-out;}
+.chips button:hover{transform:rotate(var(--tilt));color:var(--ink);border-color:var(--muted);}
+/* Selected wears the same ink fill as the CTAs. Keyed off aria-pressed rather
+   than a class, so the state a screen reader announces and the state you can see
+   are the same fact. */
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--on-ink);
+  border-color:var(--ink);}
+.chips button[aria-pressed="true"]:hover{color:var(--on-ink);border-color:var(--ink);}
+/* Settling back: two decaying bounces past centre, the same shape as the
+   anniversary badge's pop. An animation outranks the transition above while it
+   runs, so the two do not fight over transform. */
+.chips button.wobble{animation:chip-wobble .5s ease-out;}
+@keyframes chip-wobble{
+  0%{transform:rotate(var(--tilt));}
+  30%{transform:rotate(calc(var(--tilt) * -0.5));}
+  55%{transform:rotate(calc(var(--tilt) * 0.28));}
+  75%{transform:rotate(calc(var(--tilt) * -0.14));}
+  90%{transform:rotate(calc(var(--tilt) * 0.06));}
+  100%{transform:rotate(0deg);}
+}
+.chips + .sec-body{margin-top:var(--s4);}
+
 /* ============================================================
    CONTENT SECTIONS
    ============================================================ */
@@ -414,7 +443,11 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 @media (max-width:880px){
   .ag-headrow{display:none;}
   .agenda-preview > summary{grid-template-columns:1fr;}
-  .ap-rail{flex-direction:row;justify-content:space-between;padding:0 0 8px;text-align:left;}
+  /* stacked, the rail has no grid to sit beside — the two times just float */
+  .ap-rail{display:none;}
+  /* the cards space themselves with the grid's row gap, but a gap stops at the
+     grid's edge — so the fold needs its own margin against the block above */
+  .agenda-preview{margin-top:var(--ag-gap);}
   .agenda-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:8px;}
   .ag-time{display:none;}
   .ag-item{grid-column:1;grid-row:auto;margin-bottom:0;}
