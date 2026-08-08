@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import Schedule from "./_components/Schedule";
 import SocialLinks from "./_components/SocialLinks";
 import ThemeToggle from "./_components/ThemeToggle";
 import Tickets from "./_components/Tickets";
@@ -23,7 +24,7 @@ export default function HomePage() {
             <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
           </Link>
           <nav className="nav-links" aria-label="Primary">
-            <a href="#tickets">Tickets</a>
+            <a href="#agenda">Agenda</a>
             <a href="#speak">Speak</a>
             <a href="#village">Villages</a>
             <a href="#sponsor">Sponsor</a>
@@ -73,6 +74,25 @@ export default function HomePage() {
 
       {/* ================= MAIN ================= */}
       <main id="main-content">
+        {/* ----- AGENDA ----- */}
+        <section className="section" id="agenda">
+          <div className="wrap section-centered">
+            <h2 className="sec-title">Agenda</h2>
+            <p className="sec-lead">
+              Coming out in{" "}
+              <span className="nobr">
+                <span className="hl hl-y">September</span>.
+              </span>
+            </p>
+            <p className="sec-body">
+              The place to be for enthusiasts, students, and professionals across software,
+              product, cloud, data, UX, games, infrastructure, open source, security, AI, and
+              everything in between. Come on down, and bring along your team.
+            </p>
+            <Schedule />
+          </div>
+        </section>
+
         {/* ----- ABOUT ----- */}
         <section className="section" id="about">
           <div className="wrap section-centered">
@@ -80,16 +100,8 @@ export default function HomePage() {
               Celebrating <span className="hl hl-y">10 years</span> of tech community in Northern
               Ireland.
             </h2>
-            <p className="sec-body">
-              The place to be for enthusiasts, students, and professionals across software,
-              product, cloud, data, UX, games, infrastructure, open source, security, AI, and
-              everything in between. Come on down, and bring along your team.
-            </p>
           </div>
         </section>
-
-        {/* ----- TICKETS ----- */}
-        <Tickets id="tickets" />
 
         {/* ----- CALL FOR SPEAKERS ----- */}
         <section className="section" id="speak">
@@ -173,32 +185,36 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-      </main>
 
-      {/* ================= STATEMENT BAND ================= */}
-      <section className="statement" aria-label="Organised by practitioners, run by volunteers">
-        <div className="wrap">
-          <h2>
-            Organised by{" "}
-            <span className="nobr">
-              <span className="hl">Practitioners</span>,
-            </span>{" "}
-            run by{" "}
-            <span className="nobr">
-              <span className="hl hl-y">Volunteers</span>.
-            </span>
-          </h2>
-          <figure className="statement-photo">
-            <img
-              src="/images/volunteers.jpg"
-              width="2000"
-              height="1333"
-              loading="lazy"
-              alt="The NIDC volunteer team in pink shirts cheering in the ICC Belfast foyer"
-            />
-          </figure>
-        </div>
-      </section>
+        {/* ----- TICKETS ----- */}
+        <Tickets id="tickets" />
+
+        {/* ----- STATEMENT BAND ----- */}
+        <section className="statement" aria-label="Organised by practitioners, run by volunteers">
+          <div className="wrap">
+            <h2>
+              Organised by{" "}
+              <span className="nobr">
+                <span className="hl">Practitioners</span>,
+              </span>{" "}
+              run by{" "}
+              <span className="nobr">
+                <span className="hl hl-y">Volunteers</span>.
+              </span>
+            </h2>
+            <figure className="statement-photo">
+              <img
+                src="/images/volunteers.jpg"
+                width="2000"
+                height="1333"
+                loading="lazy"
+                alt="The NIDC volunteer team in pink shirts cheering in the ICC Belfast foyer"
+              />
+            </figure>
+          </div>
+        </section>
+
+      </main>
 
       {/* ================= FOOTER ================= */}
       <footer className="site">

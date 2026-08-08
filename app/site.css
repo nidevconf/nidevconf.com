@@ -315,9 +315,119 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 /* swap photo to the left on desktop (DOM stays text-first for mobile) */
 .section-split.media-left .section-media{order:-1;}
 
+/* SCHEDULE. Track headers and the time rail sit outside the fold so both states
+   read the same way, which means three grids have to line up — hence a fixed
+   gutter rather than an `auto` column that would size to nothing up there. */
+.agenda-sched{--ag-min:3px;--ag-gap:8px;--ag-gutter:60px;
+  margin-top:var(--s6);text-align:left;}
+.ag-headrow{display:grid;grid-template-columns:var(--ag-gutter) repeat(5,minmax(0,1fr));
+  column-gap:var(--ag-gap);}
+.ag-headrow span{padding:0 12px 10px;
+  font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);}
+
+/* Collapsed, the rows become one rectangle sitting exactly where they would be,
+   with the day's first and last times still on the rail beside it. <details>
+   supplies the toggle, the keyboard handling and the state — no JavaScript. */
+.agenda-preview > summary{list-style:none;cursor:pointer;
+  display:grid;grid-template-columns:var(--ag-gutter) 1fr;column-gap:var(--ag-gap);}
+.agenda-preview > summary::-webkit-details-marker{display:none;}
+.ap-rail{display:flex;flex-direction:column;justify-content:space-between;
+  padding:7px 14px 7px 0;text-align:right;
+  font-family:var(--mono);font-size:12px;color:var(--muted);}
+.ap-box{border:1px dashed var(--line);border-radius:12px;padding:20px 24px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .12s ease,border-color .12s ease;}
+/* collapsed it stands in for the whole day, so it takes real space; open it is
+   only a toggle above the grid and has no business being that tall */
+.agenda-preview:not([open]) .ap-box{min-height:180px;}
+/* same trade as the empty slots: on hover the fill takes over from the dashed
+   edge. transparent rather than none, so the box keeps its exact size. */
+.agenda-preview > summary:hover .ap-box{background:var(--bg-2);border-color:transparent;}
+.ap-more{font-family:var(--display);font-weight:400;font-size:14px;color:var(--muted);
+  transition:color .12s ease;}
+/* --ink-2 rather than --ink: a step toward the primary text colour, which reads
+   as "darker" on the light canvas and as "brighter" on the dark one */
+.agenda-preview > summary:hover .ap-more{color:var(--ink-2);}
+.ap-more::after{content:"Preview";}
+.agenda-preview[open] .ap-more::after{content:"Hide";}
+.agenda-preview{margin-bottom:var(--ag-gap);}
+.agenda-preview[open] > summary{margin-bottom:var(--ag-gap);}
+/* open, the grid carries its own times — the rail would just repeat 08:30 */
+.agenda-preview[open] .ap-rail{visibility:hidden;}
+
+.agenda-grid{display:grid;grid-template-columns:var(--ag-gutter) repeat(5,minmax(0,1fr));
+  grid-template-rows:var(--ag-rows);column-gap:var(--ag-gap);row-gap:0;}
+.ag-time{grid-column:1;grid-row:var(--r1);padding-right:14px;text-align:right;
+  font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;}
+
+/* row-gap stays 0 — the empty rows between sessions are the breaks and are already
+   the right height. The separation for slots that genuinely touch (lunch and the
+   13:00 talks) comes from insetting the card inside its row instead, by the same
+   amount that separates the tracks. Each slot's FOOTPRINT stays proportional. */
+.ag-item{position:relative;grid-column:var(--c);grid-row:var(--r1) / var(--r2);
+  margin-bottom:var(--ag-gap);border-radius:10px;padding:9px 13px;overflow:hidden;
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
+/* A booked session is a solid fill with no edge; a slot nobody has filled yet is
+   the inverse — no fill, dashed edge. The transparent border on the filled one
+   keeps both boxes the same size, so nothing shifts as slots get announced.
+   z-index puts sessions over the bands: the 11:15 workshop genuinely runs 15
+   minutes into lunch, and lunch is later in the DOM so it would otherwise bury
+   it. The canvas fill rather than `transparent` is what makes that occlude. */
+.ag-talk{background:var(--bg-2);border:1px solid transparent;z-index:1;}
+.ag-tba{background:var(--bg);border:1px dashed var(--line);}
+/* An empty slot invites you to fill it: on hover the whole square greys over, its
+   time fades out and the pitch takes the middle. The label is absolutely
+   positioned so revealing it cannot grow the row — these cards are sized by their
+   minutes, and a label taking layout space would push a 30 minute slot out of
+   scale. data-track is already on the element, so which pitch to make is a
+   selector rather than markup. */
+/* it is an <a> to the CFP now, so the pointer comes free — but the site's link
+   colour and hover underline have to be shown the door */
+.ag-tba{color:inherit;text-decoration:none;
+  transition:background .12s ease,border-color .12s ease;}
+/* the dashed edge said "nothing here yet" — on hover the fill takes over that job */
+.ag-tba:hover{background:var(--bg-2);border-color:transparent;text-decoration:none;}
+.ag-tba > *{transition:opacity .12s ease;}
+.ag-tba:hover > *{opacity:0;}
+/* two pseudo-elements, not one: the face has to be sized independently of the
+   words, and they share a text node if the label is a single ::after. Each takes
+   half the card, meeting in the middle. */
+.ag-tba::before{content:attr(data-face);position:absolute;left:0;right:0;top:0;bottom:50%;
+  display:flex;align-items:flex-end;justify-content:center;
+  font-size:28px;line-height:1;
+  opacity:0;transition:opacity .12s ease;}
+.ag-tba::after{content:"Submit a talk";position:absolute;left:10px;right:10px;top:50%;bottom:0;
+  display:flex;align-items:flex-start;justify-content:center;text-align:center;padding-top:6px;
+  font-family:var(--display);font-weight:600;font-size:12px;color:var(--muted);
+  opacity:0;transition:opacity .12s ease;}
+.ag-tba[data-track="Workshops"]::after{content:"Submit a workshop";}
+.ag-tba:hover::before,.ag-tba:hover::after{opacity:1;}
+.ag-band{background:var(--bg-3);}
+.ag-when{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ag-title{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25;
+  color:var(--ink);}
+
+/* Stacked: five columns cannot narrow, so the grid becomes one chronological
+   column and each card names its own track. */
+@media (max-width:880px){
+  .ag-headrow{display:none;}
+  .agenda-preview > summary{grid-template-columns:1fr;}
+  .ap-rail{flex-direction:row;justify-content:space-between;padding:0 0 8px;text-align:left;}
+  .agenda-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:8px;}
+  .ag-time{display:none;}
+  .ag-item{grid-column:1;grid-row:auto;margin-bottom:0;}
+  .ag-band{flex-direction:column;gap:4px;}
+  .ag-talk::before{content:attr(data-track);order:-1;
+    font-family:var(--display);font-weight:600;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);}
+}
+
 /* centred section: title / body stacked & centred, media below */
 .section-centered{text-align:center;}
-.section-centered .sec-body{margin-left:auto;margin-right:auto;}
+.section-centered .sec-body,
+.section-centered .sec-lead{margin-left:auto;margin-right:auto;}
 /* full-width banner photo (e.g. the crowd panorama in About) */
 .section-banner{margin:var(--s5) 0 0;overflow:hidden;}
 .section-banner img{display:block;width:100%;height:auto;}
@@ -330,7 +440,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 /* card so the widget reads as its own element rather than loose page content */
 .tickets-embed{margin:var(--s5) auto 0;max-width:880px;
   text-align:left; /* undo .section-centered */
-  background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
+  background:var(--bg-2);border-radius:var(--r);
   padding:var(--s3) var(--s4);}
 .tickets-embed .tito-widget{color:var(--ink);font-family:var(--body);justify-content:center;}
 .tickets-embed .tito-widget .tito-widget-form .tito-release{border-bottom-color:var(--line);}
