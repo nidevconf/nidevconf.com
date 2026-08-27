@@ -328,7 +328,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .section .btn-row{margin-top:28px;}
 
 /* every photo/video corner, one place — new media goes on this list */
-.section-media img,.section-embed,.section-banner,.statement-photo{border-radius:var(--r);}
+.section-media img,.section-banner,.statement-photo{border-radius:var(--r);}
 
 /* text + photo(s) side by side */
 .section-split{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--s6);align-items:center;}
@@ -339,8 +339,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .section-media.single img{aspect-ratio:3/2;}
 
 /* third-party video embed (YouTube iframe) */
-.section-embed{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;}
-.section-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 /* swap photo to the left on desktop (DOM stays text-first for mobile) */
 .section-split.media-left .section-media{order:-1;}
 
@@ -405,33 +403,6 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
    it. The canvas fill rather than `transparent` is what makes that occlude. */
 .ag-talk{background:var(--bg-2);border:1px solid transparent;z-index:1;}
 .ag-tba{background:var(--bg);border:1px dashed var(--line);}
-/* An empty slot invites you to fill it: on hover the whole square greys over, its
-   time fades out and the pitch takes the middle. The label is absolutely
-   positioned so revealing it cannot grow the row — these cards are sized by their
-   minutes, and a label taking layout space would push a 30 minute slot out of
-   scale. data-track is already on the element, so which pitch to make is a
-   selector rather than markup. */
-/* it is an <a> to the CFP now, so the pointer comes free — but the site's link
-   colour and hover underline have to be shown the door */
-.ag-tba{color:inherit;text-decoration:none;
-  transition:background .12s ease,border-color .12s ease;}
-/* the dashed edge said "nothing here yet" — on hover the fill takes over that job */
-.ag-tba:hover{background:var(--bg-2);border-color:transparent;text-decoration:none;}
-.ag-tba > *{transition:opacity .12s ease;}
-.ag-tba:hover > *{opacity:0;}
-/* two pseudo-elements, not one: the face has to be sized independently of the
-   words, and they share a text node if the label is a single ::after. Each takes
-   half the card, meeting in the middle. */
-.ag-tba::before{content:attr(data-face);position:absolute;left:0;right:0;top:0;bottom:50%;
-  display:flex;align-items:flex-end;justify-content:center;
-  font-size:28px;line-height:1;
-  opacity:0;transition:opacity .12s ease;}
-.ag-tba::after{content:"Submit a talk";position:absolute;left:10px;right:10px;top:50%;bottom:0;
-  display:flex;align-items:flex-start;justify-content:center;text-align:center;padding-top:6px;
-  font-family:var(--display);font-weight:600;font-size:12px;color:var(--muted);
-  opacity:0;transition:opacity .12s ease;}
-.ag-tba[data-track="Workshops"]::after{content:"Submit a workshop";}
-.ag-tba:hover::before,.ag-tba:hover::after{opacity:1;}
 .ag-band{background:var(--bg-3);}
 .ag-when{font-family:var(--mono);font-size:11.5px;color:var(--muted);
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
