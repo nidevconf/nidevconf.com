@@ -1,21 +1,6 @@
 import type { CSSProperties } from "react";
 
 const TRACKS = ["Hall 1", "Hall 2", "Room 1", "Room 2", "Workshops"];
-const WORKSHOP_TRACK = TRACKS.indexOf("Workshops");
-// same destination as the "Submit a talk or workshop" buttons in page.tsx
-const CFP = "https://sessionize.com/nidc-2026/";
-
-/* Each empty slot's pitch carries a face, and no two slots share one. Dealt by
-   position rather than hashed: a hash cannot promise uniqueness, and with 32
-   slots the pigeonhole guarantees collisions unless the list is dealt out.
-   Plain text, so each visitor gets their own platform's emoji font — which is
-   what puts the Apple artwork on Apple devices without shipping Apple's files. */
-const FACES = [
-  ..."\u{1F600}\u{1F603}\u{1F604}\u{1F601}\u{1F606}\u{1F605}\u{1F923}\u{1F602}\u{1F642}\u{1F643}",
-  ..."\u{1F609}\u{1F60A}\u{1F607}\u{1F970}\u{1F60D}\u{1F929}\u{1F618}\u{1F617}\u{1F61A}\u{1F619}",
-  ..."\u{1F972}\u{1F60B}\u{1F61B}\u{1F61C}\u{1F92A}\u{1F917}\u{1F914}\u{1F920}\u{1F973}\u{1F60E}",
-  ..."\u{1F913}\u{1F9D0}\u{1F92D}\u{1FAE2}\u{1F92B}\u{1F610}\u{1F611}\u{1F636}\u{1F644}\u{1F60F}",
-];
 
 const at = (h: number, m = 0) => h * 60 + m;
 
@@ -63,15 +48,6 @@ const ITEMS: Item[] = [
 ITEMS.sort((a, b) => a.start - b.start || (a.track ?? -1) - (b.track ?? -1));
 
 const span = (i: Item) => i.layout ?? [i.start, i.end];
-
-/* Stepping 13 at a time through 40 faces is a permutation (they share no common
-   factor), so every slot gets a different one AND neighbours sit far apart in the
-   list — dealing them in order would march the same sequence across every row. */
-const FACE_OF = new Map(
-  ITEMS.filter((i) => i.title === "TBA").map(
-    (i, n) => [`${i.track}-${i.start}`, FACES[(n * 13) % FACES.length]] as const,
-  ),
-);
 
 const clock = (m: number) =>
   `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
@@ -170,32 +146,13 @@ function Grid({ items }: { items: Item[] }) {
             "--r2": row(to),
           } as CSSProperties,
         };
-        const inner = (
-          <>
+        return (
+          <div key={key} {...props}>
             <p className="ag-when">
               {clock(item.start)} ({length(item.end - item.start)})
             </p>
             {/* an unfilled slot says so with its dashed outline, not with a word */}
             {!tba && <p className="ag-title">{item.title}</p>}
-          </>
-        );
-
-        // An empty slot is a pitch for that exact spot. Each carries its own label
-        // so a screen reader gets thirty distinct invitations, not thirty
-        // identical "Submit a talk" links.
-        return tba ? (
-          <a
-            key={key}
-            {...props}
-            href={CFP}
-            data-face={FACE_OF.get(`${item.track}-${item.start}`)}
-            aria-label={`Submit a ${item.track === WORKSHOP_TRACK ? "workshop" : "talk"} for the ${clock(item.start)} slot in ${TRACKS[item.track!]}`}
-          >
-            {inner}
-          </a>
-        ) : (
-          <div key={key} {...props}>
-            {inner}
           </div>
         );
       })}

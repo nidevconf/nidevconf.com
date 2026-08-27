@@ -61,5 +61,5 @@ The `main` branch is protected. To make changes:
 - **Framework:** Next.js 16 (App Router, static export)
 - **Styling:** Tailwind CSS v4 + handwritten `site.css`, shadcn configured
 - **Icons:** Lucide React
-- **Integrations:** ti.to (ticket widget), Sessionize (call for speakers link)
+- **Integrations:** ti.to (ticket widget)
 - **Hosting:** GitHub Pages via GitHub Actions
