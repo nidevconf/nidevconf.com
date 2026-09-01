@@ -107,7 +107,7 @@ const jsonLd = {
   description:
     "The event of the year for the tech community, celebrating 10 years. NIDC gathers enthusiasts, students, and professionals across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between.",
   startDate: "2026-11-21T08:00:00+00:00",
-  endDate: "2026-11-21T17:00:00+00:00",
+  endDate: "2026-11-21T17:10:00+00:00",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
   location: {

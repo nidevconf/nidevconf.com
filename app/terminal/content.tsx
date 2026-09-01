@@ -255,7 +255,7 @@ const COMMANDS: Record<
       "You consult the Guide's calendar for NIDC 2026.",
       "",
       "  Date: Saturday 21 November 2026",
-      "  Time: 08:00 to 17:00",
+      "  Time: 08:00 to 17:10",
       "",
       "The Guide notes: 'Time is an illusion. Lunchtime",
       "doubly so. This date, however, is entirely real.",

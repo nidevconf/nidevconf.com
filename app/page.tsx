@@ -202,7 +202,7 @@ export default function HomePage() {
                 Come on down, and bring your friends, family, and colleagues.
               </p>
               <p className="foot-term">
-                <span className="prompt">{">"}</span> Sat 21 Nov 2026 · 08:00–17:00 · ICC Belfast
+                <span className="prompt">{">"}</span> Sat 21 Nov 2026 · 08:00–17:10 · ICC Belfast
                 <span className="cursor" aria-hidden></span>
               </p>
             </div>

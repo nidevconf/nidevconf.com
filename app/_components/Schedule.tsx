@@ -16,12 +16,22 @@ type Item = {
   layout?: [number, number];
 };
 
-const TALK_STARTS = [at(10), at(10, 45), at(11, 30), at(13), at(13, 45), at(14, 45), at(15, 30)];
+const TALK_STARTS = [
+  at(10),
+  at(10, 45),
+  at(11, 30),
+  at(13),
+  at(13, 45),
+  at(14, 30),
+  at(15, 30),
+  at(16, 10),
+];
 const WORKSHOPS: [number, number][] = [
   [at(10), at(11)],
   [at(11, 15), at(12, 15)],
   [at(13), at(14)],
-  [at(14, 45), at(15, 45)],
+  [at(14, 15), at(15, 15)],
+  [at(15, 30), at(16, 30)],
 ];
 
 /* Talks are 30 minutes with a 15 minute gap, which fixes the whole day: a 15
@@ -37,10 +47,10 @@ const ITEMS: Item[] = [
   ),
   ...WORKSHOPS.map(([start, end]) => ({ start, end, track: 4, title: "TBA" })),
   { start: at(12), end: at(13), title: "Lunch" },
-  { start: at(14, 15), end: at(14, 45), title: "Afternoon break" },
-  // finishes at 17:00; the day's 15 minute gap after the last talk sets the start
-  { start: at(16, 15), end: at(17), track: 0, title: "Closing & prizes" },
-  { start: at(18), end: at(22), title: "After-party", layout: [at(17), at(17, 30)] },
+  { start: at(15), end: at(15, 30), title: "Afternoon break" },
+  // finishes at 17:10; after the break the day runs on 10 minute gaps
+  { start: at(16, 50), end: at(17, 10), track: 0, title: "Closing & prizes" },
+  { start: at(18), end: at(22), title: "After-party", layout: [at(17, 10), at(17, 40)] },
 ];
 
 // The stacked layout drops the grid and reads in DOM order, so a phone would
@@ -72,6 +82,7 @@ const EVENING = ITEMS.filter((i) => i.start >= LAST_TALK_END);
 
 const MID_START = Math.min(...MIDDLE.map((i) => i.start));
 const MID_END = Math.max(...MIDDLE.map((i) => i.end));
+const EVE_START = Math.min(...EVENING.map((i) => span(i)[0]));
 
 export default function Schedule() {
   return (
@@ -101,14 +112,19 @@ export default function Schedule() {
         <Grid items={MIDDLE} />
       </details>
 
-      <Grid items={EVENING} />
+      <Grid items={EVENING} lead={EVE_START - MID_END} />
     </div>
   );
 }
 
 /* Each block is its own grid so its rows stay proportional to its own span. They
    line up with each other because the time gutter is a fixed width. */
-function Grid({ items }: { items: Item[] }) {
+/* `lead` is the real minutes between the previous block and this one. Inside a
+   grid a break is an empty row on the --ag-min scale, but the seam between grids
+   has no row at all — so the same 10 minute break would draw 8px at the seam and
+   30px inside. The margin restores the missing minutes, less the --ag-gap the
+   preview's own margin already puts there. */
+function Grid({ items, lead }: { items: Item[]; lead?: number }) {
   // every start and end is a grid line, so an item spans exactly the bands it
   // covers and a 60 minute workshop sits alongside two 30 minute talks
   const lines = [...new Set(items.flatMap(span))].sort((a, b) => a - b);
@@ -121,7 +137,15 @@ function Grid({ items }: { items: Item[] }) {
     .join(" ");
 
   return (
-    <div className="agenda-grid" style={{ "--ag-rows": rowSizes } as CSSProperties}>
+    <div
+      className="agenda-grid"
+      style={
+        {
+          "--ag-rows": rowSizes,
+          marginTop: lead ? `calc(${lead} * var(--ag-min) - var(--ag-gap))` : undefined,
+        } as CSSProperties
+      }
+    >
       {/* Label the rail with the session's REAL start, not the row it is drawn on.
           They are the same everywhere except the after-party, which is pulled up
           the grid so it does not open a two-hour void — and there the drawn row
