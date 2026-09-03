@@ -15,17 +15,25 @@ Open [http://localhost:3000](http://localhost:3000) to view the site locally.
 
 ## Project Structure
 
-The site is a single landing page with anchor-linked sections, plus one easter egg route.
+The site is a single landing page with anchor-linked sections, an articles section, an unlisted opportunities board, and one easter egg route.
 
 ```
 app/
-  page.tsx              # The landing page: hero, agenda, speak, villages,
-                        # sponsors, tickets, footer
+  page.tsx              # The landing page: hero, agenda, villages,
+                        # sponsors, tickets
   layout.tsx            # Metadata, JSON-LD event schema, theme boot script
   site.css              # Site styles (brand direction "Headline")
   globals.css           # Tailwind v4 + shadcn tokens
-  _components/          # Section components (Schedule, Tickets, HeroVideo,
+  _components/          # SiteHeader/SiteFooter (shared by every page) and
+                        # section components (Schedule, Tickets, HeroVideo,
                         # ThemeToggle, TiltBadge, TopicChips, SocialLinks)
+  articles/             # Announcements (/articles) and one page per article
+                        # (/articles/<slug>). Each article is a file in
+                        # articles/posts/, listed in articles.tsx. Slugs are
+                        # URLs: never change one once published.
+  opportunities/        # Volunteer roles board (/opportunities) and one page
+                        # per role (/opportunities/<slug>); roles.tsx is the
+                        # data. Unlisted: noindex, not linked from anywhere.
   terminal/             # Hitchhiker's Guide easter egg
 components/ui/          # shadcn-generated components
 lib/utils.ts            # cn() class helper

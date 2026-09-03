@@ -58,22 +58,27 @@ const STORY: { text: string; color: string; delay: number }[] = [
   },
   { text: "", color: CLR.green, delay: 2200 },
   {
-    text: "ICC Belfast",
+    text: "International Convention Centre Belfast",
     color: CLR.amber,
     delay: 2600,
   },
   {
-    text: "You are standing outside ICC Belfast. The fog that once",
+    text: "You are standing outside International Convention",
     color: CLR.green,
     delay: 3200,
   },
   {
-    text: "shrouded this place has lifted, and a noticeboard",
+    text: "Centre Belfast. The fog that once shrouded this place",
     color: CLR.green,
-    delay: 3800,
+    delay: 3700,
   },
   {
-    text: "announces in large, friendly letters:",
+    text: "has lifted, and a noticeboard announces in large,",
+    color: CLR.green,
+    delay: 4100,
+  },
+  {
+    text: "friendly letters:",
     color: CLR.green,
     delay: 4400,
   },
@@ -269,7 +274,8 @@ const COMMANDS: Record<
       "",
       "You determine exactly where NIDC 2026 will take place.",
       "",
-      "  Location: ICC Belfast, 2 Lanyon Place, BT1 3WH",
+      "  Location: International Convention Centre Belfast,",
+      "  2 Lanyon Place, BT1 3WH",
       "",
       "It's in Belfast. It always has been. It always will",
       "be. Some things are constants in an uncertain",
@@ -281,9 +287,9 @@ const COMMANDS: Record<
     response: [
       "> look for venue",
       "",
-      "The Guide's entry reads: ICC Belfast (Waterfront",
-      "Hall), 2 Lanyon Place. Mostly harmless. Excellent",
-      "acoustics.",
+      "The Guide's entry reads: International Convention",
+      "Centre Belfast (Waterfront Hall), 2 Lanyon Place.",
+      "Mostly harmless. Excellent acoustics.",
       "",
       "The organisers are no longer keeping this one close",
       "to their chest. The Dentrassi cooking pot has been",
@@ -297,9 +303,10 @@ const COMMANDS: Record<
       "",
       "Lanyon Place, Belfast",
       "",
-      "You are standing outside ICC Belfast. The fog has",
-      "lifted, and the air hums with anticipation of the",
-      "10 year anniversary conference.",
+      "You are standing outside International Convention",
+      "Centre Belfast. The fog has lifted, and the air",
+      "hums with anticipation of the 10 year anniversary",
+      "conference.",
       "",
       "  To the NORTH: the River Lagan",
       "  To the SOUTH: the after-party (details TBA)",
@@ -702,7 +709,7 @@ export default function TerminalContent() {
           {/* Teaser bar */}
           <div
             className="flex items-center justify-center gap-1 py-2 mb-3 text-xs tracking-wider"
-            aria-label="NIDC 2026, Saturday 21 November, ICC Belfast, early bird tickets on sale"
+            aria-label="NIDC 2026, Saturday 21 November, International Convention Centre Belfast, early bird tickets on sale"
           >
             <span style={{ color: CLR.dimGreen }}>[ </span>
             <span style={{ color: CLR.amber }}>

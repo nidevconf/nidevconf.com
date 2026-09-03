@@ -136,7 +136,7 @@ body {
   --border: var(--line);
   --input: var(--line);
   --ring: var(--pink);
-  --radius: 4px;
+  --radius: var(--r); /* the shadcn menu wears the site radius */
 }
 
 @layer base {
