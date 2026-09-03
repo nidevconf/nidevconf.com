@@ -261,7 +261,13 @@ ul{margin:0;}
 .hero .when{margin-top:34px;font-family:var(--display);font-weight:500;font-size:16px;color:var(--ink);
   display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
 .hero .when .dot{width:6px;height:6px;border-radius:50%;background:var(--white);}
-.hero .cta-row{margin-top:38px;justify-content:center;}
+/* Pinned to the bottom of the video panel. The wrap's padding-bottom below reserves
+   its height so the centred copy can't run under it on a short viewport. */
+.hero .wrap{padding-bottom:calc(var(--s6) + 88px);}
+.hero-sponsor{position:absolute;left:0;right:0;bottom:calc(16px + 28px);z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:none;}
+.hero-sponsor-label{font-family:var(--display);font-weight:500;font-size:12px;color:var(--white);}
+.hero-sponsor img{display:block;height:32px;width:auto;}
 
 /* ---- hero background video ----
    A rounded panel inset from the hero's edges, with the footage cropped to fill
@@ -312,6 +318,27 @@ ul{margin:0;}
   100%{transform:rotate(0deg);}
 }
 .chips + .sec-body{margin-top:var(--s4);}
+
+/* ---- sponsor strip ----
+   Logos trail across the page in a loop. Mono black files; dark theme inverts
+   them, so one set of images serves both themes. */
+/* no bottom padding: the agenda's own --s7 top padding is the gap below, and the top
+   is --s7 less the video panel's 16px inset, so the logos sit centred between the two */
+.sponsor-strip{overflow:hidden;padding:calc(var(--s7) - 16px) 0 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+.sponsor-track{display:flex;width:max-content;animation:sponsor-scroll 40s linear infinite;}
+/* the trailing padding matches the gap, so the second copy starts exactly one row-width in */
+.sponsor-row{display:flex;align-items:center;gap:72px;padding-inline-end:72px;}
+/* files are pure black; invert(.07) lifts that to the light ink (#121212), invert(1) to the dark one */
+.sponsor-row img{display:block;width:auto;filter:invert(.07);}
+:root[data-theme="dark"] .sponsor-row img{filter:invert(1);}
+@keyframes sponsor-scroll{to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){
+  .sponsor-track{animation:none;width:auto;}
+  .sponsor-row{flex-wrap:wrap;justify-content:center;gap:40px 56px;padding:0 var(--s3);}
+  .sponsor-row[aria-hidden]{display:none;}
+}
 
 /* ============================================================
    CONTENT SECTIONS
