@@ -320,8 +320,8 @@ ul{margin:0;}
 .chips + .sec-body{margin-top:var(--s4);}
 
 /* ---- sponsor strip ----
-   Logos trail across the page in a loop. Mono black files; dark theme inverts
-   them, so one set of images serves both themes. */
+   Logos trail across the page in a loop. Each logo is a light/dark pair of
+   <img>s (colour on light, white mono on dark); the theme shows one of the pair. */
 /* no bottom padding: the agenda's own --s7 top padding is the gap below, and the top
    is --s7 less the video panel's 16px inset, so the logos sit centred between the two */
 .sponsor-strip{overflow:hidden;padding:calc(var(--s7) - 16px) 0 0;
@@ -330,9 +330,8 @@ ul{margin:0;}
 .sponsor-track{display:flex;width:max-content;animation:sponsor-scroll 40s linear infinite;}
 /* the trailing padding matches the gap, so the second copy starts exactly one row-width in */
 .sponsor-row{display:flex;align-items:center;gap:72px;padding-inline-end:72px;}
-/* files are pure black; invert(.07) lifts that to the light ink (#121212), invert(1) to the dark one */
-.sponsor-row img{display:block;width:auto;filter:invert(.07);}
-:root[data-theme="dark"] .sponsor-row img{filter:invert(1);}
+.sponsor-row img{display:block;width:auto;}
+:root[data-theme="dark"] .sponsor-row .light,:root:not([data-theme="dark"]) .sponsor-row .dark{display:none;}
 @keyframes sponsor-scroll{to{transform:translateX(-50%);}}
 @media (prefers-reduced-motion:reduce){
   .sponsor-track{animation:none;width:auto;}
