@@ -8,6 +8,7 @@ import Tickets from "./_components/Tickets";
 import TopicChips from "./_components/TopicChips";
 import TiltBadge from "./_components/TiltBadge";
 import HeroVideo from "./_components/HeroVideo";
+import SponsorStrip from "./_components/SponsorStrip";
 
 export default function HomePage() {
   return (
@@ -60,17 +61,18 @@ export default function HomePage() {
             Saturday, 21st November 2026
             <span className="dot"></span> International Convention Centre, Belfast
           </p>
+        </div>
 
-          <div className="cta-row btn-row">
-            <a className="btn btn-primary" href="#tickets">
-              Get an early bird ticket <span className="arrow">→</span>
-            </a>
-          </div>
+        <div className="hero-sponsor">
+          <span className="hero-sponsor-label">Headline Sponsor</span>
+          <img src="/images/sponsors/gearset-white.svg" alt="Gearset" />
         </div>
       </section>
 
       {/* ================= MAIN ================= */}
       <main id="main-content">
+        <SponsorStrip />
+
         {/* ----- AGENDA ----- */}
         <section className="section" id="agenda">
           <div className="wrap section-centered">
