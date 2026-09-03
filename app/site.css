@@ -55,6 +55,10 @@
      Three places need to agree on it — the hero's viewport maths, and the
      scroll-margin that keeps anchored sections from landing underneath it. */
   --header-h:73px;
+
+  /* --ink again, captured here so a card that repaints its own --ink for its
+     text can still find the original for its background */
+  --ink-fill:var(--ink);
 }
 
 /* The original NIDC canvas. --white stays white here: it means "on pink, on
@@ -302,9 +306,19 @@ ul{margin:0;}
 .hero .btn-secondary{color:var(--white);border-color:var(--white);}
 .hero .btn-secondary:hover{background:var(--white);color:#121212;}
 
-/* Topic chips — toggles, for filtering the schedule later. */
+/* Topic chips — highlighters for the schedule. They follow you down it: sticky
+   just under the header for as long as the section lasts (sticky is bounded by
+   the parent, and .wrap here runs to the end of the timetable). Pinned, they
+   sit on a floating island drawn by ::before, so the in-flow box never changes
+   size and nothing below jumps; the component sets .stuck. fit-content keeps the
+   box only as wide as the chips, so the island hugs them. */
 .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
-  margin:24px 0 0;padding:0;list-style:none;}
+  margin:24px auto 0;padding:0;list-style:none;
+  position:sticky;top:calc(var(--header-h) + 12px);z-index:2;width:fit-content;}
+.chips::before{content:"";position:absolute;inset:-8px -12px;z-index:-1;border-radius:24px;
+  background:var(--bg);box-shadow:0 10px 30px rgba(0,0,0,.14);
+  opacity:0;transition:opacity .2s ease;}
+.chips.stuck::before{opacity:1;}
 .chips button{font-family:var(--display);font-weight:600;font-size:13px;line-height:1;
   color:var(--muted);background:none;border:1px solid var(--line);
   border-radius:var(--r-pill);padding:6px 14px;cursor:pointer;
@@ -330,6 +344,8 @@ ul{margin:0;}
   100%{transform:rotate(0deg);}
 }
 .chips + .sec-body,.btn-row + .sec-body{margin-top:var(--s4);}
+/* on a phone the wrapped rows would pin half the screen, so they scroll away */
+@media (max-width:720px){.chips{position:static;}}
 
 /* ---- sponsor strip ----
    Logos trail across the page in a loop. Each logo is a light/dark pair of
@@ -413,46 +429,20 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 /* swap photo to the left on desktop (DOM stays text-first for mobile) */
 .section-split.media-left .section-media{order:-1;}
 
-/* SCHEDULE. Track headers and the time rail sit outside the fold so both states
-   read the same way, which means three grids have to line up — hence a fixed
-   gutter rather than an `auto` column that would size to nothing up there. */
-.agenda-sched{--ag-min:3px;--ag-gap:8px;--ag-gutter:60px;
+/* SCHEDULE. The track headers are their own row above the grid, so the time
+   gutter is a fixed width rather than an `auto` column the two would have to
+   agree on. */
+/* 4.5px a minute: the smallest scale at which a 10 minute lightning talk still
+   holds a face and two lines of title, and a 30 minute one three lines and a name.
+   Rows grow to fit (minmax below), so every card clamps its text — a card that
+   overflowed would stretch its row and break the proportion for the whole grid. */
+.agenda-sched{--ag-min:4.5px;--ag-gap:8px;--ag-gutter:60px;
   margin-top:var(--s6);text-align:left;}
 .ag-headrow{display:grid;grid-template-columns:var(--ag-gutter) repeat(5,minmax(0,1fr));
   column-gap:var(--ag-gap);}
 .ag-headrow span{padding:0 12px 10px;
   font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--muted);}
-
-/* Collapsed, the rows become one rectangle sitting exactly where they would be,
-   with the day's first and last times still on the rail beside it. <details>
-   supplies the toggle, the keyboard handling and the state — no JavaScript. */
-.agenda-preview > summary{list-style:none;cursor:pointer;
-  display:grid;grid-template-columns:var(--ag-gutter) 1fr;column-gap:var(--ag-gap);}
-.agenda-preview > summary::-webkit-details-marker{display:none;}
-.ap-rail{display:flex;flex-direction:column;justify-content:space-between;
-  padding:7px 14px 7px 0;text-align:right;
-  font-family:var(--mono);font-size:12px;color:var(--muted);}
-.ap-box{border:1px dashed var(--line);border-radius:var(--r);padding:20px 24px;
-  display:flex;align-items:center;justify-content:center;
-  transition:background .12s ease,border-color .12s ease;}
-/* collapsed it stands in for the whole day, so it takes real space; open it is
-   only a toggle above the grid and has no business being that tall */
-.agenda-preview:not([open]) .ap-box{min-height:180px;}
-/* same trade as the empty slots: on hover the fill takes over from the dashed
-   edge. transparent rather than none, so the box keeps its exact size. */
-.agenda-preview > summary:hover .ap-box{background:var(--bg-2);border-color:transparent;}
-.ap-more{font-family:var(--display);font-weight:400;font-size:14px;color:var(--muted);
-  transition:color .12s ease;}
-/* --ink-2 rather than --ink: a step toward the primary text colour, which reads
-   as "darker" on the light canvas and as "brighter" on the dark one */
-.agenda-preview > summary:hover .ap-more{color:var(--ink-2);}
-.ap-more::after{content:"Preview";}
-.agenda-preview[open] .ap-more::after{content:"Hide";}
-.agenda-preview{margin-bottom:var(--ag-gap);}
-.agenda-preview[open] > summary{margin-bottom:var(--ag-gap);}
-/* open, the grid carries its own times — the rail would just repeat 08:30 */
-.agenda-preview[open] .ap-rail{visibility:hidden;}
 
 .agenda-grid{display:grid;grid-template-columns:var(--ag-gutter) repeat(5,minmax(0,1fr));
   grid-template-rows:var(--ag-rows);column-gap:var(--ag-gap);row-gap:0;}
@@ -474,29 +464,106 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
    it. The canvas fill rather than `transparent` is what makes that occlude. */
 .ag-talk{background:var(--bg-2);border:1px solid transparent;z-index:1;}
 .ag-tba{background:var(--bg);border:1px dashed var(--line);}
+/* the same 28px box a speaker photo takes, so the two line up across cards */
+.ag-emoji{width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  font-size:24px;line-height:1;}
 .ag-band{background:var(--bg-3);}
 .ag-when{font-family:var(--mono);font-size:11.5px;color:var(--muted);
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .ag-title{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25;
   color:var(--ink);}
 
+/* A session card: who at the top, the title, and the time pinned to the bottom
+   edge — the title row takes whatever height the slot has spare, so a workshop
+   card reads the same as a talk card. Three grid rows, so the two sizes can
+   rearrange the same DOM: a lightning talk keeps only the face and title. */
+/* an empty slot shares the talk card grid, so its face and words line up with its neighbours */
+.ag-session,.ag-tba{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;row-gap:3px;
+  grid-template-rows:auto 1fr auto;grid-template-areas:"face who" "title title" "when when";
+  align-items:center;
+  padding:8px 10px;font:inherit;text-align:left;color:inherit;
+  transition:background .12s ease;}
+.ag-session{cursor:pointer;}
+.ag-session:hover{background:var(--bg-3);}
+.ag-session:hover .ag-title{color:var(--pink-dk);}
+.ag-face{grid-area:face;display:flex;}
+.ag-face img{display:block;width:28px;height:28px;border-radius:50%;object-fit:cover;}
+/* co-speakers overlap; the card-coloured ring cuts the second out of the first */
+.ag-face img + img{margin-left:-8px;border:2px solid var(--bg-2);}
+.ag-session .ag-when,.ag-tba .ag-when{grid-area:when;}
+.ag-session .ag-title{grid-area:title;align-self:start;font-size:13px;line-height:1.25;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;}
+.ag-who{grid-area:who;font-size:12.5px;line-height:1.3;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ag-flash{grid-template-rows:auto;grid-template-areas:"face title";padding:6px 8px;}
+.ag-flash .ag-face img{width:24px;height:24px;}
+.ag-flash .ag-title{font-size:11.5px;line-height:1.2;-webkit-line-clamp:2;}
+/* the rail carries the time and the slot's height says lightning */
+.ag-flash .ag-when,.ag-flash .ag-who{display:none;}
+/* Highlighted: the card wears the same ink fill as a chip that is on, and its
+   text inverts with it. One rule per chip, because the "is this chip on" test
+   lives on the list and the card only knows its own name. */
+.chips[data-on~="Engineering"] ~ .agenda-sched .ag-session[data-chip="Engineering"],
+.chips[data-on~="Product"] ~ .agenda-sched .ag-session[data-chip="Product"],
+.chips[data-on~="Design"] ~ .agenda-sched .ag-session[data-chip="Design"],
+.chips[data-on~="Security"] ~ .agenda-sched .ag-session[data-chip="Security"],
+.chips[data-on~="AI"] ~ .agenda-sched .ag-session[data-chip="AI"],
+.chips[data-on~="Data"] ~ .agenda-sched .ag-session[data-chip="Data"],
+.chips[data-on~="Career"] ~ .agenda-sched .ag-session[data-chip="Career"],
+.chips[data-on~="Wildcard"] ~ .agenda-sched .ag-session[data-chip="Wildcard"]{
+  background:var(--ink-fill);--bg-2:var(--ink-fill);
+  --ink:var(--on-ink);--pink-dk:var(--on-ink);
+  --muted:color-mix(in srgb,var(--on-ink) 72%,transparent);}
+
+/* SESSION DIALOG. Native modal: the element paints the backdrop and traps focus.
+   Padding lives on the inner panel, so the dialog's own box is exactly the
+   backdrop and a click on it means outside. */
+/* margin:auto is the browser's own centring for a modal, and Tailwind's preflight
+   zeroes margin on everything — so it has to be put back here */
+.talk-dialog{margin:auto;padding:0;border:0;background:transparent;color:var(--ink);
+  max-width:min(640px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:visible;}
+.talk-dialog::backdrop{background:rgba(0,0,0,.6);}
+/* Chrome hands the scrollable panel keyboard focus when the dialog opens; the
+   panel is its own frame, so the page-wide ring would only double its edge */
+.td-panel:focus-visible{outline:none;}
+.td-panel{position:relative;background:var(--bg);border-radius:12px;
+  padding:var(--s4);max-height:calc(100vh - 32px);overflow:auto;}
+.td-close{position:absolute;top:14px;right:14px;width:34px;height:34px;
+  border:0;border-radius:50%;background:var(--bg-2);color:var(--ink);
+  font-family:var(--display);font-size:20px;line-height:1;cursor:pointer;}
+.td-close:hover{background:var(--bg-3);}
+.td-head{display:flex;gap:16px;align-items:flex-start;padding-right:40px;}
+.td-face{display:flex;flex:none;}
+.td-face img{display:block;width:64px;height:64px;border-radius:50%;object-fit:cover;}
+.td-face img + img{margin-left:-18px;border:3px solid var(--bg);}
+.td-title{font-size:22px;font-weight:600;line-height:1.2;letter-spacing:-.01em;}
+.td-who{margin-top:6px;font-size:15px;color:var(--ink);}
+.td-meta{margin-top:6px;font-family:var(--mono);font-size:12px;color:var(--muted);}
+/* the abstract arrives as plain text with blank lines between paragraphs */
+.td-desc{white-space:pre-line;margin-top:var(--s3);font-size:15.5px;line-height:1.6;}
+.td-speaker{margin-top:var(--s3);padding-top:var(--s2);border-top:1px solid var(--line);}
+.td-name{font-family:var(--display);font-weight:600;font-size:14px;}
+.td-tag{font-size:13px;color:var(--muted);}
+.td-bio{margin-top:8px;font-size:14px;line-height:1.55;color:var(--muted);}
+/* the page must not scroll behind the modal */
+body:has(.talk-dialog[open]){overflow:hidden;}
+
 /* Stacked: five columns cannot narrow, so the grid becomes one chronological
    column and each card names its own track. */
 @media (max-width:880px){
   .ag-headrow{display:none;}
-  .agenda-preview > summary{grid-template-columns:1fr;}
-  /* stacked, the rail has no grid to sit beside — the two times just float */
-  .ap-rail{display:none;}
-  /* the cards space themselves with the grid's row gap, but a gap stops at the
-     grid's edge — so the fold needs its own margin against the block above */
-  .agenda-preview{margin-top:var(--ag-gap);}
   .agenda-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:8px;}
   .ag-time{display:none;}
   .ag-item{grid-column:1;grid-row:auto;margin-bottom:0;}
   .ag-band{flex-direction:column;gap:4px;}
-  .ag-talk::before{content:attr(data-track);order:-1;
+  .ag-talk::before{content:attr(data-track);order:-1;grid-area:track;
     font-family:var(--display);font-weight:600;font-size:10px;letter-spacing:.1em;
     text-transform:uppercase;color:var(--muted);}
+  /* rows are free height here, so a lightning card takes the full layout back */
+  .ag-session,.ag-flash{grid-template-rows:auto;
+    grid-template-areas:"track track" "face who" "title title" "when when";}
+  .ag-flash .ag-when,.ag-flash .ag-who{display:block;}
+  .ag-flash .ag-when{display:flex;}
 }
 
 /* centred section: title / body stacked & centred, media below */

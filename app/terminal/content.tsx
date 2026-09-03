@@ -121,7 +121,7 @@ const STORY: { text: string; color: string; delay: number }[] = [
     delay: 8800,
   },
   {
-    text: "  EARLY BIRD TICKETS: ON SALE NOW",
+    text: "  TICKETS: ON SALE NOW",
     color: CLR.amber,
     delay: 9400,
   },
@@ -165,12 +165,12 @@ const COMMANDS: Record<
       "> get ticket",
       "",
       "You reach for a ticket and, remarkably, your hand does",
-      "not pass through empty air. Early bird tickets for",
-      "NIDC 2026 are ON SALE NOW.",
+      "not pass through empty air. Tickets for NIDC 2026",
+      "are ON SALE NOW.",
       "",
-      "The Guide notes: 'Early bird pricing, much like the",
-      "Restaurant at the End of the Universe, will not be",
-      "there forever.'",
+      "The Guide notes: 'Tickets, much like the Restaurant",
+      "at the End of the Universe, will not be there",
+      "forever.'",
       "",
       "Transporting you to the ticket desk...",
     ],
@@ -196,21 +196,17 @@ const COMMANDS: Record<
       "",
       "You flip open the Guide. In large, friendly letters on",
       "the cover it says DON'T PANIC. You turn to the NIDC 2026",
-      "schedule page. It reads:",
+      "schedule page. The black bars are gone. It has been",
+      "DECLASSIFIED: four rooms of talks, a workshop track,",
+      "and lightning talks after lunch.",
       "",
-      "  ██:██  ████████████████████████",
-      "  ██:██  ████████████████████████",
-      "  ██:██  ████████████████████████",
-      "  ██:██  ████████████████████████",
-      "  ██:██  ████████████████████████",
-      "  ██:██  ████████████████████████",
+      "The Guide adds: 'Pick your talks now. The good seats",
+      "go the way of the dodo.'",
       "",
-      ...classifiedResponse(),
-      "",
-      "The Guide adds: 'Declassification of the agenda is",
-      "scheduled for September. Probably worth the wait.'",
+      "Transporting you to the agenda...",
     ],
     color: CLR.green,
+    link: "/#agenda",
   },
   SPEAKERS: {
     response: [
@@ -223,7 +219,7 @@ const COMMANDS: Record<
       "among peers, which is frankly the sort of thing that",
       "restores your faith in carbon-based life forms.",
       "",
-      "The line-up is being declassified in September.",
+      "The line-up has been declassified. Type AGENDA.",
     ],
     color: CLR.green,
   },
@@ -310,7 +306,7 @@ const COMMANDS: Record<
       "",
       "  To the NORTH: the River Lagan",
       "  To the SOUTH: the after-party (details TBA)",
-      "  To the EAST: a queue forming for early bird tickets",
+      "  To the EAST: a queue forming for tickets",
       "  To the WEST: the rest of Belfast",
       "",
       "A sign floats past reading: 'NIDC 2026, SAT 21 NOV,",
@@ -323,7 +319,7 @@ const COMMANDS: Record<
     response: [
       "The Guide suggests the following interactions:",
       "",
-      "  TICKETS   - Get an early bird ticket",
+      "  TICKETS   - Get tickets",
       "  SPONSOR   - Put your brand in the room",
       "  DATE      - Ask about the date",
       "  LOCATION  - Investigate the venue",
@@ -353,7 +349,7 @@ const COMMANDS: Record<
       "  A lingering sense of anticipation",
       "",
       "Your NIDC 2026 ticket status: NOT PURCHASED YET",
-      "(Early bird tickets are on sale. Type TICKETS.",
+      "(Tickets are on sale. Type TICKETS.",
       "Don't panic.)",
     ],
     color: CLR.green,
@@ -363,8 +359,8 @@ const COMMANDS: Record<
       const rumours = [
         "A passing Betelgeusean whispers: 'I heard it's their biggest one yet. Ten years, you know.'",
         "A developer at the bar mutters: 'Apparently the after-party is going to be legendary. Again.'",
-        "A note stuck to the wall reads: 'Early bird tickets never last as long as you think they will.'",
-        "An anonymous source reports: 'The organisers are already arguing about which talks to accept.'",
+        "A note stuck to the wall reads: 'Tickets never last as long as you think they will.'",
+        "An anonymous source reports: 'The organisers are already arguing about which talk to see first.'",
         "The grapevine suggests: 'The coffee will be just as good. Maybe better.'",
       ];
       const pick = rumours[Math.floor(Math.random() * rumours.length)];
@@ -434,7 +430,7 @@ const COMMANDS: Record<
       "  Oh splenetic gribblesnort of keynote dawn,",
       "  thy lanyard flaps upon my quivering jowls",
       "  like a badly deployed microservice.",
-      "  See how the early bird plurdles its ticket,",
+      "  See how the eager bird plurdles its ticket,",
       "  gurgling greatly upon the sponsored coffee urn!",
       "  Groop, I implore thee, my frupious agenda,",
       "  and hurl me gronkingly to the fourth breakout room,",
@@ -709,11 +705,11 @@ export default function TerminalContent() {
           {/* Teaser bar */}
           <div
             className="flex items-center justify-center gap-1 py-2 mb-3 text-xs tracking-wider"
-            aria-label="NIDC 2026, Saturday 21 November, International Convention Centre Belfast, early bird tickets on sale"
+            aria-label="NIDC 2026, Saturday 21 November, International Convention Centre Belfast, tickets on sale"
           >
             <span style={{ color: CLR.dimGreen }}>[ </span>
             <span style={{ color: CLR.amber }}>
-              NIDC 2026 · SAT 21 NOV · ICC BELFAST · EARLY BIRD ON SALE
+              NIDC 2026 · SAT 21 NOV · ICC BELFAST · TICKETS ON SALE
             </span>
             <span style={{ color: CLR.dimGreen }}> ]</span>
           </div>

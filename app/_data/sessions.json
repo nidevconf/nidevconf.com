@@ -1,0 +1,741 @@
+[
+  {
+    "id": "1271354",
+    "title": "Agentic AI lessons from my smart home",
+    "description": "A story of what my smart home taught me about agentic AI: Where GenAI genuinely helps to build a smarter home, where it breaks down, the practical lessons that I bring back to my workplace, and where I think AI-powered smart home tech is heading next.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Introductory",
+    "topics": [
+      "Hardware/IoT",
+      "GenAI",
+      "Open Source"
+    ],
+    "chip": "AI",
+    "speakers": [
+      {
+        "name": "Rory Gallagher",
+        "tagline": "Solutions Engineer at Liberty IT",
+        "bio": "Solutions Engineer at Liberty Information Technology where I've spent 14 years as an engineer and the past 6 years in Liberty's innovation unit. I lead engineering teams exploring emerging technologies, from quantum computing to agentic AI and help to shape which innovations are ready for enterprise adoption.",
+        "photo": "rory-gallagher.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1308347",
+    "title": "All the data in the world",
+    "description": "You may have heard of OpenStreetMap, a decades-old volunteer effort that seeks to rival with Google Maps. Or does it? This presentation will seek to dispel some common misconceptions, and show how you can use OSM for fun, profit, and even helping in disaster recovery on the other side of the world. Perhaps it will even encourage you to contribute back?\n\nThis will be an AI-free presentation.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Open Source",
+      "Web"
+    ],
+    "chip": "Data",
+    "speakers": [
+      {
+        "name": "Pablo Brasero Moreno",
+        "tagline": "Core Software Engineer - OpenStreetMap Foundation",
+        "bio": "I am a software engineer with 20+ years of experience and a desire to work towards a better, kinder world for all, now. For most of my career I have worked with web technologies, from London and Belfast, in projects of all sizes and breadths. I don't like talking about myself in the third person.",
+        "photo": "pablo-brasero-moreno.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1274424",
+    "title": "Chaining the Unchainable: Finding and Exploiting Logic Flaws in Modern Web Architectures",
+    "description": "Most scanners will never find these bugs. This talk is about what happens when you chain enough of them together anyway. Spoiler: it ends in RCE and full tenant isolation bypass.\n\nBusiness logic flaws are unglamorous. They don't have CVEs, they don't get blog posts, and individually they'll barely register as medium severity on most reports. But in the microservice-heavy, federated identity, multi-tenant environments most organisations are running today, these small mismatches compound. The interesting stuff happens at the joins, like where an API gateway hands off to a downstream service, where an event queue trusts state it shouldn't, or where OAuth flows have one assumption too many baked in.\n\nThis session walks through three attack chains pulled from real engagements. This is not sanitised theory. We will look at actual proxy logs, HTTP pairs, and the exact moment each system broke. The three paths covered include:\n\n1. Race conditions in async queues: Abusing state validation gaps in event-driven architectures to push through unauthorised transactions.\n\n2. Token propagation abuse: Exploiting the trust gap between an API gateway and its downstream services to chain into deep IDOR.\n\n3. OAuth state-machine quirks: Turning minor implementation oversights into persistent session hijacking.\n\nThe goal isn't just to show what broke. Attendees will come away with a method for reading an architecture diagram and spotting where the logic synchronisation is weakest, a framework for building these chains deliberately, and concrete design-layer fixes that actually address the root cause rather than just patching symptoms.\n\nKey Takeaways for Attendees:\n\n- A clear method for analyzing an architecture diagram to spot where logic synchronization is most vulnerable.\n\n- An adversarial framework for systematically building exploit chains out of low-severity context flaws.\n\n- Concrete, design-layer remediation strategies that address the root cause of these architectural gaps.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Security",
+      "Testing"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Raj Dhruv",
+        "tagline": "Application Security Specialist at Black Duck",
+        "bio": "Application Security Specialist at Black Duck I'm an Application Security Specialist at Black Duck, spending my days handling penetration testing, vulnerability assessments, and digging into the weeds of web app flaws. Before this, I was a Machine Learning Researcher at Rapid7, where I built models to predict and filter out false-positive noise inside InsightIDR. I also dropped by Ulster University recently as a guest lecturer to talk to the students about real-world security engineering, and I hold an MSc in Applied Cyber Security from Queen's University Belfast. I like breaking things, figuring out why complex logic fails, and making sure developers have the actual blueprints to fix it.",
+        "photo": "raj-dhruv.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1310289",
+    "title": "Create You First Linter",
+    "description": "Over the years, I’ve built several linters and in this session, I’ll show you how surprisingly simple it is to build your own linter in Go, but also,how powerful it can be.\n\nYou’ll learn how to create a linter from scratch, plug it into golangci-lint, and use it to enforce your team’s style guide automatically in CI.",
+    "format": "Workshop",
+    "minutes": 60,
+    "level": "Intermediate",
+    "topics": [
+      "Coding",
+      "Tools"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Manuel Doncel Martos",
+        "tagline": "Trying to make software that people use",
+        "bio": "I am a Technical Lead with experience in building distributed systems. I have commercial experience in Java and Go but I'm passionate about learning new programming languages, which is why you'll also find me exploring other languages like Python and Rust. I enjoy tackling challenges, experimenting with different tech stacks, and growing as a developer.\n\nI always look how to improve the code quality, and for that I created several linters that I use in many of my projects.",
+        "photo": "manuel-doncel-martos.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1309264",
+    "title": "Cyberdecks : From scifi to reality",
+    "description": "Cyberdecks: what are they, why are people making them and how far can I get towards making my sci-fi dreams a reality?\n\nThere's been a trend in some (admittedly niche) areas of the internet for making cyberdecks. These devices started out in 1970s sci-fi novels as personal devices hackers owned, came on screen in 1990s techno-optimist films and now young people online are making their own using Raspberry Pis and hot-glue guns.\n\nIn my talk I want to briefly explain the internet subculture, show off my progress into making my very own and explain how creative side projects like this can bring use back to what is currently just e-waste. A perfect talk for anyone who reads too much sci-fi and wants to bring creativity back to their side projects.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Introductory",
+    "topics": [
+      "Hardware/IoT",
+      "Other"
+    ],
+    "chip": "Wildcard",
+    "speakers": [
+      {
+        "name": "Dervla O'Brien",
+        "tagline": "Software Engineer II - Instil",
+        "bio": "Software Engineer for Instil and sometimes volunteer at NI Raspberry Jam. Passionate about arts and technology crossover projects.",
+        "photo": "dervla-o-brien.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1311194",
+    "title": "Debugging Feelings: a neurodiverse engineer learns how emotions and culture are made",
+    "description": "In my twenties I developed a crippling fear of flying. What eventually helped wasn't willpower or drugs - it was learning about the theory of constructed emotion, that the racing heart and clammy hands weren't an immutable part of me, but emotions that my brain was constructing from prior experience, and which I could learn to construct differently. That idea turned out to work on far more than aeroplanes.\n\nAs a neurodiverse engineer - now an engineering manager - I've always found the human layer of work more layered and harder to pin down than the technical one: the emotions you're meant to just get, the unwritten cultural rules, the shared sense of what's \"professional\" or \"fair\" that nobody ever writes down. So I did what we do with any undocumented system: I went looking for an explanation, for the source code.\n\nThis talk is on what I found, drawn from the science of how our own emotions are constructed, how moral foundations theory helps explain why others think differently and how all this comes together as culture. I'll move from managing my own stress before high-stakes moments, to why well-meaning people with different moral instincts end up furious and talking straight past each other, to learning how to read the company or team culture from what emotions are fostered and which ones are forbidden.\n\nIt's for anyone - neurodivergent or not - who's found the people part of work harder than the code. It's based in real science, and it's given me a model to navigate the work environment.\n\nKey takeaways:\n\nEmotions as constructed predictions you can reframe — a practical handle on anticipatory stress before demos, incidents, and difficult conversations\n\nWhy moral disagreements at work lead to deadlock, and how seeing the intuitions underneath makes them navigable rather than infuriating\n\nHow to read a team as a culture formed of the emotions they display, instead of taking what they say at face value.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Non-Technical",
+      "Other"
+    ],
+    "chip": "Career",
+    "speakers": [
+      {
+        "name": "Cormac O'Donnell",
+        "tagline": "Engineering Manager at SciLeads",
+        "bio": "Cormac is an engineering manager with a PhD in physics and around fifteen years in software, most recently building AI and ML systems before moving back into engineering management. He's long been interested in the contrasts between the technical and human sides of the job - and, as an autistic engineer, in learning to understand emotions, morality and culture deliberately rather than by instinct. This is his first conference talk.",
+        "photo": "cormac-o-donnell.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1307120",
+    "title": "Decoding Irish Trad",
+    "description": "How an engineering mindset helped me to understand, appreciate and participate in Irish traditional music sessions\n\nWill include a live demo of a playthrough of some tunes and introduction to some technology that will help you to recognise, catalogue and learn tunes to play in next year's Fleadh",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Non-Technical"
+    ],
+    "chip": "Wildcard",
+    "speakers": [
+      {
+        "name": "Sean McGurk",
+        "tagline": "DevOps Engineer",
+        "bio": "I am a DevOps Engineer with over 10 years devops experience and over 20 years industry experience.\n\nI play Irish Traditional music.",
+        "photo": "sean-mcgurk.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1281884",
+    "title": "Deprecated: The role was redundant. Not me.",
+    "description": "When my manager asked for \"a team update\", I had no idea I was about to enter one of the least-talked-about experiences in a professional career. And yet within days I discovered something uncomfortable: almost everyone I told had quietly been through something similar. The nods. The knowing looks. The \"yeah, that happened to me too.\"\n\nSo why does nobody talk about it?\n\nRedundancy is surprisingly common, poorly understood and almost entirely absent from any conversation about career resilience... until it happens to you. A bit like pensions, really. A few people in the loop. Most people beside it. Almost nobody prepared.\n\nDrawing from my own recent experience and 15+ years working across the software industry, this session maps the redundancy process honestly against the Kübler-Ross five stages of grief. Because it turns out you don't go through it once. You go through it twice- first through the consultation, then again through the job search. And the second loop is the one nobody warns you about.\n\nThis isn't a session about failure. It isn't toxic positivity about doors and windows either. It's an honest conversation about something that happens to good people doing good work at companies that simply pivot. You can do everything right. The role still gets deprecated.\n\nYou'll leave with a framework for recognising where you are emotionally if or when it happens, the language to talk about it (to yourself and others) and the reassurance that end of support doesn't mean end of service.\n\nBecause deprecated isn't deleted. It's just ready for what's next.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Non-Technical",
+      "Other"
+    ],
+    "chip": "Career",
+    "speakers": [
+      {
+        "name": "Andrew Paul",
+        "tagline": "Senior Software Engineer & Trainer, with a passion for education over training!",
+        "bio": "Andrew writes code and teaches people. Sometimes at the same time. Over a decade in education (schools, colleges, training professional engineers) taught him that technical excellence without communication skills creates brilliant individual contributors but struggling teams. Now consulting on architecture while training engineering teams globally, he helps developers find their authentic technical voice- the one that writes elegant code AND explains why it matters.",
+        "photo": "andrew-paul.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1308541",
+    "title": "Don’t Let the Bots Win: Taming Web Traffic Without Hurting Real Users",
+    "description": "With automated traffic now surpassing human users and with \"bad bots\" making up 37% of web traffic, the modern web is increasingly hostile. Traditional security measures like robots.txt are routinely ignored, leaving modern applications highly vulnerable to non-organic traffic surges.\n\nThis results in outages, increased infrastructure spend, skewed metrics, and decreased confidence from advertising networks. \n\nAttendees will learn how to counter this threat by deploying a Web Application Firewall (WAF), while navigating its trade offs such as elevated page load times and false positives that can mistakenly block human users, search engine crawlers, or third-party ad integrations.\n\nThe session presents a rollout playbook, based on a real world case study from a global media company: a phased, risk-managed approach to introducing WAF safely and reducing bot traffic without disrupting legitimate users or business-critical integrations.\n\nThis session is aimed at engineers and anyone responsible for the performance, security, or business metrics of a high-traffic website.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "DevOps",
+      "Cloud",
+      "Security"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Eve Brennan",
+        "tagline": "Cloud Engineer IV at Business Insider, DevOps Belfast Co-Organiser, BelTech Curator",
+        "bio": "Eve is a Cloud Engineer IV at a global media company. Her experience spans cloud infrastructure, software engineering, and site reliability engineering. Beyond her core work, Eve organises DevOps Belfast, a meetup group dedicated to fostering knowledge sharing and collaboration between the people building, deploying, and operating modern software. Eve is also a curator for the BelTech conference and an AWS Community Builder.",
+        "photo": "eve-brennan.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1306848",
+    "title": "Erased From the Commit Log: Forty Years of Queer Computing, and the Systems We're Building Next",
+    "description": "In January 1976, a shipping clerk in Belfast had his home searched and his private papers seized. Five years later, Jeffrey Dudgeon won a case at the European Court of Human Rights that decriminalised homosexuality in Northern Ireland. It was 1988 when Norris v. Ireland put the Republic on the road to decriminalisation. These rulings are younger than some of the companies we work for.\n\nOur industry was built by people who had to hide to do their work. Alan Turing died a convicted criminal. Lynn Conway was fired by IBM in 1968 and rebuilt a career from nothing, then wrote the methods that every chip designer still uses. Sophie Wilson designed the instruction set that runs on almost every phone in this hall. Most of us learned their architectures without ever learning their names.\n\nThis talk traces that history forward into the code we ship today: the name field that can't hold both a legal and a chosen name, gender modelled as an enum, the deadname that survives in every backup and audit log, the identity check that fails on mismatched documents, the retention policy that turns a user record into an outing risk in the wrong jurisdiction. These are architecture decisions with owners and tickets, not HR problems.\n\nWe'll close by considering what the next decade asks of us and why designing for the edges has always produced better systems for everyone in the middle.\n\nKey takeaways\n\n* Named, specific ways production systems fail queer users - identity modelling, audit trails, verification flows, data retention - and design patterns that can provide solutions\n* A working test: how to audit your own schema and logs for assumptions that only hold for the default user\n* Why inclusive design consistently improves reliability and usability for the whole user base, with the mechanism, not the platitude\n* A pocket history of queer computing you can cite, from Belfast in 1981 to the ARM core in your pocket",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Non-Technical",
+      "Tools",
+      "Testing",
+      "Other"
+    ],
+    "chip": "Wildcard",
+    "speakers": [
+      {
+        "name": "Adam D'Arcy",
+        "tagline": "Staff Engineer, AI / Cybersecurity",
+        "bio": "Adam Darcy is a Principal Engineer, Architect and Researcher with over a decade of experience leading engineering teams across HCI, cybersecurity, and AI. He provides cross-organisational cybersecurity leadership, owning threat modelling, vulnerability detection and response, and secure software delivery practices across platform and AI systems. Between 2022 and 2025, he conducted research into cyber resilience as part of a partnership between Workday, Technological University Dublin, and the IDA. Experienced across the full software delivery lifecycle, he collaborates closely with product, UX, research, cybersecurity, legal, privacy, and senior leadership stakeholders to deliver secure, resilient systems at scale. A recognised researcher in HCI, cybersecurity, and AI, he has published and presented internationally on these topics. Adam is also a committed champion for LGBTQ+ representation and diversity in technology, dedicated to building inclusive platforms and engineering cultures where all contributors can do their best work.",
+        "photo": "adam-d-arcy.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1309913",
+    "title": "Follow the Twenty Quid: The AI Bill That Doesn't Add Up",
+    "description": "No prompts, no agent architecture, no tooling demo. This is a talk about money.\n\nTwenty quid a month. That's what an AI subscription costs, near enough, whether it's ChatGPT, Claude or Cursor. Tens of thousands of pounds for a single chip. Warehouses of them, drawing power like a small city. Somebody is covering the difference, and it isn't me.\n\nI went looking for who, and got it wrong twice.\n\nMaybe nobody's covering anything, and this simply isn't expensive to run. Except power is only about 1% of what an hour of GPU time costs. The money goes on the chip itself. So the gap is real. Then maybe they're taking the loss on me. Except OpenAI's leaked, FT-verified accounts show serving turns a profit, and the twenty-billion-dollar hole is research.\n\nThe answer is other users. The 95% who pay nothing, and more surprisingly the quiet payers who barely touch it. The expensive ones are the people in this room running coding agents overnight, and three companies have now said so publicly.\n\nThat should have been the end of it. Except the labs spent twenty billion a year themselves, so somebody funds them too. Keep pulling and it stops being about software: thirty-eight billion dollars per gigawatt of datacentre, companies buying repurposed jet engines because grid connections take years, and SoftBank selling its entire Nvidia stake to fund a company that hands the money straight back to Nvidia.\n\nWe have seen most of this film. Netflix burned cash for a decade at £5.99, turned profitable, and only then brought in ads, a password crackdown, and a £12.99 price tag. All three have now appeared in AI, the last of them in April.\n\nYou'll leave knowing which of the five very different layers of this industry actually makes money, whether you personally are one of the expensive users, and one question worth asking about whatever you're building: what happen if the price of a token doubled tomorrow?\n\nNothing to sell here. Every figure is sourced.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "GenAI",
+      "Non-Technical"
+    ],
+    "chip": "AI",
+    "speakers": [
+      {
+        "name": "Yuan Zhang",
+        "tagline": "Associate Software Engineer at Liberty IT",
+        "bio": "To be update",
+        "photo": "yuan-zhang.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1303858",
+    "title": "From Zero to Container: A Java Quarkus Deep Dive",
+    "description": "Java has a reputation problem in the cloud-native world: slow startup, heavy memory footprints, and an inner development loop that hasn't changed in a decade. Quarkus was built to fix all three and in this session, we prove it live.\n\nIn twenty minutes we go from an empty directory to a running Docker container, using nothing but the Quarkus CLI and the tooling the framework generates for you. We scaffold an application with quarkus create app, explore a dev mode that makes Java feel like a scripting language, and finish by building and running a production-ready container image and no hand-written Dockerfile in sight.\n\nBut this is a deep dive, not a demo reel. Along the way we unpack the single idea that makes Quarkus different: moving framework work, classpath scanning, dependency injection, configuration parsing, from runtime to build time. \n\nAttendees see how that one decision explains Quarkus's startup speed, its memory footprint, its live-coding dev mode, and its path to GraalVM native images.\n\nKey learning areas:\n- Bootstrapping a production-shaped project with the Quarkus CLI and its extension ecosystem\n- The modern inner loop: live coding, the Dev UI, continuous testing, and Dev Services (zero-config databases via Testcontainers)\n- Build-time processing: what actually happens under the hood and why it matters\n- JVM vs. native packaging: honest trade-offs and a clear decision framework for each\n- Containerising Quarkus applications: the generated Dockerfiles, layered fast-jar packaging, and daemonless image builds\n\nWhat attendees take away:\nThe exact commands, the mental model, and the reference material to go from quarkus create app to a deployed container the same day plus a grounded sense of where Quarkus fits in their stack, and where it doesn't.\n\nWHO SHOULD ATTEND Java developers curious about Quarkus or re-evaluating Java for cloud-native workloads. No prior Quarkus experience needed; basic familiarity with Maven and Docker is helpful but certainly not required.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Coding",
+      "DevOps",
+      "Frameworks",
+      "Open Source",
+      "Cloud"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Jason Bell",
+        "tagline": "Jason Bell -",
+        "bio": "Jason Bell is a seasoned machine learning practitioner, Java/Clojure developer, author, and strategic advisor with over 18 years of experience bridging theoretical AI concepts and real-world implementation, backed by nearly forty years in software. \n\nHis book, \"Machine Learning: Hands On For Developers and Technical Professionals\" (Wiley, 2014 and 2020), is required reading at over 35 universities worldwide including Columbia, NYU, and UC San Diego. Jason's practical approach to machine learning has helped organisations across industries leverage AI to drive growth and competitive advantage. \n\nPreviously he was section editor for Java Developers Journal, wrote several articles for IBM DeveloperWorks and acts as a AI/ML proposal reviewer for Wiley.",
+        "photo": "jason-bell.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1310014",
+    "title": "Getting Shit Done in Two Worlds",
+    "description": "I build software in two completely different worlds, with the same AI in both. By day I am a principal engineer on a ten-person team, building a distributed AI framework on a graph, wrapped in real governance: human-in-the-loop, guardrails, sign-offs, the lot. By night I run a small consultancy that is me, sometimes one other engineer and a salesperson, shipping monolithic apps with barely any of that.\n\nSame models. Same thirty years of habits. Wildly different rules about how far I let the machine run. And I have spent this year paying close attention to what that actually does to the work.\n\nThe timing is the part I cannot stop chewing on. My day job embraced all of this early and hard, and at the very same time it was scaling up, which meant Agile, governance, sign-offs and ceremony arriving in force. So one world went all-in on the new way of building and wrapped it in heavy process. The other went all-in with almost none. Same paradigm shift, same embrace of it, wildly different amounts of scaffolding around it. And thirty years in I am certain the shift is real: what it means to be a software engineer has genuinely changed, not just sped up, changed. Getting to watch that land in two such different setups at once is the most instructive thing this career has handed me.\n\nThis is not a \"how AI made me faster\" talk. We are all faster, and that turned out to be the least interesting part. What is interesting is everything the tool exposed the moment it stopped being the bottleneck: how much governance a piece of work really needs, when guardrails save you and when they are just fear with a process bolted on, and what a big team is genuinely for once one person and a machine can carry a whole app on their own.\n\nI will show you the software factory I actually use to get things done: the full-throttle version I run solo, and the stripped-down version that survives inside a governed team. The gap between those two is the clearest picture I have ever had of what engineering at scale really costs, and really buys.\n\nI am measuring both sides between now and the conference, and I will put the honest results on the screen, including the ones I do not like. Then I will give you the rule I use to decide how much to trust the machine, and how much rope to give it, depending on which world I am standing in.\n\nNo sales deck, no tool demo. Just a thirty-year engineer, two very different ways of shipping software, one AI, and what I have learned running it at both extremes.\n\nKey takeaways:\n\nWhy the job of a software engineer has genuinely changed, not just got faster, and what happens when a scaling org embraces that shift and layers Agile, governance and ceremony on top of it at the same time.\n\nHow to decide how much governance a piece of work actually needs, instead of wrapping everything in the same process by reflex.\n\nWhen guardrails and human-in-the-loop genuinely save you, and when they are just expensive fear.\n\nA software factory you can steal: the full version I run solo, and the stripped-down version that survives a governed team.\n\nHonest results from running the same AI at both extremes, including what went wrong.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Advanced",
+    "topics": [
+      "Coding",
+      "Tools",
+      "Product"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Stephen McCullough",
+        "tagline": "Whitespace, Principal Software Engineer",
+        "bio": "Stephen has over 26 years experience as a polyglot software engineer. During this time he has help lead Belfast Ruby, PyBelfast, Belfast Elixir user groups. He currently works as a principal software engineer building sovereign AI frameworks.",
+        "photo": "stephen-mccullough.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1299723",
+    "title": "How to Be a Good Citizen Contributor to Open Source in the Age of Regulation",
+    "description": "Open source runs everything. But in 2026 the ecosystem that sustains it experiences, perhaps, the biggest simultaneous challenges in its history: maintainer burnout, chronic underfunding, regulatory pressure (e.g, from the EU Cyber Resilience Act), an AI-accelerated vulnerability tsunami, and a flood of AI-generated issues and PRs. \n\nOpen source projects experience \"enforced collaboration\" that has led companies, researchers, everyone to shove pull requests and demand immediate response from the community, often lacking awareness of the diverse open source governance and contributing norms.\n\nThis session outlines how people from companies and society can responsibly contribute back to open source while preserving upstream health. It highlights two OpenSSF initiatives. First, a Concise Guide for Upstream Collaboration, developed by the Best Practices WG and aiming to help OSPOs guide employees through security upstream contributions. Second, the deliverables of the Global Cyber Policy WG, including CRA Maintainer Guidance, demonstrating how community developers can establish clear consumption expectations, shielding them from unreasonable compliance pressure.\n\nAttendees will leave with a clear understanding of diverse upstream ecosystem operations and how to interact with and responsibly contribute to open source projects we all depend upon.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Open Source",
+      "Security"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Roman Zhukov",
+        "tagline": "Principal Architect - Security Communities Lead at Red Hat",
+        "bio": "Roman is a cybersecurity expert, engineer, and leader with 20 years of hands-on experience securing complex systems and products at scale. Currently Principal Architect at Red Hat, he leads open-source security strategy, upstream collaboration, and cross-industry initiatives focused on building trusted ecosystems. He has built and scaled programs across security architecture, threat modeling, secure development, vulnerability management, incident response, and security education - for both engineers and senior leadership. His work spans trusted AI, privacy, compliance, and secure software supply chains. Previously, Roman led Product Security & Privacy for Data Center and AI software at Intel. He is a Security Champion for several open-source projects and an active contributor to working groups under the OpenSSF, Eclipse Foundation, and other global initiatives. He is an official member of CEN/CLC and ETSI standardization groups, contributing to the EU Cyber Resilience Act (CRA).",
+        "photo": "roman-zhukov.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1307192",
+    "title": "In Good Taste: How To Build Success Not Slop",
+    "description": "How we design, build and deliver products is evolving… and the roles within that are changing too. Today, everyone has access to tools that can quickly create features that feel real. But fast doesn’t necessarily mean “right”.\n\nIn this presentation, I’ll share five tangible design tips for those who say, “I’m not a designer,” helping you create successful solutions and ensure your vibe-coded ideas deliver real value for customers, today and tomorrow.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Introductory",
+    "topics": [
+      "Product"
+    ],
+    "chip": "Design",
+    "speakers": [
+      {
+        "name": "Louise Laughlin",
+        "tagline": "Senior UX Designer",
+        "bio": "Designer, drawer and dog mum based in Belfast. Passionate about creating meaningful experiences and effective solutions for all through design.",
+        "photo": "louise-laughlin.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1296109",
+    "title": "Is this the CVE-nd? Inside the Vulnerability Data Crisis",
+    "description": "This talk explores a growing crisis in the vulnerability intelligence ecosystem. The number of reported CVEs (Common Vulnerabilities and Exposures) keeps rising, while the agencies responsible for tracking them, CISA (Cybersecurity and Infrastructure Security Agency) and the NVD (National Vulnerability Database), are being weakened by political cuts. As a result, traditional vulnerability management tools are quietly failing, and their users don't even know it.\n\nAt the same time, security researchers are finding it increasingly difficult to disclose vulnerabilities responsibly, exacerbating the long-standing tension at the heart of the CVE programme: balancing the interests of software vendors and researchers.\n\nFinally, we look at the latest disruption hitting the community: AI-assisted vulnerability discovery. As automated tooling begins generating CVEs at unprecedented scale, and with hugely variable quality, it is placing even more strain on an already creaking ecosystem.\n\nSo all of this begs the question: is this the CVE-nd for vulnerability intelligence as we know it? And how do we as developers cope with a increasingly fragmented security space?",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Security",
+      "Open Source"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Samuel Dynes",
+        "tagline": "Senior Software Engineer - Arqit",
+        "bio": "Software engineer and security enthusiast who has been working on or around vulnerability management for his entire career. When not sitting in front of a work laptop he’s a big fan of CTF’s, reading about things with no application to real life and a little bit of weightlifting",
+        "photo": "samuel-dynes.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1309513",
+    "title": "Less Engine, More Game: Building a Game Engine Inside a Game Engine",
+    "description": "What if limiting a general-purpose game engine could actually make development faster? This talk explores building a smaller, genre-specific engine on top of a broader one, replacing low-level concepts with reusable building blocks that simplify development and speed up iteration.\n\nA point-and-click adventure engine built with PlayCanvas React provides the case study, turning generic engine features into rooms, characters, hotspots, dialogue and inventory. PlayCanvas is the demo, but the idea applies equally to engines such as Godot, Unity and Unreal: invest in the abstraction once then spend more time building the game.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Intermediate",
+    "topics": [
+      "Games",
+      "Coding",
+      "Web"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Paul Barrett",
+        "tagline": "Software developer based in Belfast. Mainly frontend development & web design but also 3D modelling, animation, game development.",
+        "bio": "Software developer based in Belfast. Mainly frontend development & web design but also 3D modelling, animation, game development.",
+        "photo": "paul-barrett.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1293818",
+    "title": "Local AI at the End of the Tunnel",
+    "description": "In this session we'll combine Local AI, .NET and Dev Tunnels!\n\nTo begin we'll look at how easy it is to install Ollama, and download a suitable model to run locally, on our own computers.\n\nTurning to code, we'll then discover how quick it is to connect to Ollama via our own C# Code, using the Microsoft.Extensions.AI library. Initially interacting via our own Console App.\n\nSidestepping, we'll look at an often overlooked feature: Visual Studio Dev Tunnels. We'll look at the benefits for Web Applications and Web API.\n\nBringing everything together, we'll take our (minimal) Console App code, bake it into a Blazor Web Application, and expose this via a Web Tunnel. Creating a route through to our Local AI installation from any web modern browser.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "GenAI",
+      "Tools",
+      "Web",
+      "Testing",
+      "Open Source",
+      "Coding"
+    ],
+    "chip": "AI",
+    "speakers": [
+      {
+        "name": "Mike Irving",
+        "tagline": "Cross-platform Software Developer. Speaker. Microsoft MVP. Co-organiser of Dot Net North and Macc Tech",
+        "bio": "A professional developer for over 20 years, based in Macclesfield.\n\nFor the past 10+ years I have been heavily involved in mobile development, and have utilised  both Native code (Swift, Kotlin, Objective-C, Java) and Cross-Platform app development systems including Xamarin, .NET MAUI, Uno Platform and Cordova on different projects.\n\nA constant in my journey has been the use of C# / .NET. I also do web development work, and I am equally happy working front-end in HTML, CSS and JavaScript.\n\nMicrosoft MVP. Co-organiser of Dot Net North and Macc Tech.\n\nRegular speaker and presenter.",
+        "photo": "mike-irving.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1310638",
+    "title": "Making the Smart Dumb Thing Smart",
+    "description": "I wanted one simple thing: access to the data from my own electricity meter.\n\nWhat followed was a journey through low-level Bluetooth, awkward pairing, undocumented behaviour, failed approaches and a bit of reverse engineering to make a supposedly “smart” device actually useful to me.\n\nBut the meter is only one example. Our homes are full of devices and services that collect useful data about us while giving us little practical, programmable access to it.\n\nThis talk is about making one proprietary thing work for me and the questions that journey raised about openness, interoperability and whether the smart things around us really work for the people who use them.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Hardware/IoT",
+      "Tools"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Andrew Fletcher",
+        "tagline": "Senior Software Engineer @ Intapp by day; long-time hobbyist, builder and serial dabbler by night.",
+        "bio": "Andrew is a Senior Software Engineer at Intapp and a lifelong hobbyist, builder and dabbler in technology. Over the past 13 years he’s worked across both the public and private sectors, as an employee and freelancer, building everything from startup products to large government systems. Outside work, he’s always enjoyed experimenting with technology and is finally making more time for the “I must check that out” list that has been growing for far too long.",
+        "photo": "andrew-fletcher.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1290323",
+    "title": "One Architecture, Any Silo: Proving Patterns Without Naming Victims",
+    "description": "Domestic abuse reporting has a data architecture problem. To corroborate a pattern of abuse, systems currently assume the underlying raw data of the victim must be seen by whoever's verifying it. That single assumption forces an impossible trade-off: survivors either stay silent contributing to the dark figure of crime or expose sensitive data to centralised systems that become high-risk targets in their own right.\n\nThis talk walks through a working Zero-Knowledge Proof architecture built to remove that trade-off entirely  one where a statutory authority or third-sector agency can learn that a pattern exists. This can be a perpetrator that has been flagged by multiple independent reports, a threshold crossed, or a count without ever seeing a single name, incident report, or plaintext record.\n\nThe system works by having each party  for example, a police force and a support agency  independently commit their records to a cryptographic hash rather than sharing the records themselves. Before that commitment happens, names go through a fuzzy-matching step so that naming variants, like \"O'Neill\" versus \"Oneill,\" get grouped into the same bucket without anyone comparing raw strings directly. Each party then generates a proof from their commitment, and a verifier  who never sees either party's plaintext data  checks those proofs and groups them by their public phonetic identifier. When proofs from multiple independent agencies land in the same group, the verifier can say a pattern exists and how many times it's been corroborated, without ever learning a name, date of birth, or case reference. The only thing that crosses back to whoever's watching for patterns is a count and a yes/no flag  nothing that could re-identify anyone.\n\n\nKey Takeaways:\n\nHow Zero-Knowledge Proofs differ practically from Private Set Intersection and Data Clean Rooms, and why PSI's binary yes/no output can't support pattern-counting use cases A working architecture for cross-silo pattern detection where a verifying authority learns only an aggregate signal (a count crossing a threshold)  never plaintext records, names, or case files The real engineering challenge of encoding fuzzy, approximate matching (handling naming variants) ahead of a zero-knowledge circuit, and what's involved in eventually moving that logic inside an arithmetic circuit A transferable architectural pattern: any scenario with multiple independent parties needing to corroborate a pattern, without a central party being trusted with raw data",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Data Science",
+      "Open Source",
+      "Coding",
+      "Security"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Megan D'Arcy",
+        "tagline": "Data Engineer at Kainos",
+        "bio": "Combining her background in data engineering with ongoing studies in Applied Cyber Security, Megan  brings a unique perspective to data privacy and responsible AI. With a strong foundation in Mathematics and Computer Science from Queen’s University Belfast, her work explores the intersection of machine learning, security, and ethical AI systems. Her final-year project focused on identifying serial killers in the U.S. using statistical models and machine learning. Recognized for her contributions to the tech community, she was awarded the Rising Star Award by Women Who Code in 2024.",
+        "photo": "megan-d-arcy.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1272502",
+    "title": "OWASP PTK Hands-On: Test the Browser State Your Scanner Cannot See",
+    "description": "Modern web applications are authenticated, JavaScript-heavy and stateful. A server response is only the input to the application the user ultimately runs:\nthe browser adds routes, DOM mutations, storage, tokens, loaded components and the exact sequence of actions that reached the state under test.\n\nThis is a practical, laptop-based workshop using OWASP PenTest Kit (PTK), a browser-native application-security toolkit. Participants will test deliberately vulnerable applications running only on their own machine. They will reproduce a transient SPA weakness, correlate DAST, SAST and IAST evidence, compare it with a repaired control, and then run DAST, SAST, IAST and SCA across one authenticated macro-guided journey. A final request-focused exercise shows why a JWT inside nested JSON is different from a token discovered in cookies or browser storage. We finish by taking the same deterministic journey toward CLI and CI automation.\n\nThe workshop does not position browser-native testing as a replacement for proxies, source analysis or established scanners. It shows how the browser's live session and runtime state can supply evidence those tools may not observe alone, and how the resulting workflow can complement OWASP ZAP.\n\nParticipants leave with a repeatable method for connecting a user action to a request or runtime operation, a security finding and a repaired control—not just a list of scanner alerts.\n\n## Format\n- 60-minute hands-on workshop\n- Approximately 15 minutes of guided explanation and 40 minutes of exercises\n- Individual or paired work on attendee laptops\n- Local, deliberately vulnerable targets only\n- Prepared screenshots and completed results are available as a catch-up path\n\n## Intended Audience Developers, testers, students, DevOps engineers and AppSec practitioners who work with modern web applications. No previous PTK or professional penetration testing experience is required. Basic familiarity with a browser and web requests is helpful.\n\n## Learning Outcomes By the end, participants will be able to:\n1. explain the difference between an HTTP response and live browser state;\n2. use DAST, SAST, IAST and SCA as complementary views over one journey;\n3. reproduce and validate a transient SPA finding against a repaired control;\n4. run an authenticated macro-guided scan without adding an unrelated crawl;\n5. inspect and actively test a JWT carried in a nested JSON POST body; and\n6. identify how a recorded journey can become a deterministic CLI/CI security    check.\n\n## Participant Prerequisites Attendees should bring a laptop with:\n- Chrome or Edge;\n- OWASP PTK 9.9.9 or later installed before the workshop;\n- either Docker Desktop or Node.js 20 or later;\n- the supplied workshop bundle or pre-pulled container images; and\n- permission to run local services on ports 3001 and 3080.\n\nFirefox is supported as a fallback, but the primary workshop path uses Chrome or Edge. No internet access or cloud account is required during the exercises.\n\n\n## Safety Boundary All active testing is restricted to the supplied loopback targets. Attendees must not scan public, employer or third-party systems during the workshop.",
+    "format": "Workshop",
+    "minutes": 60,
+    "level": "Intermediate",
+    "topics": [
+      "Security",
+      "Open Source",
+      "Web"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Denis Podgurskii",
+        "tagline": "AppSec Specialist (DAST/SAST/IAST) | OWASP Belfast Chapter Leader | OWASP PTK Creator",
+        "bio": "Denis Podgurskii is an application security specialist with 15+ years of experience across DAST, SAST, and IAST, focused on making security testing practical for modern web apps and real user flows. He is the OWASP Belfast Chapter Leader and the creator/maintainer of OWASP PTK (PenTest Kit), a browser extension for hands-on AppSec testing (including authenticated sessions and SPAs). Denis also contributes to the wider OWASP ecosystem, including work integrating OWASP PTK into OWASP ZAP workflows.",
+        "photo": "denis-podgurskii.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1266968",
+    "title": "Product Market Fit isn't a moment: Designing the systems that get you there",
+    "description": "Many founders and product managers treat product market fit as a destination - a single moment where customers suddenly arrive and growth takes off. In reality, its rarely an event. It is the outcome of deliberate systems, customer discovery, feedback loops, distribution, experimentation and product decision making. \n\nDrawing from experience in building technology products in both start up and enterprise environments, This session explores why product market fit should be viewed as a system rather than a milestone. Attendees will learn practical frameworks for validating ideas and identifying real customer problems, avoiding common product traps and designing products that continuously evolve towards market fit.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Intermediate",
+    "topics": [
+      "Product",
+      "Other"
+    ],
+    "chip": "Product",
+    "speakers": [
+      {
+        "name": "Nelson Okpalachukwu",
+        "tagline": "Principal Product Owner",
+        "bio": "A senior product professional with a background spanning across product management, fintech, insure tech, AI, data platforms and start up innovation.\n\nHe currently leads enterprise data initiatives at Liberty Mutual, has led start ups across the technology space, and is passionate about building scalable technology solutions that creates real business value, He also holds an MBA from Ulster university",
+        "photo": "nelson-okpalachukwu.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1306805",
+    "title": "Ranking Every Trainer in Pokemon Red",
+    "description": "Title could maybe be better. At the start of this year I was working on a small project to rank every trainer in Pokémon Red. There’s a mix of how the GameBoy system works, how Pokemon Red works, how you can use emulation and Python to automate the game and build a fun set of statistics. The output of the project was 1400 hours of video from around 1.6 million battles run in the cloud, and there’ll be a YouTube video about it sometime in the coming months if I get around to finishing my write up\n\nTopics involved:\n* The Game Boy system\n* Console emulation\n* Pokemon Red\n* Assembly\n* Python\n* The Cloud (minor)\n\nI’m sure I can fill an hour, but I could cut some things and fit it into 30 minutes. If this isn’t a detailed enough description I can expand a bit more",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Games",
+      "Coding"
+    ],
+    "chip": "Wildcard",
+    "speakers": [
+      {
+        "name": "Nathan Sullivan",
+        "tagline": "Software Engineer / Code Monkey",
+        "bio": "I learned to code when I was around 14 and my dad handed me his old C++ textbook. About 10 years ago, after going to Queen’s University Belfast to study computer games design, I realised game devs were underpaid and overworked, so I moved to Dublin to work for AWS. After a couple of moves I’m working for Business Insider in Belfast.",
+        "photo": "nathan-sullivan.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1310988",
+    "title": "So, Why Do We Need Quantum Computers?",
+    "description": "Quantum computing has gone from a scary research topic to a technology attracting a lot of interest from the wider tech industry. But beyond the hype, what problem are we really trying to solve... and what does quantum computing mean for software developers?\n\nThis talk is an introduction to quantum computing from a software and engineering perspective. We'll look at what we've achieved so far, what quantum programs actually look like, and what it takes to get a quantum program running on a real quantum computer.\n\nThe aim isn't to predict exactly when quantum computing will become mainstream, but to help developers understand what quantum computing is, why we might need it, where it could be useful, and what role we as software engineers could play in its future.\n\nKey takeaways:\n1. Understand the basic ideas behind quantum computing without all the complex maths.\n2. See how quantum programs differ from conventional programs and how they interact with classical computers.\n3. Explore some of the big technical and practical challenges facing quantum computing.\n4. Separate some of the potential applications of quantum computing from the buzz surrounding it.\n5. Get an insight into the emerging roles for software developers in a future with quantum computing.\n\nNo prior knowledge of quantum computing is required!",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Quantum"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Jane Moore",
+        "tagline": "Computer Science PhD @ QUB | Quantum Compilation & Next-Generation Quantum Benchmarking",
+        "bio": "Jane Moore is a PhD researcher at Queen's University Belfast specialising in quantum computing. Her research explores how quantum programs are compiled, how the compilation process can be optimised at scale, and how machine learning can be used to analyse and generate quantum programs.\n\nJane is currently finishing her PhD and is looking towards a career in engineering, with interest in emerging technology and early-stage companies.",
+        "photo": "jane-moore.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1311214",
+    "title": "Taste in the Age of AI: Designing When Everyone Can Create",
+    "description": "AI has made creating faster, cheaper and more accessible than ever. We can generate interfaces, prototypes, images, code and entire product concepts with a few prompts. But when everyone can create, what separates a useful solution from a convincing one?\n\nThis talk explores why taste the ability to make informed judgements about what is good, appropriate and worth creating is becoming an increasingly important skill for designers.\n\nWe’ll look at how designers can use AI more effectively by bringing the skills AI cannot provide on its own: understanding people, framing problems, setting meaningful constraints, making trade-offs and thinking beyond the interface to the wider system.\n\nWe’ll also explore prompting as a design skill. Rather than treating prompts as magic words, we’ll look at how better questions, context and constraints can lead to better AI outputs and why the quality of an AI generated solution is often limited by the quality of the thinking behind it.\n\nThe future of design may not be about who can create the most. It may be about who can decide what is worth creating.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "UI/UX",
+      "Product",
+      "GenAI"
+    ],
+    "chip": "Design",
+    "speakers": [
+      {
+        "name": "Rachael Aluko",
+        "tagline": "Product Designer",
+        "bio": "Rachael is a product designer and content creator driven by an unwavering passion for crafting meaningful and user-centric experiences. As a lifelong learner, she thrives on exploring new ideas and continually experimenting with design to push boundaries.",
+        "photo": "rachael-aluko.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1311260",
+    "title": "Terminal Panic: Building A Physical Console-Horror Experience, Because I Can",
+    "description": "I have always loved the chunky tactility of physical buttons, switches, flashing lights and all the trappings of the retro-future promised by classic science fiction, and realised in the arcades of my youth.\n\nSo I'm building it: a bespoke physical game terminal, part retrogame remake and part movie prop, in an attempt to reimagine one of the most unique and obscure games in the legendary Alien franchise.\n\nThe fact I can barely hold a soldering iron, never mind design circuits or work a 3D printer, will not scare me off.\n\nJoin me for a personal project deep-dive that touches on game coding, hardware design, survival horror mechanics, emergent narrative, 3D printing, ‘cassette futurism’ and movie set UI. This is a story of actually finishing a project, building weird things for the love of the process, and the need for creative curiosity now more than ever.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Coding",
+      "Games",
+      "Hardware/IoT",
+      "UI/UX",
+      "Web"
+    ],
+    "chip": "Wildcard",
+    "speakers": [
+      {
+        "name": "Neil McCallion",
+        "tagline": "Staff Software Engineer @ Rapid7",
+        "bio": "Neil McCallion is a Staff Software Engineer at Rapid7, a long-tenured browser-based developer, engineering manager, and occasional community speaker. Neil likes to promote the more creative and experimental side of the Web, from audio-visual art and learning aids to game dev and beyond, while also pushing for better performance, accessibility and inclusion on the platform. Will 'do things' for cake.",
+        "photo": "neil-mccallion.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1310995",
+    "title": "The 'Enlightenment' of LLMs and How to Exploit Them",
+    "description": "Your system prompt, a user's message, and the contents of a scraped webpage all arrive at a language model as one flat stream of tokens. There are tags marking who said what, but models largely ignore them, inferring roles from what text sounds like instead. When tone and tag disagree, it looks like tone wins.\n\nThis talk walks through why the most interesting attacks don't come from users typing \"ignore previous instructions\": they come from a Jira ticket, a PR description, or a tool response that quietly tells your agent to do something else. I'll also look at why writing a stern system prompt just isn't enough to protect your agentic system.\n\nKey takeaways:\n- Why LLMs can't distinguish instructions from data.\n- How indirect prompt injection reaches your agent through the content it retrieves, not necessarily just the input that it's given.\n- An overview of some practical mitigation strategies.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Introductory",
+    "topics": [
+      "GenAI",
+      "Coding",
+      "Security"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "Corey Duffy",
+        "tagline": "Software Engineer/Tech Lead",
+        "bio": "Hi, I'm Corey. I'm a senior software engineer and tech lead, with over a decade of experience building software. \n\nThese days I'm mostly working on AI products and digital intelligence solutions for enterprise clients, while trying to keep the robots honest.\n\nOver the years I've worked across application security automation, fraud prevention, usage-based billing, AI knowledge agents, computer vision projects and more, taking things from early prototype to full-scale systems.",
+        "photo": "corey-duffy.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1283814",
+    "title": "The Shortcut Tax: What AI Is Costing Your Career Growth",
+    "description": "Before AI, a hard bug meant hours of digging. You read docs, tried things, failed, tried again. That struggle is what built your skill, the same way lifting weights builds muscle. The weight is the struggle.\nNow AI can hand you the answer in one prompt. Fast, but you skip the workout. You get the fix, not the strength.\nThis talk is about a habit I use to keep growing while still using AI every day: I start the code myself. I write the function signature, sketch the pattern, make the hard calls about how it should work. Then I let AI finish the typing. The thinking happens first.\nI'll walk through real examples from my own work, including building a notification system in Go, to show what this looks like in practice. I'll also share the trap version of this: what it looks like when someone skips straight to \"write me a function that does X\" and never builds the muscle for the hard part.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Introductory",
+    "topics": [
+      "GenAI",
+      "Coding"
+    ],
+    "chip": "Career",
+    "speakers": [
+      {
+        "name": "Destiny Amba",
+        "tagline": "Software engineer who builds small tools for real everyday problems, like knowing exactly when to leave for the bus",
+        "bio": "Software engineer based in Belfast. Likes building small, practical tools that solve everyday problems, like a personal bus tracker that tells me exactly when to leave home so I'm never too early or too late.\nCurrently learning Go and believes the best way to grow as an engineer is to build the smallest useful thing first, then let the hard parts teach you",
+        "photo": "destiny-amba.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1310846",
+    "title": "The Weird Creature You Have to Keep Alive Is You: Building a Self-Care Tracker with AWS and an ESP32",
+    "description": "Being a grown up is a lot like caring for a Tamagotchi, except the weird little creature that you have to keep alive is you! Unlike a Tamagotchi, it can be hard to track exactly what you’re doing wrong.\nIn this lightning talk, I’ll run you through how I set out to make this a little easier for myself by combining cloud technologies with an ESP32 microcontroller to create a portable self-care tracker and virtual pet as well as hopefully giving you some inspiration to make your own!",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Introductory",
+    "topics": [
+      "Coding",
+      "Cloud",
+      "Hardware/IoT"
+    ],
+    "chip": "Wildcard",
+    "speakers": [
+      {
+        "name": "Hephzibah Wilson",
+        "tagline": "Graduate Software Engineer",
+        "bio": "Hephzibah Wilson is a Graduate Software Engineer at Hamilton Robson, where she primarily uses Typescript, Node.js, React and AWS Cloud services to develop IoT projects used across the globe to track environmental and occupancy data. She has recently graduated from Ulster University with a MSc in Computer Science. In her spare time, she loves to knit and tend to her herd of Tamagotchis.",
+        "photo": "hephzibah-wilson.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1311202",
+    "title": "This code is a crime scene!",
+    "description": "There’s been a murder.\n\nThe victim? A perfectly respectable software project.\n\nThe codebase is riddled with technical debt. Nobody dares touch that module. Deployments require two developers, a spreadsheet and a small religious ceremony.\n\nSo, who killed it?\n\nWas it the developer who copied and pasted the same logic six times? The architect and their seventeen microservices? The product owner who kept changing the requirements?\n\nLet’s examine the evidence.\n\nBecause terrible software isn’t necessarily written by terrible developers. Often, it’s written by good people making reasonable decisions in circumstances that make bad software inevitable.\n\nIn This Code Is a Crime Scene, we’ll follow the clues from bad code back to the organisation that produced it — and discover why fixing the code without understanding what killed it can leave you with another body two years later.\n\nThree key takeaways\n\n* Examine the evidence: recognise when technical problems point to deeper organisational problems.\n* Establish the motive: understand why bad technical decisions were made before trying to fix them.\n* Prevent the next murder: change the conditions that created the mess, not just the code they produced.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Non-Technical"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Nick Cousins",
+        "tagline": "Software developer, consultant and recovering CTO",
+        "bio": "Nick Cousins has spent nearly two decades building software, leading technical teams and occasionally wondering how everything got quite so complicated.\n\nHe began his career as a software developer before becoming a technical lead, manager, CTO and eventually founding his own software company. Today, he works as an independent software developer and consultant, helping organisations untangle the people, process and technical problems that get in the way.\n\nHe is particularly interested in what happens where software and people collide: how teams make decisions, how organisations shape the systems they build, and why perfectly sensible people sometimes produce completely baffling code.\n\nNick lives in Belfast, is an enthusiastic reader of murder mysteries, and remains cautiously optimistic that the next rewrite will fix everything.",
+        "photo": "nick-cousins.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1307140",
+    "title": "Two Radios and a Terminal: Building a LoRa Command Line",
+    "description": "Off the grid... No Wi-Fi. No cellular. No internet. But the machine is still out there, and we still need to talk to it. \n\nIn this talk, I'll show you how I built a remote outpost that can be monitored and controlled from miles away using LoRa: a Low-power Radio technology designed for sending small amounts of data over surprisingly long distances...( well, in this example maybe nearer rather than farther)\n\nAlong the way we'll look at how LoRa actually works, its strengths and limitations, and decisions involved in building software for a connection that is slow, constrained and occasionally unreliable.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Coding",
+      "Hardware/IoT",
+      "Open Source"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Chris Laughlin",
+        "tagline": "Product engineer, hardware tinkerer, BBQ enthusiast, and chronic builder of things nobody asked for.",
+        "bio": "Lifelong tinkerer who enjoys exploring new technology, building side projects, solving problems that probably didn’t need solving, and occasionally applying the same over-engineering to his BBQ. Usually happiest when turning a random idea into something that actually works.",
+        "photo": "chris-laughlin.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1311123",
+    "title": "We Sped Up Apache Commons' CI Pipeline 3x With an Algorithm From 1969",
+    "description": "While working as software engineers, we kept watching our CI pipeline crawl to the finish line; one job would drag on forever while three others finished ages ago and just sat there. We got fed up and decided to fix it. Turns out the answer already existed: Longest Processing Time (LPT), a scheduling algorithm from 1969, decades before GitHub Actions was even a thing.\n\nWe built TestSplit, a CLI tool that profiles your JUnit test suite and uses LPT to split tests across parallel CI jobs so no single job ends up carrying everyone else. We’ll go through why naive splitting, alphabetical order, and round-robin always end up with one overloaded job and a bunch of idle ones, and why LPT's dead simple rule (sort by duration, fill whichever bucket is emptiest) beats it every time.\n\nWe also implemented MULTIFIT, which uses binary search to obtain a tighter split when LPT's approximation isn't sufficient. We'll get into the actual problems we ran into building both: tests with ordering dependencies that broke LPT's assumptions, floating-point precision bugs in our binary search, and the challenge of parsing Java source files for dependencies without writing a full AST parser.\n\nWe ran it against Apache Commons Lang, a real open-source repo with 231 test classes and 64,725 tests, and got a 2.24x speedup on test execution and 3.1x over running it sequentially. We'll also be honest about where it falls short: almost 90% of Commons Lang's tests returned a zero duration in the XML output, which messes with scheduling accuracy.\n\nIf you've ever sat there watching a CI pipeline crawl and thought \"there has to be a better way,\" this is for you. No ML or academic background needed, just tests that take too long. You'll leave with a real mental model for how a 1969 algorithm still beats most naive approaches to a very modern problem, and a working, open-source CLI tool you can point at your own test suite this week to see the difference yourself.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Testing",
+      "DevOps",
+      "Tools"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Marjia Siddik",
+        "tagline": "PhD Student in Computer Science at Trinity College Dublin",
+        "bio": "Marjia Siddik is a PhD student in Computer Science at Trinity College Dublin. She was previously a Software Engineer at Fidelity Investments, building and testing tools used by investment analysts.",
+        "photo": "marjia-siddik.jpg"
+      },
+      {
+        "name": "Samson Oloruntola",
+        "tagline": "Software Engineer at Fidelity Investments",
+        "bio": "Software Engineer at Fidelity Investments and published researcher in software engineering with work on automated refactoring featured by Springer Nature. Interested in building reliable software and tackling complex engineering problems.",
+        "photo": "samson-oloruntola.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1284658",
+    "title": "When Your Software Starts Looking Like Your Org Chart",
+    "description": "We like to think software architecture is driven by technical decisions. In reality, it's often driven by reporting lines, ownership boundaries and incentives. This talk explores how organisational structure quietly shapes software, when that's helpful, when it hurts customers, and how engineers can recognise and challenge it.",
+    "format": "Lightning",
+    "minutes": 10,
+    "level": "Intermediate",
+    "topics": [
+      "Product",
+      "Non-Technical"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Shreya Sahu",
+        "tagline": "Backend Engineer and Tech Lead in Monzo Bank UK",
+        "bio": "Shreya Sahu is a Tech Lead at Monzo, a speaker and writer. She enjoys making complex engineering ideas accessible through stories from real-world software systems and is the founder of The Longer Thought, a publication about systems thinking, incentives and independent judgment.",
+        "photo": "shreya-sahu.jpg"
+      }
+    ]
+  },
+  {
+    "id": "1315618",
+    "title": "You Are Not Netflix",
+    "description": "Somewhere right now, an app with 12 monthly active users has a dedicated K8s cluster. Somewhere else, a \"temporary\" script is celebrating its 4th birthday in production. This talk will teach you how to avoid both fates.\n\nYou'll leave knowing when to keep things simple, when complexity is genuinely justified, and how to spot the warning signs of over-engineering and under-engineering before shipping.\n\nOur LLM besties have dramatically reduced the time it takes to write code, making design the new bottleneck in software delivery. The most expensive mistakes now happen before anyone opens an IDE. It has never been easier to build the wrong thing at warp speed, whether that's a multi-region failover setup for an app with 12 users or a hacky fix that miraculously becomes the backbone of the entire company.\n\nNetflix's architecture is brilliant. It solves Netflix's problems. Most of us have very different problems, and copying their homework won't help.\n\nThis is a practical framework for designing at the scale you actually operate. We'll dig into why over-engineering and under-engineering are two sides of the same mistake, and walk through questions that tell you whether the simplest design will still be standing in two years. Expect real stories and lessons learned from getting these decisions right, and a few from getting them very wrong.\n\nWhat will I take away?\n\n- A cheat sheet for validating that a simple architecture can be extended later, without adding speculative complexity\n- How to figure out whether a design decision is easy to reverse later, or a one-way door that deserves the whiteboard inquisition\n- Team habits for making better architecture trade-offs",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Intermediate",
+    "topics": [
+      "Other"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Lauren Taylor",
+        "tagline": "Engineering Team Lead @ Swap",
+        "bio": "Lauren is an Engineering Team Lead at Swap, where she leads the Enablement Core team, an infrastructure and platform team focused on helping other engineering teams ship faster and more reliably. Her career spans corporates, startups and scaleups, from government platforms serving millions (including the NHS Covid-19 testing service) to early-stage products, giving her a front-row seat to both good and bad architecture decisions at every scale.\n\nShe is a long-standing part of the NIDC community, having volunteered as Marketing Lead for 3 years and helped grow the conference from 400 to 750+ attendees. If someone ever ambushed you in the corridor with a microphone, that was probably her. Sorry.",
+        "photo": "lauren-taylor.jpg"
+      }
+    ]
+  }
+]

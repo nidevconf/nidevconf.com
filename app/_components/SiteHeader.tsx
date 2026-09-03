@@ -21,7 +21,7 @@ export default function SiteHeader() {
           <Link href="/#village">Villages</Link>
           <Link href="/#sponsor">Sponsor</Link>
           <Link className="btn btn-primary" href="/#tickets">
-            Get an early bird ticket
+            Get tickets
           </Link>
         </nav>
       </div>
