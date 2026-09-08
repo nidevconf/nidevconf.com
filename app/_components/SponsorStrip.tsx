@@ -20,6 +20,7 @@ export const SPONSORS: {
   { name: "Enso Recruitment", url: "https://www.ensorecruitment.com/", light: "enso.png", dark: "enso-white.png", h: 32, tier: "gold" },
   { name: "Allstate Northern Ireland", url: "https://www.allstateni.com/", light: "allstate.svg", dark: "allstate-white.svg", h: 32, tier: "silver" },
   { name: "DailyPay", url: "https://www.dailypay.com/", light: "dailypay.svg", dark: "dailypay-white.svg", h: 27, tier: "silver" },
+  { name: "Enably", url: "https://enablyco.com/", light: "enably.svg", dark: "enably-white.svg", h: 28, tier: "silver" },
   { name: "Coding Fury", url: "https://www.codingfury.com/", light: "codingfury-black.png", dark: "codingfury-white.png", h: 32, tier: "silver" },
   { name: "Uptime Labs", url: "https://www.uptimelabs.io/", light: "uptimelabs.svg", dark: "uptimelabs-white.svg", h: 40, tier: "silver" },
 ];
