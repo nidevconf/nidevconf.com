@@ -61,8 +61,10 @@ const article: Article = {
       <p>
         Community Interest Companies form an <em>asset lock</em> (in a good way) to serve the
         benefit of the community. The change is not reversible. It’s a big deal. This
-        benefit is public on Companies House for every registered CIC (eg: BSides Belfast). All
-        future organisers & directors have to pursue it. That means each volunteer’s
+        benefit is public on{" "}
+        <a href="https://find-and-update.company-information.service.gov.uk/">Companies House</a>{" "}
+        for every registered CIC (eg: <a href="https://bsidesbelfast.org/">BSides Belfast</a>).
+        All future organisers & directors have to pursue it. That means each volunteer’s
         contribution keeps benefiting the community after they move on.
       </p>
       <blockquote>
@@ -72,7 +74,9 @@ const article: Article = {
           making sure it continues to benefit people for years to come.
         </p>
         <footer>
-          <b>Paul Breen</b>
+          <b>
+            <a href="https://www.linkedin.com/in/ppbreen/">Paul Breen</a>
+          </b>
           <span>Director, NIDC</span>
         </footer>
       </blockquote>
@@ -95,7 +99,9 @@ const article: Article = {
         </p>
         <footer>
           <b>Angie McKeown</b>
-          <span>Founder, NI Game Dev Network</span>
+          <span>
+            Founder, <a href="https://nigame.dev/">NI Game Dev Network</a>
+          </span>
         </footer>
       </blockquote>
       <p>
@@ -162,10 +168,16 @@ const article: Article = {
       <p>
         <b>Speaker workshops</b> get more technical people talking, and doing it well. We run 3
         types: applying to speak at a technical conference, structuring your presentation, and
-        practice presenting technical content. That started in 2018 when we partnered with
-        Belfast Toastmasters for a workshop at Ormeau Labs. Now, almost 10 years later we run it
-        together with ServerlessDays Belfast, and BSides Belfast, with Garth and Ciaran leading
-        it. If you’re curious, I’m sure folks like Kirstine won’t mind telling you
+        practice presenting technical content. That started in 2018 when we partnered with{" "}
+        <a href="https://belfast.toastmastersclubs.org/">Belfast Toastmasters</a> for a workshop
+        at <a href="https://ormeaulabs.com/">Ormeau Labs</a>. Now, almost 10 years later we run
+        it together with{" "}
+        <a href="https://serverlessdaysbelfast.com/">ServerlessDays Belfast</a>, and{" "}
+        <a href="https://bsidesbelfast.org/">BSides Belfast</a>, with{" "}
+        <a href="https://www.linkedin.com/in/garthgilmour/">Garth</a> and{" "}
+        <a href="https://www.linkedin.com/in/ciaran-conliffe-7133843a/">Ciaran</a> leading it.
+        If you’re curious, I’m sure folks like{" "}
+        <a href="https://www.linkedin.com/in/kirstine-boyd/">Kirstine</a> won’t mind telling you
         about their experience coming along.
       </p>
       <Lightbox
@@ -204,9 +216,10 @@ const article: Article = {
       <p>
         In the space of a few months we learned everything from logistics of live television, to
         implementing COVID precautions. There was a lot more to it than turning on a camera, and
-        streaming to YouTube than you’d expect. But, with the help of David Kane we found an
-        old flax & linen mill on the Newtownards Road. The most spacious rooms you’ll set
-        your eyes on, with a great view of Samson & Goliath. The team worked hard to keep
+        streaming to YouTube than you’d expect. But, with the help of{" "}
+        <a href="https://www.linkedin.com/in/dsrkane/">David Kane</a> we found an old flax &
+        linen mill on the Newtownards Road. The most spacious rooms you’ll set your eyes on,
+        with a great view of Samson & Goliath. The team worked hard to keep
         everyone safe, and bring people together with a feeling of community we’ve all been
         missing. And, we tried to have a bit of fun with it, too. I hope you felt it.
       </p>
@@ -223,7 +236,8 @@ const article: Article = {
         />
       </div>
       <p>
-        One of the coolest things was teaming up with NI Raspberry Jam. Kids around Northern
+        One of the coolest things was teaming up with{" "}
+        <a href="https://niraspberryjam.com/">NI Raspberry Jam</a>. Kids around Northern
         Ireland (and the world) were at home bored. The jam was on pause. Inviting them to watch
         a 4 hour educational livestream probably wouldn’t help. So, we got creative, found a
         way to give <em>free</em> electronics kits for anyone signing up to the make-along, and
@@ -247,8 +261,10 @@ const article: Article = {
       <p>
         Next year, we were confident that the lockdown was over. We even filmed a conference date
         announcement. Until the conference venue cancelled our booking 30 days before the event.
-        But, no pressure (definitely pressure 😅). Ormeau Labs came to the rescue. Claire
-        Halliday heard our story, and offered a place to run it for free. That week we reached
+        But, no pressure (definitely pressure 😅).{" "}
+        <a href="https://ormeaulabs.com/">Ormeau Labs</a> came to the rescue.{" "}
+        <a href="https://uk.linkedin.com/in/claireshalliday">Claire Halliday</a> heard our story,
+        and offered a place to run it for free. That week we reached
         out to organisers who paused their meetups for lockdowns with an idea: Meetup Week. NIDC
         handles the COVID safety, venue, and catering. Organisers bring their communities
         together for the first time since isolation started. That’s what it’s all
@@ -258,35 +274,86 @@ const article: Article = {
       </p>
       <p className="list-title">Meetup Week & Meetup Fest Communities</p>
       <ul className="tiles">
-        <li>Belfast JS</li>
-        <li>ProductCamp</li>
-        <li>AI NI</li>
-        <li>DevOps Belfast</li>
-        <li>Belfast Linux/Libre User Group</li>
-        <li>Belfast Elixir</li>
-        <li>BelfAWSt Meetup</li>
-        <li>InfoSecNI</li>
-        <li>Geek Dinner Club</li>
-        <li>PyBelfast</li>
-        <li>NI Creative Community</li>
-        <li>Farset Labs Hackerspace</li>
-        <li>NI Game Dev Network</li>
-        <li>Newry Digital</li>
-        <li>Belfast Software Craftsmanship Community</li>
-        <li>Women Who Code</li>
-        <li>UX Belfast</li>
+        <li>
+          <a href="https://belfast.js.org/">Belfast JS</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/pcampbelfast">ProductCamp</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/artificial-intelligence-northern-ireland/">AI NI</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/devops-belfast/">DevOps Belfast</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/belfast-lug/">Belfast Linux/Libre User Group</a>
+        </li>
+        <li>
+          <a href="https://x.com/belfastelixir">Belfast Elixir</a>
+        </li>
+        <li>
+          <a href="https://www.awsbelfast.co.uk/">BelfAWSt Meetup</a>
+        </li>
+        <li>
+          <a href="https://infosecni.net/">InfoSecNI</a>
+        </li>
+        <li>
+          <a href="https://geekdinnerclub.com/">Geek Dinner Club</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/pybelfast/">PyBelfast</a>
+        </li>
+        <li>
+          <a href="https://www.nicreative.co/">NI Creative Community</a>
+        </li>
+        <li>
+          <a href="https://www.farsetlabs.org.uk/">Farset Labs Hackerspace</a>
+        </li>
+        <li>
+          <a href="https://nigame.dev/">NI Game Dev Network</a>
+        </li>
+        <li>
+          <a href="https://newrydigital.com/">Newry Digital</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/belfast-software-craftsmanship-community/">Belfast Software Craftsmanship Community</a>
+        </li>
+        <li>
+          <a href="https://x.com/wwcodebelfast">Women Who Code</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/uxbelfast/">UX Belfast</a>
+        </li>
         <li>Organisers Roundtable</li>
-        <li>ProductTank Belfast</li>
-        <li>UU Computing Society</li>
-        <li>Queen’s Computing Society</li>
-        <li>Belfast Automation and Software Testing</li>
+        <li>
+          <a href="https://www.meetup.com/producttank-belfast/">ProductTank Belfast</a>
+        </li>
+        <li>
+          <a href="https://uk.linkedin.com/company/computingsocietyuu">UU Computing Society</a>
+        </li>
+        <li>
+          <a href="https://queenscomputingsociety.com/">Queen’s Computing Society</a>
+        </li>
+        <li>
+          <a href="https://www.meetup.com/belfast-automation-software-testing/">Belfast Automation and Software Testing</a>
+        </li>
       </ul>
       <p>
         Even though <em>Meetup Fest</em> and lockdowns are (finally) done, we did keep doing one
         thing. Something bringing the tech community together aside from the conference, started
-        by Yuan back in 2023. The NI Tech Community still gets together every year for Belfast
-        Pride, behind the colourful banner designed by our friend and organiser Zan.
+        by <a href="https://www.linkedin.com/in/yuan-zhang-965aaa141/">Yuan</a> back in 2023. The
+        NI Tech Community still gets together every year for{" "}
+        <a href="https://belfastpride.com/">Belfast Pride</a>, behind the colourful banner
+        designed by our friend and organiser{" "}
+        <a href="https://www.linkedin.com/in/zan-dani/">Zan</a>.
       </p>
+      <Lightbox
+        hero={{
+          src: "/images/pride-banner.jpg",
+          alt: "The NI Tech Community group marching through Belfast Pride behind a rainbow-striped banner reading NI Tech Community, All together",
+        }}
+      />
       <p>
         I hope all the things we did during lockdowns left people something to remember. Beyond
         the rectangles on a screen containing their colleagues.
@@ -418,14 +485,14 @@ const article: Article = {
       <p className="callout">
         <span className="emoji" aria-hidden>
           🤩
-        </span>
+        </span>{" "}
         Bringing together the whole tech community of Northern Ireland, every year.
       </p>
       <h3>Our Mission 🏔️</h3>
       <p className="callout">
         <span className="emoji" aria-hidden>
           🏔️
-        </span>
+        </span>{" "}
         Organise the biggest meetup of the year, bringing together techies, meetups and
         companies from all over Northern Ireland.
       </p>
