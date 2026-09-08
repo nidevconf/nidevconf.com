@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://nidevconf.com"),
   title: {
     default:
-      "NIDC 2026 — Northern Ireland Developer Conference · 21 Nov, ICC Belfast",
+      "NIDC 2026 — Northern Ireland Developer Conference · 21 Nov, International Convention Centre Belfast",
     template: "%s | NIDC 2026 — Northern Ireland Developer Conference",
   },
   description:
-    "NIDC gathers enthusiasts, students, and professionals across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between. Saturday 21 November 2026, ICC Belfast.",
+    "NIDC gathers enthusiasts, students, and professionals across software, product, cloud, data, UX, games, infrastructure, open source, security, AI, and everything in between. Saturday 21 November 2026, International Convention Centre Belfast.",
   keywords: [
     "NIDC",
     "NIDC 2026",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     "Northern Ireland Developers Conference",
     "Belfast tech conference",
     "tech conference Belfast",
-    "ICC Belfast",
+    "International Convention Centre Belfast",
     "software developer conference",
     "NI tech community",
     "developer conference UK",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NIDC 2026 — Northern Ireland Developer Conference",
     description:
-      "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, ICC Belfast.",
+      "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, International Convention Centre Belfast.",
     url: "https://nidevconf.com",
     siteName: "NIDC — Northern Ireland Developer Conference",
     type: "website",
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "NIDC 2026 — Northern Ireland Developer Conference",
     description:
-      "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, ICC Belfast.",
+      "The event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026, International Convention Centre Belfast.",
     images: ["/opengraph-image.jpg"],
   },
   robots: {
@@ -112,7 +112,7 @@ const jsonLd = {
   eventStatus: "https://schema.org/EventScheduled",
   location: {
     "@type": "Place",
-    name: "ICC Belfast (Waterfront Hall)",
+    name: "International Convention Centre Belfast (Waterfront Hall)",
     address: {
       "@type": "PostalAddress",
       streetAddress: "2 Lanyon Place",
@@ -175,7 +175,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Poppins:wght@400;500;600&family=Inter:wght@400;500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Poppins:wght@400;500;600&family=Inter:wght@400;500&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap"
           rel="stylesheet"
         />
       </head>

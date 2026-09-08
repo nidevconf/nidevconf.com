@@ -43,12 +43,13 @@
   --display:'Poppins', system-ui, -apple-system, sans-serif;
   --body:'Inter', system-ui, -apple-system, sans-serif;
   --mono:'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --serif:'Source Serif 4', Georgia, Cambria, 'Times New Roman', Times, serif; /* article body */
 
   /* --- spacing rhythm (8px) --- */
   --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:48px; --s6:64px; --s7:96px;
 
   /* --- radii --- */
-  --r:4px; --r-pill:999px;
+  --r:.5rem; --r-pill:999px; /* one radius for every box; pills and circles aside */
 
   /* Measured height of the sticky header: 16px padding + a 41px nav button + 16px.
      Three places need to agree on it — the hero's viewport maths, and the
@@ -141,7 +142,7 @@ ul{margin:0;}
 :root[data-theme="dark"] .logo-mark{content:url("/images/nidc-mark-dark.png");}
 :root[data-theme="dark"] .logo-word{content:url("/images/nidc-wordmark-dark.png");}
 
-/* terminal flavour — monospace, pink prompt + blinking cursor (footer date line) */
+/* terminal flavour — monospace (agenda times, read time), pink prompt + blinking cursor */
 .mono{font-family:var(--mono);}
 .prompt{color:var(--pink-dk);font-weight:500;}
 .cursor{display:inline-block;width:.55em;height:1.05em;background:var(--pink);
@@ -162,14 +163,25 @@ ul{margin:0;}
 .btn-primary:active{transform:translateY(0);}
 .btn-secondary{background:transparent;color:var(--ink);border-color:var(--ink);}
 .btn-secondary:hover{background:var(--ink);color:var(--bg);transform:translateY(-2px);text-decoration:none;}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink);}
-.btn-ghost:hover{background:var(--ink);color:var(--on-ink);text-decoration:none;}
+/* ghost: a link wearing the pill's height, so it sits level with real buttons in a row */
+.btn-ghost{background:transparent;color:var(--ink);border-color:transparent;padding-inline:0;}
+.btn-ghost:hover{color:var(--pink-dk);text-decoration:none;}
 .btn .arrow{font-size:1.1em;line-height:1;}
 /* floating tilted emoji sticker beside a CTA */
 .cta-sticker{position:relative;display:inline-flex;}
 .cta-sticker .sticker-emoji{position:absolute;top:-20px;right:-18px;width:46px;height:46px;
   transform:rotate(15deg);pointer-events:none;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45));}
 .btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+/* split button, the GitHub merge button: one pill, two halves. The main half does the
+   thing; the caret picks which thing. Each half keeps its outer corners, and the inner
+   borders halve so the divider stays the 2px the pill's edge is. The lift on hover
+   moves the whole pill, not just the half under the pointer. */
+.split{display:inline-flex;transition:transform .12s ease;}
+.split:hover{transform:translateY(-2px);}
+.split .btn:hover{transform:none;}
+.split-main{border-top-right-radius:0;border-bottom-right-radius:0;border-right-width:1px;}
+.split-caret{border-top-left-radius:0;border-bottom-left-radius:0;border-left-width:1px;
+  padding-inline:14px;}
 
 /* ============================================================
    SITE HEADER (sticky)
@@ -238,7 +250,7 @@ ul{margin:0;}
 @keyframes anni-confetti-fade{0%,62%{opacity:1;} 100%{opacity:0;}}
 .anni-badge:active{transform:scale(.94);}
 .anni-badge:hover,
-.anni-badge:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;}
+.anni-badge:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;text-decoration:none;}
 .anni-badge.pop{animation:badge-pop .42s ease-out;}
 /* release: two decaying pulses — a big overshoot, then a small one */
 @keyframes badge-pop{
@@ -278,7 +290,7 @@ ul{margin:0;}
    max-width stops it — otherwise an ultrawide gets a 3400px-wide video */
 .hero-video{position:absolute;inset:16px;z-index:0;
   max-width:1600px;margin-inline:auto;
-  border-radius:16px;overflow:hidden;background:#000;pointer-events:none;}
+  border-radius:var(--r);overflow:hidden;background:#000;pointer-events:none;}
 .hero-video video{display:block;width:100%;height:100%;object-fit:cover;}
 .hero-video::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.6);}
 
@@ -317,7 +329,7 @@ ul{margin:0;}
   90%{transform:rotate(calc(var(--tilt) * 0.06));}
   100%{transform:rotate(0deg);}
 }
-.chips + .sec-body{margin-top:var(--s4);}
+.chips + .sec-body,.btn-row + .sec-body{margin-top:var(--s4);}
 
 /* ---- sponsor strip ----
    Logos trail across the page in a loop. Each logo is a light/dark pair of
@@ -331,7 +343,22 @@ ul{margin:0;}
 /* the trailing padding matches the gap, so the second copy starts exactly one row-width in */
 .sponsor-row{display:flex;align-items:center;gap:72px;padding-inline-end:72px;}
 .sponsor-row img{display:block;width:auto;}
-:root[data-theme="dark"] .sponsor-row .light,:root:not([data-theme="dark"]) .sponsor-row .dark{display:none;}
+:root[data-theme="dark"] .sponsor-row .light,:root:not([data-theme="dark"]) .sponsor-row .dark,
+:root[data-theme="dark"] .sponsor-tiers .light,:root:not([data-theme="dark"]) .sponsor-tiers .dark{display:none;}
+/* the tiered figure in an article: a row per tier, biggest first */
+.prose > .sponsor-tiers{margin:var(--s4) 0;}
+.sponsor-tiers .tier{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:20px 40px;padding:18px 0;}
+.sponsor-tiers img{display:block;width:auto;max-width:100%;}
+.sponsor-tiers figcaption{margin-top:6px;text-align:center;font-family:var(--display);
+  font-size:13px;color:var(--muted);}
+/* the open slot: no fill, dashed edge, the way an unbooked agenda slot is drawn */
+.sponsor-slot{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 18px;
+  background:var(--bg);border:1px dashed var(--line);border-radius:var(--r);
+  font-family:var(--display);font-weight:600;font-size:15px;line-height:1.2;color:var(--ink);
+  text-decoration:none;transition:background .12s ease,border-color .12s ease;}
+.sponsor-slot span{font-weight:400;font-size:12px;color:var(--muted);}
+.sponsor-slot:hover{background:var(--bg-2);border-color:transparent;text-decoration:none;}
 @keyframes sponsor-scroll{to{transform:translateX(-50%);}}
 @media (prefers-reduced-motion:reduce){
   .sponsor-track{animation:none;width:auto;}
@@ -363,6 +390,24 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .section-media.pair{grid-template-columns:1fr 1fr;}
 .section-media.pair img{height:340px;}
 .section-media.single img{aspect-ratio:3/2;}
+.section-media.wide img{aspect-ratio:2/1;}
+/* a row of small ones, however many there are */
+.section-media.row{grid-auto-flow:column;grid-auto-columns:1fr;}
+.section-media.row img{height:150px;}
+/* a photo that opens full size: the button is invisible, the image is the whole of it */
+.photo-hit{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;}
+/* three photos: one tall on the left, two stacked beside it */
+.section-media.trio{grid-template-columns:2fr 1fr;grid-template-rows:200px 200px;}
+.section-media.trio > :first-child{grid-row:1 / 3;}
+@media (max-width:720px){
+  .section-media.trio{grid-template-columns:1fr;grid-template-rows:auto;}
+  .section-media.trio > *{grid-row:auto;}
+  .section-media.trio img{height:auto;aspect-ratio:3/2;}
+}
+/* a run of media blocks in the reading column sits at the grid's own gap, not a paragraph's;
+   and the pair is shorter there, so a wide photo is not cropped to a sliver */
+.prose > .section-media + .section-media{margin-top:14px;}
+.prose .section-media.pair img{height:200px;}
 
 /* third-party video embed (YouTube iframe) */
 /* swap photo to the left on desktop (DOM stays text-first for mobile) */
@@ -388,7 +433,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .ap-rail{display:flex;flex-direction:column;justify-content:space-between;
   padding:7px 14px 7px 0;text-align:right;
   font-family:var(--mono);font-size:12px;color:var(--muted);}
-.ap-box{border:1px dashed var(--line);border-radius:12px;padding:20px 24px;
+.ap-box{border:1px dashed var(--line);border-radius:var(--r);padding:20px 24px;
   display:flex;align-items:center;justify-content:center;
   transition:background .12s ease,border-color .12s ease;}
 /* collapsed it stands in for the whole day, so it takes real space; open it is
@@ -419,7 +464,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
    13:00 talks) comes from insetting the card inside its row instead, by the same
    amount that separates the tracks. Each slot's FOOTPRINT stays proportional. */
 .ag-item{position:relative;grid-column:var(--c);grid-row:var(--r1) / var(--r2);
-  margin-bottom:var(--ag-gap);border-radius:10px;padding:9px 13px;overflow:hidden;
+  margin-bottom:var(--ag-gap);border-radius:var(--r);padding:9px 13px;overflow:hidden;
   display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
 /* A booked session is a solid fill with no edge; a slot nobody has filled yet is
    the inverse — no fill, dashed edge. The transparent border on the filled one
@@ -458,6 +503,7 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .section-centered{text-align:center;}
 .section-centered .sec-body,
 .section-centered .sec-lead{margin-left:auto;margin-right:auto;}
+.section-centered .btn-row{justify-content:center;}
 /* full-width banner photo (e.g. the crowd panorama in About) */
 .section-banner{margin:var(--s5) 0 0;overflow:hidden;}
 .section-banner img{display:block;width:100%;height:auto;}
@@ -554,8 +600,8 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 /* Assembly-style split: brand block (left) + three link columns (right) */
 .foot-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:flex-start;}
 .foot-blurb{color:var(--muted);font-size:15px;max-width:44ch;margin-top:16px;}
-.foot-term{font-family:var(--mono);font-size:13px;color:var(--pink-dk);margin-top:18px;
-  letter-spacing:.02em;line-height:1.5;}
+.foot-term{font-family:var(--display);font-weight:500;font-size:13px;color:var(--pink-dk);margin-top:18px;
+  line-height:1.5;}
 .foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
 .foot-cols h4{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
@@ -574,7 +620,7 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 :root[data-theme="dark"] .social-github{--brand:#FFFFFF;}
 .foot-bottom{border-top:1px solid var(--line);margin-top:var(--s5);padding-top:24px;
   display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
-  font-family:var(--mono);color:var(--muted);font-size:12.5px;}
+  font-family:var(--display);font-weight:500;color:var(--muted);font-size:12.5px;}
 .foot-bottom-end{display:flex;align-items:center;gap:16px;}
 /* trigger for the shadcn theme dropdown — the menu itself is themed by the
    token aliases in globals.css, so only the trigger needs dressing */
@@ -586,6 +632,244 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
   border-radius:var(--r);padding:4px 9px;cursor:pointer;
   transition:color .12s ease,border-color .12s ease;}
 .theme-toggle:hover{color:var(--ink);border-color:var(--muted);}
+
+/* ============================================================
+   PAGES — the opportunities board (unlisted) and articles share one kit:
+   title block, facts line, card list, reading column
+   ============================================================ */
+/* every page opens on the same title block: eyebrow, sec-title, lead */
+.page-head{padding-bottom:0;}
+.page-eyebrow{font-family:var(--display);font-weight:500;font-size:13px;color:var(--muted);}
+.page-eyebrow a{color:var(--muted);}
+.page-eyebrow a:hover{color:var(--pink-dk);text-decoration:none;}
+/* facts read like the hero's date line: display face, muted, a dot between each —
+   a role's type · team · commitment, an article's date · author · read time.
+   One child per fact; the dots are drawn here, so the markup never carries them. The dot
+   trails its fact rather than leading the next, so a wrapped line never opens with one. */
+.facts{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;
+  font-family:var(--display);font-weight:500;font-size:15px;color:var(--muted);
+  margin:-8px 0 18px;}
+.facts > *:not(:last-child)::after{content:"";display:inline-block;width:5px;height:5px;
+  border-radius:50%;background:var(--muted);margin-left:12px;vertical-align:middle;}
+
+/* the board: one raised card per item, the whole card is the link */
+.board-section{padding-top:var(--s5);}
+.board{list-style:none;padding:0;display:grid;gap:14px;}
+.board-card{display:block;background:var(--bg-2);border-radius:var(--r);padding:var(--s3) var(--s4);
+  color:var(--ink);transition:background .12s ease;}
+.board-card:hover{background:var(--bg-3);text-decoration:none;}
+.board-title{font-size:clamp(22px,2.6vw,28px);color:var(--ink);margin-bottom:12px;
+  transition:color .12s ease;}
+.board-card .facts{margin:0 0 12px;}
+.board-summary{color:var(--ink);max-width:66ch;}
+.board-cta{display:inline-flex;align-items:center;gap:6px;margin-top:18px;
+  font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink);}
+/* compact board, for a list inside an article: the roles side by side in equal
+   columns, each card just the title and the way in. Same card, less of it. */
+.board-compact{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+.board-compact .board-card{padding:var(--s2) var(--s3);}
+.board-compact .board-title{font-size:18px;margin-bottom:8px;}
+.board-compact .board-card .facts,.board-compact .board-summary{display:none;}
+.board-compact .board-cta{margin:0;}
+
+/* every page sits in one reading-width column, centred on the canvas like the home
+   sections, with the text left-aligned inside it. Pairs with .wrap for the auto margins. */
+.page-wrap{max-width:820px;}
+.page-wrap .sec-title{text-wrap:balance;}
+
+/* reading column: the serif at 18px, a 66ch measure centred in the page column so
+   headings, paragraphs and lists share one axis; every h2 opens a section */
+.prose{font-family:var(--serif);font-size:18px;max-width:66ch;margin-inline:auto;}
+.prose > * + *{margin-top:1.5em;}
+/* direct children only: the column's own copy gets the reading type, and a card or a
+   board embedded in it keeps its own */
+.prose > h2{font-size:clamp(22px,2.6vw,28px);margin:72px 0 14px;} /* 1.5 × --s5: a section break, not a paragraph one */
+.prose > h3{font-size:20px;margin:40px 0 10px;} /* a part within a section */
+.prose > p,.prose > ul > li{color:var(--ink);line-height:1.6;}
+.prose > p{text-wrap:pretty;} /* no one-word last lines */
+.prose b,.prose strong{font-weight:600;}
+/* tailwind preflight strips list-style, so the bullets have to be asked for */
+.prose > ul:not(.board):not(.wall):not(.credits):not(.tiles){list-style:disc;padding-left:1.2em;display:grid;gap:.5em;}
+/* tiles: a cloud of names as small cards, each as wide as its name, all the same height */
+.prose > .tiles{list-style:none;padding:0;margin-top:12px;display:flex;flex-wrap:wrap;
+  justify-content:center;gap:8px;}
+.prose > .tiles > li{display:flex;align-items:center;min-height:44px;
+  background:var(--bg-2);border-radius:var(--r);padding:8px 14px;font-family:var(--display);
+  font-weight:500;font-size:14px;line-height:1.3;color:var(--ink);}
+/* credits: the roll at the end of a film — a small caption, then the names stacked and
+   centred in the display face, no bullets, the links quiet until hovered */
+.prose > .list-title{margin-top:var(--s4);font-family:var(--display);font-weight:500;font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.prose > .credits-title{margin-top:var(--s5);text-align:center;font-family:var(--display);
+  font-weight:500;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);}
+.prose > .credits{list-style:none;padding:0;margin:14px 0 var(--s5);text-align:center;
+  font-family:var(--display);font-weight:500;font-size:16px;
+  columns:190px;column-gap:20px;} /* as many columns as 190px fit: three in the column */
+.prose > .credits > li{line-height:1.8;break-inside:avoid;}
+.credits a{color:var(--ink);text-decoration:none;}
+.credits a:hover{color:var(--pink-dk);}
+.prose > ul > li::marker{color:var(--pink);}
+/* the quieter second option under a board or a button: smaller, muted, a plain link */
+.prose > .also{margin-top:14px;font-size:16px;color:var(--muted);}
+.prose > .also a{color:inherit;text-decoration:underline;}
+.prose > .also a:hover{color:var(--pink-dk);}
+.prose .btn-row{margin-top:24px;}
+/* ---- the "watch" pill, centred on a video card ---- */
+/* the pill sits dead centre: text-lg/medium, px-4 py-2, gap-2, backdrop blur, white on
+   near-black — theme-free on purpose, it floats over footage. The card is the click
+   target; the pill itself has no hover state. */
+.teaser-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 16px;border:0;
+  border-radius:40px;white-space:nowrap;backdrop-filter:blur(8px);
+  background:var(--white);color:#111;font-family:var(--display);font-weight:500;font-size:16px;
+  line-height:28px;cursor:pointer;transition:background .15s ease,color .15s ease;}
+.teaser-time{opacity:.6;}
+/* the player: the dialog is the whole screen, the panel is the video with the hero's
+   corners, a lower-third caption at the bottom-left, the close at the top-right */
+.video-dialog{width:100vw;height:100vh;max-width:none;max-height:none;border:0;padding:24px;
+  background:transparent;align-items:center;justify-content:center;}
+.video-dialog[open]{display:flex;}
+.video-dialog::backdrop{background:rgba(0,0,0,.88);}
+.vd-panel{position:relative;width:min(1400px,100%);outline:none;}
+.vd-panel video{display:block;width:100%;max-height:calc(100vh - 48px);aspect-ratio:16 / 9;
+  border-radius:var(--r);background:#000;}
+.vd-panel img{display:block;width:100%;max-height:calc(100vh - 48px);object-fit:contain;
+  border-radius:var(--r);}
+.vd-panel iframe{display:block;width:100%;aspect-ratio:16 / 9;max-height:calc(100vh - 48px);
+  border:0;border-radius:var(--r);background:#000;}
+.vd-caption{position:absolute;left:32px;bottom:76px;margin:0;color:#fff;
+  font-family:var(--display);line-height:1.15;text-shadow:0 2px 14px rgba(0,0,0,.7);
+  pointer-events:none;}
+.vd-caption b{display:block;font-weight:600;font-size:clamp(20px,3vw,34px);}
+.vd-caption span{display:block;margin-top:6px;font-weight:400;font-size:clamp(13px,1.6vw,18px);
+  opacity:.9;}
+.vd-close{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:50%;
+  background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;cursor:pointer;}
+.vd-close:hover{background:rgba(0,0,0,.8);}
+/* ---- values: the vision and mission as callouts, then the dos and don'ts table ---- */
+.prose > .callout{display:flex;gap:12px;align-items:flex-start;padding:16px 20px;
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--r);
+  font-family:var(--body);font-size:17px;line-height:1.5;color:var(--ink);}
+.callout .emoji{flex:none;font-size:20px;line-height:1.3;}
+.prose > .dos{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--line);
+  border-radius:var(--r);overflow:hidden;font-family:var(--body);font-size:15.5px;line-height:1.5;
+  color:var(--ink);}
+.dos th{font-family:var(--display);font-weight:600;font-size:15px;text-align:left;
+  background:var(--bg-2);}
+.dos th,.dos td{padding:12px 16px;vertical-align:top;width:50%;}
+.dos tbody td{border-top:1px solid var(--line);}
+.dos th + th,.dos td + td{border-left:1px solid var(--line);}
+
+.prose > .wall{margin:var(--s4) 0 0;}
+.wall{--wall-h:360px;display:flex;gap:12px;height:var(--wall-h);list-style:none;padding:0;margin:0;}
+.wall-card{position:relative;flex:1 1 0;min-width:0;border-radius:var(--r);overflow:hidden;
+  background:#000;transition:flex .45s cubic-bezier(.2,.7,.2,1);}
+/* the open one goes square, as wide as the row is tall; the rest share what is left */
+.wall-card.is-open{flex:0 0 var(--wall-h);}
+/* a wall of one is a single wide card, the row's height across the column */
+.wall-card:only-child{flex:1 1 auto;}
+/* photos straight after a video sit at the grid's gap too */
+.prose > .wall + .section-media{margin-top:14px;}
+.wall-hit{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer;
+  color:var(--white);text-align:left;font:inherit;}
+.wall-card img,.wall-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  display:block;}
+/* the still stands until the card opens; the loop fades in over it */
+.wall-card video{opacity:0;transition:opacity .3s ease;}
+.wall-card.is-open video{opacity:1;}
+/* the pill only on the open card */
+.wall-card .teaser-play{opacity:0;transition:opacity .2s ease;}
+.wall-card.is-open .teaser-play{opacity:1;}
+/* the name sits at the top under a scrim from the top edge */
+.wall-caption{position:absolute;inset:0 0 auto 0;padding:18px 22px 56px;
+  font-family:var(--display);font-weight:500;font-size:15px;line-height:1.3; /* the byline's name */
+  opacity:.95;transition:opacity .2s ease;
+  background:linear-gradient(to bottom,rgba(0,0,0,.72),rgba(0,0,0,0));}
+/* the quote sits at the foot and brings its own scrim, so at rest the foot is clear. It
+   fades in over the same .45s the card takes to open, so both land together. */
+.wall-quote{position:absolute;inset:auto 0 0 0;padding:110px 22px 22px;font-family:var(--serif);
+  font-size:16px;line-height:1.35;quotes:"\201C" "\201D";opacity:0;visibility:hidden;
+  background:linear-gradient(to top,rgba(0,0,0,.78),rgba(0,0,0,0));
+  transition:opacity .2s ease,visibility 0s linear .2s;}
+.wall-card.is-open .wall-quote{opacity:1;visibility:visible;
+  transition:opacity .45s ease,visibility 0s;}
+/* the closed cards are slivers, whichever one is open; a name would only wrap there */
+.wall-card:not(.is-open) .wall-caption{opacity:0;}
+/* stacked, each card is a square and nothing needs hovering */
+@media (max-width:720px){
+  .wall{flex-direction:column;height:auto;}
+  .wall-card,.wall-card.is-open{flex:none;aspect-ratio:1;}
+  .wall-quote{opacity:1;visibility:visible;}
+}
+/* the callout is a ticket: ink-filled, torn across above the button, the tear's notches
+   cut from the canvas. The one thing to do on the page, dressed as the thing it gets you.
+   Colours are the pill's inversion — --ink and --on-ink — so the dark theme flips it to a
+   white ticket on a dark canvas and nothing else has to change. */
+.prose .ticket{margin-top:var(--s5);position:relative;background:var(--ink);color:var(--on-ink);
+  border-radius:var(--r);}
+/* the halves are set heights, the way a ticket is: what is printed on it sits in the
+   space, it does not size it. The heights are what the card measured with a line of
+   copy above the tear, which looked right. */
+.ticket-top,.ticket-stub{display:flex;align-items:center;padding:0 var(--s4);}
+.ticket-top{min-height:180px;flex-direction:column;justify-content:center;align-items:flex-start;
+  gap:12px;padding-block:var(--s3);}
+.ticket p{margin:0;font-family:var(--body);line-height:1.5;} /* not reading copy: the body face, as on the home page */
+.ticket-stub{min-height:112px;}
+.ticket h3{font-size:clamp(24px,3vw,30px);line-height:1.1;}
+/* the perforation runs edge to edge; the notches sit on the edges */
+.ticket-tear{position:relative;
+  border-top:2px dashed color-mix(in srgb,currentColor 35%,transparent);}
+.ticket-tear::before,.ticket-tear::after{content:"";position:absolute;top:-13px;width:24px;
+  height:24px;border-radius:50%;background:var(--bg);}
+.ticket-tear::before{left:-12px;}
+.ticket-tear::after{right:-12px;}
+/* the inverse pill: canvas on ink, pink when it wants pressing */
+.ticket-btn{background:var(--on-ink);color:var(--ink);}
+.ticket-btn:hover{background:var(--pink);color:var(--white);transform:translateY(-2px);
+  text-decoration:none;}
+/* pull quote: display face at lead size, the attribution in the facts style */
+/* a quote in the reading column is a card, the byline's kind: canvas fill, the chips'
+   hairline, the site radius. The quote in the reading type; under it the name and the
+   role stacked the way the byline stacks who and when. */
+.prose > blockquote{margin:var(--s5) 0;padding:var(--s3) var(--s4);color:var(--ink);line-height:1.6;
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--r);}
+.prose blockquote p{font:inherit;color:inherit;max-width:none;}
+.prose blockquote footer{margin-top:16px;display:flex;flex-direction:column;gap:2px;}
+.prose blockquote footer b{font-family:var(--display);font-weight:500;font-size:15px;line-height:1.3;
+  color:var(--ink);}
+.prose blockquote footer span{font-family:var(--display);font-size:13px;color:var(--muted);}
+
+/* ---- reading an article ---- */
+/* progress: a hairline across the very top of the viewport that fills as you scroll.
+   A scroll-driven animation, no JS. animation-timeline must follow the shorthand, which
+   resets it. Where unsupported the bar stays at scaleX(0), i.e. simply isn't there. */
+.read-progress{position:fixed;top:0;left:0;z-index:60;width:100%;height:3px;background:var(--pink);
+  transform-origin:0 50%;transform:scaleX(0);pointer-events:none;
+  animation:read-progress linear both;animation-timeline:scroll(root);}
+@keyframes read-progress{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+/* the head sits on the axis; the eyebrow stays left as the way back. Direct children
+   only, so "Read next" and "Pass it on" at the end do not follow. */
+.post > .page-wrap > .sec-title{text-align:center;}
+/* a role opens the same way: title, facts and lead on the axis, the eyebrow left as the way back */
+.role > .page-wrap > .sec-title,.role > .page-wrap > .sec-lead{text-align:center;}
+.role > .page-wrap > .sec-lead{margin-inline:auto;}
+.role > .page-wrap > .facts{justify-content:center;}
+/* the byline is the agenda session card's shape: the face at the left, who beside it,
+   the when line in mono underneath; here the face spans both rows because there is no
+   title row between them. Canvas fill with the chips' solid hairline. fit-content +
+   auto side margins centre the card itself, not the text inside it. */
+.byline{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;row-gap:2px;
+  grid-template-areas:"face who" "face when";align-items:center;text-align:center;
+  width:fit-content;margin:var(--s5) auto var(--s5);
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:9px 13px;}
+.byline img{grid-area:face;display:block;width:28px;height:28px;border-radius:50%;object-fit:cover;}
+.byline-who{grid-area:who;font-family:var(--display);font-weight:500;font-size:15px;
+  line-height:1.3;color:var(--ink);}
+.byline-when{grid-area:when;font-family:var(--mono);font-size:11.5px;color:var(--muted);}
+/* the end: hairline, share row, then what to read next */
+.article-end{margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid var(--line);}
+.article-end .facts{margin:0 0 14px;}
+.article-end .sec-title{margin-top:var(--s6);}
 
 /* ============================================================
    RESPONSIVE

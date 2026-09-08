@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   useEffect,
   useRef,
@@ -31,8 +33,10 @@ type Piece = { id: number; style: CSSProperties };
 
 const POP_SRC = "/media/badge-pop.mp3"; // ElevenLabs, trimmed to the pop and its scatter
 const POP_VOLUME = 0.6;
+const HOLD_MS = 600; // pop finished, confetti at its apex — then the link is followed
 
-export default function TiltBadge({ children }: { children: ReactNode }) {
+export default function TiltBadge({ href, children }: { href: string; children: ReactNode }) {
+  const router = useRouter();
   const [tilt, setTilt] = useState<CSSProperties>({});
   const [popping, setPopping] = useState(false);
   const [confetti, setConfetti] = useState<Piece[]>([]);
@@ -104,13 +108,21 @@ export default function TiltBadge({ children }: { children: ReactNode }) {
       });
   }, []);
 
-  function release(e: MouseEvent<HTMLButtonElement>) {
+  function release(e: MouseEvent<HTMLAnchorElement>) {
     setPopping(true);
     if (pop.current) {
       pop.current.currentTime = 0; // restart rather than ignore a rapid second click
       pop.current.play().catch(() => {}); // a blocked autoplay must not break the animation
     }
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // a plain click holds the page for the pop before it follows the link. A modified click
+    // (new tab, new window) is left to the browser — there is nothing to wait for
+    const plain = e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (plain) {
+      e.preventDefault();
+      window.setTimeout(() => router.push(href), reduced ? 0 : HOLD_MS);
+    }
+    if (reduced) return;
     // offset* are layout sizes, so they ignore whatever transform the pill is under
     const halfW = e.currentTarget.offsetWidth / 2;
     const halfH = e.currentTarget.offsetHeight / 2;
@@ -157,8 +169,8 @@ export default function TiltBadge({ children }: { children: ReactNode }) {
       ))}
       {/* tilt and press live on separate elements so the pop animation can't fight the tilt */}
       <span className="anni-badge-tilt" style={tilt}>
-        <button
-          type="button"
+        <Link
+          href={href}
           className={popping ? "anni-badge pop" : "anni-badge"}
           // both reset first, so a fast second activation replays the pop
           onPointerDown={() => setPopping(false)}
@@ -168,7 +180,7 @@ export default function TiltBadge({ children }: { children: ReactNode }) {
           onAnimationEnd={() => setPopping(false)}
         >
           <span className="anni-badge-label">{children}</span>
-        </button>
+        </Link>
       </span>
     </span>
   );

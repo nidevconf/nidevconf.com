@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "NIDC 2026 — Northern Ireland Developer Conference",
     short_name: "NIDC 2026",
     description:
-      "Event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026 at ICC Belfast.",
+      "Event of the year for the tech community — celebrating 10 years. Saturday 21 November 2026 at International Convention Centre Belfast.",
     start_url: "/",
     display: "standalone",
     background_color: "#FBFBFB",
