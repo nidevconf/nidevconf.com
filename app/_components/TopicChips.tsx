@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { CHIPS } from "./chips";
 
-/* The subject areas on offer, in the order they read best. */
-const CHIPS = ["Engineering", "Product", "Design", "Security", "AI", "Data", "Wildcard"];
-
-/* Toggles, for filtering the schedule later. Nothing reads `selected` yet — when
-   something does, this state is what lifts. */
+/* Highlighter toggles. The chips on are written to data-on as a token list, and
+   CSS lights up every session card carrying one of those names — the list and
+   the schedule are siblings, so no state has to cross into the server tree. */
 export default function TopicChips() {
   const [selected, setSelected] = useState<string[]>([]);
   // The tilt is CSS on :hover, but the settle back is a decaying wobble, and a
@@ -16,8 +15,29 @@ export default function TopicChips() {
   const [wobbling, setWobbling] = useState<string[]>([]);
   const settled = (topic: string) => setWobbling((w) => w.filter((t) => t !== topic));
 
+  // The list is position:sticky, and CSS cannot say whether it is currently
+  // stuck. So: watch it against a root whose top edge is one pixel below the
+  // sticky offset. Pinned, the list sits exactly on the offset and that pixel
+  // is outside the root; in flow, it is wholly inside. The top check keeps a
+  // list scrolling in from below (also partly outside) from counting. The 0
+  // threshold is for a jump straight into the pinned state — a reload halfway
+  // down the page — which never passes through "wholly inside".
+  const list = useRef<HTMLUListElement>(null);
+  const [stuck, setStuck] = useState(false);
+  useEffect(() => {
+    const el = list.current;
+    if (!el) return;
+    const line = parseFloat(getComputedStyle(el).top);
+    const io = new IntersectionObserver(
+      ([e]) => setStuck(e.intersectionRatio < 1 && e.boundingClientRect.top <= line + 0.5),
+      { threshold: [0, 1], rootMargin: `-${line + 1}px 0px 0px 0px` },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <ul className="chips">
+    <ul ref={list} className={stuck ? "chips stuck" : "chips"} data-on={selected.join(" ")}>
       {CHIPS.map((topic, i) => (
         <li key={topic}>
           <button

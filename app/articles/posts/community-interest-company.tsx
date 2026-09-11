@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import type { Article } from "../articles";
-import AgendaReminder from "../../_components/AgendaReminder";
 import VideoWall from "../../_components/VideoWall";
 import Lightbox from "../../_components/Lightbox";
 import SponsorTiers from "../../_components/SponsorTiers";
@@ -594,29 +593,28 @@ const article: Article = {
 
       <h2>Come to the conference</h2>
       <p>
-        Agenda is announced on Friday, 11th September at 10am. General availability tickets,
-        including honesty tickets and childcare, go on sale at the same time.
+        The agenda is out, and general availability tickets, including honesty tickets and
+        childcare, are on sale.
       </p>
       <div className="btn-row">
-        <AgendaReminder />
         <Link className="btn btn-ghost" href="/#agenda">
-          Preview the agenda <span className="arrow">→</span>
+          See the agenda <span className="arrow">→</span>
         </Link>
       </div>
       <aside className="ticket">
         <div className="ticket-top">
           <h3>
-            Last chance for <span className="hl">early bird</span> tickets
+            Get your <span className="hl">tickets</span>
           </h3>
           <p>
-            Early bird tickets are on sale until the agenda is out, so if you’re coming
-            anyway, this is your last chance to get them with a wee discount.
+            Tickets are on sale, including honesty tickets and childcare. If you’re coming,
+            grab yours and tell your team.
           </p>
         </div>
         <div className="ticket-tear" aria-hidden />
         <div className="ticket-stub">
           <Link className="btn ticket-btn" href="/#tickets">
-            Get an early bird ticket <span className="arrow">→</span>
+            Get tickets <span className="arrow">→</span>
           </Link>
         </div>
       </aside>

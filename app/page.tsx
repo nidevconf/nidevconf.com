@@ -7,7 +7,6 @@ import TopicChips from "./_components/TopicChips";
 import TiltBadge from "./_components/TiltBadge";
 import HeroVideo from "./_components/HeroVideo";
 import SponsorStrip from "./_components/SponsorStrip";
-import AgendaReminder from "./_components/AgendaReminder";
 
 export default function HomePage() {
   return (
@@ -56,15 +55,11 @@ export default function HomePage() {
           <div className="wrap section-centered">
             <h2 className="sec-title">Agenda</h2>
             <p className="sec-lead">
-              Coming out in{" "}
-              <span className="nobr">
-                <span className="hl hl-y">September</span>.
-              </span>
+              Nerd out and learn from
+              <br />
+              engineers, hackers, designers, and PhDs.
             </p>
             <TopicChips />
-            <div className="btn-row">
-              <AgendaReminder />
-            </div>
             <p className="sec-body">
               The place to be for enthusiasts, students, and professionals across software,
               product, cloud, data, UX, games, infrastructure, open source, security, AI, and
