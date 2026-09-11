@@ -321,6 +321,29 @@
     ]
   },
   {
+    "id": "1331058",
+    "title": "Introduction to Python and Electronics - code your own game controller",
+    "description": "Ever wonder how Python and electronics work together? What's CircuitPython? This exciting electronics-based workshop brings creativity and technology together to enhance the gaming experience. Learning how to build a custom game controller, participants will develop skills to tailor the design and functionality of their gaming preferences.\n\n👉 What you need to bring is your laptop with Thonny installed - https://thonny.org\n\nWe will provide the rest of the components and materials needed for the workshop.",
+    "format": "Workshop",
+    "minutes": 60,
+    "level": "Introductory",
+    "topics": [
+      "Coding",
+      "Games",
+      "Hardware/IoT",
+      "Open Source"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Vicky Twomey-Lee",
+        "tagline": "Coding Grace, Diversity in Tech Advocate",
+        "bio": "Vicky Twomey-Lee, a techie who has been involved with the Irish Tech Community since 2005, and currently advocates diversity in tech through Coding Grace and PyLadies Dublin. She also co-organises game jams through GameCraft. And with her Maker hat on, she was also the Maker Advocate for Dublin Maker a few years ago.\n\nhttps://www.linkedin.com/in/vickyleeire",
+        "photo": "vicky-twomey-lee.jpg"
+      }
+    ]
+  },
+  {
     "id": "1296109",
     "title": "Is this the CVE-nd? Inside the Vulnerability Data Crisis",
     "description": "This talk explores a growing crisis in the vulnerability intelligence ecosystem. The number of reported CVEs (Common Vulnerabilities and Exposures) keeps rising, while the agencies responsible for tracking them, CISA (Cybersecurity and Infrastructure Security Agency) and the NVD (National Vulnerability Database), are being weakened by political cuts. As a result, traditional vulnerability management tools are quietly failing, and their users don't even know it.\n\nAt the same time, security researchers are finding it increasingly difficult to disclose vulnerabilities responsibly, exacerbating the long-standing tension at the heart of the CVE programme: balancing the interests of software vendors and researchers.\n\nFinally, we look at the latest disruption hitting the community: AI-assisted vulnerability discovery. As automated tooling begins generating CVEs at unprecedented scale, and with hugely variable quality, it is placing even more strain on an already creaking ecosystem.\n\nSo all of this begs the question: is this the CVE-nd for vulnerability intelligence as we know it? And how do we as developers cope with a increasingly fragmented security space?",
@@ -478,7 +501,7 @@
   {
     "id": "1306805",
     "title": "Ranking Every Trainer in Pokemon Red",
-    "description": "Title could maybe be better. At the start of this year I was working on a small project to rank every trainer in Pokémon Red. There’s a mix of how the GameBoy system works, how Pokemon Red works, how you can use emulation and Python to automate the game and build a fun set of statistics. The output of the project was 1400 hours of video from around 1.6 million battles run in the cloud, and there’ll be a YouTube video about it sometime in the coming months if I get around to finishing my write up\n\nTopics involved:\n* The Game Boy system\n* Console emulation\n* Pokemon Red\n* Assembly\n* Python\n* The Cloud (minor)\n\nI’m sure I can fill an hour, but I could cut some things and fit it into 30 minutes. If this isn’t a detailed enough description I can expand a bit more",
+    "description": "Title could maybe be better. At the start of this year I was working on a small project to rank every trainer in Pokémon Red. There’s a mix of how the GameBoy system works, how Pokemon Red works, how you can use emulation and Python to automate the game and build a fun set of statistics. The output of the project was 1400 hours of video from around 1.6 million battles run in the cloud, and there’ll be a YouTube video about it sometime in the coming months if I get around to finishing my write up\n\nTopics involved:\n* The Game Boy system\n* Console emulation\n* Pokemon Red\n* Assembly\n* Python\n* The Cloud (minor)",
     "format": "Talk",
     "minutes": 30,
     "level": "Intermediate",
