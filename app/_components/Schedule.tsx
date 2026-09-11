@@ -81,7 +81,7 @@ const PINNED: Record<string, [start: number, track: number]> = {
   "1303858": [at(13, 45), 1], // From Zero to Container: A Java Quarkus Deep Dive (Jason Bell)
   "1311260": [at(13, 45), 0], // Terminal Panic
   "1310638": [at(14, 30), 0], // Making the Smart Dumb Thing Smart
-  "iz-wright": [at(11, 30), 0], // Shipping Quick, Failing Fast
+  "1331334": [at(11, 30), 0], // Shipping Quick, Failing Fast
 };
 const pinned = (start: number, track: number) =>
   sessions.find((s) => PINNED[s.id]?.[0] === start && PINNED[s.id]?.[1] === track);

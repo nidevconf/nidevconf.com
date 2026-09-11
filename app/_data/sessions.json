@@ -526,21 +526,22 @@
     ]
   },
   {
-    "id": "iz-wright",
+    "id": "1331334",
     "title": "Shipping Quick, Failing Fast",
     "description": "The biggest waste of product effort often isn't a sloppy feature. It's a polished, well-built one that solves a problem nobody actually had. In this talk, Iz Wright, Product Manager at Gearset, walks through the process behind shipping a customer-validated feature. From uncovering the \"real\" problem with customers by applying the lessons of Rob Fitzpatrick's The Mom Test to ask better questions, to building a rapid, shareable prototype that lets users react and interact rather than imagine. Iz shows how shipping the smallest possible slice creates space to gather real usage data, iterate fast, and even spot Go-To-Market opportunities hiding in the data.",
     "format": "Talk",
     "minutes": 30,
     "level": "Introductory",
     "topics": [
-      "Product"
+      "Product",
+      "DevOps"
     ],
     "chip": "Product",
     "speakers": [
       {
         "name": "Iz Wright",
         "tagline": "Product Manager at Gearset",
-        "bio": "",
+        "bio": "With a background as a Product Manager in Tech, Iz has a passion for understanding user needs and translating them into impactful products. Having lived in Norwich (with a short stint in London) for the past decade, NorDev is the perfect opportunity to make her speaker debut!",
         "photo": "iz-wright.jpg"
       }
     ]
