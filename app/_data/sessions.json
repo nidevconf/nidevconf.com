@@ -520,6 +520,26 @@
     ]
   },
   {
+    "id": "iz-wright",
+    "title": "Shipping Quick, Failing Fast",
+    "description": "The biggest waste of product effort often isn't a sloppy feature. It's a polished, well-built one that solves a problem nobody actually had. In this talk, Iz Wright, Product Manager at Gearset, walks through the process behind shipping a customer-validated feature. From uncovering the \"real\" problem with customers by applying the lessons of Rob Fitzpatrick's The Mom Test to ask better questions, to building a rapid, shareable prototype that lets users react and interact rather than imagine. Iz shows how shipping the smallest possible slice creates space to gather real usage data, iterate fast, and even spot Go-To-Market opportunities hiding in the data.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Product"
+    ],
+    "chip": "Product",
+    "speakers": [
+      {
+        "name": "Iz Wright",
+        "tagline": "Product Manager at Gearset",
+        "bio": "",
+        "photo": "iz-wright.jpg"
+      }
+    ]
+  },
+  {
     "id": "1310988",
     "title": "So, Why Do We Need Quantum Computers?",
     "description": "Quantum computing has gone from a scary research topic to a technology attracting a lot of interest from the wider tech industry. But beyond the hype, what problem are we really trying to solve... and what does quantum computing mean for software developers?\n\nThis talk is an introduction to quantum computing from a software and engineering perspective. We'll look at what we've achieved so far, what quantum programs actually look like, and what it takes to get a quantum program running on a real quantum computer.\n\nThe aim isn't to predict exactly when quantum computing will become mainstream, but to help developers understand what quantum computing is, why we might need it, where it could be useful, and what role we as software engineers could play in its future.\n\nKey takeaways:\n1. Understand the basic ideas behind quantum computing without all the complex maths.\n2. See how quantum programs differ from conventional programs and how they interact with classical computers.\n3. Explore some of the big technical and practical challenges facing quantum computing.\n4. Separate some of the potential applications of quantum computing from the buzz surrounding it.\n5. Get an insight into the emerging roles for software developers in a future with quantum computing.\n\nNo prior knowledge of quantum computing is required!",
