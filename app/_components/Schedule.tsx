@@ -51,6 +51,7 @@ const FLASH_GAP = 5;
 // a room and start, place by those instead.
 const PINNED: Record<string, [start: number, track: number]> = {
   "1272502": [at(13), 4], // OWASP PTK Hands-On — straight after lunch
+  "1331058": [at(11, 15), 4], // Python and Electronics workshop
   "1281884": [at(10, 45), 0], // Deprecated: The role was redundant. Not me.
   "1315618": [at(15, 30), 1], // You Are Not Netflix
   "1307120": [at(16, 10), 0], // Decoding Irish Trad — closes Hall 1A
