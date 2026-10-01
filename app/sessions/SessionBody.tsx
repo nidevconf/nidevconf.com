@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import FavButton from "../_components/FavButton";
 import type sessions from "../_data/sessions.json";
 
 export type Session = (typeof sessions)[number];
@@ -27,6 +28,7 @@ export default function SessionBody({
     <>
       <H className={H === "h1" ? "sec-title" : "td-title"}>{s.title}</H>
       <p className="td-meta">{meta}</p>
+      <FavButton id={s.id} title={s.title} labelled />
       <div className="td-people">
         {s.speakers.map((p, i) => (
           <figure key={p.name} className="td-person">

@@ -25,6 +25,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx next build
+        env:
+          # the agenda Worker's address, set under Settings > Secrets and
+          # variables > Actions > Variables; unset, hearts stay on the device
+          NEXT_PUBLIC_AGENDA_API: ${{ vars.AGENDA_API }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
