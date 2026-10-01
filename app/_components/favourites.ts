@@ -11,6 +11,7 @@ import { useEffect, useMemo, useSyncExternalStore } from "react";
 
 const KEY = "agenda";
 const DEVICE = "agenda-device";
+const SYNCED = "agenda-synced"; // the last list the Worker accepted
 const API = process.env.NEXT_PUBLIC_AGENDA_API;
 
 const listeners = new Set<() => void>();
@@ -51,12 +52,22 @@ export function useFavourites() {
 
 /* A change is sent when it happens, but that send can be lost: offline at the
    venue, the API down, or picks made before the API existed. So the first page
-   that shows a heart sends the list once more. It replaces, so a repeat is harmless. */
+   that shows a heart sends the list again, but only if it differs from the last
+   one the Worker accepted; resending on every page load would burn the
+   database's daily write allowance on the day. */
 let resynced = false;
 function resyncOnce() {
   if (resynced) return;
   resynced = true;
-  if (parse(read()).length) sync();
+  if (read() !== synced()) sync();
+}
+
+function synced() {
+  try {
+    return localStorage.getItem(SYNCED) ?? "[]";
+  } catch {
+    return "[]";
+  }
 }
 
 export function setAll(ids: string[]) {
@@ -104,13 +115,19 @@ function device() {
 // without a CORS preflight. Fire and forget: the agenda never waits on this.
 function push() {
   timer = undefined;
+  const body = read();
+  if (body === synced()) return; // hearted and unhearted again: nothing to tell
   try {
     fetch(`${API}/picks/${device()}`, {
       method: "POST",
       headers: { "content-type": "text/plain" },
-      body: read(),
+      body,
       keepalive: true,
-    }).catch(() => {});
+    })
+      .then((r) => {
+        if (r.ok) localStorage.setItem(SYNCED, body);
+      })
+      .catch(() => {});
   } catch {
     // no storage, no crypto: the picks still work on this device
   }

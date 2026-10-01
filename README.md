@@ -103,7 +103,7 @@ cd worker && npx wrangler d1 execute nidevconf-agenda --remote \
    - **Actions variable:** `AGENDA_API` = the Worker URL (used by the site build).
    - **Secrets:** `CLOUDFLARE_API_TOKEN` (Workers + D1 edit) and `CLOUDFLARE_ACCOUNT_ID`, for `.github/workflows/worker.yml`, which redeploys the Worker on changes under `worker/`.
 
-Locally: put `ADMIN_KEY=...` and `SITE=http://localhost:3000` in `worker/.dev.vars`, then run `npm run migrate:local && npm run dev` in `worker/`. Run the site with `NEXT_PUBLIC_AGENDA_API=http://localhost:8787 npm run dev`.
+Locally: put `ADMIN_KEY=...`, `SITE=http://localhost:3000` and `ORIGINS=http://localhost:3000` in `worker/.dev.vars`, then run `npm run migrate:local && npm run dev` in `worker/`. Run the site with `NEXT_PUBLIC_AGENDA_API=http://localhost:8787 npm run dev`.
 
 ## Deployment
 

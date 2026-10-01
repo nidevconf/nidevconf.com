@@ -71,6 +71,12 @@ function corsHeaders(req: Request, env: Env): Record<string, string> {
 }
 
 async function savePicks(req: Request, env: Env, device: string) {
+  // CORS only hides the response; a text/plain POST from any other site would
+  // still be written. Browsers always send Origin on a POST, so this stops them.
+  const origin = req.headers.get("origin");
+  if (!origin || !env.ORIGINS.split(",").includes(origin)) {
+    return new Response("Not from the agenda", { status: 403 });
+  }
   if (!UUID.test(device)) return new Response("Bad device id", { status: 400 });
 
   const ip = req.headers.get("cf-connecting-ip") ?? "local";
@@ -91,19 +97,52 @@ async function savePicks(req: Request, env: Env, device: string) {
     return new Response("Expected an array of session ids", { status: 400 });
   }
 
-  // the whole list replaces what was there, so a lost request heals on the next
-  const now = Date.now();
+  // Only real sessions count, so a device holds at most the agenda. If the
+  // site can't be reached, take the list on trust rather than lose hearts.
+  const timetable = await sessionIds(env);
+  const want = new Set(ids as string[]);
+  if (timetable.size && [...want].some((id) => !timetable.has(id))) {
+    return new Response("Unknown session id", { status: 400 });
+  }
+
+  /* The list sent is the whole list, so a lost request heals on the next. But
+     D1 bills every row (and index entry) written, so only the difference is
+     written, and a list that hasn't changed writes nothing at all. */
+  const { results } = await env.DB.prepare("SELECT session FROM picks WHERE device = ?")
+    .bind(device)
+    .all<{ session: string }>();
+  const have = new Set(results.map((r) => r.session));
+  const added = [...want].filter((id) => !have.has(id));
+  const removed = [...have].filter((id) => !want.has(id));
+  if (!added.length && !removed.length) return new Response(null, { status: 204 });
+
   await env.DB.batch([
-    env.DB.prepare("DELETE FROM picks WHERE device = ?").bind(device),
-    ...[...new Set(ids as string[])].map((id) =>
+    ...removed.map((id) =>
+      env.DB.prepare("DELETE FROM picks WHERE device = ? AND session = ?").bind(device, id),
+    ),
+    ...added.map((id) =>
       env.DB.prepare("INSERT INTO picks (device, session) VALUES (?, ?)").bind(device, id),
     ),
     env.DB.prepare(
       `INSERT INTO devices (device, first, last) VALUES (?1, ?2, ?2)
        ON CONFLICT (device) DO UPDATE SET last = ?2`,
-    ).bind(device, now),
+    ).bind(device, Date.now()),
   ]);
   return new Response(null, { status: 204 });
+}
+
+// The live agenda, cached at the edge for five minutes. Empty if unreachable.
+async function timetable(env: Env): Promise<Slot[]> {
+  try {
+    const r = await fetch(`${env.SITE}/timetable.json`, { cf: { cacheTtl: 300 } });
+    return r.ok ? ((await r.json()) as Slot[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+async function sessionIds(env: Env) {
+  return new Set((await timetable(env)).flatMap((s) => (s.id ? [s.id] : [])));
 }
 
 async function countBySession(env: Env) {
@@ -201,10 +240,8 @@ type Slot = {
 /* Everything the admin page draws, in one response. The timetable comes from
    the live site, so the page always matches the agenda people are picking from. */
 async function stats(env: Env) {
-  const [timetable, bySession, totals, daily, pairs] = await Promise.all([
-    fetch(`${env.SITE}/timetable.json`, { cf: { cacheTtl: 300 } })
-      .then((r) => (r.ok ? (r.json() as Promise<Slot[]>) : []))
-      .catch(() => [] as Slot[]),
+  const [slots, bySession, totals, daily] = await Promise.all([
+    timetable(env),
     countBySession(env),
     env.DB.prepare(
       `SELECT (SELECT COUNT(DISTINCT device) FROM picks) AS people,
@@ -215,31 +252,41 @@ async function stats(env: Env) {
       `SELECT date(first / 1000, 'unixepoch') AS day, COUNT(*) AS n
        FROM devices GROUP BY day ORDER BY day`,
     ).all<{ day: string; n: number }>(),
-    env.DB.prepare(
-      `SELECT a.session AS a, b.session AS b, COUNT(*) AS n
-       FROM picks a JOIN picks b ON a.device = b.device AND a.session < b.session
-       GROUP BY a.session, b.session`,
-    ).all<{ a: string; b: string; n: number }>(),
   ]);
-
-  // a pair only matters when the two run at the same time
-  const at = new Map(timetable.filter((s) => s.id).map((s) => [s.id!, s]));
-  const clashes = pairs.results
-    .filter(({ a, b }) => {
-      const x = at.get(a);
-      const y = at.get(b);
-      return x && y && x.start < y.end && y.start < x.end;
-    })
-    .sort((x, y) => y.n - x.n)
-    .slice(0, 15);
-
   return {
-    timetable,
+    timetable: slots,
     counts: bySession,
     people: totals?.people ?? 0,
     picks: totals?.picks ?? 0,
     last: totals?.last ?? null,
     daily: daily.results,
-    clashes,
+    clashes: await clashes(env, slots),
   };
+}
+
+/* How many people picked both of two sessions that run at the same time. Only
+   the pairs that actually overlap are counted, each by index lookups, rather
+   than joining every pick to every other. They are written into the SQL rather
+   than bound because D1 allows only 100 bound parameters; they are checked to
+   be plain digits first. */
+async function clashes(env: Env, slots: Slot[]) {
+  const talks = slots.filter((s) => s.id && SESSION.test(s.id));
+  const pairs: string[] = [];
+  for (const x of talks) {
+    for (const y of talks) {
+      if (x.id! < y.id! && x.start < y.end && y.start < x.end) pairs.push(`('${x.id}','${y.id}')`);
+    }
+  }
+  if (!pairs.length) return [];
+  const { results } = await env.DB.prepare(
+    `WITH pair (a, b) AS (VALUES ${pairs.join(",")})
+     SELECT pair.a AS a, pair.b AS b, COUNT(*) AS n
+     FROM pair
+     JOIN picks x ON x.session = pair.a
+     JOIN picks y ON y.device = x.device AND y.session = pair.b
+     GROUP BY pair.a, pair.b
+     ORDER BY n DESC
+     LIMIT 15`,
+  ).all<{ a: string; b: string; n: number }>();
+  return results;
 }
