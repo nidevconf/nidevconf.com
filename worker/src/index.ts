@@ -116,12 +116,15 @@ async function savePicks(req: Request, env: Env, device: string) {
   const removed = [...have].filter((id) => !want.has(id));
   if (!added.length && !removed.length) return new Response(null, { status: 204 });
 
+  // The read above is outside the batch, so two tabs syncing the same device at
+  // once can both decide to add a row. OR IGNORE keeps the second from failing
+  // the whole batch on the primary key; the deletes are already idempotent.
   await env.DB.batch([
     ...removed.map((id) =>
       env.DB.prepare("DELETE FROM picks WHERE device = ? AND session = ?").bind(device, id),
     ),
     ...added.map((id) =>
-      env.DB.prepare("INSERT INTO picks (device, session) VALUES (?, ?)").bind(device, id),
+      env.DB.prepare("INSERT OR IGNORE INTO picks (device, session) VALUES (?, ?)").bind(device, id),
     ),
     env.DB.prepare(
       `INSERT INTO devices (device, first, last) VALUES (?1, ?2, ?2)
