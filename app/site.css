@@ -553,6 +553,29 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .td-speaker{margin-top:var(--s3);padding-top:var(--s2);border-top:1px solid var(--line);}
 .td-name{font-family:var(--display);font-weight:600;font-size:14px;}
 .td-bio{margin-top:8px;font-size:14px;line-height:1.55;color:var(--muted);}
+/* MY AGENDA. The card is a box rather than a button so it can hold the heart:
+   the button that opens the modal is stretched over the whole card, empty,
+   named for the session, and the heart sits on top of it in the corner. */
+.ag-open{position:absolute;inset:0;z-index:1;border:0;padding:0;background:transparent;
+  border-radius:inherit;cursor:pointer;}
+.ag-open:focus-visible{outline-offset:-3px;}
+.ag-session .fav{position:absolute;top:4px;right:4px;z-index:2;}
+.ag-session .ag-who{padding-right:22px;}
+.ag-flash .ag-title{padding-right:22px;}
+/* picked: the pink edge the transparent border was keeping room for */
+.ag-session[data-picked]{border-color:var(--pink);}
+
+.fav{display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  width:26px;height:26px;padding:0;border:0;border-radius:50%;background:transparent;
+  color:var(--muted);cursor:pointer;transition:color .12s ease,background .12s ease;}
+.fav:hover{color:var(--pink-dk);background:var(--bg-3);}
+.fav[aria-pressed="true"]{color:var(--pink-dk);}
+.fav-labelled{width:auto;height:auto;margin-top:var(--s2);padding:8px 14px;
+  border:1px solid var(--line);border-radius:var(--r-pill);
+  font-family:var(--display);font-weight:600;font-size:14px;color:var(--ink);}
+.fav-labelled[aria-pressed="true"]{border-color:var(--pink);}
+.fav-labelled svg{color:var(--pink-dk);}
+
 /* the page must not scroll behind the modal */
 body:has(.talk-dialog[open]){overflow:hidden;}
 
@@ -960,6 +983,49 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 .article-end .facts{margin:0 0 14px;}
 .article-end .sec-title{margin-top:var(--s6);}
 
+/* the header's way to your picks, with the count in a pink pill */
+.site-header .nav-links .nav-agenda{display:inline-flex;align-items:center;gap:6px;}
+.site-header .nav-links .nav-agenda svg{color:var(--pink-dk);}
+.nav-agenda-n{min-width:20px;padding:1px 6px;border-radius:var(--r-pill);background:var(--pink);
+  color:var(--white);font-size:12px;line-height:18px;text-align:center;}
+
+/* /my-agenda: one row per slot of your day. Sessions are cards like the agenda's;
+   the breaks between them are a plain line, so the eye runs down the talks. */
+.my-agenda{margin-top:var(--s4);}
+.my-actions{margin-bottom:var(--s3);}
+.my-actions .btn{gap:8px;padding:10px 18px;font-size:15px;}
+.my-day{list-style:none;padding:0;display:grid;gap:8px;}
+.my-row{display:grid;grid-template-columns:56px auto minmax(0,1fr) auto;align-items:center;
+  column-gap:14px;}
+.my-time{font-family:var(--mono);font-size:13px;color:var(--ink);align-self:start;padding-top:2px;}
+.my-time span{display:block;color:var(--muted);font-size:11.5px;}
+.my-session{background:var(--bg-2);border:1px solid transparent;border-radius:var(--r);
+  padding:12px 12px 12px 14px;}
+.my-session[data-clash]{border-color:var(--yellow);}
+.my-band{padding:6px 14px;color:var(--muted);font-family:var(--display);font-size:14px;}
+.my-band .my-time{color:var(--muted);padding-top:0;}
+.my-band .my-text{grid-column:2 / -1;}
+.my-faces{display:flex;align-self:start;}
+.my-faces img{width:40px;height:40px;border-radius:50%;object-fit:cover;}
+.my-faces img + img{margin-left:-12px;border:2px solid var(--bg-2);}
+.my-text{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.my-title{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.3;color:var(--ink);}
+.my-title:hover{color:var(--pink-dk);}
+.my-meta{font-size:13px;color:var(--muted);}
+.my-band .my-text{display:block;}
+.my-clash{margin-top:4px;font-size:13px;color:var(--ink);}
+.my-clash::before{content:"⚠ ";}
+.my-session .fav{align-self:start;}
+.my-empty,.my-shared{background:var(--bg-2);border-radius:var(--r);padding:var(--s3) var(--s4);}
+.my-empty .btn-row,.my-shared .btn-row{margin-top:var(--s2);}
+.my-shared{margin-bottom:var(--s3);border:1px solid var(--yellow);}
+.my-privacy{margin-top:var(--s4);font-size:13px;color:var(--muted);}
+@media (max-width:560px){
+  .my-row{grid-template-columns:48px minmax(0,1fr) auto;}
+  .my-faces{display:none;}
+  .my-band .my-text{grid-column:2 / -1;}
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -971,7 +1037,8 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 }
 @media (max-width:560px){
   .section{padding:var(--s6) 0;}
-  .site-header .nav-links a:not(.btn){display:none;}
+  .site-header .nav-links a:not(.btn):not(.nav-agenda){display:none;}
+  .nav-agenda-label{display:none;}
   .foot-cols{grid-template-columns:1fr 1fr;}
 }
 

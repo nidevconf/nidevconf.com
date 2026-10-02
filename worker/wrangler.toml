@@ -1,0 +1,31 @@
+# The agenda API: anonymous counts of who hearted what, and the organisers'
+# admin page. The site itself stays on GitHub Pages; see README "My agenda".
+name = "nidevconf-agenda"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+
+# the admin page is one HTML file bundled into the Worker as a string
+rules = [{ type = "Text", globs = ["**/*.html"], fallthrough = true }]
+
+[vars]
+SITE = "https://nidevconf.com"
+# the only sites whose pages may send picks; for `wrangler dev`, override it
+# with ORIGINS=http://localhost:3000 in worker/.dev.vars
+ORIGINS = "https://nidevconf.com"
+# Organiser sign-in lives in Worker secrets, not here, because this repo is
+# public: ACCESS_TEAM_DOMAIN and ACCESS_AUD (Cloudflare Access with Google
+# login), or ADMIN_KEY until Access is set up. See README "My agenda".
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nidevconf-agenda"
+# from `npx wrangler d1 create nidevconf-agenda`
+database_id = "00000000-0000-0000-0000-000000000000"
+
+# Per IP, so it has to cover a whole room on the venue wifi, which shares one
+# address: browsers only send when their picks change, so 120 a minute is
+# plenty there and still slows down a script trying to stuff the counts.
+[[ratelimits]]
+name = "RATE"
+namespace_id = "1001"
+simple = { limit = 120, period = 60 }

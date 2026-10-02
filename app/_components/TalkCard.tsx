@@ -3,10 +3,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRef, type CSSProperties } from "react";
 import SessionBody, { type Session } from "../sessions/SessionBody";
+import FavButton from "./FavButton";
+import { useFavourites } from "./favourites";
 
 export type { Session };
 
-/* A session in its timetable slot. The card is a button sized by the grid, so it
+/* A session in its timetable slot. The card is sized by the grid, so it
    only previews — faces, title, who — and the abstract and bios open in a
    <dialog>, which brings its own focus trap, Escape and backdrop. */
 export default function TalkCard({
@@ -28,16 +30,19 @@ export default function TalkCard({
 }) {
   const dlg = useRef<HTMLDialogElement>(null);
   const who = s.speakers.map((p) => p.name).join(" & ");
+  const picked = useFavourites().includes(s.id);
 
   return (
     <>
-      <button
-        type="button"
+      {/* The heart is a second control on the card, and a button cannot hold
+          another button — so the card is a box, and the button that opens the
+          modal is stretched over the whole of it with the heart above. */}
+      <div
         className={`ag-item ag-talk ag-session${flash ? " ag-flash" : ""}`}
         data-track={track}
         data-chip={s.chip}
+        data-picked={picked || undefined}
         style={style}
-        onClick={() => dlg.current?.showModal()}
       >
         <span className="ag-face">
           {s.speakers.map((p) => (
@@ -47,7 +52,14 @@ export default function TalkCard({
         <span className="ag-who">{who}</span>
         <span className="ag-title">{s.title}</span>
         <span className="ag-when">{when}</span>
-      </button>
+        <button
+          type="button"
+          className="ag-open"
+          aria-label={`${s.title}, ${who}`}
+          onClick={() => dlg.current?.showModal()}
+        />
+        <FavButton id={s.id} title={s.title} />
+      </div>
 
       {/* the dialog's own box is the backdrop's edge: a click that lands on it,
           not on the panel inside, is a click outside */}

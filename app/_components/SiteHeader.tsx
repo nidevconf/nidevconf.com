@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import AgendaLink from "./AgendaLink";
 
 // Anchors are rooted at "/" so the same header works off the home page too.
 export default function SiteHeader() {
@@ -18,6 +19,7 @@ export default function SiteHeader() {
         </Link>
         <nav className="nav-links" aria-label="Primary">
           <Link href="/#agenda">Agenda</Link>
+          <AgendaLink />
           <Link href="/#village">Villages</Link>
           <Link href="/volunteers">Volunteer</Link>
           <Link href="/#sponsor">Sponsor</Link>

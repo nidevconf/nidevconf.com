@@ -165,7 +165,36 @@ export function placement(id: string) {
   return i && { when: whenOf(i), track: TRACKS[i.track!] };
 }
 
-const clock = (m: number) =>
+/* The day as plain rows — every session and every all-hands band, no empty
+   slots — for the places that rebuild it in the browser: /my-agenda, and the
+   organisers' admin page by way of /timetable.json. Minutes since midnight. */
+export type Slot = {
+  start: number;
+  end: number;
+  title: string;
+  /** a band with no room runs across every track */
+  track?: string;
+  id?: string;
+  slug?: string;
+  format?: string;
+  who?: string;
+  photos?: string[];
+};
+export const TIMETABLE: Slot[] = ITEMS.filter((i) => i.title !== "Coming soon").map((i) => ({
+  start: i.start,
+  end: i.end,
+  title: i.title,
+  track: i.track === undefined ? undefined : TRACKS[i.track],
+  ...(i.session && {
+    id: i.session.id,
+    slug: i.session.slug,
+    format: i.session.format,
+    who: i.session.speakers.map((p) => p.name).join(" & "),
+    photos: i.session.speakers.map((p) => p.photo),
+  }),
+}));
+
+export const clock = (m: number) =>
   `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
 
 function length(mins: number) {

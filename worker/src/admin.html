@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NIDC agenda interest</title>
+<!--
+  The organisers' view of "my agenda": which sessions people have hearted,
+  how that lines up against the rooms, and which picks clash. Served by the
+  agenda Worker behind Cloudflare Access. Everything comes from /admin/stats.
+
+  A heart is one person planning to be in the room, so each session's hearts
+  are counted against its room's seats. Each organiser types the seats in once;
+  they are remembered in that browser and never leave it.
+-->
+<style>
+:root{
+  color-scheme:light;
+  --bg:#FBFBFB;--bg-2:#F1F1F1;--bg-3:#E6E6E6;--line:#DDDDDD;--field:#FFFFFF;
+  --pink:#EC008C;--pink-dk:#B80070;--yellow:#F2C94C;
+  --ink:#121212;--muted:#5A5A5A;--on-pink:#FFFFFF;
+  --over:#B80070;--tight:#8A6D00;
+  --display:'Poppins',system-ui,-apple-system,sans-serif;
+  --body:system-ui,-apple-system,sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{color-scheme:dark;
+    --bg:#121212;--bg-2:#1A1A1A;--bg-3:#222222;--line:#303030;--field:#222222;
+    --pink-dk:#FF4DA6;--ink:#FFFFFF;--muted:#B5B5B5;--over:#FF4DA6;--tight:#F2C94C;}
+}
+*{box-sizing:border-box;margin:0;}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);padding:32px 16px 64px;}
+main{max-width:1200px;margin:0 auto;}
+h1,h2{font-family:var(--display);font-weight:600;letter-spacing:-.01em;}
+h1{font-size:28px;}
+h1 .hl{background:var(--pink);color:var(--on-pink);padding:0 .2em;border-radius:4px;}
+h2{font-size:19px;margin:48px 0 6px;}
+.lead,.note{color:var(--muted);}
+.note{font-size:13px;margin-bottom:14px;}
+a{color:var(--pink-dk);}
+button,input,select{font:inherit;color:inherit;}
+.btn{border:1px solid var(--ink);background:transparent;border-radius:999px;padding:7px 16px;
+  font-family:var(--display);font-weight:600;font-size:14px;cursor:pointer;}
+.btn:hover{background:var(--ink);color:var(--bg);}
+input,select{background:var(--field);border:1px solid var(--line);border-radius:6px;padding:5px 8px;}
+input[type=number]{width:88px;}
+:focus-visible{outline:3px solid var(--pink);outline-offset:2px;}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:24px;}
+.tile{background:var(--bg-2);border-radius:8px;padding:16px 18px;}
+.tile b{display:block;font-family:var(--display);font-size:30px;line-height:1.1;}
+.tile span{font-size:13px;color:var(--muted);}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:10px 0 14px;font-size:14px;}
+.controls label{display:inline-flex;gap:8px;align-items:center;}
+
+.scroll{overflow-x:auto;}
+table{border-collapse:collapse;width:100%;font-size:14px;}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.time{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap;}
+
+/* the room grid: one row per start time, one column per room */
+.rooms td{min-width:170px;}
+.rooms th input{display:block;margin-top:6px;width:100%;max-width:110px;
+  text-transform:none;letter-spacing:0;font-weight:400;font-family:var(--body);}
+.cell{background:var(--bg-2);border-radius:6px;padding:8px 10px;border:1px solid transparent;}
+.cell + .cell{margin-top:6px;}
+.cell[data-state=over]{border-color:var(--over);}
+.cell[data-state=tight]{border-color:var(--tight);}
+.cell .t{font-weight:600;line-height:1.3;}
+.cell .w{font-size:12.5px;color:var(--muted);}
+.cell .n{margin-top:6px;font-size:13px;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;}
+.cell .n b{font-family:var(--display);font-size:17px;}
+.flag{font-size:12px;font-weight:600;}
+.flag.over{color:var(--over);}
+.flag.tight{color:var(--tight);}
+
+/* bars: one series, one hue; the number beside it is the label */
+.bar{display:flex;align-items:center;gap:10px;min-width:180px;}
+.bar i{display:block;height:10px;background:var(--pink);border-radius:0 4px 4px 0;min-width:2px;}
+.bar span{font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap;}
+
+.days{display:flex;align-items:flex-end;gap:2px;height:120px;border-bottom:1px solid var(--line);
+  padding-top:8px;}
+.days div{flex:1 1 0;max-width:28px;background:var(--pink);border-radius:4px 4px 0 0;min-height:2px;position:relative;}
+.days div:hover{background:var(--pink-dk);}
+.days-axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:6px;}
+
+#gate{max-width:420px;margin-top:32px;background:var(--bg-2);border-radius:8px;padding:20px;}
+#gate form{display:flex;gap:8px;margin-top:12px;}
+#gate input{flex:1;}
+#error{margin-top:24px;color:var(--over);}
+[hidden]{display:none !important;}
+</style>
+</head>
+<body>
+<main>
+  <h1>Agenda <span class="hl">interest</span></h1>
+  <p class="lead">Who has hearted what on nidevconf.com. Updated live; reload for the latest.</p>
+
+  <div id="gate" hidden>
+    <p>Enter the organiser key to see the numbers.</p>
+    <form id="gate-form">
+      <input id="gate-key" type="password" autocomplete="current-password" aria-label="Organiser key" required>
+      <button class="btn" type="submit">Open</button>
+    </form>
+  </div>
+  <p id="error" hidden></p>
+
+  <div id="app" hidden>
+    <div class="tiles">
+      <div class="tile"><b id="t-people">–</b><span>people building an agenda</span></div>
+      <div class="tile"><b id="t-picks">–</b><span>hearts in total</span></div>
+      <div class="tile"><b id="t-avg">–</b><span>sessions per person</span></div>
+      <div class="tile"><b id="t-last">–</b><span>last change</span></div>
+    </div>
+
+    <h2>Rooms</h2>
+    <p class="note">
+      Each heart is one person planning to be there. Put in each room's seats to see how full
+      each session is (remembered in this browser):
+      <span class="flag over">▲ over</span> means more hearts than seats,
+      <span class="flag tight">● tight</span> means over 80% full.
+    </p>
+    <div class="scroll"><table class="rooms" id="rooms"></table></div>
+
+    <h2>Every session</h2>
+    <div class="controls">
+      <label>Format
+        <select id="format">
+          <option value="">All</option>
+          <option>Talk</option>
+          <option>Lightning</option>
+          <option>Workshop</option>
+        </select>
+      </label>
+      <button class="btn" type="button" id="csv">Download CSV</button>
+    </div>
+    <div class="scroll"><table id="ranked"></table></div>
+
+    <h2>Clashes</h2>
+    <p class="note">Pairs of sessions that run at the same time and were both hearted by the same people. Worth a look when placing sessions.</p>
+    <div class="scroll"><table id="clashes"></table></div>
+
+    <h2>New agendas by day</h2>
+    <p class="note" id="days-note"></p>
+    <div class="days" id="days" role="img"></div>
+    <div class="days-axis"><span id="days-from"></span><span id="days-to"></span></div>
+  </div>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+const clock = (m) => `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`;
+const pct = (x) => `${Math.round(x * 100)}%`;
+
+const ROOMS = ["Hall 1A", "Hall 1B", "Room 1A", "Room 1B", "Workshops"];
+
+// the organiser's own seat numbers live in this browser; a blocked store just forgets them
+const store = {
+  get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+};
+const keyStore = {
+  get() { try { return sessionStorage.getItem("admin-key"); } catch { return null; } },
+  set(v) { try { sessionStorage.setItem("admin-key", v); } catch {} },
+};
+let adminKey = keyStore.get();
+let data = null;
+
+async function load() {
+  const res = await fetch("/admin/stats", {
+    headers: adminKey ? { authorization: `Bearer ${adminKey}` } : {},
+  });
+  if (res.status === 403) {
+    $("app").hidden = true;
+    $("gate").hidden = false;
+    if (adminKey) {
+      $("error").hidden = false;
+      $("error").textContent = "That key didn't work.";
+    }
+    return;
+  }
+  if (!res.ok) {
+    $("error").hidden = false;
+    $("error").textContent = `Couldn't load the numbers (${res.status}).`;
+    return;
+  }
+  data = await res.json();
+  $("gate").hidden = true;
+  $("error").hidden = true;
+  $("app").hidden = false;
+  render();
+}
+
+$("gate-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  adminKey = $("gate-key").value;
+  keyStore.set(adminKey);
+  load();
+});
+
+function sessions() {
+  const n = (id) => data.counts[id] ?? 0;
+  return data.timetable
+    .filter((s) => s.id)
+    .map((s) => ({ ...s, n: n(s.id) }));
+}
+
+function render() {
+  $("t-people").textContent = data.people.toLocaleString();
+  $("t-picks").textContent = data.picks.toLocaleString();
+  $("t-avg").textContent = data.people ? (data.picks / data.people).toFixed(1) : "–";
+  $("t-last").textContent = data.last
+    ? new Date(data.last).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })
+    : "–";
+  renderRooms();
+  renderRanked();
+  renderClashes();
+  renderDays();
+}
+
+/* ---- rooms ---- */
+// one heart is one seat taken: the room is as full as its hearts over its seats
+const seatsOf = (room) => Number((store.get("seats") ?? {})[room]) || 0;
+const fullness = (s) => {
+  const cap = seatsOf(s.track);
+  if (!cap) return { cap, state: "" };
+  const f = s.n / cap;
+  return { cap, f, state: f > 1 ? "over" : f > 0.8 ? "tight" : "" };
+};
+
+/* The seat boxes are built once and never redrawn, so typing in one keeps its
+   cursor; each keystroke redraws only the rows beneath them. */
+let roomsHead = false;
+function renderRooms() {
+  const all = sessions();
+  const starts = [...new Set(all.map((s) => s.start))].sort((a, b) => a - b);
+
+  if (!roomsHead) {
+    roomsHead = true;
+    const seats = store.get("seats") ?? {};
+    $("rooms").innerHTML = `<thead><tr><th>Time</th>${ROOMS.map((r) => `
+      <th>${esc(r)}<input type="number" min="0" step="10" data-room="${esc(r)}"
+        value="${esc(seats[r] ?? "")}" placeholder="seats" aria-label="${esc(r)} seats"></th>`).join("")}
+    </tr></thead><tbody></tbody>`;
+    $("rooms").querySelectorAll("input[data-room]").forEach((input) => {
+      input.addEventListener("input", () => {
+        store.set("seats", { ...(store.get("seats") ?? {}), [input.dataset.room]: input.value });
+        renderRooms();
+        renderRanked();
+      });
+    });
+  }
+
+  $("rooms").querySelector("tbody").innerHTML = starts.map((t) => `<tr><td class="time">${clock(t)}</td>${ROOMS.map((r) => {
+    const here = all.filter((s) => s.start === t && s.track === r);
+    return `<td>${here.map((s) => {
+      const { cap, f, state } = fullness(s);
+      return `<div class="cell" data-state="${state}">
+        <div class="t">${esc(s.title)}</div>
+        <div class="w">${esc(s.who)} · ${clock(s.start)}–${clock(s.end)}</div>
+        <div class="n"><b>${s.n}</b>${cap ? `<span>/ ${cap} seats · ${pct(f)} full</span>` : `<span>heart${s.n === 1 ? "" : "s"}</span>`}
+          ${state === "over" ? `<span class="flag over">▲ over</span>` : ""}
+          ${state === "tight" ? `<span class="flag tight">● tight</span>` : ""}
+        </div></div>`;
+    }).join("")}</td>`;
+  }).join("")}</tr>`).join("");
+}
+
+/* ---- ranked ---- */
+$("format").addEventListener("change", renderRanked);
+
+function ranked() {
+  const f = $("format").value;
+  return sessions()
+    .filter((s) => !f || s.format === f)
+    .sort((a, b) => b.n - a.n || a.start - b.start);
+}
+
+function renderRanked() {
+  const list = ranked();
+  const max = Math.max(1, ...list.map((s) => s.n));
+  $("ranked").innerHTML = `<thead><tr><th class="num">#</th><th>Session</th><th>Room</th>
+    <th>Time</th><th>Hearts</th></tr></thead><tbody>${list.map((s, i) => `
+    <tr><td class="num">${i + 1}</td>
+      <td><b>${esc(s.title)}</b><br><span class="note">${esc(s.who)} · ${esc(s.format)}</span></td>
+      <td>${esc(s.track)}</td><td class="time">${clock(s.start)}</td>
+      <td><div class="bar" title="${s.n} heart${s.n === 1 ? "" : "s"}">
+        <i style="width:${(s.n / max) * 140}px"></i><span>${s.n}${(({ cap, f }) => cap ? ` / ${cap} · ${pct(f)} full` : "")(fullness(s))}</span></div></td>
+    </tr>`).join("")}</tbody>`;
+}
+
+$("csv").addEventListener("click", () => {
+  const cell = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [
+    ["Session id", "Title", "Speakers", "Format", "Room", "Start", "End", "Hearts", "Room seats", "Full"],
+    ...ranked().map((s) => {
+      const { cap, f } = fullness(s);
+      return [s.id, s.title, s.who, s.format, s.track, clock(s.start), clock(s.end), s.n, cap || "", cap ? pct(f) : ""];
+    }),
+  ].map((row) => row.map(cell).join(","));
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([lines.join("\r\n")], { type: "text/csv" }));
+  a.download = `nidc-agenda-interest-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+/* ---- clashes ---- */
+function renderClashes() {
+  const by = new Map(data.timetable.filter((s) => s.id).map((s) => [s.id, s]));
+  const line = (s) => `<b>${esc(s.title)}</b><br><span class="note">${esc(s.track)} · ${clock(s.start)}–${clock(s.end)}</span>`;
+  $("clashes").innerHTML = data.clashes.length
+    ? `<thead><tr><th class="num">Both</th><th>Session</th><th>Clashes with</th></tr></thead><tbody>${
+      data.clashes.map((c) => `<tr><td class="num"><b>${c.n}</b></td>
+        <td>${line(by.get(c.a))}</td><td>${line(by.get(c.b))}</td></tr>`).join("")}</tbody>`
+    : `<tbody><tr><td class="note">No clashing picks yet.</td></tr></tbody>`;
+}
+
+/* ---- by day ---- */
+function renderDays() {
+  const days = data.daily;
+  const max = Math.max(1, ...days.map((d) => d.n));
+  $("days").innerHTML = days.map((d) =>
+    `<div style="height:${(d.n / max) * 100}%" title="${esc(d.day)}: ${d.n} new"></div>`).join("");
+  $("days").setAttribute("aria-label", days.map((d) => `${d.day}: ${d.n}`).join(", ") || "No data yet");
+  $("days-from").textContent = days[0]?.day ?? "";
+  $("days-to").textContent = days.length > 1 ? days[days.length - 1].day : "";
+  $("days-note").textContent = days.length
+    ? `Busiest day: ${days.reduce((a, b) => (b.n > a.n ? b : a)).day}. Hover a bar for its count.`
+    : "No agendas yet.";
+}
+
+load();
+</script>
+</body>
+</html>

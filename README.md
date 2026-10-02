@@ -42,10 +42,13 @@ app/
   opportunities/        # Volunteer roles board (/opportunities) and one page
                         # per role (/opportunities/<slug>); roles.tsx is the
                         # data. Unlisted: noindex, not linked from anywhere.
+  my-agenda/            # Your own timetable from the sessions you hearted
+  timetable.json/       # The day as data, for the organisers' admin page
   terminal/             # Hitchhiker's Guide easter egg
 components/ui/          # shadcn-generated components
 lib/utils.ts            # cn() class helper
 scripts/sessions.py     # Sessionize .xlsx export -> sessions.json + speaker photos
+worker/                 # Cloudflare Worker + D1: anonymous agenda counts and /admin
 public/images/          # Brand marks, photography
 public/media/           # Hero trailer video + poster
 ```
@@ -59,6 +62,48 @@ scripts/sessions.py "~/Downloads/nidc-2026 accepted sessions - exported YYYY-MM-
 ```
 
 That rewrites `app/_data/sessions.json` and downloads any new speaker photos into `public/images/speakers/` (a 200px crop for the agenda and an 800px `-lg` crop for the session page and images). Pass the Sessionize speaker photo export folder as a second argument for full-size originals. A session's slug and chip survive a re-run. Emails and the CFP questionnaire never leave the spreadsheet.
+
+## My agenda
+
+Anyone can heart a session (on the agenda, in the session modal, or on its page) and see their day at `/my-agenda`. There are no accounts. Picks live in the browser's localStorage, and a share link (`/my-agenda#s=<ids>`) moves them to another device. The page can also download an `.ics` for a calendar.
+
+Each browser also sends its picks, under a random ID it made itself, to the agenda Worker in `worker/` (Cloudflare Workers + D1). That is how organisers see what people want to attend. No names, emails or IPs are stored. If `NEXT_PUBLIC_AGENDA_API` is unset, the hearts still work and simply aren't counted.
+
+**Organisers** open `<worker URL>/admin`. It shows:
+
+- headline numbers;
+- a room grid: each session's hearts against its room's seats (one heart is one person), with full and over-full sessions flagged. Each organiser types the seats in on the page once and their browser remembers them;
+- a ranked list with CSV export;
+- the most common clashing picks;
+- new agendas by day.
+
+Organisers sign in with Google through Cloudflare Access; the allowed addresses are a list in Cloudflare. Before that is set up, or in `wrangler dev`, it falls back to the `ADMIN_KEY` secret.
+
+Quick query without the page:
+
+```bash
+cd worker && npx wrangler d1 execute nidevconf-agenda --remote \
+  --command "SELECT session, COUNT(*) n FROM picks GROUP BY session ORDER BY n DESC"
+```
+
+### One-off setup
+
+1. `cd worker && npm install && npx wrangler login`
+2. `npx wrangler d1 create nidevconf-agenda` and put the `database_id` it prints into `worker/wrangler.toml`
+3. `npm run migrate && npm run deploy`. Note the `*.workers.dev` URL. For Google sign-in on `/admin` (next step) the Worker most likely needs a hostname on a Cloudflare-managed domain, such as `api.nidevconf.com`. nidevconf.com's DNS is currently with Namecheap, so that means moving the DNS to Cloudflare (free; the GitHub Pages records carry over unchanged). The alternative is to run on `workers.dev` with only the `ADMIN_KEY` login.
+4. **Organiser access (Sign in with Google), through Cloudflare Access:**
+   - **Create a Google login.** In Google Cloud Console → APIs & Services → Credentials, create an OAuth client ID (Web application). Use `https://<team>.cloudflareaccess.com/cdn-cgi/access/callback` as the authorised redirect URI.
+   - **Connect it to Cloudflare.** In Cloudflare Zero Trust → Settings → Authentication → Login methods, add **Google** with that client ID and secret.
+   - **Protect the admin page.** In Zero Trust → Access → Applications, add a self-hosted application for `<worker host>/admin*`. Only `/admin` must be protected: attendees' browsers send their hearts to `/picks` on the same host, so don't use the Worker's one-click "enable Access" toggle, which locks the whole host.
+     - Login method: Google only. Turn off One-time PIN if you want Google to be the only way in.
+     - Policy: Allow, Include → Emails, listing the organisers' Google addresses. Use "Emails ending in" instead if you all share a Google Workspace domain.
+   - **Tell the Worker.** In `worker/`, run `npx wrangler secret put ACCESS_TEAM_DOMAIN` (`<team>.cloudflareaccess.com`) and `npx wrangler secret put ACCESS_AUD` (the application's Audience tag). They are secrets rather than lines in `wrangler.toml` because this repo is public. The Worker then checks Access's signed token on every admin request.
+   - **Before this is set up:** `npx wrangler secret put ADMIN_KEY` sets a shared key the admin page asks for instead. Make it long and random (e.g. `openssl rand -base64 24`), and share it privately, never in the repo or an issue.
+5. GitHub repo settings:
+   - **Actions variable:** `AGENDA_API` = the Worker URL (used by the site build).
+   - **Secrets:** `CLOUDFLARE_API_TOKEN` (Workers + D1 edit) and `CLOUDFLARE_ACCOUNT_ID`, for `.github/workflows/worker.yml`, which redeploys the Worker on changes under `worker/`.
+
+Locally: put `ADMIN_KEY=...`, `SITE=http://localhost:3000` and `ORIGINS=http://localhost:3000` in `worker/.dev.vars`, then run `npm run migrate:local && npm run dev` in `worker/`. Run the site with `NEXT_PUBLIC_AGENDA_API=http://localhost:8787 npm run dev`.
 
 ## Deployment
 
@@ -89,4 +134,4 @@ The `main` branch is protected. To make changes:
 - **Styling:** Tailwind CSS v4 + handwritten `site.css`, shadcn configured
 - **Icons:** Lucide React
 - **Integrations:** ti.to (ticket widget)
-- **Hosting:** GitHub Pages via GitHub Actions
+- **Hosting:** GitHub Pages via GitHub Actions; the agenda counts on Cloudflare Workers + D1

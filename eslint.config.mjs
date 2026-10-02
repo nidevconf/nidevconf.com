@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // the agenda Worker is its own project with its own tsconfig
+    "worker/**",
   ]),
 ]);
 

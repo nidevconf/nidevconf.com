@@ -15,6 +15,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${baseUrl}/my-agenda`,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
       url: `${baseUrl}/volunteers`,
       lastModified: new Date(),
       changeFrequency: "monthly",
