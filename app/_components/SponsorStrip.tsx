@@ -18,11 +18,14 @@ export const SPONSORS: {
   { name: "Magnite", url: "https://www.magnite.com/", light: "magnite.svg", dark: "magnite-white.svg", h: 28, tier: "gold" },
   { name: "Payroc", url: "https://payroc.com/", light: "payroc.svg", dark: "payroc-white.svg", h: 46, tier: "gold" },
   { name: "Enso Recruitment", url: "https://www.ensorecruitment.com/", light: "enso.png", dark: "enso-white.png", h: 32, tier: "gold" },
+  { name: "Kainos", url: "https://www.kainos.com/", light: "kainos.png", dark: "kainos-white.png", h: 28, tier: "gold" },
   { name: "Allstate Northern Ireland", url: "https://www.allstateni.com/", light: "allstate.svg", dark: "allstate-white.svg", h: 32, tier: "silver" },
   { name: "DailyPay", url: "https://www.dailypay.com/", light: "dailypay.svg", dark: "dailypay-white.svg", h: 27, tier: "silver" },
   { name: "Enably", url: "https://enablyco.com/", light: "enably.svg", dark: "enably-white.svg", h: 28, tier: "silver" },
   { name: "Coding Fury", url: "https://www.codingfury.com/", light: "codingfury-black.png", dark: "codingfury-white.png", h: 32, tier: "silver" },
   { name: "Uptime Labs", url: "https://www.uptimelabs.io/", light: "uptimelabs.svg", dark: "uptimelabs-white.svg", h: 40, tier: "silver" },
+  { name: "Liberty IT", url: "https://www.liberty-it.co.uk/", light: "liberty.png", dark: "liberty-white.png", h: 52, tier: "silver" },
+  { name: "Phorest", url: "https://www.phorest.com/", light: "phorest.png", dark: "phorest-white.png", h: 32, tier: "silver" },
 ];
 
 export default function SponsorStrip() {
