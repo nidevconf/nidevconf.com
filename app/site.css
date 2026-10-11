@@ -464,6 +464,13 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
    it. The canvas fill rather than `transparent` is what makes that occlude. */
 .ag-talk{background:var(--bg-2);border:1px solid transparent;z-index:1;}
 .ag-tba{background:var(--bg);border:1px dashed var(--line);}
+/* a sponsor's slot: a faint brand tint and the company's name, booked or not.
+   A tint rather than an edge stripe, which doubled up beside the focus ring. */
+.ag-sponsor{background:color-mix(in srgb,var(--pink) 6%,var(--bg-2));}
+.ag-tba.ag-sponsor{background:color-mix(in srgb,var(--pink) 4%,var(--bg));}
+.ag-session.ag-sponsor:hover{background:color-mix(in srgb,var(--pink) 10%,var(--bg-2));}
+.ag-sponsor .ag-when{flex-direction:column;align-items:flex-start;gap:2px;}
+.ag-sponsor-name{order:-1;color:var(--pink-dk);}
 /* the same 28px box a speaker photo takes, so the two line up across cards */
 .ag-emoji{width:28px;height:28px;display:flex;align-items:center;justify-content:center;
   font-size:24px;line-height:1;}
