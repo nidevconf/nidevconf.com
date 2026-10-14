@@ -18,8 +18,6 @@ type Item = {
    *  after-party sits two hours after the last talk. It still prints its true
    *  time. */
   layout?: [number, number];
-  /** the company whose slot this is, booked or not */
-  sponsor?: string;
 };
 
 const TALK_STARTS = [
@@ -110,7 +108,7 @@ const slot = (start: number, end: number, track: number, format: keyof typeof qu
   const sponsor = sponsorOf(start, track);
   const session: Session | undefined =
     pinned(start, track) ?? (sponsor ? undefined : queues[format].shift());
-  return { start, end, track, title: session?.title ?? "Coming soon", session, sponsor };
+  return { start, end, track, title: session?.title ?? "Coming soon", session };
 };
 
 /* Talks are 30 minutes with a 15 minute gap, which fixes the whole day: a 15
@@ -245,7 +243,6 @@ function Grid({ items }: { items: Item[] }) {
               when={when}
               track={TRACKS[item.track!]}
               flash={item.end - item.start < 30}
-              sponsor={item.sponsor}
               style={style}
             />
           );
@@ -253,7 +250,7 @@ function Grid({ items }: { items: Item[] }) {
         return (
           <div
             key={key}
-            className={`ag-item ${band ? "ag-band" : "ag-talk"}${tba ? " ag-tba" : ""}${item.sponsor ? " ag-sponsor" : ""}`}
+            className={`ag-item ${band ? "ag-band" : "ag-talk"}${tba ? " ag-tba" : ""}`}
             data-track={band ? undefined : TRACKS[item.track!]}
             style={style}
           >
@@ -267,10 +264,7 @@ function Grid({ items }: { items: Item[] }) {
             ) : (
               <p className="ag-title">{item.title}</p>
             )}
-            <p className="ag-when">
-              {when}
-              {item.sponsor && <span className="ag-sponsor-name">Sponsored by {item.sponsor}</span>}
-            </p>
+            <p className="ag-when">{when}</p>
           </div>
         );
       })}

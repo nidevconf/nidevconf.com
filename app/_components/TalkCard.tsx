@@ -15,7 +15,6 @@ export default function TalkCard({
   when,
   track,
   flash,
-  sponsor,
   style,
 }: {
   session: Session;
@@ -25,8 +24,6 @@ export default function TalkCard({
   track: string;
   /** a lightning talk: the slot is a third the height, so the card is one row */
   flash?: boolean;
-  /** the company whose slot this is */
-  sponsor?: string;
   style: CSSProperties;
 }) {
   const dlg = useRef<HTMLDialogElement>(null);
@@ -36,7 +33,7 @@ export default function TalkCard({
     <>
       <button
         type="button"
-        className={`ag-item ag-talk ag-session${flash ? " ag-flash" : ""}${sponsor ? " ag-sponsor" : ""}`}
+        className={`ag-item ag-talk ag-session${flash ? " ag-flash" : ""}`}
         data-track={track}
         data-chip={s.chip}
         style={style}
@@ -49,10 +46,7 @@ export default function TalkCard({
         </span>
         <span className="ag-who">{who}</span>
         <span className="ag-title">{s.title}</span>
-        <span className="ag-when">
-          {when}
-          {sponsor && <span className="ag-sponsor-name">Sponsored by {sponsor}</span>}
-        </span>
+        <span className="ag-when">{when}</span>
       </button>
 
       {/* the dialog's own box is the backdrop's edge: a click that lands on it,
