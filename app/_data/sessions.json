@@ -287,6 +287,30 @@
     ]
   },
   {
+    "id": "dailypay-adam-mcgrogan",
+    "slug": "from-idea-to-internal-tool-in-31-minutes",
+    "title": "From Idea to Internal Tool in 31 Minutes: What AI-Accelerated Prototyping Taught Me",
+    "description": "Every engineering team has the same quiet problem: pull requests that sit unreviewed. Nobody is ignoring them on purpose. They just get lost across a dozen repos, behind Slack threads and stand-ups. The fix was obvious: a daily digest of every open PR the team owns. The tool had never been built because it was never anyone's priority.\n\nSo I gave it 31 minutes, with an AI assistant doing most of the typing. The result was a small Slack bot that posts a morning summary to the team's channel, listing every pull request that's waiting for review, how long each one has waited, and where it's stuck.\n\nThis talk isn't a demo of how fast AI can write code. It's an honest look at where those 31 minutes went. Some of it was the AI doing the work. Some of it was me describing what I wanted, checking the output and fixing it. And there were the parts that went wrong: the edge cases the AI got confidently wrong or the bug reports that only came in once real teams depended on it.\n\nIf a prototype takes half an hour instead of half a sprint, the question stops being \"can we build it?\" and becomes \"want to see what I built?\"\n\nKey takeaways:\n- Where the time really goes in an AI-assisted build, and what the AI sped up or slowed down\n- A repeatable path from team annoyance to a tool teams can use\n- How to catch AI output that's confidently wrong before your users do\n- Why a working prototype is more convincing than a pitch",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Coding",
+      "DevOps",
+      "GenAI",
+      "Tools"
+    ],
+    "chip": "AI",
+    "speakers": [
+      {
+        "name": "Adam McGrogan",
+        "tagline": "Placement Software Engineer at DailyPay",
+        "bio": "Adam McGrogan is a final-year Computing and IT student at Queen's University Belfast, and a Placement Software Engineer at DailyPay, where he works on backend microservices and internal developer tooling. He's especially interested in how AI is changing the way engineers build software, and he enjoys turning the small frustrations that slow teams down into tools that make them go away.",
+        "photo": "adam-mcgrogan.jpg"
+      }
+    ]
+  },
+  {
     "id": "1303858",
     "slug": "from-zero-to-container-a-java-quarkus-deep-dive",
     "title": "From Zero to Container: A Java Quarkus Deep Dive",
@@ -497,6 +521,27 @@
         "tagline": "Senior Software Engineer @ Intapp by day; long-time hobbyist, builder and serial dabbler by night.",
         "bio": "Andrew is a Senior Software Engineer at Intapp and a lifelong hobbyist, builder and dabbler in technology. Over the past 13 years he’s worked across both the public and private sectors, as an employee and freelancer, building everything from startup products to large government systems. Outside work, he’s always enjoyed experimenting with technology and is finally making more time for the “I must check that out” list that has been growing for far too long.",
         "photo": "andrew-fletcher.jpg"
+      }
+    ]
+  },
+  {
+    "id": "gearset-curtis-tarr",
+    "slug": "observing-your-observability",
+    "title": "Observing your Observability",
+    "description": "When did your team last look at its observability on purpose, rather than in the middle of an incident? It's easy to add instrumentation and then move on. Over time the dashboards stop matching the system, the alerts fire so often that nobody reacts any more, and the gaps in your data stay hidden until the day you need exactly what's missing. This talk shares a simple weekly habit that makes observability something the whole team looks after rather than one person's speciality, built around three questions: is anything wrong, what can we not see, and what is just noise.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "DevOps"
+    ],
+    "chip": "Engineering",
+    "speakers": [
+      {
+        "name": "Curtis Tarr",
+        "tagline": "Software Engineer at Gearset",
+        "bio": "Curtis is a full-stack engineer at Gearset, working on DevOps tooling for Salesforce teams, with a background in scalable backend systems and cloud-native architecture across AWS serverless, .NET on Azure and Java SaaS platforms.",
+        "photo": "curtis-tarr.jpg"
       }
     ]
   },
