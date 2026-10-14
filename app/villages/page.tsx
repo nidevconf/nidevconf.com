@@ -27,7 +27,8 @@ type Village = {
   name: string;
   theme: string;
   about: string;
-  atNidc: string;
+  // a paragraph, or named workshops when a village is running several
+  atNidc: string | { title: string; text: string }[];
   // optional photo of the village's stand, shown at the top of its card
   image?: { src: string; alt: string };
   links: { label: string; href?: string }[];
@@ -65,6 +66,27 @@ const villages: Village[] = [
         label: "LinkedIn: Atlantic Exploit Labs",
         href: "https://www.linkedin.com/company/atlantic-exploit-labs",
       },
+    ],
+  },
+  {
+    id: "kids",
+    name: "Northern Ireland Raspberry Jam",
+    theme: "Kids village",
+    about:
+      "The Northern Ireland Raspberry Jam is a programme of free, regular and family friendly events, aimed at providing attendees the opportunity to get hands on with coding and electronics, in a fun and practical setting. These events, known as “Raspberry Jams”, are organised and led by a group of 40+ passionate volunteers from across Northern Ireland, who come together to pull off the largest regular coding programme in Northern Ireland, for people of all ages.",
+    atNidc: [
+      {
+        title: "Creating Art with Robots",
+        text: "Using a Micro:bit and a Bitbot with a marker, create robot art by programming the Micro:bit to drive around a canvas with other robots. All programming in this workshop uses MakeCode, a super simple graphical Scratch-like code editor.",
+      },
+      {
+        title: "Unicorn Horns",
+        text: "In this workshop you will hack the Neopixels (multicoloured LEDs) on a Circuit Playground to create a colour changing Unicorn Horn! All programming in this workshop uses MakeCode, a super simple graphical Scratch-like code editor.",
+      },
+    ],
+    links: [
+      { label: "niraspberryjam.com", href: "https://niraspberryjam.com/" },
+      { label: "info@niraspberryjam.com", href: "mailto:info@niraspberryjam.com" },
     ],
   },
 ];
@@ -139,7 +161,16 @@ export default function VillagesPage() {
                     <h3>About {v.name}</h3>
                     <p>{v.about}</p>
                     <h3>At NIDC</h3>
-                    <p>{v.atNidc}</p>
+                    {typeof v.atNidc === "string" ? (
+                      <p>{v.atNidc}</p>
+                    ) : (
+                      v.atNidc.map((w) => (
+                        <div key={w.title} className="village-workshop">
+                          <h4>{w.title}</h4>
+                          <p>{w.text}</p>
+                        </div>
+                      ))
+                    )}
                     <p className="facts village-links">
                       {v.links.map((l) =>
                         l.href ? (
