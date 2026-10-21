@@ -89,6 +89,19 @@ const villages: Village[] = [
       { label: "info@niraspberryjam.com", href: "mailto:info@niraspberryjam.com" },
     ],
   },
+  {
+    id: "maker",
+    name: "Farset Labs and Tog Hackerspace",
+    theme: "Maker village",
+    about:
+      "Maker Village is a collaboration between two hackerspaces on the island: Farset Labs in Belfast and Tog in Dublin. They’re bringing it to NIDC as part of a shared island programme to get makers across the island of Ireland to build connections, learn cool stuff from each other, and have a bit of fun making.",
+    atNidc:
+      "We’ll bring 3D printers so you can give it a go on the day and have something to take home. We’ll also bring a giant, programmable, LED ping pong table from Robin Price’s “This is a table” project, built with Farset Labs members over the past few months.",
+    links: [
+      { label: "farsetlabs.org.uk", href: "https://www.farsetlabs.org.uk/" },
+      { label: "tog.ie", href: "https://www.tog.ie/" },
+    ],
+  },
 ];
 
 export default function VillagesPage() {
