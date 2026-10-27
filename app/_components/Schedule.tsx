@@ -83,31 +83,30 @@ const PINNED: Record<string, [start: number, track: number]> = {
   "1311260": [at(13, 45), 0], // Terminal Panic
   "1310638": [at(14, 30), 0], // Making the Smart Dumb Thing Smart
   "1331334": [at(11, 30), 0], // Shipping Quick, Failing Fast
-  "dailypay-adam-mcgrogan": [at(10, 45), 1], // From Idea to Internal Tool in 31 Minutes (DailyPay)
-  "gearset-curtis-tarr": [at(13), 1], // Observing your Observability (Gearset)
+  "dailypay-adam-mcgrogan": [at(10, 45), 1], // From Idea to Internal Tool in 31 Minutes
+  "gearset-curtis-tarr": [at(13), 1], // Observing your Observability
   "tony-mcbride-cv": [at(15, 30), 4], // Building a Tech CV — the last workshop
 };
 const pinned = (start: number, track: number) =>
   sessions.find((s) => PINNED[s.id]?.[0] === start && PINNED[s.id]?.[1] === track);
-// Sponsor slots. One with no talk pinned to it stays empty rather than taking
-// the next talk off the queue, until the sponsor names a speaker.
-const SPONSORED: [start: number, track: number, sponsor: string][] = [
-  [at(10), 0, "Kainos"],
-  [at(10, 45), 1, "DailyPay"],
-  [at(11, 30), 0, "Gearset"],
-  [at(11, 30), 1, "Magnite"],
-  [at(13), 0, "Payroc"],
-  [at(13), 1, "Gearset"],
+// Held slots. One with no talk pinned to it stays empty rather than taking
+// the next talk off the queue.
+const HELD: [start: number, track: number][] = [
+  [at(10), 0],
+  [at(10, 45), 1],
+  [at(11, 30), 0],
+  [at(11, 30), 1],
+  [at(13), 0],
+  [at(13), 1],
 ];
-const sponsorOf = (start: number, track: number) =>
-  SPONSORED.find(([s, t]) => s === start && t === track)?.[2];
+const held = (start: number, track: number) =>
+  HELD.some(([s, t]) => s === start && t === track);
 const queue = (format: string) =>
   sessions.filter((s) => s.format === format && !PINNED[s.id]);
 const queues = { Talk: queue("Talk"), Lightning: queue("Lightning"), Workshop: queue("Workshop") };
 const slot = (start: number, end: number, track: number, format: keyof typeof queues): Item => {
-  const sponsor = sponsorOf(start, track);
   const session: Session | undefined =
-    pinned(start, track) ?? (sponsor ? undefined : queues[format].shift());
+    pinned(start, track) ?? (held(start, track) ? undefined : queues[format].shift());
   return { start, end, track, title: session?.title ?? "Coming soon", session };
 };
 
