@@ -27,8 +27,8 @@ type Village = {
   name: string;
   theme: string;
   about: string;
-  // a paragraph, or named workshops when a village is running several
-  atNidc: string | { title: string; text: string }[];
+  // a paragraph, several paragraphs, or named workshops when a village is running several
+  atNidc: string | string[] | { title: string; text: string }[];
   // optional photo of the village's stand, shown at the top of its card
   image?: { src: string; alt: string };
   links: { label: string; href?: string }[];
@@ -37,13 +37,19 @@ type Village = {
 const villages: Village[] = [
   {
     id: "retro",
-    name: "Timeline",
+    name: "TIMELINE",
     theme: "Retro village",
     about:
-      "Timeline is a hands-on retro computing exhibition built around original computers and consoles from the 1970s through to the 1990s. The aim is to let people experience the technology rather than simply look at it.",
-    atNidc:
-      "I’ll be bringing a handpicked selection of original machines from the Timeline collection for attendees to get hands-on with throughout the day. Expect plenty of nostalgia, some familiar favourites and a few surprises.",
+      "We bring computing history to life through original computers and consoles that people can use and enjoy. Play classic games, try your hand at programming and discover how technology changed the way we learned, worked and created.",
+    atNidc: [
+      "For NIDC this year, we’ve picked a selection of machines for you to try between talks. Everything is hands-on, with activities to get you started. Or, if you already know your way around, go off-piste and show us how it’s done!",
+      "Drop by and have some retro fun!",
+    ],
     links: [
+      {
+        label: "timelineexperience.netlify.app",
+        href: "https://timelineexperience.netlify.app",
+      },
       {
         label: "Facebook: Timeline Carrickfergus",
         href: "https://www.facebook.com/people/Timeline-Carrickfergus/61592370308595/",
@@ -174,15 +180,15 @@ export default function VillagesPage() {
                     <h3>About {v.name}</h3>
                     <p>{v.about}</p>
                     <h3>At NIDC</h3>
-                    {typeof v.atNidc === "string" ? (
-                      <p>{v.atNidc}</p>
-                    ) : (
-                      v.atNidc.map((w) => (
+                    {[v.atNidc].flat().map((w) =>
+                      typeof w === "string" ? (
+                        <p key={w}>{w}</p>
+                      ) : (
                         <div key={w.title} className="village-workshop">
                           <h4>{w.title}</h4>
                           <p>{w.text}</p>
                         </div>
-                      ))
+                      ),
                     )}
                     <p className="facts village-links">
                       {v.links.map((l) =>
