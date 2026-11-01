@@ -16,8 +16,8 @@ export default function SiteFooter() {
               role="img"
               aria-label="NIDC"
             >
-              <img className="logo-mark" src="/images/nidc-mark.png" alt="" aria-hidden />
-              <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
+              <img className="logo-mark" src="/images/nidc-mark-dark.png" alt="" aria-hidden />
+              <img className="logo-word" src="/images/nidc-wordmark-dark.png" alt="" aria-hidden />
             </span>
             <p className="foot-blurb">
               Northern Ireland Developer Conference — the event of the year for the tech community.
