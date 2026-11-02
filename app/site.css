@@ -78,6 +78,23 @@
   --muted:  #B5B5B5;
 }
 
+/* The header and footer stay dark in both themes so the white logo always
+   reads. Re-declaring the dark tokens here means everything inside them
+   (nav links, the ticket pill, footer text, dividers) follows automatically. */
+.site-header, footer.site{
+  color-scheme:dark;
+  --bg:    #121212;
+  --bg-2:  #1A1A1A;
+  --bg-3:  #222222;
+  --line:  #303030;
+  --field: #222222;
+  --pink-dk: #FF4DA6;
+  --ink:    #FFFFFF;
+  --ink-2:  #E0E0E0;
+  --on-ink: #121212;
+  --muted:  #B5B5B5;
+}
+
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -141,10 +158,6 @@ ul{margin:0;}
 /* real brand lockup: <> mark + NIDC wordmark (set height via --logo-h) */
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;line-height:0;}
 .logo img{display:block;width:auto;height:var(--logo-h,22px);}
-/* the lockup's letterforms are baked into the PNG — ink on the light canvas,
-   white on the dark one — so the file itself has to swap. */
-:root[data-theme="dark"] .logo-mark{content:url("/images/nidc-mark-dark.png");}
-:root[data-theme="dark"] .logo-word{content:url("/images/nidc-wordmark-dark.png");}
 
 /* terminal flavour — monospace (agenda times, read time), pink prompt + blinking cursor */
 .mono{font-family:var(--mono);}
@@ -692,7 +705,9 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 .social-github{--brand:#181717;}
 /* the two near-black marks would vanish on the dark canvas */
 :root[data-theme="dark"] .social-tiktok,
-:root[data-theme="dark"] .social-github{--brand:#FFFFFF;}
+:root[data-theme="dark"] .social-github,
+footer.site .social-tiktok,
+footer.site .social-github{--brand:#FFFFFF;}
 .foot-bottom{border-top:1px solid var(--line);margin-top:var(--s5);padding-top:24px;
   display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
   font-family:var(--display);font-weight:500;color:var(--muted);font-size:12.5px;}

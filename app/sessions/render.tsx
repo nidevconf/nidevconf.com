@@ -26,7 +26,7 @@ export function image(slug: string, kind: "og" | "card") {
 
   const wordmark = (
     <img
-      src={uri("public/images/nidc-wordmark-dark.png", "image/png")}
+      src={uri("public/images/nidc-wordmark.png", "image/png")}
       height={portrait ? 96 : 64}
       width={portrait ? 201 : 134}
     />
