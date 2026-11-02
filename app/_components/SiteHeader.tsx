@@ -13,8 +13,8 @@ export default function SiteHeader() {
           style={{ "--logo-h": "22px" } as CSSProperties}
           aria-label="NIDC home"
         >
-          <img className="logo-mark" src="/images/nidc-mark-dark.png" alt="" aria-hidden />
-          <img className="logo-word" src="/images/nidc-wordmark-dark.png" alt="" aria-hidden />
+          <img className="logo-mark" src="/images/nidc-mark.png" alt="" aria-hidden />
+          <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
         </Link>
         <nav className="nav-links" aria-label="Primary">
           <Link href="/#agenda">Agenda</Link>
