@@ -158,8 +158,6 @@ ul{margin:0;}
 /* real brand lockup: <> mark + NIDC wordmark (set height via --logo-h) */
 .logo{display:inline-flex;align-items:center;gap:11px;text-decoration:none;line-height:0;}
 .logo img{display:block;width:auto;height:var(--logo-h,22px);}
-/* the lockup's letterforms are white, so it only ever sits on the header and
-   footer, which stay dark in both themes (see below). */
 
 /* terminal flavour — monospace (agenda times, read time), pink prompt + blinking cursor */
 .mono{font-family:var(--mono);}
