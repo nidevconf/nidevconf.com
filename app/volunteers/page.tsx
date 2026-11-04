@@ -4,10 +4,6 @@ import Lightbox from "../_components/Lightbox";
 import SiteFooter from "../_components/SiteFooter";
 import SiteHeader from "../_components/SiteHeader";
 
-const FORM = "https://forms.gle/egaE5KJNsnHv6Asg9";
-const FORM_EMBED =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfFMC6_9YiOShEIX8eHi0t7aUPIHm29CLJ4eFAotdF8hWRNVQ/viewform?embedded=true";
-
 const description =
   "NIDC is run by volunteers. Give us a hand on Saturday, 21st November 2026 at the International Convention Centre Belfast.";
 
@@ -38,13 +34,12 @@ export default function VolunteersPage() {
               Call for <span className="hl">volunteers</span>.
             </h1>
             <p className="sec-lead">
-              NIDC is back babyyyy. Be part of the team making it happen.
+              NIDC is back babyyyy. Thanks to everyone who’s part of the team making it happen.
             </p>
-            <div className="btn-row">
-              <a className="btn btn-primary" href="#signup">
-                Sign up to volunteer <span className="arrow">→</span>
-              </a>
-            </div>
+            <p className="sec-lead">
+              <strong>Volunteer applications are now closed.</strong> Thank you to everyone who
+              applied!
+            </p>
 
             <figure className="statement-photo">
               <img
@@ -58,8 +53,8 @@ export default function VolunteersPage() {
             <div className="prose">
               <p>
                 Organised by practitioners, run by volunteers. Every year a crew of people from
-                the tech community get together on Saturday to make the conference happen. If you’d like
-                to volunteer in some capacity this year, let us know in the form below.
+                the tech community get together on Saturday to make the conference happen. Here’s what the
+                crew gets up to on the day.
               </p>
               <p>
                 You’ll join a team of people who get it, and see the conference from another angle,
@@ -70,8 +65,8 @@ export default function VolunteersPage() {
               <h2>What volunteers do</h2>
               <p>
                 Registration desk, help desk, pointing people the right way, keeping the villages
-                running, moving boxes, and putting up the signs. Pick what suits you in the form,
-                we’ll sort the rota.
+                running, moving boxes, and putting up the signs. Everyone picks what suits
+                them, and we sort the rota.
               </p>
               <Lightbox
                 layout="trio"
@@ -199,16 +194,15 @@ export default function VolunteersPage() {
                 ]}
               />
 
-              <h2 id="signup">Sign up</h2>
+              <h2 id="signup">Applications closed</h2>
               <p>
-                Once submitted, we’ll get in touch and invite you to a discussion channel to
-                coordinate. Be patient with us please, we’re volunteers, too.
+                Volunteer applications for NIDC 2026 are now closed. A huge thank you to everyone
+                who applied. If you signed up, we’ll be in touch with the details. See you on the
+                day!
               </p>
-              <div className="form-embed">
-                <iframe src={FORM_EMBED} title="Call for Volunteers form" height={1605} />
-              </div>
-              <p className="also">
-                Form not loading? <a href={FORM}>Open it in a new tab</a>.
+              <p>
+                If you have any questions, contact us at{" "}
+                <a href="mailto:organisers@nidevconf.com">organisers@nidevconf.com</a>.
               </p>
             </div>
           </div>
