@@ -86,13 +86,13 @@ const PINNED: Record<string, [start: number, track: number]> = {
   "dailypay-adam-mcgrogan": [at(10, 45), 1], // From Idea to Internal Tool in 31 Minutes
   "gearset-curtis-tarr": [at(13), 1], // Observing your Observability
   "tony-mcbride-cv": [at(15, 30), 4], // Building a Tech CV — the last workshop
+  "kainos-lee-service": [at(10), 0], // Kainos AI-first academy (Lee Service & Anna McCormick)
 };
 const pinned = (start: number, track: number) =>
   sessions.find((s) => PINNED[s.id]?.[0] === start && PINNED[s.id]?.[1] === track);
 // Held slots. One with no talk pinned to it stays empty rather than taking
 // the next talk off the queue.
 const HELD: [start: number, track: number][] = [
-  [at(10), 0],
   [at(10, 45), 1],
   [at(11, 30), 0],
   [at(11, 30), 1],
