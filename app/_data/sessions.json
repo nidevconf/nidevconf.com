@@ -910,5 +910,33 @@
         "photo": "lauren-taylor.jpg"
       }
     ]
+  },
+  {
+    "id": "kainos-lee-service",
+    "slug": "developing-the-next-generation-of-tech-talent-in-an-ai-world",
+    "title": "Developing the Next Generation of Tech Talent in an AI World",
+    "description": "AI is transforming how software is designed, built, and delivered, and the skills required to thrive are evolving just as rapidly. As AI co‑pilots, code generators, and autonomous agents become standard tools in every developer's workflow, organisations face a critical challenge: how do we prepare the next generation of technologists to build with AI, not just alongside it?\n\nIn this session, Lee Service & Anna McCormick share insights from leading Kainos' early‑careers engineering academy: an AI‑first programme designed around core principles, hands‑on mentoring, and measurable impact. They'll show how traditional training models fall short in preparing graduates for a world where AI writes, reviews, and tests code, and how Kainos has reimagined its approach to create adaptable, AI‑fluent developers.\n\nThe talk will cover:\n\n1. The Core Principles of AI‑First Engineering Education\n– Why code literacy alone is no longer enough\n– Foundational principles for developing AI‑fluent and AI‑confident technologists\n– How these principles inform the structure, culture, and expectations of the academy\n\n2. From Code Literacy to AI Fluency\n– Teaching developers how to think, prompt, reason, and design with AI systems\n– Shifting mindsets: moving from \"writing code\" to \"designing systems that code\"\n\n3. The Role of Mentors and Support Networks in an AI‑Augmented World\n– How project mentors reinforce good practice, accelerate confidence, and model responsible AI use\n– Structures used within Kainos projects to support early‑career engineers\n– Lessons learned from pairing, shadowing, and embedded community support\n\n4. Success Metrics: How We Measure Growth, Impact, and Readiness\n– What good looks like in an AI‑first academy\n– Metrics across skills development, delivery performance, AI usage maturity, and project contribution\n– Real-world examples of how AI accelerates both learning and delivery\n\n5. Balancing Human Creativity, Ethics, and Accountability\n– Embedding responsible AI principles into training and project work\n– Ensuring developers understand the boundaries of AI as well as its power\n\n6. The New Skills Every Developer Needs\n– Architectural reasoning and system design\n– Data awareness and evaluation of AI‑generated outputs\n– Prompt engineering and iterative reasoning loops\n\n7. Live Demo: How AI Accelerates Learning and Delivery\n– A short, practical demonstration showing how AI transforms real engineering workflows\n– Before‑and‑after examples based on scenarios from the academy",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "GenAI",
+      "Non-Technical"
+    ],
+    "chip": "AI",
+    "speakers": [
+      {
+        "name": "Lee Service",
+        "tagline": "Senior Associate Software Engineer at Kainos",
+        "bio": "Lee Service started as a software engineering graduate at Kainos just over three years ago.\n\nHis day to day job has him applying the latest AI innovations to solve real problems within the UK civil service, whereas his recent efforts have involved using AI to teach Kainos' recent apprentice and graduate hires.\n\nHe hosted BelTech EDU 2026 and will host again for BelTech EDU 2027. He enjoys teaching, gigs and retro gaming.",
+        "photo": "lee-service.jpg"
+      },
+      {
+        "name": "Anna McCormick",
+        "tagline": "Apprentice Software Engineer at Kainos",
+        "bio": "",
+        "photo": "anna-mccormick.jpg"
+      }
+    ]
   }
 ]
