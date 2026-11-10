@@ -485,6 +485,15 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .ag-title{font-family:var(--display);font-weight:600;font-size:15px;line-height:1.25;
   color:var(--ink);}
+/* a band's where/what line: icon-led chips, wrapping on narrow screens */
+.ag-details{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--ink);}
+.ag-details span{display:inline-flex;align-items:center;gap:5px;}
+.ag-details svg{flex:none;color:var(--pink-dk);}
+/* a band that opens a dialog: a button, so reset it and show it can be pressed */
+.ag-event{font:inherit;text-align:left;border:1px solid transparent;cursor:pointer;}
+.ag-event:hover{border-color:var(--pink-dk);}
+.ag-event:hover .ag-title{color:var(--pink-dk);}
+.ag-event:focus-visible{outline:2px solid var(--pink-dk);outline-offset:2px;}
 
 /* A session card: who at the top, the title, and the time pinned to the bottom
    edge — the title row takes whatever height the slot has spare, so a workshop
@@ -562,6 +571,11 @@ section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
 .td-person span{display:block;margin-top:2px;font-size:13px;line-height:1.4;opacity:.85;}
 .td-panel .btn-row{margin-top:var(--s3);justify-content:flex-start;} /* the agenda section centres its rows */
 /* the abstract arrives as plain text with blank lines between paragraphs */
+.td-details{list-style:none;margin-top:var(--s3);padding:0;display:grid;gap:12px;
+  font-size:16px;}
+.td-details li{display:flex;align-items:center;gap:8px;}
+.td-details svg{flex:none;color:var(--pink-dk);}
+.td-details a{color:var(--pink-dk);text-decoration:underline;text-underline-offset:3px;}
 .td-desc{white-space:pre-line;margin-top:var(--s3);font-size:15.5px;line-height:1.6;}
 .td-speaker{margin-top:var(--s3);padding-top:var(--s2);border-top:1px solid var(--line);}
 .td-name{font-family:var(--display);font-weight:600;font-size:14px;}

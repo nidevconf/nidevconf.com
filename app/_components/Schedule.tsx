@@ -1,6 +1,8 @@
 import type { CSSProperties } from "react";
+import { Beer, Globe, MapPin, Pizza } from "lucide-react";
 import sessions from "../_data/sessions.json";
 import { large } from "../sessions/photos";
+import EventCard, { type Detail } from "./EventCard";
 import TalkCard, { type Session } from "./TalkCard";
 
 const TRACKS = ["Hall 1A", "Hall 1B", "Room 1A", "Room 1B", "Room 2A"];
@@ -18,6 +20,8 @@ type Item = {
    *  after-party sits two hours after the last talk. It still prints its true
    *  time. */
   layout?: [number, number];
+  /** makes a band clickable: where shows on the band, details in its dialog */
+  event?: { where: Detail; details: Detail[] };
 };
 
 const TALK_STARTS = [
@@ -87,6 +91,7 @@ const PINNED: Record<string, [start: number, track: number]> = {
   "gearset-curtis-tarr": [at(13), 1], // Observing your Observability
   "tony-mcbride-cv": [at(15, 30), 4], // Building a Tech CV — the last workshop
   "kainos-lee-service": [at(10), 0], // Kainos AI-first academy (Lee Service & Anna McCormick)
+  "payroc-david-edwards": [at(13), 0], // The Perimeter Strikes Back (David Edwards, Payroc)
 };
 const pinned = (start: number, track: number) =>
   sessions.find((s) => PINNED[s.id]?.[0] === start && PINNED[s.id]?.[1] === track);
@@ -96,7 +101,6 @@ const HELD: [start: number, track: number][] = [
   [at(10, 45), 1],
   [at(11, 30), 0],
   [at(11, 30), 1],
-  [at(13), 0],
   [at(13), 1],
 ];
 const held = (start: number, track: number) =>
@@ -133,7 +137,35 @@ const ITEMS: Item[] = [
   { start: at(15), end: at(15, 30), title: "Afternoon break" },
   // finishes at 17:10; after the break the day runs on 10 minute gaps
   { start: at(16, 50), end: at(17, 10), track: 0, title: "Closing & prizes" },
-  { start: at(18), end: at(22), title: "After-party", layout: [at(17, 10), at(17, 40)] },
+  {
+    start: at(18),
+    end: at(22),
+    title: "After-party",
+    layout: [at(17, 10), at(17, 40)],
+    event: {
+      where: {
+        icon: <Globe size={16} aria-hidden />,
+        text: "Three Sheets",
+        href: "https://threesheetsbelfast.com/",
+      },
+      details: [
+        {
+          icon: <MapPin size={16} aria-hidden />,
+          text: "1 Bankmore Square, Belfast BT7 1DH",
+          href: "https://www.google.com/maps/search/?api=1&query=Three+Sheets,+1+Bankmore+Square,+Belfast+BT7+1DH",
+        },
+        {
+          icon: (
+            <>
+              <Pizza size={16} aria-hidden />
+              <Beer size={16} aria-hidden />
+            </>
+          ),
+          text: "Pizza and beer",
+        },
+      ],
+    },
+  },
 ];
 
 // The stacked layout drops the grid and reads in DOM order, so a phone would
@@ -246,6 +278,18 @@ function Grid({ items }: { items: Item[] }) {
             />
           );
         }
+        if (item.event) {
+          return (
+            <EventCard
+              key={key}
+              title={item.title}
+              when={when}
+              where={item.event.where}
+              details={item.event.details}
+              style={style}
+            />
+          );
+        }
         return (
           <div
             key={key}
@@ -263,6 +307,7 @@ function Grid({ items }: { items: Item[] }) {
             ) : (
               <p className="ag-title">{item.title}</p>
             )}
+
             <p className="ag-when">{when}</p>
           </div>
         );
