@@ -938,5 +938,27 @@
         "photo": "anna-mccormick.jpg"
       }
     ]
+  },
+  {
+    "id": "payroc-david-edwards",
+    "slug": "the-perimeter-strikes-back-defending-against-the-ai-attacker",
+    "title": "The Perimeter Strikes Back: Defending Against the AI Attacker",
+    "description": "This talk looks at how AI-driven attackers are changing the economics of perimeter attacks, from automated vulnerability discovery to adaptive, human-sounding social engineering. We’ll separate real, observed threats from vendor hype, and walk through where defences are most likely to break under machine-speed pressure.",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "Introductory",
+    "topics": [
+      "Security",
+      "GenAI"
+    ],
+    "chip": "Security",
+    "speakers": [
+      {
+        "name": "David Edwards",
+        "tagline": "Senior Vice President, Information Security at Payroc",
+        "bio": "David is Senior Vice President, Information Security at Payroc.\n\nhttps://www.linkedin.com/company/payroc",
+        "photo": "david-edwards.jpg"
+      }
+    ]
   }
 ]
