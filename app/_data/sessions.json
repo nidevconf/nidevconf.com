@@ -960,5 +960,24 @@
         "photo": "david-edwards.jpg"
       }
     ]
+  },
+  {
+    "id": "magnite-charlie-malloy",
+    "slug": "chasing-the-tail",
+    "title": "Chasing the Tail",
+    "description": "The importance and impact of tail-end latencies in a high-scale service",
+    "format": "Talk",
+    "minutes": 30,
+    "level": "",
+    "topics": [],
+    "chip": "",
+    "speakers": [
+      {
+        "name": "Charlie Malloy",
+        "tagline": "Staff Engineer at Magnite",
+        "bio": "",
+        "photo": "charlie-malloy.jpg"
+      }
+    ]
   }
 ]
