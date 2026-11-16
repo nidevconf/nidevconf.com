@@ -704,7 +704,7 @@ footer.site{padding:var(--s6) 0 var(--s5);background:var(--bg-2);}
 .foot-blurb{color:var(--muted);font-size:15px;max-width:44ch;margin-top:16px;}
 .foot-term{font-family:var(--display);font-weight:500;font-size:13px;color:var(--pink-dk);margin-top:18px;
   line-height:1.5;}
-.foot-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.foot-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
 .foot-cols h4{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
 .foot-cols a{display:block;color:var(--ink);font-size:14px;margin-bottom:9px;}

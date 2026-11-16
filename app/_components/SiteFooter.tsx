@@ -31,6 +31,13 @@ export default function SiteFooter() {
 
           <div className="foot-cols">
             <div>
+              <h4>On the day</h4>
+              <Link href="/#agenda">Agenda</Link>
+              <Link href="/villages">Villages</Link>
+              <Link href="/maps">Floor map</Link>
+            </div>
+
+            <div>
               <h4>Get involved</h4>
               <a href="https://ti.to/nidc/nidc-2026-10th-anniversary">Get yer&apos; tickets</a>
               <a href="https://forms.gle/2zWFfxfsPCfqbrCa7">Call for villages</a>
