@@ -26,6 +26,8 @@ type Village = {
   id: string;
   name: string;
   theme: string;
+  // where in the ICC the village is, shown alongside the theme
+  location: string;
   about: string;
   // a paragraph, several paragraphs, or named workshops when a village is running several
   atNidc: string | string[] | { title: string; text: string }[];
@@ -39,6 +41,7 @@ const villages: Village[] = [
     id: "retro",
     name: "TIMELINE",
     theme: "Retro village",
+    location: "Level 1",
     about:
       "We bring computing history to life through original computers and consoles that people can use and enjoy. Play classic games, try your hand at programming and discover how technology changed the way we learned, worked and created.",
     atNidc: [
@@ -64,6 +67,7 @@ const villages: Village[] = [
     id: "security",
     name: "Atlantic Exploit Labs",
     theme: "Security village",
+    location: "Level 1",
     about: "Atlantic Exploit Labs build cyber security challenges for conferences.",
     atNidc:
       "We have a number of challenges that are designed to be solved without requiring participants to bring any additional hardware.",
@@ -75,9 +79,24 @@ const villages: Village[] = [
     ],
   },
   {
+    id: "maker",
+    name: "Farset Labs and Tog Hackerspace",
+    theme: "Maker village",
+    location: "Level 1",
+    about:
+      "Maker Village is a collaboration between two hackerspaces on the island: Farset Labs in Belfast and Tog in Dublin. They’re bringing it to NIDC as part of a shared island programme to get makers across the island of Ireland to build connections, learn cool stuff from each other, and have a bit of fun making.",
+    atNidc:
+      "We’ll bring 3D printers so you can give it a go on the day and have something to take home. We’ll also bring a giant, programmable, LED ping pong table from Robin Price’s “This is a table” project, built with Farset Labs members over the past few months.",
+    links: [
+      { label: "farsetlabs.org.uk", href: "https://www.farsetlabs.org.uk/" },
+      { label: "tog.ie", href: "https://www.tog.ie/" },
+    ],
+  },
+  {
     id: "kids",
     name: "Northern Ireland Raspberry Jam",
     theme: "Kids village",
+    location: "Level 3",
     about:
       "The Northern Ireland Raspberry Jam is a programme of free, regular and family friendly events, aimed at providing attendees the opportunity to get hands on with coding and electronics, in a fun and practical setting. These events, known as “Raspberry Jams”, are organised and led by a group of 40+ passionate volunteers from across Northern Ireland, who come together to pull off the largest regular coding programme in Northern Ireland, for people of all ages.",
     atNidc: [
@@ -93,19 +112,6 @@ const villages: Village[] = [
     links: [
       { label: "niraspberryjam.com", href: "https://niraspberryjam.com/" },
       { label: "info@niraspberryjam.com", href: "mailto:info@niraspberryjam.com" },
-    ],
-  },
-  {
-    id: "maker",
-    name: "Farset Labs and Tog Hackerspace",
-    theme: "Maker village",
-    about:
-      "Maker Village is a collaboration between two hackerspaces on the island: Farset Labs in Belfast and Tog in Dublin. They’re bringing it to NIDC as part of a shared island programme to get makers across the island of Ireland to build connections, learn cool stuff from each other, and have a bit of fun making.",
-    atNidc:
-      "We’ll bring 3D printers so you can give it a go on the day and have something to take home. We’ll also bring a giant, programmable, LED ping pong table from Robin Price’s “This is a table” project, built with Farset Labs members over the past few months.",
-    links: [
-      { label: "farsetlabs.org.uk", href: "https://www.farsetlabs.org.uk/" },
-      { label: "tog.ie", href: "https://www.tog.ie/" },
     ],
   },
 ];
@@ -175,7 +181,9 @@ export default function VillagesPage() {
                     <img className="village-photo" src={v.image.src} alt={v.image.alt} loading="lazy" />
                   )}
                   <div className="village-body">
-                    <p className="village-theme">{v.theme}</p>
+                    <p className="village-theme">
+                      {v.theme} · {v.location}
+                    </p>
                     <h2 className="village-name">{v.name}</h2>
                     <h3>About {v.name}</h3>
                     <p>{v.about}</p>
