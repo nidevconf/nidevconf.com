@@ -92,6 +92,7 @@ const PINNED: Record<string, [start: number, track: number]> = {
   "tony-mcbride-cv": [at(15, 30), 4], // Building a Tech CV — the last workshop
   "kainos-lee-service": [at(10), 0], // Kainos AI-first academy (Lee Service & Anna McCormick)
   "payroc-david-edwards": [at(13), 0], // The Perimeter Strikes Back (David Edwards, Payroc)
+  "magnite-charlie-malloy": [at(11, 30), 1], // Chasing the Tail (Charlie Malloy, Magnite)
 };
 const pinned = (start: number, track: number) =>
   sessions.find((s) => PINNED[s.id]?.[0] === start && PINNED[s.id]?.[1] === track);
