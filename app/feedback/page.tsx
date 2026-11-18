@@ -18,12 +18,9 @@ export const metadata: Metadata = {
   },
 };
 
-// The site is a static export, so there are no server redirects. A meta refresh
-// sends visitors straight to the form; the link below covers anything that ignores it.
 export default function FeedbackPage() {
   return (
     <>
-      <meta httpEquiv="refresh" content={`0; url=${FORM}`} />
       <SiteHeader />
       <main id="main-content">
         <section className="section">
@@ -34,12 +31,32 @@ export default function FeedbackPage() {
             <h1 className="sec-title">
               Share your <span className="hl">feedback</span>.
             </h1>
-            <p className="sec-lead">Taking you to the feedback form…</p>
-            <div className="btn-row">
-              <a className="btn btn-primary" href={FORM}>
-                Open the feedback form <span className="arrow">→</span>
+            <p className="sec-lead">
+              Tell us what you thought of NIDC 2026. It only takes a few minutes.
+            </p>
+
+            {/* Google Forms supports embedding via ?embedded=true */}
+            <iframe
+              src={`${FORM}?embedded=true`}
+              title="NIDC 2026 feedback form"
+              loading="lazy"
+              style={{
+                width: "100%",
+                height: "max(80vh, 700px)",
+                border: 0,
+                marginTop: 24,
+              }}
+            >
+              Loading…
+            </iframe>
+
+            <p className="sec-lead" style={{ marginTop: 16 }}>
+              Form not loading?{" "}
+              <a href={FORM} target="_blank" rel="noopener noreferrer">
+                Open it in a new tab
               </a>
-            </div>
+              .
+            </p>
           </div>
         </section>
       </main>
