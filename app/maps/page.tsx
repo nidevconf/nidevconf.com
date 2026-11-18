@@ -3,19 +3,8 @@ import type { Metadata } from "next";
 import SiteFooter from "../_components/SiteFooter";
 import SiteHeader from "../_components/SiteHeader";
 
-// To update the floor map, drop the new file in public/maps/ and change this.
-// Use a PNG/JPEG (shown inline) or a PDF (embedded, with a download link).
-const FLOORMAP = {
-  src: "/maps/floormap.png",
-  alt: "Floor map of the International Convention Centre Belfast for NIDC 2026, showing the talk rooms, villages and sponsor areas",
-  width: 1600,
-  height: 1000,
-};
-
-const isPdf = FLOORMAP.src.toLowerCase().endsWith(".pdf");
-
 const description =
-  "Floor map for NIDC on Saturday, 21st November 2026 at the International Convention Centre Belfast.";
+  "Floor maps for NIDC on Saturday, 21st November 2026 at the International Convention Centre Belfast: registration, talks, villages, exhibitors and support rooms across Levels 0 to 3.";
 
 export const metadata: Metadata = {
   title: "Maps",
@@ -28,6 +17,116 @@ export const metadata: Metadata = {
   },
 };
 
+// Files live in public/maps/. For each map: <id>.png is shown on the page,
+// <id>@4x.png is the high-resolution download and <id>.svg is the vector download.
+type VenueMap = {
+  id: string;
+  nav: string;
+  title: string;
+  subtitle?: string;
+  alt: string;
+  width: number;
+  height: number;
+  // the overview is a tall portrait image, so it is shown narrower
+  narrow?: boolean;
+};
+
+const levels: VenueMap[] = [
+  {
+    id: "level-0",
+    nav: "Level 0",
+    title: "Level 0",
+    subtitle: "Registration",
+    alt: "Level 0 floor map: Registration at the top of the escalators, the Riverside Entrance, lifts, toilets and Changing Places toilet. Waterfront Hall is shown for reference only.",
+    width: 1920,
+    height: 1045,
+  },
+  {
+    id: "level-1",
+    nav: "Level 1",
+    title: "Level 1",
+    subtitle: "Talks, Villages & Exhibition Hall",
+    alt: "Level 1 floor map: the Retro, Maker and Security villages, the Info Desk, Exhibitors and Catering, and the Hall 1A and Hall 1B talk tracks.",
+    width: 1920,
+    height: 1045,
+  },
+  {
+    id: "level-2",
+    nav: "Level 2",
+    title: "Level 2",
+    subtitle: "Support Rooms",
+    alt: "Level 2 floor map: the Quiet Room, Speaker Green Room and Breastfeeding Space.",
+    width: 1920,
+    height: 1045,
+  },
+  {
+    id: "level-3",
+    nav: "Level 3",
+    title: "Level 3",
+    subtitle: "Talks, Labs and Childcare",
+    alt: "Level 3 floor map: Conference Room 1A and 1B talk tracks, Conference Room 2A workshops, the Kids' Village and the quiet and main childcare rooms.",
+    width: 1920,
+    height: 1045,
+  },
+];
+
+const overview: VenueMap = {
+  id: "venue",
+  nav: "Whole venue",
+  title: "Whole venue",
+  subtitle: "All four levels on one page",
+  alt: "Overview floor map of the venue with Level 3 at the top, then Level 2, Level 1 and Level 0 at the bottom.",
+  width: 2160,
+  height: 4809,
+  narrow: true,
+};
+
+const all = [...levels, overview];
+
+function MapSection({ map }: { map: VenueMap }) {
+  return (
+    <section id={map.id} className="venue-map" style={{ marginTop: 56, scrollMarginTop: 96 }}>
+      <h2 className="sec-title" style={{ fontSize: "clamp(26px, 4vw, 36px)" }}>
+        {map.title}
+      </h2>
+      {map.subtitle ? (
+        <p className="sec-lead" style={{ marginTop: 8 }}>
+          {map.subtitle}
+        </p>
+      ) : null}
+      <a
+        href={`/maps/${map.id}.png`}
+        aria-label={`Open the ${map.title} map full size`}
+        style={{ display: "block", marginTop: 20 }}
+      >
+        <img
+          src={`/maps/${map.id}.png`}
+          width={map.width}
+          height={map.height}
+          alt={map.alt}
+          loading={map.id === "level-0" ? undefined : "lazy"}
+          style={{
+            display: "block",
+            width: "100%",
+            maxWidth: map.narrow ? 640 : undefined,
+            height: "auto",
+            margin: map.narrow ? "0 auto" : undefined,
+            borderRadius: "var(--r)",
+          }}
+        />
+      </a>
+      <div className="btn-row" style={{ marginTop: 16 }}>
+        <a className="btn btn-secondary" href={`/maps/${map.id}@4x.png`} download>
+          Download PNG (high-res)
+        </a>
+        <a className="btn btn-secondary" href={`/maps/${map.id}.svg`} download>
+          Download SVG
+        </a>
+      </div>
+    </section>
+  );
+}
+
 export default function MapsPage() {
   return (
     <>
@@ -39,40 +138,24 @@ export default function MapsPage() {
               <span className="prompt">{">"}</span> maps
             </p>
             <h1 className="sec-title">
-              Floor <span className="hl">map</span>.
+              Venue <span className="hl">maps</span>.
             </h1>
-            <p className="sec-lead">Find your way around the ICC Belfast on the day.</p>
-            <div className="btn-row">
-              <a className="btn btn-secondary" href={FLOORMAP.src} download>
-                Download the map
-              </a>
-            </div>
+            <p className="sec-lead">
+              Find your way around the International Convention Centre Belfast on the day.
+            </p>
+            <nav aria-label="Jump to a map">
+              <div className="btn-row">
+                {all.map((m, i) => (
+                  <a key={m.id} className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`} href={`#${m.id}`}>
+                    {m.nav}
+                  </a>
+                ))}
+              </div>
+            </nav>
 
-            <figure className="statement-photo">
-              {isPdf ? (
-                <object
-                  data={FLOORMAP.src}
-                  type="application/pdf"
-                  aria-label={FLOORMAP.alt}
-                  style={{ width: "100%", height: "80vh", minHeight: 480 }}
-                >
-                  <p>
-                    Your browser can’t show PDFs inline.{" "}
-                    <a href={FLOORMAP.src}>Open the floor map</a>.
-                  </p>
-                </object>
-              ) : (
-                <a href={FLOORMAP.src} aria-label="Open the floor map full size">
-                  <img
-                    src={FLOORMAP.src}
-                    width={FLOORMAP.width}
-                    height={FLOORMAP.height}
-                    alt={FLOORMAP.alt}
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                </a>
-              )}
-            </figure>
+            {all.map((m) => (
+              <MapSection key={m.id} map={m} />
+            ))}
           </div>
         </section>
       </main>
