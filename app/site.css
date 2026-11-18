@@ -1026,3 +1026,7 @@ footer.site .social-github{--brand:#FFFFFF;}
   html{scroll-behavior:auto;}
   .cursor{animation:none;}
 }
+
+/* embedded Google Form on /feedback: tall enough to show the whole form without an inner scrollbar */
+.feedback-frame{display:block;width:100%;height:2050px;border:0;margin-top:24px;}
+@media (max-width:560px){.feedback-frame{height:2900px;}}

@@ -35,17 +35,15 @@ export default function FeedbackPage() {
               Tell us what you thought of NIDC 2026. It only takes a few minutes.
             </p>
 
-            {/* Google Forms supports embedding via ?embedded=true */}
+            {/* Google Forms supports embedding via ?embedded=true. A cross-origin iframe can't
+                auto-size, so the height in site.css fits the form's single page (measured
+                at ~1970px desktop and up to ~2800px on the narrowest phones). Update it
+                if the form gets longer. */}
             <iframe
               src={`${FORM}?embedded=true`}
               title="NIDC 2026 feedback form"
               loading="lazy"
-              style={{
-                width: "100%",
-                height: "max(80vh, 700px)",
-                border: 0,
-                marginTop: 24,
-              }}
+              className="feedback-frame"
             >
               Loading…
             </iframe>
