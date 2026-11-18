@@ -17,8 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-// Files live in public/maps/. For each map: <id>.png is shown on the page,
-// <id>@4x.png is the high-resolution download and <id>.svg is the vector download.
+// Files live in public/maps/ as <id>.png (1920px wide).
 type VenueMap = {
   id: string;
   nav: string;
@@ -98,14 +97,6 @@ function MapSection({ map }: { map: VenueMap }) {
           }}
         />
       </a>
-      <div className="btn-row" style={{ marginTop: 16 }}>
-        <a className="btn btn-secondary" href={`/maps/${map.id}@4x.png`} download>
-          Download PNG (high-res)
-        </a>
-        <a className="btn btn-secondary" href={`/maps/${map.id}.svg`} download>
-          Download SVG
-        </a>
-      </div>
     </section>
   );
 }
