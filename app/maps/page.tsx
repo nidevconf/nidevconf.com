@@ -27,8 +27,6 @@ type VenueMap = {
   alt: string;
   width: number;
   height: number;
-  // the overview is a tall portrait image, so it is shown narrower
-  narrow?: boolean;
 };
 
 const levels: VenueMap[] = [
@@ -70,19 +68,6 @@ const levels: VenueMap[] = [
   },
 ];
 
-const overview: VenueMap = {
-  id: "venue",
-  nav: "Whole venue",
-  title: "Whole venue",
-  subtitle: "All four levels on one page",
-  alt: "Overview floor map of the venue with Level 3 at the top, then Level 2, Level 1 and Level 0 at the bottom.",
-  width: 2160,
-  height: 4809,
-  narrow: true,
-};
-
-const all = [...levels, overview];
-
 function MapSection({ map }: { map: VenueMap }) {
   return (
     <section id={map.id} className="venue-map" style={{ marginTop: 56, scrollMarginTop: 96 }}>
@@ -108,9 +93,7 @@ function MapSection({ map }: { map: VenueMap }) {
           style={{
             display: "block",
             width: "100%",
-            maxWidth: map.narrow ? 640 : undefined,
             height: "auto",
-            margin: map.narrow ? "0 auto" : undefined,
             borderRadius: "var(--r)",
           }}
         />
@@ -145,7 +128,7 @@ export default function MapsPage() {
             </p>
             <nav aria-label="Jump to a map">
               <div className="btn-row">
-                {all.map((m, i) => (
+                {levels.map((m, i) => (
                   <a key={m.id} className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`} href={`#${m.id}`}>
                     {m.nav}
                   </a>
@@ -153,7 +136,7 @@ export default function MapsPage() {
               </div>
             </nav>
 
-            {all.map((m) => (
+            {levels.map((m) => (
               <MapSection key={m.id} map={m} />
             ))}
           </div>
