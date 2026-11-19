@@ -39,17 +39,13 @@ export const SPONSORS: {
   { name: "BCS NI", url: "https://www.bcs.org/", light: "bcs.png", dark: "bcs-white.png", h: 52, tier: "bronze" },
 ];
 
-// One labelled row per tier, biggest first. The two headline tiers share the top row, each logo
-// captioned with its role; the rest are labelled by the row.
-const ROWS: { label: string; tiers: Tier[]; caption?: Partial<Record<Tier, string>> }[] = [
-  {
-    label: "Headline",
-    tiers: ["headline", "headline-recruitment"],
-    caption: { headline: "Headline Sponsor", "headline-recruitment": "Recruitment Partner" },
-  },
-  { label: "Gold", tiers: ["gold"] },
-  { label: "Silver", tiers: ["silver"] },
-  { label: "Bronze", tiers: ["bronze"] },
+// One labelled row per tier, biggest first, the label centred above its logos.
+const ROWS: { label: string; tier: Tier }[] = [
+  { label: "Headline", tier: "headline" },
+  { label: "Exclusive Recruitment Partner", tier: "headline-recruitment" },
+  { label: "Gold", tier: "gold" },
+  { label: "Silver", tier: "silver" },
+  { label: "Bronze", tier: "bronze" },
 ];
 
 export default function SponsorStrip() {
@@ -58,36 +54,32 @@ export default function SponsorStrip() {
       <h2 className="sec-title" id="sponsors-title">
         Sponsors
       </h2>
-      {ROWS.map(({ label, tiers, caption }) => {
-        const sponsors = SPONSORS.filter((s) => tiers.includes(s.tier));
+      {ROWS.map(({ label, tier }) => {
+        const sponsors = SPONSORS.filter((s) => s.tier === tier);
         if (!sponsors.length) return null;
         return (
           <div key={label} className="sponsor-strip-row">
             <h3 className="sponsor-strip-label">{label}</h3>
             <div className="sponsor-row">
-              {sponsors.map((s) => {
-                const role = caption?.[s.tier];
-                return (
-                  <a key={s.name} className="sponsor-item" href={s.url} target="_blank" rel="noopener">
-                    {s.light && s.dark ? (
-                      (["light", "dark"] as const).map((theme) => (
-                        <img
-                          key={theme}
-                          className={theme}
-                          src={`/images/sponsors/${s[theme]}`}
-                          alt={theme === "dark" ? "" : s.name}
-                          style={{ height: s.h * STRIP_SCALE[s.tier] }}
-                        />
-                      ))
-                    ) : (
-                      <span className="sponsor-name" style={{ fontSize: s.h * STRIP_SCALE[s.tier] * 0.75 }}>
-                        {s.name}
-                      </span>
-                    )}
-                    {role && <span className="sponsor-role">{role}</span>}
-                  </a>
-                );
-              })}
+              {sponsors.map((s) => (
+                <a key={s.name} className="sponsor-item" href={s.url} target="_blank" rel="noopener">
+                  {s.light && s.dark ? (
+                    (["light", "dark"] as const).map((theme) => (
+                      <img
+                        key={theme}
+                        className={theme}
+                        src={`/images/sponsors/${s[theme]}`}
+                        alt={theme === "dark" ? "" : s.name}
+                        style={{ height: s.h * STRIP_SCALE[s.tier] }}
+                      />
+                    ))
+                  ) : (
+                    <span className="sponsor-name" style={{ fontSize: s.h * STRIP_SCALE[s.tier] * 0.75 }}>
+                      {s.name}
+                    </span>
+                  )}
+                </a>
+              ))}
             </div>
           </div>
         );
