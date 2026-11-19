@@ -17,7 +17,7 @@ export default function SiteHeader() {
           <img className="logo-word" src="/images/nidc-wordmark.png" alt="" aria-hidden />
         </Link>
         <nav className="nav-links" aria-label="Primary">
-          <Link href="/#agenda">Agenda</Link>
+          <a href="https://agenda.nidevconf.com/agenda">Agenda</a>
           <Link href="/villages">Villages</Link>
           <Link href="/volunteers">Volunteer</Link>
           <Link href="/#sponsor">Sponsor</Link>
