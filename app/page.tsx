@@ -65,6 +65,11 @@ export default function HomePage() {
               product, cloud, data, UX, games, infrastructure, open source, security, AI, and
               everything in between. Come on down, and bring along your team.
             </p>
+            <div className="btn-row">
+              <a className="btn btn-primary" href="https://agenda.nidevconf.com/agenda">
+                Build your agenda <span className="arrow">→</span>
+              </a>
+            </div>
             <Schedule />
           </div>
         </section>
