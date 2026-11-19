@@ -42,8 +42,8 @@ export const SPONSORS: {
 // One labelled row per tier, biggest first, the label centred above its logos.
 const ROWS: { label: string; tier: Tier }[] = [
   { label: "Headline", tier: "headline" },
-  { label: "Exclusive Recruitment Partner", tier: "headline-recruitment" },
   { label: "Gold", tier: "gold" },
+  { label: "Exclusive Recruitment Partner", tier: "headline-recruitment" },
   { label: "Silver", tier: "silver" },
   { label: "Bronze", tier: "bronze" },
 ];
