@@ -360,18 +360,38 @@ ul{margin:0;}
 /* on a phone the wrapped rows would pin half the screen, so they scroll away */
 @media (max-width:720px){.chips{position:static;}}
 
-/* ---- sponsor strip ----
-   Logos trail across the page in a loop. Each logo is a light/dark pair of
-   <img>s (colour on light, white mono on dark); the theme shows one of the pair. */
-/* no bottom padding: the agenda's own --s7 top padding is the gap below, and the top
-   is --s7 less the video panel's 16px inset, so the logos sit centred between the two */
-.sponsor-strip{overflow:hidden;padding:calc(var(--s7) - 16px) 0 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
-.sponsor-track{display:flex;width:max-content;animation:sponsor-scroll 40s linear infinite;}
-/* the trailing padding matches the gap, so the second copy starts exactly one row-width in */
-.sponsor-row{display:flex;align-items:center;gap:72px;padding-inline-end:72px;}
-.sponsor-row img{display:block;width:auto;}
+/* ---- sponsors ----
+   A static row per tier under the hero, logos sized down the tiers. One grid holds every
+   row and is centred as a whole: labels right-aligned against a hairline, the way the
+   agenda's time gutter sits beside its grid, logos left-aligned after it. Labels and the
+   headline roles use the agenda's column-header type. Each logo is a light/dark pair of
+   <img>s (colour on light, white mono on dark); the theme shows one of the pair.
+   No bottom padding: the agenda's own --s7 top padding is the gap below, and the top
+   is --s7 less the video panel's 16px inset. */
+.sponsor-strips{padding:calc(var(--s7) - 16px) var(--s3) 0;display:grid;
+  grid-template-columns:auto auto;justify-content:center;align-items:center;row-gap:var(--s4);}
+.sponsor-strip-row{display:contents;}
+/* the section title spans both columns, centred like the other sections' titles */
+.sponsor-strips > .sec-title{grid-column:1 / -1;text-align:center;margin-top:0;}
+.sponsor-strip-label,.sponsor-role{font-family:var(--display);font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);line-height:1.2;}
+.sponsor-strip-label{margin:0;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
+  padding-right:var(--s3);border-right:1px solid var(--line);font-size:12px;}
+.sponsor-role{font-size:10px;white-space:nowrap;}
+.sponsor-row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);
+  padding-left:var(--s3);}
+.sponsor-item{display:flex;flex-direction:column;align-items:center;gap:var(--s1);}
+.sponsor-item:hover{text-decoration:none;}
+.sponsor-row img{display:block;width:auto;max-width:100%;}
+/* a sponsor with no logo yet: the name in the display face, ink on either theme */
+.sponsor-name{display:block;font-family:var(--display);font-weight:600;line-height:1;
+  letter-spacing:-.02em;color:var(--ink);white-space:nowrap;}
+/* a phone: each label centred above its row, no hairline */
+@media (max-width:720px){
+  .sponsor-strips{grid-template-columns:1fr;row-gap:var(--s2);}
+  .sponsor-strip-label{justify-content:center;padding:var(--s2) 0 0;border-right:0;}
+  .sponsor-row{justify-content:center;padding-left:0;gap:var(--s2) var(--s4);}
+}
 :root[data-theme="dark"] .sponsor-row .light,:root:not([data-theme="dark"]) .sponsor-row .dark,
 :root[data-theme="dark"] .sponsor-tiers .light,:root:not([data-theme="dark"]) .sponsor-tiers .dark{display:none;}
 /* the tiered figure in an article: a row per tier, biggest first */
@@ -388,12 +408,6 @@ ul{margin:0;}
   text-decoration:none;transition:background .12s ease,border-color .12s ease;}
 .sponsor-slot span{font-weight:400;font-size:12px;color:var(--muted);}
 .sponsor-slot:hover{background:var(--bg-2);border-color:transparent;text-decoration:none;}
-@keyframes sponsor-scroll{to{transform:translateX(-50%);}}
-@media (prefers-reduced-motion:reduce){
-  .sponsor-track{animation:none;width:auto;}
-  .sponsor-row{flex-wrap:wrap;justify-content:center;gap:40px 56px;padding:0 var(--s3);}
-  .sponsor-row[aria-hidden]{display:none;}
-}
 
 /* ============================================================
    CONTENT SECTIONS
