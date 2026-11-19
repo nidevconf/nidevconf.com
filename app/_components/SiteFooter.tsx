@@ -35,6 +35,7 @@ export default function SiteFooter() {
               <Link href="/#agenda">Agenda</Link>
               <Link href="/villages">Villages</Link>
               <Link href="/maps">Floor map</Link>
+              <Link href="/feedback">Feedback</Link>
             </div>
 
             <div>
