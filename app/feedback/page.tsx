@@ -5,7 +5,7 @@ import SiteHeader from "../_components/SiteHeader";
 const FORM =
   "https://docs.google.com/forms/d/e/1FAIpQLScqrkyE0HrkqukqKx9s2JC3wk-H-UaBVPDobgP9c0AmWwtKmw/viewform";
 
-const description = "Tell us what you thought of NIDC 2026.";
+const description = "Tell us how you got on at NIDC 2026.";
 
 export const metadata: Metadata = {
   title: "Feedback",
@@ -33,9 +33,7 @@ export default function FeedbackPage() {
             <h1 className="sec-title">
               Share your <span className="hl">feedback</span>.
             </h1>
-            <p className="sec-lead">
-              Tell us what you thought of NIDC 2026. It only takes a few minutes.
-            </p>
+            <p className="sec-lead">Tell us how you got on at NIDC.</p>
 
             {/* Google Forms supports embedding via ?embedded=true. A cross-origin iframe can't
                 auto-size, so the height in site.css fits the form's single page (measured
