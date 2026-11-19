@@ -1,11 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
-export type Tier = "headline" | "gold" | "silver";
+// In order of status, highest first. "recruitment" is the exclusive recruitment partner.
+export type Tier = "headline" | "gold" | "recruitment" | "silver" | "bronze";
 
 // Heights are hand-tuned per logo so wordmarks, badges and stacked marks read as
 // the same visual size. Each logo is a light/dark pair: the brand's colour file
 // on light, white mono on dark. CSS shows one per theme. The tier is what they
-// sponsored at; the strip ignores it, the article's tiered figure does not.
+// sponsored at (the Package in the Sponsors 2026 database in Notion). Keep the list
+// in tier order: the strip shows it as it is, and the article's tiered figure
+// groups it by tier.
 export const SPONSORS: {
   name: string;
   url: string;
@@ -17,15 +20,15 @@ export const SPONSORS: {
   { name: "Gearset", url: "https://gearset.com/", light: "gearset.svg", dark: "gearset-white.svg", h: 32, tier: "headline" },
   { name: "Magnite", url: "https://www.magnite.com/", light: "magnite.svg", dark: "magnite-white.svg", h: 28, tier: "gold" },
   { name: "Payroc", url: "https://payroc.com/", light: "payroc.svg", dark: "payroc-white.svg", h: 46, tier: "gold" },
-  { name: "Enso Recruitment", url: "https://www.ensorecruitment.com/", light: "enso.png", dark: "enso-white.png", h: 32, tier: "gold" },
   { name: "Kainos", url: "https://www.kainos.com/", light: "kainos.png", dark: "kainos-white.png", h: 28, tier: "gold" },
+  { name: "Enso Recruitment", url: "https://www.ensorecruitment.com/", light: "enso.png", dark: "enso-white.png", h: 32, tier: "recruitment" },
   { name: "Allstate Northern Ireland", url: "https://www.allstateni.com/", light: "allstate.svg", dark: "allstate-white.svg", h: 32, tier: "silver" },
   { name: "DailyPay", url: "https://www.dailypay.com/", light: "dailypay.svg", dark: "dailypay-white.svg", h: 27, tier: "silver" },
-  { name: "Enably", url: "https://enablyco.com/", light: "enably.svg", dark: "enably-white.svg", h: 28, tier: "silver" },
-  { name: "Coding Fury", url: "https://www.codingfury.com/", light: "codingfury-black.png", dark: "codingfury-white.png", h: 32, tier: "silver" },
-  { name: "Uptime Labs", url: "https://www.uptimelabs.io/", light: "uptimelabs.svg", dark: "uptimelabs-white.svg", h: 40, tier: "silver" },
   { name: "Liberty IT", url: "https://www.liberty-it.co.uk/", light: "liberty.png", dark: "liberty-white.png", h: 52, tier: "silver" },
   { name: "Phorest", url: "https://www.phorest.com/", light: "phorest.png", dark: "phorest-white.png", h: 32, tier: "silver" },
+  { name: "Enably", url: "https://enablyco.com/", light: "enably.svg", dark: "enably-white.svg", h: 28, tier: "bronze" },
+  { name: "Coding Fury", url: "https://www.codingfury.com/", light: "codingfury-black.png", dark: "codingfury-white.png", h: 32, tier: "bronze" },
+  { name: "Uptime Labs", url: "https://www.uptimelabs.io/", light: "uptimelabs.svg", dark: "uptimelabs-white.svg", h: 40, tier: "bronze" },
 ];
 
 export default function SponsorStrip() {

@@ -2,11 +2,17 @@
 import Link from "next/link";
 import { SPONSORS, type Tier } from "./SponsorStrip";
 
-/* This year's sponsors by tier, three sizes from the headline down, and an empty slot at
+/* This year's sponsors by tier, five sizes from the headline down, and an empty slot at
    the end for the next one, drawn like an unfilled agenda slot. The same light/dark logo
    pairs as the strip; CSS shows one per theme. */
-const SCALE: Record<Tier, number> = { headline: 2, gold: 1.4, silver: 1 };
-const TIERS: Tier[] = ["headline", "gold", "silver"];
+const SCALE: Record<Tier, number> = {
+  headline: 2,
+  gold: 1.4,
+  recruitment: 1.2,
+  silver: 1,
+  bronze: 0.85,
+};
+const TIERS: Tier[] = ["headline", "gold", "recruitment", "silver", "bronze"];
 
 export default function SponsorTiers() {
   return (
