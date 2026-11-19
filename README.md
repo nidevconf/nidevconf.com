@@ -39,6 +39,10 @@ app/
                         # URLs: never change one once published.
   volunteers/           # Call for volunteers (/volunteers): the sign-up form,
                         # and photos of the crew at work
+  maps/                 # Venue floor maps (/maps): Levels 0-3, one PNG per level
+                        # in public/images/maps/
+  feedback/             # Feedback (/feedback): the embedded Google Form. Its
+                        # iframe height lives in site.css (.feedback-frame)
   opportunities/        # Volunteer roles board (/opportunities) and one page
                         # per role (/opportunities/<slug>); roles.tsx is the
                         # data. Unlisted: noindex, not linked from anywhere.

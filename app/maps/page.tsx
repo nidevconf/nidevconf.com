@@ -10,14 +10,16 @@ export const metadata: Metadata = {
   title: "Maps",
   description,
   alternates: { canonical: "https://nidevconf.com/maps" },
+  // openGraph does not merge with the layout's, so the image comes along again
   openGraph: {
     title: "Maps | NIDC 2026",
     description,
     url: "https://nidevconf.com/maps",
+    images: ["/opengraph-image.jpg"],
   },
 };
 
-// Files live in public/maps/ as <id>.png (1920px wide).
+// Files live in public/images/maps/ as <id>.png (1920px wide).
 type VenueMap = {
   id: string;
   nav: string;
@@ -69,32 +71,20 @@ const levels: VenueMap[] = [
 
 function MapSection({ map }: { map: VenueMap }) {
   return (
-    <section id={map.id} className="venue-map" style={{ marginTop: 56, scrollMarginTop: 96 }}>
-      <h2 className="sec-title" style={{ fontSize: "clamp(26px, 4vw, 36px)" }}>
-        {map.title}
-      </h2>
-      {map.subtitle ? (
-        <p className="sec-lead" style={{ marginTop: 8 }}>
-          {map.subtitle}
-        </p>
-      ) : null}
+    <section id={map.id} className="venue-map">
+      <h2 className="sec-title">{map.title}</h2>
+      {map.subtitle ? <p className="sec-lead">{map.subtitle}</p> : null}
       <a
-        href={`/maps/${map.id}.png`}
+        className="venue-map-link"
+        href={`/images/maps/${map.id}.png`}
         aria-label={`Open the ${map.title} map full size`}
-        style={{ display: "block", marginTop: 20 }}
       >
         <img
-          src={`/maps/${map.id}.png`}
+          src={`/images/maps/${map.id}.png`}
           width={map.width}
           height={map.height}
           alt={map.alt}
           loading={map.id === "level-0" ? undefined : "lazy"}
-          style={{
-            display: "block",
-            width: "100%",
-            height: "auto",
-            borderRadius: "var(--r)",
-          }}
         />
       </a>
     </section>
@@ -106,7 +96,7 @@ export default function MapsPage() {
     <>
       <SiteHeader />
       <main id="main-content">
-        <section className="section">
+        <section className="section call">
           <div className="wrap page-wrap">
             <p className="page-eyebrow">
               <span className="prompt">{">"}</span> maps
@@ -117,14 +107,16 @@ export default function MapsPage() {
             <p className="sec-lead">
               Find your way around the International Convention Centre Belfast on the day.
             </p>
-            <nav aria-label="Jump to a map">
-              <div className="btn-row">
-                {levels.map((m, i) => (
-                  <a key={m.id} className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`} href={`#${m.id}`}>
-                    {m.nav}
-                  </a>
-                ))}
-              </div>
+            <nav className="btn-row" aria-label="Jump to a map">
+              {levels.map((m, i) => (
+                <a
+                  key={m.id}
+                  className={`btn ${i === 0 ? "btn-primary" : "btn-secondary"}`}
+                  href={`#${m.id}`}
+                >
+                  {m.nav}
+                </a>
+              ))}
             </nav>
 
             {levels.map((m) => (

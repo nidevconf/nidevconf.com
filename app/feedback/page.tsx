@@ -11,10 +11,12 @@ export const metadata: Metadata = {
   title: "Feedback",
   description,
   alternates: { canonical: "https://nidevconf.com/feedback" },
+  // openGraph does not merge with the layout's, so the image comes along again
   openGraph: {
     title: "Feedback | NIDC 2026",
     description,
     url: "https://nidevconf.com/feedback",
+    images: ["/opengraph-image.jpg"],
   },
 };
 
@@ -23,7 +25,7 @@ export default function FeedbackPage() {
     <>
       <SiteHeader />
       <main id="main-content">
-        <section className="section">
+        <section className="section call">
           <div className="wrap page-wrap">
             <p className="page-eyebrow">
               <span className="prompt">{">"}</span> feedback
@@ -48,7 +50,7 @@ export default function FeedbackPage() {
               Loading…
             </iframe>
 
-            <p className="sec-lead" style={{ marginTop: 16 }}>
+            <p className="sec-lead">
               Form not loading?{" "}
               <a href={FORM} target="_blank" rel="noopener noreferrer">
                 Open it in a new tab
