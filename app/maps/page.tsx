@@ -104,9 +104,7 @@ export default function MapsPage() {
             <h1 className="sec-title">
               Venue <span className="hl">maps</span>.
             </h1>
-            <p className="sec-lead">
-              Find your way around the International Convention Centre Belfast on the day.
-            </p>
+            <p className="sec-lead">Lost? Don’t be a stranger - check the map or ask a volunteer.</p>
             <nav className="btn-row" aria-label="Jump to a map">
               {levels.map((m, i) => (
                 <a
