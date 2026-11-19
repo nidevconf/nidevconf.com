@@ -32,7 +32,7 @@ export default function SiteFooter() {
           <div className="foot-cols">
             <div>
               <h4>On the day</h4>
-              <Link href="/#agenda">Agenda</Link>
+              <Link href="/agenda">Agenda</Link>
               <Link href="/villages">Villages</Link>
               <Link href="/maps">Floor map</Link>
             </div>
