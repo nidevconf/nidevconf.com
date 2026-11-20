@@ -36,7 +36,7 @@ export const SPONSORS: {
   { name: "Enably", url: "https://enablyco.com/", light: "enably.svg", dark: "enably-white.svg", h: 28, tier: "bronze" },
   { name: "Uptime Labs", url: "https://www.uptimelabs.io/", light: "uptimelabs.svg", dark: "uptimelabs-white.svg", h: 40, tier: "bronze" },
   { name: "Coding Fury", url: "https://www.codingfury.com/", light: "codingfury-black.png", dark: "codingfury-white.png", h: 32, tier: "bronze" },
-  { name: "BCS NI", url: "https://www.bcs.org/", light: "bcs.png", dark: "bcs-white.png", h: 52, tier: "bronze" },
+  { name: "BCS NI", url: "https://www.bcs.org/", light: "bcs-ni.png", dark: "bcs-ni-white.png", h: 52, tier: "bronze" },
 ];
 
 // One labelled row per tier, biggest first, the label centred above its logos.
